@@ -1,0 +1,3 @@
+{
+  "onlyBuiltDependencies": ["@sentry/cli", "@trivago/prettier-plugin-sort-imports"]
+}
