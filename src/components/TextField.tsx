@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
 import { Pressable, Text, TextInput, TextInputProps, View } from 'react-native'
+import { moderateScale, verticalScale } from 'react-native-size-matters'
+
+import { VisibilityIcon } from '@/assets/icons'
 
 type TextFieldProps = TextInputProps & {
   label?: string
@@ -23,13 +26,15 @@ export function TextField({
   return (
     <View className="w-full">
       <View
-        className={`h-14 flex-row items-center rounded-xl border px-4 ${
-          hasError ? 'border-[#ea4335]' : isFocused ? 'border-primary' : 'border-gray1'
+        className={`flex-row items-center rounded-lg border bg-gray1 px-4 ${
+          hasError ? 'border-[#ea4335]' : isFocused ? 'border-secondary' : 'border-transparent'
         }`}
+        style={{ height: verticalScale(50) }}
       >
         <TextInput
-          className="flex-1 text-[18px] font-medium text-black"
-          placeholderTextColor="#74768E"
+          className="flex-1 font-medium text-black"
+          style={{ fontSize: moderateScale(16) }}
+          placeholderTextColor="rgba(0,0,0,0.2)"
           placeholder={label}
           secureTextEntry={secureToggle ? isSecure : secureTextEntry}
           onFocus={() => setIsFocused(true)}
@@ -40,16 +45,16 @@ export function TextField({
           <Pressable
             hitSlop={8}
             onPress={() => setIsSecure((prev) => !prev)}
-            className="h-full items-center justify-center px-2"
+            className="h-11 w-11 items-center justify-center"
           >
-            <Text className="text-[13px] font-medium text-gray2">
-              {isSecure ? '표시' : '숨김'}
-            </Text>
+            <VisibilityIcon size={24} off={isSecure} />
           </Pressable>
         )}
       </View>
       {hasError && (
-        <Text className="mt-1 text-[13px] font-medium text-[#ea4335]">{errorMessage}</Text>
+        <Text className="mt-1 font-medium text-[#ea4335]" style={{ fontSize: moderateScale(13) }}>
+          {errorMessage}
+        </Text>
       )}
     </View>
   )
