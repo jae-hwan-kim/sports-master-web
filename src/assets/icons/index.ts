@@ -1,6 +1,0 @@
-export { GoogleIcon } from './GoogleIcon'
-export { KakaoIcon } from './KakaoIcon'
-export { AppleIcon } from './AppleIcon'
-export { ArrowBackIcon } from './ArrowBackIcon'
-export { SettingsIcon } from './SettingsIcon'
-export { VisibilityIcon } from './VisibilityIcon'
