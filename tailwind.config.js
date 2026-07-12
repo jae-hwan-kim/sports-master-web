@@ -10,8 +10,13 @@ module.exports = {
         gray1: '#D9D9D9',
         gray2: '#74768E',
         gray3: '#1F2A43',
-        primary: '#B48247',
-        secondary: '#C6A75E',
+        primary: '#C6A75E',
+        secondary: '#B48247',
+      },
+      fontFamily: {
+        'pretendard-regular': ['Pretendard-Regular'],
+        'pretendard-medium': ['Pretendard-Medium'],
+        'pretendard-extrabold': ['Pretendard-ExtraBold'],
       },
       fontSize: {
         title: ['28px', { lineHeight: '36px' }],
