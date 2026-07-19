@@ -25,7 +25,7 @@ export function Button({
   const bgClass = isPrimary
     ? disabled
       ? 'bg-gray1'
-      : 'bg-secondary'
+      : 'bg-primary'
     : 'border border-gray1 bg-white'
 
   if (isSocialIcon) {

@@ -12,7 +12,7 @@ export function Checkbox({ label, checked, onToggle }: CheckboxProps) {
     <Pressable hitSlop={8} onPress={onToggle} className="min-h-11 flex-row items-center gap-2">
       <View
         className={`items-center justify-center rounded border ${
-          checked ? 'border-secondary bg-secondary' : 'border-gray1 bg-transparent'
+          checked ? 'border-primary bg-primary' : 'border-gray1 bg-transparent'
         }`}
         style={{ height: scale(20), width: scale(20) }}
       >

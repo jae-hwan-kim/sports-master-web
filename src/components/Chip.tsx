@@ -13,7 +13,7 @@ export function Chip({ label, selected = false, onPress }: ChipProps) {
       hitSlop={8}
       onPress={onPress}
       className={`items-center justify-center rounded-full border ${
-        selected ? 'border-secondary bg-secondary' : 'border-gray1 bg-white'
+        selected ? 'border-primary bg-primary' : 'border-gray1 bg-white'
       }`}
       style={{ height: verticalScale(36), paddingHorizontal: scale(16) }}
     >

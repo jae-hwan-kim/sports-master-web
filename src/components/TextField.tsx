@@ -27,7 +27,7 @@ export function TextField({
     <View className="w-full">
       <View
         className={`flex-row items-center rounded-lg border bg-gray1 px-4 ${
-          hasError ? 'border-[#ea4335]' : isFocused ? 'border-secondary' : 'border-transparent'
+          hasError ? 'border-[#ea4335]' : isFocused ? 'border-primary' : 'border-transparent'
         }`}
         style={{ height: verticalScale(50) }}
       >
