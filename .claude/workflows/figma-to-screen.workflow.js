@@ -4,7 +4,7 @@ export const meta = {
   phases: [
     { title: 'Figma 분석', detail: 'get_design_context/get_screenshot/get_variable_defs로 디자인 스펙 추출' },
     { title: '화면 코드 생성', detail: 'NativeWind 기반 화면 + 하위 컴포넌트 생성' },
-    { title: '병렬 리뷰', detail: '구조 · RN 규칙 준수 · 접근성/터치 3개 에이전트 동시 검토' },
+    { title: '병렬 리뷰', detail: '구조 · RN 규칙 준수 · 접근성/터치 · 네이티브 호환성 4개 에이전트 동시 검토' },
     { title: '수정 적용', detail: '리뷰 결과 통합 후 파일 수정' },
   ],
 }
@@ -92,6 +92,14 @@ React Native (Expo) 필수 규칙:
 - 애니메이션은 useNativeDriver: true
 - import 순서: ^react, ^expo, ^@tanstack, ^@/, ^[./]
 - Prettier: semi false, singleQuote, printWidth 100
+
+네이티브(iOS/Android) 렌더링 호환성 — 웹 미리보기(react-native-web)에서는 정상으로 보여도
+실제 시뮬레이터에서는 깨질 수 있는 항목이므로 반드시 확인:
+- \`hover:\`, \`focus:\`, \`group-hover:\` 등 상호작용 pseudo-class 클래스 금지 (네이티브 미지원, 웹에서만 동작)
+- \`transition-*\`, \`animate-*\` 클래스는 react-native-reanimated 없이는 네이티브에서 크래시/무시될 수 있음 — 이 프로젝트엔 reanimated 미설치이므로 사용 금지
+- \`grid\`, \`display: block\` 등 CSS 전용 레이아웃 금지 (Flexbox만 사용)
+- 순수 CSS box-shadow 문자열(tailwind.config.js의 boxShadow.card 등) 대신 네이티브 shadow(shadowColor/shadowOffset/shadowOpacity/shadowRadius, Android는 elevation) 또는 Platform.select 사용
+- 임의값(arbitrary value) 클래스(\`w-[123px]\`, \`bg-black/50\` 등)는 지원되지만 과도하게 복잡한 조합은 react-native-css-interop 파싱 이슈 가능성 있으므로 단순한 형태 우선
 `
 
 // ─── Phase 1: Figma 분석 ────────────────────────────────────────────────────
@@ -152,7 +160,7 @@ const codeText = codeResult.files.map(f => `// ${f.path}\n${f.code}`).join('\n\n
 phase('병렬 리뷰')
 log('3개 차원 동시 검토 중...')
 
-const [structureReview, rnRuleReview, a11yReview] = await parallel([
+const [structureReview, rnRuleReview, a11yReview, nativeCompatReview] = await parallel([
   () =>
     agent(
       `다음 RN 화면/컴포넌트 코드의 폴더 구조와 import 경로를 검토하세요.
@@ -193,15 +201,36 @@ ${codeText}
 4. 텍스트 대비/폰트 크기가 지나치게 작지 않은지 (디자인 스펙 대비)`,
       { schema: REVIEW_SCHEMA, label: 'Reviewer: 접근성/터치' },
     ),
+  () =>
+    agent(
+      `다음 코드가 웹 미리보기(react-native-web)뿐 아니라 iOS/Android 시뮬레이터에서도 동일하게 렌더링되는지 검토하세요.
+이 프로젝트는 react-native-reanimated가 설치되어 있지 않고, react-native-css-interop 버전 정합성 이슈가 있어
+"웹에서는 정상, 네이티브에서는 깨짐" 현상이 실제로 발생한 이력이 있습니다.
+
+=== 코드 ===
+${codeText}
+
+검토 항목 (모두 웹 전용 렌더러에서만 동작하고 네이티브에서는 무시/깨짐/크래시 가능):
+1. hover:, focus:, group-hover: 등 pseudo-class 클래스 사용 여부
+2. transition-*, animate-* 클래스 사용 여부 (reanimated 미설치 상태에서 특히 위험)
+3. grid, display: block 등 Flexbox가 아닌 CSS 레이아웃 사용 여부
+4. box-shadow 형태의 순수 CSS 그림자 클래스/스타일 (네이티브 shadow* 또는 Platform.select로 대체 필요) 사용 여부
+5. Image 컴포넌트에 width/height 없이 auto 의존하는 부분
+6. 과도하게 복잡한 임의값(arbitrary value) 조합으로 인해 파싱 이슈가 우려되는 클래스`,
+      { schema: REVIEW_SCHEMA, label: 'Reviewer: 네이티브 호환성' },
+    ),
 ])
 
 // ─── Phase 4: 수정 적용 ──────────────────────────────────────────────────────
 
 phase('수정 적용')
 
-const allFindings = [...(structureReview?.findings ?? []), ...(rnRuleReview?.findings ?? []), ...(a11yReview?.findings ?? [])].filter(
-  Boolean,
-)
+const allFindings = [
+  ...(structureReview?.findings ?? []),
+  ...(rnRuleReview?.findings ?? []),
+  ...(a11yReview?.findings ?? []),
+  ...(nativeCompatReview?.findings ?? []),
+].filter(Boolean)
 
 const errorCount = allFindings.filter(f => f.severity === 'error').length
 const warningCount = allFindings.filter(f => f.severity === 'warning').length
@@ -234,7 +263,7 @@ return {
   screenName,
   designSpec,
   generated: codeResult,
-  reviews: { structure: structureReview, rnRules: rnRuleReview, a11y: a11yReview },
+  reviews: { structure: structureReview, rnRules: rnRuleReview, a11y: a11yReview, nativeCompat: nativeCompatReview },
   findings: allFindings,
   fix: fixResult,
 }
