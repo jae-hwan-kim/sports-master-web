@@ -115,8 +115,10 @@ ${collected}
 4. 크기(width/height): 특히 버튼/입력창처럼 Figma가 고정 px로 명시한 요소가 verticalScale/moderateScale 등으로 감싸져 있으면 플랫폼별로 값이 달라질 수 있으므로 error로 표시
 5. 아이콘: Figma 원본이 44x44 같은 탭 영역 전체를 포함해 내보낸 에셋인지, 24x24 순수 글리프인지 확인하고 코드의 렌더 사이즈와 비교
 6. Figma에는 있는데 코드에 없는 요소, 코드에는 있는데 Figma에 없는 요소 확인
-7. 반응형 레이아웃 의도(category: responsive-intent): 코드가 화면 하단 근처 요소(약관/저작권 텍스트, 하단 CTA 버튼 등)까지의 간격을 Figma 캔버스 높이에서 역산한 고정값(mt-[Npx])으로 처리하고 있는지 확인. 고정값이면 Figma 캔버스보다 큰 기기에서 하단에 빈 여백이 과도하게 남는 문제가 생기므로 error로 표시하고, flexGrow 스페이서(+ ScrollView contentContainerStyle의 flexGrow: 1)로 전환하도록 fix에 구체적으로 적을 것
-8. 문제 없으면 diffs를 빈 배열로 반환
+   - 이 판단은 get_design_context가 반환한 raw 코드가 아니라 **get_screenshot 렌더링 결과를 기준**으로 할 것. raw 코드(메타데이터)에는 나오지만 실제 스크린샷에는 안 보이는 요소(숨겨진 레이어, 다른 variant 등)를 "누락된 요소"로 잘못 판단해 추가하라고 하지 말 것 — 반대로 코드에 있는데 스크린샷에서 안 보이면 missing-element가 아니라 "화면에 없어야 할 요소"로 표시
+7. 인라인 텍스트 링크(같은 줄에 일반 Text와 나란히 있는 Pressable — "회원가입", "비밀번호 찾기" 등)가 min-h-11/min-w-11 같은 최소 크기 className을 가지고 있는지 확인. 있으면 그 Pressable만 44px로 부풀어 같은 줄의 다른 요소와 높이가 달라지므로 size(error)로 표시하고, hitSlop={8}만 사용하도록 fix에 적을 것
+8. 반응형 레이아웃 의도(category: responsive-intent): 코드가 화면 하단 근처 요소(약관/저작권 텍스트, 하단 CTA 버튼 등)까지의 간격을 Figma 캔버스 높이에서 역산한 고정값(mt-[Npx])으로 처리하고 있는지 확인. 고정값이면 Figma 캔버스보다 큰 기기에서 하단에 빈 여백이 과도하게 남는 문제가 생기므로 error로 표시하고, flexGrow 스페이서(+ ScrollView contentContainerStyle의 flexGrow: 1)로 전환하도록 fix에 구체적으로 적을 것
+9. 문제 없으면 diffs를 빈 배열로 반환
 
 각 diff에는 category, severity(error: 명백히 틀림/warning: 애매하지만 다름/suggestion: 사소함), element, file, expected(Figma 값), actual(코드 값), fix(구체적 수정 방법)를 채우세요.`,
   { schema: DIFF_SCHEMA, label: '정밀 대조', effort: 'high' },

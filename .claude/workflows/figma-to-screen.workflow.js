@@ -138,6 +138,7 @@ React Native (Expo) 필수 규칙:
 - NativeWind(className) 우선, 인라인 스타일 객체 금지
 - 동적/긴 리스트는 FlatList/FlashList, 짧고 고정된 목록만 map() 허용
 - TouchableOpacity 금지 → Pressable + hitSlop={8}
+- 인라인 텍스트 링크(예: "계정이 없으신가요? 회원가입", "비밀번호 찾기")처럼 같은 줄(flex-row)에 일반 Text와 나란히 놓이는 Pressable에는 터치 영역 확보를 위해 min-h-11/min-w-11 같은 최소 높이/너비 className을 주지 말 것 — 그러면 그 Pressable만 44px로 부풀어서 같은 줄의 다른 요소와 높이가 달라짐. 터치 영역 확보는 반드시 hitSlop={8}만으로 처리(시각적 크기는 그대로, 터치 인식 범위만 확장)
 - 이미지 width/height 명시, 외부 이미지는 expo-image
 - 입력 폼 있는 화면은 KeyboardAvoidingView 필수
 - 애니메이션은 useNativeDriver: true
@@ -151,6 +152,10 @@ React Native (Expo) 필수 규칙:
 - \`grid\`, \`display: block\` 등 CSS 전용 레이아웃 금지 (Flexbox만 사용)
 - 순수 CSS box-shadow 문자열(tailwind.config.js의 boxShadow.card 등) 대신 네이티브 shadow(shadowColor/shadowOffset/shadowOpacity/shadowRadius, Android는 elevation) 또는 Platform.select 사용
 - 임의값(arbitrary value) 클래스(\`w-[123px]\`, \`bg-black/50\` 등)는 지원되지만 과도하게 복잡한 조합은 react-native-css-interop 파싱 이슈 가능성 있으므로 단순한 형태 우선
+
+아이콘/이미지 SVG 에셋 관련:
+- Figma에서 내려받은 SVG가 <pattern>+<use>+matrix transform으로 래스터 이미지를 감싸는 구조라면(주로 벡터가 아니라 스크린샷/PNG를 그대로 SVG로 내보낸 경우) react-native-svg에서 깨지거나 안 보일 수 있음 — <image width height href="data:image/png;base64,..."/> 형태의 단순 구조로 바꿔서 사용할 것
+- 아이콘이 44x44 같은 탭 영역 전체를 포함해 내보내졌는지(내부 24x24 글리프 + 여백), 여백 없는 순수 글리프인지 확인하고 렌더 size를 그에 맞게 결정 — 무조건 24로 렌더링하면 실제보다 작아 보일 수 있음
 
 크기(scale) 관련 — 기기/웹 프리뷰 간 불일치 방지:
 - Figma가 고정 px로 명시한 요소(버튼/입력창 높이, 아이콘 크기 등)에는 verticalScale/scale을 쓰지 말 것 — className 고정값(예: h-[50px]) 사용. 폰트 크기 등 약간의 반응형이 허용되는 값에만 moderateScale 제한적으로 허용.
@@ -187,14 +192,18 @@ log(`Figma 디자인 분석 중: ${figmaUrl}`)
 const analysisResult = await agent(
   `다음 Figma 링크의 디자인을 분석하세요: ${figmaUrl}
 
-이 링크는 하나의 화면이 아니라 여러 화면(단계, 팝업, 상태 분기 포함)을 포함한 플로우 프레임일 수 있습니다.
+이 링크는 하나의 화면이 아니라 여러 화면(실제로 별도 네비게이션 경로가 필요한 단계/팝업)을 포함한 플로우 프레임일 수 있습니다.
 
 절차:
 1. Figma MCP 도구(get_design_context, get_screenshot, get_variable_defs)를 사용해 실제 디자인 데이터를 가져올 것 — 추측 금지
-2. 프레임 안에 시각적으로 구분되는 화면(예: 로그인 화면, 비밀번호 재설정 팝업, 회원가입 1단계, 회원가입 2단계 등)이 여러 개 있는지 확인
-3. 각 화면마다: 레이아웃/컴포넌트 계층, 디자인 토큰(색상 hex, 폰트, spacing), 리스트/반복 요소 여부, 인터랙션 요소, 텍스트/아이콘 배치, 화면 이름(PascalCase 영문)과 목적을 정리
+2. 프레임 안에 있는 각 하위 프레임이 "진짜 별도 화면"인지 "같은 화면의 입력/상태 변형"인지 먼저 판단할 것:
+   - 별도 screen으로 분리: 사용자가 실제로 다른 라우트로 이동해야 하는 경우 (예: 로그인 → 회원가입, 1단계 → 2단계)
+   - 별도 screen으로 분리하지 않음(원래 화면에 흡수): 같은 화면에서 입력 중/에러 표시/비밀번호 표시 토글/포커스 등 컴포넌트 내부 state나 조건부 렌더링만으로 표현 가능한 변형. 이런 프레임을 발견하면 별도 screens 항목을 만들지 말고, 원래 화면의 interactions 필드에 "이 상태에서는 ~하게 보인다"고 기술해서 코드 생성 단계가 그 state를 화면 하나 안에 구현하도록 할 것
+   - 판단이 애매하면 별도 화면으로 만들지 않는 쪽을 기본값으로 함 (화면 수 과다 생성이 실제로 반복 발생한 문제였음)
+3. 각 화면마다: 레이아웃/컴포넌트 계층, 디자인 토큰(색상 hex, 폰트, spacing), 리스트/반복 요소 여부, 인터랙션 요소(2번에서 흡수하기로 한 상태 변형 포함), 텍스트/아이콘 배치, 화면 이름(PascalCase 영문)과 목적을 정리
 4. 화면이 하나뿐이면 screens 배열 길이 1로 반환
-5. apiHint에는 이 화면이 서버와 주고받을 것으로 보이는 데이터/액션을 간단히 적을 것 (예: "이메일/비밀번호로 로그인 요청, 실패 시 에러 메시지 표시")`,
+5. apiHint에는 이 화면이 서버와 주고받을 것으로 보이는 데이터/액션을 간단히 적을 것 (예: "이메일/비밀번호로 로그인 요청, 실패 시 에러 메시지 표시")
+6. 요소가 raw 코드/메타데이터에는 있지만 get_screenshot 렌더링에는 실제로 안 보이면(숨겨진 레이어, 다른 variant 등) — **스크린샷에 보이는 것을 기준으로 판단**하고, 코드에만 있는 요소는 componentTree/notes에 "코드상 존재하나 렌더링에는 보이지 않아 제외함"이라고 명시할 것`,
   { schema: SCREENS_SCHEMA, label: 'Figma Design Analyzer' },
 )
 
