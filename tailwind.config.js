@@ -12,6 +12,8 @@ module.exports = {
         gray3: '#1F2A43',
         primary: '#C6A75E',
         secondary: '#B48247',
+        dialogBorder: '#4A5198',
+        dialogBg: '#102343',
       },
       fontFamily: {
         'pretendard-regular': ['Pretendard-Regular'],
@@ -23,6 +25,7 @@ module.exports = {
         main: ['17px', { lineHeight: 'normal' }],
         small1: ['13px', { lineHeight: 'normal' }],
         small2: ['12px', { lineHeight: 'normal' }],
+        small3: ['16px', { lineHeight: 'normal' }],
         'popup-lg': ['24px', { lineHeight: 'normal' }],
         'popup-md': ['20px', { lineHeight: 'normal' }],
       },

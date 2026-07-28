@@ -1,5 +1,5 @@
 import { ActivityIndicator, Pressable, Text } from 'react-native'
-import { moderateScale, verticalScale } from 'react-native-size-matters'
+import { moderateScale } from 'react-native-size-matters'
 
 type ButtonVariant = 'primary' | 'social' | 'socialIcon'
 
@@ -23,9 +23,7 @@ export function Button({
   const isPrimary = variant === 'primary'
   const isSocialIcon = variant === 'socialIcon'
   const bgClass = isPrimary
-    ? disabled
-      ? 'bg-gray1'
-      : 'bg-primary'
+    ? `${disabled ? 'bg-gray1' : 'bg-gray3'} border border-gray2`
     : 'border border-gray1 bg-white'
 
   if (isSocialIcon) {
@@ -34,9 +32,10 @@ export function Button({
         hitSlop={8}
         disabled={disabled}
         onPress={onPress}
+        accessibilityRole="button"
         accessibilityLabel={label}
-        className="flex-1 items-center justify-center rounded-lg border border-gray1 bg-white"
-        style={{ height: verticalScale(50) }}
+        accessibilityState={{ disabled }}
+        className="h-[50px] flex-1 items-center justify-center rounded-lg border border-gray1 bg-white"
       >
         {icon}
       </Pressable>
@@ -48,10 +47,12 @@ export function Button({
       hitSlop={8}
       disabled={disabled || loading}
       onPress={onPress}
-      className={`w-full flex-row items-center justify-center rounded-lg ${bgClass} ${
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityState={{ disabled: disabled || loading }}
+      className={`h-[50px] w-full flex-row items-center justify-center rounded-lg ${bgClass} ${
         !isPrimary && icon ? 'gap-2' : ''
       }`}
-      style={{ height: verticalScale(56) }}
     >
       {loading ? (
         <ActivityIndicator color={isPrimary ? '#F2F2F2' : '#07091C'} />
@@ -59,7 +60,7 @@ export function Button({
         <>
           {icon}
           <Text
-            className={`font-medium ${isPrimary ? 'text-white' : 'text-black'}`}
+            className={`font-medium ${isPrimary ? 'text-[#F2F2F2]' : 'text-black'}`}
             style={{ fontSize: moderateScale(17) }}
           >
             {label}

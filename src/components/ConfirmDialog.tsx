@@ -1,5 +1,4 @@
-import { Modal, Pressable, Text, View } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import { ActivityIndicator, Modal, Pressable, Text, View } from 'react-native'
 
 type ConfirmDialogProps = {
   visible: boolean
@@ -7,6 +6,9 @@ type ConfirmDialogProps = {
   description: string
   onConfirm: () => void
   onCancel: () => void
+  confirmLoading?: boolean
+  confirmLabel?: string
+  cancelLabel?: string
 }
 
 export function ConfirmDialog({
@@ -15,46 +17,42 @@ export function ConfirmDialog({
   description,
   onConfirm,
   onCancel,
+  confirmLoading = false,
+  confirmLabel = '확인',
+  cancelLabel = '취소',
 }: ConfirmDialogProps) {
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onCancel}>
       <View className="flex-1 items-center justify-center bg-black/50 px-6">
-        <View
-          className="w-full items-center rounded-2xl bg-white px-5 py-6"
-          style={{ maxWidth: scale(340) }}
-        >
-          <Text
-            className="text-center font-semibold text-black"
-            style={{ fontSize: moderateScale(24) }}
-          >
-            {title}
-          </Text>
-          <Text
-            className="mt-3 text-center font-medium text-gray2"
-            style={{ fontSize: moderateScale(16) }}
-          >
+        <View className="w-full max-w-[340px] items-center rounded-2xl bg-white px-5 pb-6 pt-11">
+          <Text className="text-center font-semibold text-black text-popup-lg">{title}</Text>
+          <Text className="mt-4 text-center font-medium text-gray2 text-small3">
             {description}
           </Text>
-          <View className="mt-6 w-full flex-row gap-3">
+          <View className="mt-12 w-full flex-row gap-2">
             <Pressable
               hitSlop={8}
               onPress={onConfirm}
-              className="flex-1 items-center justify-center rounded-lg bg-primary"
-              style={{ height: verticalScale(50) }}
+              disabled={confirmLoading}
+              className={`h-[50px] flex-1 items-center justify-center rounded-lg bg-primary ${
+                confirmLoading ? 'opacity-70' : 'opacity-100'
+              }`}
             >
-              <Text className="font-medium text-white" style={{ fontSize: moderateScale(17) }}>
-                확인
-              </Text>
+              {confirmLoading ? (
+                <ActivityIndicator color="#FFFFFF" />
+              ) : (
+                <Text className="font-medium text-white text-main">{confirmLabel}</Text>
+              )}
             </Pressable>
             <Pressable
               hitSlop={8}
               onPress={onCancel}
-              className="flex-1 items-center justify-center rounded-lg border border-[#4A5198] bg-[#102343]"
-              style={{ height: verticalScale(50) }}
+              disabled={confirmLoading}
+              className={`h-[50px] flex-1 items-center justify-center rounded-lg border border-dialogBorder bg-dialogBg ${
+                confirmLoading ? 'opacity-50' : 'opacity-100'
+              }`}
             >
-              <Text className="font-medium text-white" style={{ fontSize: moderateScale(17) }}>
-                취소
-              </Text>
+              <Text className="font-medium text-white text-main">{cancelLabel}</Text>
             </Pressable>
           </View>
         </View>
