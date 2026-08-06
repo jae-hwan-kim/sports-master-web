@@ -6,7 +6,7 @@ export const meta = {
     { title: '화면 코드 생성', detail: '화면별 NativeWind 코드 + 폼 필드 추출' },
     { title: '백엔드 정합성 확인/수정', detail: 'DTO/Entity/Service를 화면 폼 필드에 맞춰 조정, 타입 재생성' },
     { title: 'API 연동', detail: 'TanStack Query 훅 실제 작성' },
-    { title: '병렬 리뷰', detail: '구조 · RN 규칙 · 접근성/터치 · 네이티브 호환성 · API 정합성 5개 에이전트 동시 검토' },
+    { title: '병렬 리뷰', detail: '코드품질(구조/RN규칙/네이티브호환성) · 접근성 2개 + API 정합성(연동 시에만) 조건부 검토 — 토큰 절약을 위해 최소 에이전트로 구성' },
     { title: '수정 적용', detail: '리뷰 결과 통합 후 파일 수정' },
   ],
 }
@@ -322,92 +322,65 @@ ${currentCodeText}
     return { screen, codeResult, backendResult, apiResult }
   },
 
-  // Stage 4: 병렬 리뷰 (5개 관점)
+  // Stage 4: 병렬 리뷰 — 토큰 절약을 위해 2개(+조건부 1개)로 최소화, 매번 전체 RN_RULES를 복붙하지 않고 요약만 전달
   async ({ screen, codeResult, backendResult, apiResult }) => {
     phase('병렬 리뷰')
     const codeText = apiResult.files.map(f => `// ${f.path}\n${f.code}`).join('\n\n---\n\n')
+    const apiIntegrated = codeResult.formFields.length > 0 || apiResult !== codeResult
 
-    const [structureReview, rnRuleReview, a11yReview, nativeCompatReview, apiReview] = await parallel([
+    const reviewJobs = [
       () =>
         agent(
-          `다음 RN 화면/컴포넌트 코드의 폴더 구조와 import 경로를 검토하세요.
-
-=== 코드 ===
-${codeText}
+          `다음 RN 화면/컴포넌트 코드를 구조·컨벤션·플랫폼 호환성 관점에서 검토하세요.
 
 검토 항목:
-1. 화면은 src/screens/{Name}/{Name}Screen.tsx, 컴포넌트는 src/components/ 규칙 준수 여부
-2. import 순서 (^react, ^expo, ^@tanstack, ^@/, ^[./])
-3. 파일명이 컴포넌트명과 일치하는가
-4. 불필요하게 큰 단일 파일(책임 과다) 여부`,
-          { schema: REVIEW_SCHEMA, label: `Reviewer 구조/Import: ${screen.screenName}`, phase: '병렬 리뷰' },
+1. 폴더 구조(screens/{Name}/{Name}Screen.tsx, components/) 및 import 순서(^react,^expo,^@tanstack,^@/,^[./]) 준수
+2. NativeWind className 우선(인라인 style 지양), TouchableOpacity 대신 Pressable+hitSlop
+3. map() 대신 FlatList/FlashList(긴 리스트), 이미지 width/height 명시
+4. verticalScale/scale로 고정 px 요소(버튼/입력창 높이 등)를 감싸지 않았는지(플랫폼별 값 달라짐 — className 고정값이어야 함)
+5. 웹 전용 클래스(hover:, focus:, grid 등) 미사용, useNativeDriver 없는 애니메이션 없음
+6. 인라인 텍스트 링크 Pressable에 min-h/min-w 없이 hitSlop만 사용했는지
+
+=== 코드 ===
+${codeText}`,
+          { schema: REVIEW_SCHEMA, label: `Reviewer 코드품질: ${screen.screenName}`, phase: '병렬 리뷰' },
         ),
       () =>
         agent(
-          `다음 코드가 RN 필수 규칙을 준수하는지 검토하세요.
-
-${RN_RULES}
-
-=== 코드 ===
-${codeText}
-
-각 위반 사항에 severity, 파일, 문제, 수정 방법을 명시하세요.`,
-          { schema: REVIEW_SCHEMA, label: `Reviewer RN 규칙: ${screen.screenName}`, phase: '병렬 리뷰' },
-        ),
-      () =>
-        agent(
-          `다음 코드의 접근성과 터치 UX를 검토하세요.
-
-=== 코드 ===
-${codeText}
+          `다음 코드의 접근성/터치 UX를 검토하세요.
 
 검토 항목:
-1. 터치 영역 44x44pt 이상 확보 (hitSlop 포함)
-2. 이미지에 width/height 명시
-3. 입력 폼 화면에 KeyboardAvoidingView 적용 여부
-4. 텍스트 대비/폰트 크기가 지나치게 작지 않은지`,
-          { schema: REVIEW_SCHEMA, label: `Reviewer 접근성/터치: ${screen.screenName}`, phase: '병렬 리뷰' },
-        ),
-      () =>
-        agent(
-          `다음 코드가 웹 미리보기(react-native-web)뿐 아니라 iOS/Android 시뮬레이터에서도 동일하게 렌더링되는지 검토하세요.
+1. 터치 영역 44x44pt 이상(hitSlop 포함), 입력 폼 화면은 KeyboardAvoidingView 적용
+2. 텍스트 대비/폰트 크기, 하단 고정 요소(약관/CTA 등)가 mt-[Npx] 고정값이 아니라 flexGrow 스페이서로 처리됐는지
 
 === 코드 ===
-${codeText}
-
-검토 항목:
-1. hover:, focus:, group-hover: 등 pseudo-class 클래스 사용 여부
-2. useNativeDriver 없는 Animated 사용 또는 reanimated worklet 규칙 위반 여부
-3. grid, display: block 등 Flexbox가 아닌 CSS 레이아웃 사용 여부
-4. box-shadow 형태의 순수 CSS 그림자 클래스/스타일 사용 여부
-5. Image 컴포넌트에 width/height 없이 auto 의존하는 부분
-6. 과도하게 복잡한 임의값(arbitrary value) 조합`,
-          { schema: REVIEW_SCHEMA, label: `Reviewer 네이티브 호환성: ${screen.screenName}`, phase: '병렬 리뷰' },
+${codeText}`,
+          { schema: REVIEW_SCHEMA, label: `Reviewer 접근성/레이아웃: ${screen.screenName}`, phase: '병렬 리뷰' },
         ),
-      () =>
+    ]
+
+    if (apiIntegrated) {
+      reviewJobs.push(() =>
         agent(
           `다음 코드의 API 연동 정합성을 검토하세요.
 
-=== 코드 ===
-${codeText}
-
-=== 참고: 백엔드 정합화 결과 ===
-${JSON.stringify(backendResult, null, 2)}
-
 검토 항목:
 1. 요청/응답 타입이 sports-master-web/src/types/schema.ts (Read로 확인)와 일치하는지
-2. 로딩/에러 상태 처리가 되어있는지 (로그인 실패, 네트워크 에러 등)
-3. 백엔드가 수정되었다면(backendResult.mismatchFound) 그 변경이 sports-master-api/CLAUDE.md 컨벤션(@ApiProperty, class-validator, @ApiDataResponse 등)을 지키는지 해당 파일을 Read로 확인
-4. TanStack Query 사용 패턴(mutation/query key 등)이 적절한지`,
+2. 로딩/에러 상태 처리 여부, TanStack Query 사용 패턴 적절성
+3. 백엔드가 수정되었다면(mismatchFound: ${backendResult.mismatchFound}) 그 변경이 sports-master-api/CLAUDE.md 컨벤션을 지키는지 해당 파일을 Read로 확인
+
+=== 코드 ===
+${codeText}`,
           { schema: REVIEW_SCHEMA, label: `Reviewer API 정합성: ${screen.screenName}`, phase: '병렬 리뷰' },
         ),
-    ])
+      )
+    }
+
+    const [qualityReview, a11yReview, apiReview] = await parallel(reviewJobs)
 
     const allFindings = [
-      ...(structureReview?.findings ?? []),
-      ...(rnRuleReview?.findings ?? []),
+      ...(qualityReview?.findings ?? []),
       ...(a11yReview?.findings ?? []),
-      ...(nativeCompatReview?.findings ?? []),
       ...(apiReview?.findings ?? []),
     ].filter(Boolean)
 
@@ -415,14 +388,27 @@ ${JSON.stringify(backendResult, null, 2)}
       screen,
       codeResult: apiResult,
       backendResult,
-      reviews: { structure: structureReview, rnRules: rnRuleReview, a11y: a11yReview, nativeCompat: nativeCompatReview, api: apiReview },
+      reviews: { quality: qualityReview, a11y: a11yReview, api: apiReview ?? null },
       findings: allFindings,
     }
   },
 
-  // Stage 5: 수정 적용
+  // Stage 5: 조건부 수정 — 발견된 문제가 없으면 Fixer 호출 자체를 생략
   async ({ screen, codeResult, backendResult, reviews, findings }) => {
     phase('수정 적용')
+
+    if (findings.length === 0) {
+      log(`[${screen.screenName}] 리뷰에서 문제 발견되지 않음 — 수정 단계 생략 (비용 절감)`)
+      return {
+        screenName: screen.screenName,
+        purpose: screen.purpose,
+        generated: codeResult,
+        backendChanges: backendResult,
+        reviews,
+        findings,
+        fix: { files: [], skipped: ['리뷰에서 문제 발견되지 않아 수정 생략'] },
+      }
+    }
 
     const errorCount = findings.filter(f => f.severity === 'error').length
     const warningCount = findings.filter(f => f.severity === 'warning').length
@@ -438,8 +424,6 @@ ${JSON.stringify(findings, null, 2)}
 
 === 현재 코드 ===
 ${codeText}
-
-${RN_RULES}
 
 수정 규칙:
 1. error, warning은 반드시 수정
