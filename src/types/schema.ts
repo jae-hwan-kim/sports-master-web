@@ -344,21 +344,21 @@ export interface components {
              */
             password: string;
             /**
-             * @description 이름
+             * @description 닉네임
              * @example 김운동
              */
-            name: string;
+            nickname: string;
             /**
              * @description 전화번호
              * @example 010-1234-5678
              */
-            phone: string;
+            phone?: string;
             /**
-             * @description 가입 모드
+             * @description 가입 모드 (미입력 시 customer)
              * @example customer
              * @enum {string}
              */
-            mode: "expert" | "customer";
+            mode?: "expert" | "customer";
         };
         LoginDto: {
             /**
@@ -488,7 +488,7 @@ export interface components {
              * @example license
              * @enum {string}
              */
-            type: "license" | "graduation";
+            type?: "license" | "graduation";
             /**
              * @description 자격증 세부 종류 (type=license 시)
              * @example PT
