@@ -60,7 +60,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
         <Text
           accessibilityRole="alert"
           accessibilityLiveRegion="polite"
-          className="mt-1 font-medium text-[#ea4335]"
+          className="mt-1 pl-4 font-medium text-[#ea4335]"
           style={{ fontSize: moderateScale(13) }}
         >
           {errorMessage}

@@ -1,7 +1,7 @@
 import { ActivityIndicator, Pressable, Text } from 'react-native'
 import { moderateScale } from 'react-native-size-matters'
 
-type ButtonVariant = 'primary' | 'social' | 'socialIcon'
+type ButtonVariant = 'primary' | 'gold' | 'social' | 'socialIcon'
 
 type ButtonProps = {
   label: string
@@ -20,11 +20,17 @@ export function Button({
   loading = false,
   icon,
 }: ButtonProps) {
-  const isPrimary = variant === 'primary'
   const isSocialIcon = variant === 'socialIcon'
-  const bgClass = isPrimary
-    ? `${disabled ? 'bg-gray1' : 'bg-gray3'} border border-gray2`
-    : 'border border-gray1 bg-white'
+  const isGold = variant === 'gold'
+  const isDark = variant === 'primary'
+  const hasWhiteText = isGold || isDark
+  const bgClass = isGold
+    ? disabled
+      ? 'bg-gray1'
+      : 'bg-primary'
+    : isDark
+      ? `${disabled ? 'bg-gray1' : 'bg-gray3'} border border-gray2`
+      : 'border border-gray1 bg-white'
 
   if (isSocialIcon) {
     return (
@@ -51,16 +57,16 @@ export function Button({
       accessibilityLabel={label}
       accessibilityState={{ disabled: disabled || loading }}
       className={`h-[50px] w-full flex-row items-center justify-center rounded-lg ${bgClass} ${
-        !isPrimary && icon ? 'gap-2' : ''
+        !hasWhiteText && icon ? 'gap-2' : ''
       }`}
     >
       {loading ? (
-        <ActivityIndicator color={isPrimary ? '#F2F2F2' : '#07091C'} />
+        <ActivityIndicator color={hasWhiteText ? '#F2F2F2' : '#07091C'} />
       ) : (
         <>
           {icon}
           <Text
-            className={`font-medium ${isPrimary ? 'text-[#F2F2F2]' : 'text-black'}`}
+            className={`font-medium ${hasWhiteText ? 'text-[#F2F2F2]' : 'text-black'}`}
             style={{ fontSize: moderateScale(17) }}
           >
             {label}
