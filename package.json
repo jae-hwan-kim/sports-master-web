@@ -15,6 +15,7 @@
     "fix:style": "pnpm run fmt && pnpm run lint:fix"
   },
   "dependencies": {
+    "@expo/vector-icons": "^15.1.1",
     "@hookform/resolvers": "^5.4.0",
     "@react-navigation/native": "^7.3.8",
     "@react-navigation/native-stack": "^7.17.10",
@@ -26,6 +27,8 @@
     "expo": "~57.0.7",
     "expo-dev-client": "~57.0.7",
     "expo-font": "^57.0.1",
+    "expo-image": "~57.0.1",
+    "expo-image-picker": "~57.0.6",
     "expo-linear-gradient": "^57.0.1",
     "expo-splash-screen": "^57.0.4",
     "expo-status-bar": "~57.0.1",
@@ -50,6 +53,7 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@react-native-community/cli": "^20.2.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/lodash": "^4.17.16",
     "@types/node": "^22.13.4",

@@ -27,7 +27,14 @@
       "@sentry/react-native",
       "expo-font",
       "expo-splash-screen",
-      "expo-status-bar"
+      "expo-status-bar",
+      "expo-image",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "자격증 이미지를 첨부하려면 사진 접근 권한이 필요합니다."
+        }
+      ]
     ],
     "extra": {
       "eas": {
