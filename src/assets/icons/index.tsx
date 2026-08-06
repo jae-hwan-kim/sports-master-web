@@ -1,9 +1,13 @@
 import type { SvgProps } from 'react-native-svg'
 
+import AddAltSvg from './add-alt.svg'
 import AppleSvg from './apple.svg'
+import ArrowNextSvg from './arrow-next.svg'
 import BackSvg from './back.svg'
+import CustomerSvg from './customer.svg'
 import GoogleSvg from './google.svg'
 import KakaoSvg from './kakao.svg'
+import MasterSvg from './master.svg'
 import SettingsSvg from './settings.svg'
 import VisibilityOffSvg from './visibility-off.svg'
 import VisibilityOnSvg from './visibility-on.svg'
@@ -18,6 +22,11 @@ export function ArrowBackIcon({ size = 44, ...rest }: IconProps) {
 
 export function SettingsIcon({ size = 44, ...rest }: IconProps) {
   return <SettingsSvg width={size} height={size} {...rest} />
+}
+
+// add-alt는 44x44 탭 영역 전체(내부 24x24 글리프 + 여백)를 포함해 내보내져 있어 44로 렌더링
+export function AddCircleIcon({ size = 44, ...rest }: IconProps) {
+  return <AddAltSvg width={size} height={size} {...rest} />
 }
 
 export function VisibilityIcon({ size = 44, off = false, ...rest }: IconProps & { off?: boolean }) {
@@ -36,4 +45,19 @@ export function KakaoIcon({ size = 24, ...rest }: IconProps) {
 
 export function AppleIcon({ size = 24, ...rest }: IconProps) {
   return <AppleSvg width={(size * 19) / 24} height={size} {...rest} />
+}
+
+// arrow-next 에셋은 44x44 탭 영역 전체를 포함해 내보내져 있어(실제 화살표 글리프는 내부),
+// 44로 렌더링해야 원본과 동일한 크기로 보임
+export function ArrowNextIcon({ size = 44, ...rest }: IconProps) {
+  return <ArrowNextSvg width={size} height={size} {...rest} />
+}
+
+// master/customer는 자체 색상을 가진 54x54 글리프(RoleCard 배지용)
+export function MasterIcon({ size = 54, ...rest }: IconProps) {
+  return <MasterSvg width={size} height={size} {...rest} />
+}
+
+export function CustomerIcon({ size = 54, ...rest }: IconProps) {
+  return <CustomerSvg width={size} height={size} {...rest} />
 }
