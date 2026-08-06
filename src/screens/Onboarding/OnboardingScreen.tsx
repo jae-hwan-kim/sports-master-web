@@ -1,9 +1,10 @@
 // src/screens/Onboarding/OnboardingScreen.tsx
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { Image, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { moderateScale } from 'react-native-size-matters'
+import { Image } from 'expo-image'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
@@ -31,17 +32,16 @@ export function OnboardingScreen() {
 
       <View
         className="flex-1 px-[44px]"
-        style={{ paddingTop: insets.top + 110, paddingBottom: insets.bottom + 114 }}
+        style={{ paddingTop: insets.top + 56, paddingBottom: insets.bottom + 114 }}
       >
         <Image
           source={logoImage}
-          resizeMode="contain"
           accessibilityLabel="스포츠마스터 로고"
           style={{ width: moderateScale(149), height: moderateScale(195) }}
         />
 
         <View
-          className="mb-[15px] mt-[47px] w-px flex-grow bg-gray2"
+          className="mb-[15px] mt-[37px] h-[190px] w-px flex-grow bg-gray2"
           accessible={false}
           importantForAccessibility="no-hide-descendants"
         />
