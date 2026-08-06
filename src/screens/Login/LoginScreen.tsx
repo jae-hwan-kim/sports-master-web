@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Controller, useForm } from 'react-hook-form'
 import {
   KeyboardAvoidingView,
@@ -14,13 +15,16 @@ import {
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { AppleIcon, ArrowBackIcon, GoogleIcon, KakaoIcon } from '@/assets/icons'
+import { AppleIcon, GoogleIcon, KakaoIcon } from '@/assets/icons'
 import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
+import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
 import { useAppleLogin } from '@/hooks/useAppleLogin'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
 import { useLogin } from '@/hooks/useLogin'
+import { RootStackParamList } from '@/navigation/RootNavigator'
+import { useAuthStore } from '@/store/authStore'
 import {
   extractApiErrorMessage,
   isInvalidCredentialsError,
@@ -37,7 +41,7 @@ const SOCIAL_LABEL: Record<SocialProvider, string> = {
 }
 
 export function LoginScreen() {
-  const navigation = useNavigation()
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const [autoLogin, setAutoLogin] = useState(false)
   const [socialDialog, setSocialDialog] = useState<SocialProvider | null>(null)
   const [socialLoading, setSocialLoading] = useState(false)
@@ -49,10 +53,9 @@ export function LoginScreen() {
   const styles = useMemo(
     () =>
       StyleSheet.create({
-        navBar: { paddingTop: insets.top },
         scrollContent: { flexGrow: 1, paddingBottom: insets.bottom + 40 },
       }),
-    [insets.top, insets.bottom]
+    [insets.bottom]
   )
 
   const {
@@ -71,13 +74,15 @@ export function LoginScreen() {
   const { mutate: login, isPending } = useLogin()
   const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
   const { mutate: appleLogin, isPending: isAppleLoginPending } = useAppleLogin()
+  const setTokens = useAuthStore((state) => state.setTokens)
 
   const onSubmit = handleFormSubmit((values) => {
     setFormError(null)
     login(values, {
-      onSuccess: async () => {
-        // TODO: expo-secure-store 설치 후 사용 — accessToken/refreshToken을 SecureStore에 저장
-        // autoLogin이 true인 경우 refreshToken을 영구 저장, 아니면 메모리/세션 상태로만 유지
+      onSuccess: async (data) => {
+        // TODO: expo-secure-store 설치 후 자동로그인(autoLogin) 시 refreshToken을 영구 저장하도록 전환 —
+        // 현재는 autoLogin 여부와 무관하게 메모리(zustand)에만 저장되어 앱 재시작 시 소실됨
+        setTokens(data.accessToken, data.refreshToken)
       },
       onError: (error) => {
         const message = extractApiErrorMessage(error, '로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
@@ -115,9 +120,8 @@ export function LoginScreen() {
         googleLogin(
           { idToken },
           {
-            onSuccess: () => {
-              // TODO: expo-secure-store 설치 후 사용 — accessToken/refreshToken을 SecureStore에 저장
-              // autoLogin이 true인 경우 refreshToken을 영구 저장, 아니면 메모리/세션 상태로만 유지
+            onSuccess: (data) => {
+              setTokens(data.accessToken, data.refreshToken)
               setSocialLoading(false)
               setSocialDialog(null)
             },
@@ -150,9 +154,8 @@ export function LoginScreen() {
         appleLogin(
           { identityToken },
           {
-            onSuccess: () => {
-              // TODO: expo-secure-store 설치 후 사용 — accessToken/refreshToken을 SecureStore에 저장
-              // autoLogin이 true인 경우 refreshToken을 영구 저장, 아니면 메모리/세션 상태로만 유지
+            onSuccess: (data) => {
+              setTokens(data.accessToken, data.refreshToken)
               setSocialLoading(false)
               setSocialDialog(null)
             },
@@ -185,27 +188,14 @@ export function LoginScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className="flex-1 bg-[#F2F2F2]"
     >
-      {/* Navigation Bar — 본문과 다른 16px 인셋을 쓰므로 별도 영역으로 분리 */}
-      <View className="h-14 mt-[54px] flex-row items-center px-4" style={styles.navBar}>
-        <Pressable
-          hitSlop={8}
-          accessibilityRole="button"
-          accessibilityLabel="뒤로가기"
-          onPress={() => navigation.goBack()}
-        >
-          <ArrowBackIcon />
-        </Pressable>
-      </View>
+      <ScreenHeader onBack={() => navigation.goBack()} />
 
       <ScrollView
         className="flex-1 px-[26px]"
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
       >
-        {/* 상단 여백 — 화면이 Figma 기준(874)보다 길면 이 공간이 늘어나 타이틀 블록 전체가 살짝 아래로 내려감 */}
-        <View style={{ flexGrow: 1 }} />
-
-        {/* Title */}
+        {/* Title — Figma: 헤더(상단여백54+네비바56=110) 아래 34px 고정 */}
         <Text className="mt-[34px] text-[28px] font-extrabold text-black">로그인</Text>
         <Text className="mt-2 text-[13px] font-medium text-gray2">
           최근에 이용한 항목으로 로그인 해주세요
@@ -314,6 +304,7 @@ export function LoginScreen() {
                 hitSlop={8}
                 accessibilityRole="button"
                 accessibilityLabel="회원가입"
+                onPress={() => navigation.navigate('SignUp')}
               >
                 <Text className="text-[13px] font-semibold text-gray3">회원가입</Text>
               </Pressable>
@@ -322,11 +313,8 @@ export function LoginScreen() {
           </View>
         </View>
 
-        {/* 화면이 Figma 기준보다 길면 이 공간이 상단 여백보다 더 크게 늘어나(하단 비중 우선) 약관이 하단에 가깝게 유지됨 */}
-        <View style={{ flexGrow: 3 }} />
-
-        {/* 약관 안내 */}
-        <View className="items-center gap-1 pt-[40px]">
+        {/* 약관 안내 — Figma: 회원가입 안내 행 하단에서 108px 고정 */}
+        <View className="mt-[108px] items-center gap-1">
           <Text className="text-center text-[10px] font-normal tracking-[0.2px] leading-[1.45] text-gray2">
             로그인시 아래 내용에 동의하는 것으로 간주됩니다
           </Text>
