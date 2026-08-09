@@ -23,6 +23,8 @@ import { TextField } from '@/components/TextField'
 import { useAppleLogin } from '@/hooks/useAppleLogin'
 import { useGoogleAuth } from '@/hooks/useGoogleAuth'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
+import { useKakaoAuth } from '@/hooks/useKakaoAuth'
+import { useKakaoLogin } from '@/hooks/useKakaoLogin'
 import { useLogin } from '@/hooks/useLogin'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
@@ -76,6 +78,8 @@ export function LoginScreen() {
   const { mutate: login, isPending } = useLogin()
   const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
   const { promptGoogle } = useGoogleAuth()
+  const { mutate: kakaoLogin, isPending: isKakaoLoginPending } = useKakaoLogin()
+  const { promptKakao } = useKakaoAuth()
   const { mutate: appleLogin, isPending: isAppleLoginPending } = useAppleLogin()
   const setAuthSession = useAuthStore((state) => state.setAuthSession)
 
@@ -185,9 +189,37 @@ export function LoginScreen() {
       return
     }
 
-    // TODO: 카카오 SDK 연동 전까지는 실제 인증 요청 없이 준비중 안내만 표시한다
-    // kakao: 카카오 SDK 인가코드 취득 후 POST /auth/kakao 전송 예정
-    setSocialError('카카오 로그인은 아직 준비중입니다')
+    if (socialDialog === 'kakao') {
+      setSocialLoading(true)
+      try {
+        const result = await promptKakao()
+        if (!result) {
+          // 사용자가 브라우저에서 취소한 경우 — 에러로 취급하지 않고 조용히 종료
+          setSocialLoading(false)
+          return
+        }
+
+        kakaoLogin(result, {
+          onSuccess: (data) => {
+            setAuthSession(data.accessToken, data.refreshToken, data.user)
+            setSocialLoading(false)
+            setSocialDialog(null)
+            navigateAfterAuth(navigation, {
+              isNewUser: data.isNewUser,
+              hasSelectedMode: data.user.hasSelectedMode,
+              currentMode: data.user.currentMode,
+            })
+          },
+          onError: (error) => {
+            setSocialError(extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialLoading(false)
+          },
+        })
+      } catch {
+        setSocialError('카카오 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요')
+        setSocialLoading(false)
+      }
+    }
   }
 
   const handleSocialCancel = () => {
@@ -296,7 +328,7 @@ export function LoginScreen() {
               onPress={() => setSocialDialog('google')}
             />
             <Button
-              label="카카오로 로그인 (준비중)"
+              label="카카오로 로그인"
               variant="socialIcon"
               icon={<KakaoIcon size={24} />}
               onPress={() => setSocialDialog('kakao')}
@@ -360,7 +392,7 @@ export function LoginScreen() {
         description={socialError ?? '계정연동을 위한 화면으로 이동합니다'}
         onConfirm={handleSocialConfirm}
         onCancel={handleSocialCancel}
-        confirmLoading={socialLoading || isGoogleLoginPending || isAppleLoginPending}
+        confirmLoading={socialLoading || isGoogleLoginPending || isKakaoLoginPending || isAppleLoginPending}
       />
       <ConfirmDialog
         visible={autoLoginDialogVisible}

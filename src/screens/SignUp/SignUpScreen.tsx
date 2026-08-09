@@ -22,6 +22,8 @@ import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
 import { useGoogleAuth } from '@/hooks/useGoogleAuth'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
+import { useKakaoAuth } from '@/hooks/useKakaoAuth'
+import { useKakaoLogin } from '@/hooks/useKakaoLogin'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 import { useSignUpDraftStore } from '@/store/signupDraftStore'
@@ -52,6 +54,8 @@ export function SignUpScreen() {
   const consumePendingError = useSignUpDraftStore((state) => state.consumePendingError)
   const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
   const { promptGoogle } = useGoogleAuth()
+  const { mutate: kakaoLogin, isPending: isKakaoLoginPending } = useKakaoLogin()
+  const { promptKakao } = useKakaoAuth()
   const insets = useSafeAreaInsets()
   // insets는 런타임 계산 값이라 className으로 표현할 수 없어 style로 최소 사용
   // 네비바(ScreenHeader) 높이는 54(고정 mt) + 56 — KeyboardAvoidingView 오프셋 계산에 사용
@@ -136,7 +140,40 @@ export function SignUpScreen() {
       return
     }
 
-    // TODO: 카카오/애플 SDK 연동 전까지는 실제 인증 요청 없이 준비중 안내만 표시한다
+    if (socialDialog === 'kakao') {
+      setSocialLoading(true)
+      try {
+        const result = await promptKakao()
+        if (!result) {
+          // 사용자가 브라우저에서 취소한 경우 — 에러로 취급하지 않고 조용히 종료
+          setSocialLoading(false)
+          return
+        }
+
+        kakaoLogin(result, {
+          onSuccess: (data) => {
+            setAuthSession(data.accessToken, data.refreshToken, data.user)
+            setSocialLoading(false)
+            setSocialDialog(null)
+            navigateAfterAuth(navigation, {
+              isNewUser: data.isNewUser,
+              hasSelectedMode: data.user.hasSelectedMode,
+              currentMode: data.user.currentMode,
+            })
+          },
+          onError: (error) => {
+            setSocialError(extractApiErrorMessage(error, '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialLoading(false)
+          },
+        })
+      } catch {
+        setSocialError('카카오 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요')
+        setSocialLoading(false)
+      }
+      return
+    }
+
+    // TODO: 애플 SDK 연동 전까지는 실제 인증 요청 없이 준비중 안내만 표시한다
     setSocialLoading(true)
     setSocialError(`${SOCIAL_LABEL[socialDialog as SocialProvider]} 회원가입은 아직 준비중입니다`)
     setSocialLoading(false)
@@ -305,7 +342,7 @@ export function SignUpScreen() {
         description={socialError ?? '계정연동을 위한 화면으로 이동합니다'}
         onConfirm={handleSocialConfirm}
         onCancel={handleSocialCancel}
-        confirmLoading={socialLoading || isGoogleLoginPending}
+        confirmLoading={socialLoading || isGoogleLoginPending || isKakaoLoginPending}
       />
     </KeyboardAvoidingView>
   )
