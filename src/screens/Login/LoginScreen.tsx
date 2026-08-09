@@ -21,6 +21,7 @@ import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
 import { useAppleLogin } from '@/hooks/useAppleLogin'
+import { useGoogleAuth } from '@/hooks/useGoogleAuth'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
 import { useLogin } from '@/hooks/useLogin'
 import { RootStackParamList } from '@/navigation/RootNavigator'
@@ -31,6 +32,7 @@ import {
   loginSchema,
   type LoginFormValues,
 } from '@/utils/loginValidation'
+import { navigateAfterAuth } from '@/utils/socialAuthNavigation'
 
 type SocialProvider = 'google' | 'kakao' | 'apple'
 
@@ -73,8 +75,9 @@ export function LoginScreen() {
 
   const { mutate: login, isPending } = useLogin()
   const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
+  const { promptGoogle } = useGoogleAuth()
   const { mutate: appleLogin, isPending: isAppleLoginPending } = useAppleLogin()
-  const setTokens = useAuthStore((state) => state.setTokens)
+  const setAuthSession = useAuthStore((state) => state.setAuthSession)
 
   const onSubmit = handleFormSubmit((values) => {
     setFormError(null)
@@ -82,7 +85,11 @@ export function LoginScreen() {
       onSuccess: async (data) => {
         // TODO: expo-secure-store 설치 후 자동로그인(autoLogin) 시 refreshToken을 영구 저장하도록 전환 —
         // 현재는 autoLogin 여부와 무관하게 메모리(zustand)에만 저장되어 앱 재시작 시 소실됨
-        setTokens(data.accessToken, data.refreshToken)
+        setAuthSession(data.accessToken, data.refreshToken, data.user)
+        navigateAfterAuth(navigation, {
+          hasSelectedMode: data.user.hasSelectedMode,
+          currentMode: data.user.currentMode,
+        })
       },
       onError: (error) => {
         const message = extractApiErrorMessage(error, '로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
@@ -109,30 +116,31 @@ export function LoginScreen() {
     if (socialDialog === 'google') {
       setSocialLoading(true)
       try {
-        // TODO: expo-auth-session(Google) 설치 후 실제 Google Sign-In 플로우로 idToken 취득 필요
-        // 현재 프로젝트에 Google OAuth SDK가 없어 idToken을 발급받을 수 없으므로,
-        // SDK 연동 전까지는 아래 호출이 실행되지 않도록 가드한다.
-        const idToken: string | null = null
-        if (!idToken) {
-          throw new Error('GOOGLE_SDK_NOT_INSTALLED')
+        const result = await promptGoogle()
+        if (!result) {
+          // 사용자가 브라우저에서 취소한 경우 — 에러로 취급하지 않고 조용히 종료
+          setSocialLoading(false)
+          return
         }
 
-        googleLogin(
-          { idToken },
-          {
-            onSuccess: (data) => {
-              setTokens(data.accessToken, data.refreshToken)
-              setSocialLoading(false)
-              setSocialDialog(null)
-            },
-            onError: (error) => {
-              setSocialError(extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요'))
-              setSocialLoading(false)
-            },
-          }
-        )
+        googleLogin(result, {
+          onSuccess: (data) => {
+            setAuthSession(data.accessToken, data.refreshToken, data.user)
+            setSocialLoading(false)
+            setSocialDialog(null)
+            navigateAfterAuth(navigation, {
+              isNewUser: data.isNewUser,
+              hasSelectedMode: data.user.hasSelectedMode,
+              currentMode: data.user.currentMode,
+            })
+          },
+          onError: (error) => {
+            setSocialError(extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialLoading(false)
+          },
+        })
       } catch {
-        setSocialError('구글 로그인 SDK가 아직 연동되지 않았습니다. expo-auth-session 설치가 필요합니다')
+        setSocialError('구글 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요')
         setSocialLoading(false)
       }
       return
@@ -155,9 +163,14 @@ export function LoginScreen() {
           { identityToken },
           {
             onSuccess: (data) => {
-              setTokens(data.accessToken, data.refreshToken)
+              setAuthSession(data.accessToken, data.refreshToken, data.user)
               setSocialLoading(false)
               setSocialDialog(null)
+              navigateAfterAuth(navigation, {
+                isNewUser: data.isNewUser,
+                hasSelectedMode: data.user.hasSelectedMode,
+                currentMode: data.user.currentMode,
+              })
             },
             onError: (error) => {
               setSocialError(extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요'))
