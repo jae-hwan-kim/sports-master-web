@@ -16,8 +16,8 @@ export function MasterWelcomeScreen() {
   const insets = useSafeAreaInsets()
 
   const handleGoHome = () => {
-    // NOTE: 명인 인증 요청 접수 상태 표시는 Home 화면 진입 후 처리
-    navigation.navigate('Home')
+    // NOTE: 명인 인증 요청 접수 상태 표시는 홈 화면 진입 후 처리
+    navigation.navigate('MasterHome')
   }
 
   return (

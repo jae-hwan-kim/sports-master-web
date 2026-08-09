@@ -1,7 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import { CustomerHomeScreen } from '@/screens/CustomerHome/CustomerHomeScreen'
 import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
 import { LoginScreen } from '@/screens/Login/LoginScreen'
+import { MasterHomeScreen } from '@/screens/MasterHome/MasterHomeScreen'
 import { MasterVerificationScreen } from '@/screens/MasterVerification/MasterVerificationScreen'
 import { MasterWelcomeScreen } from '@/screens/MasterWelcome/MasterWelcomeScreen'
 import { OnboardingScreen } from '@/screens/Onboarding/OnboardingScreen'
@@ -16,8 +18,8 @@ export type RootStackParamList = {
   MasterVerification: undefined
   CustomerWelcome: undefined
   MasterWelcome: undefined
-  // TODO: 실제 Home 화면 구현 전까지 LoginScreen을 임시로 연결 — Home 화면 준비되면 component 교체 필요
-  Home: undefined
+  MasterHome: undefined
+  CustomerHome: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -32,7 +34,8 @@ export function RootNavigator() {
       <Stack.Screen name="MasterVerification" component={MasterVerificationScreen} />
       <Stack.Screen name="CustomerWelcome" component={CustomerWelcomeScreen} />
       <Stack.Screen name="MasterWelcome" component={MasterWelcomeScreen} />
-      <Stack.Screen name="Home" component={LoginScreen} />
+      <Stack.Screen name="MasterHome" component={MasterHomeScreen} />
+      <Stack.Screen name="CustomerHome" component={CustomerHomeScreen} />
     </Stack.Navigator>
   )
 }
