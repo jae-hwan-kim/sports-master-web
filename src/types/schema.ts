@@ -316,7 +316,17 @@ export interface components {
              * @example local
              * @enum {string}
              */
-            socialProvider: "local" | "kakao" | "apple";
+            socialProvider: "local" | "kakao" | "apple" | "google";
+            /**
+             * @description 모드를 명시적으로 확정했는지 여부(false면 모드선택 필요)
+             * @example true
+             */
+            hasSelectedMode: boolean;
+            /**
+             * @description 자격증 이미지 업로드 여부
+             * @example false
+             */
+            hasSubmittedCertification: boolean;
         };
         AuthTokenResponseDto: {
             /** @description 인증된 유저 정보 */
@@ -339,7 +349,7 @@ export interface components {
              */
             email: string;
             /**
-             * @description 비밀번호 (최소 8자)
+             * @description 비밀번호 (8~12자, 특수문자 사용 가능)
              * @example P@ssw0rd!
              */
             password: string;
@@ -679,6 +689,11 @@ export interface components {
              * @enum {string}
              */
             currentMode: "expert" | "customer";
+            /**
+             * @description 모드를 명시적으로 확정했는지 여부
+             * @example true
+             */
+            hasSelectedMode: boolean;
         };
         UpdateModeDto: {
             /**
