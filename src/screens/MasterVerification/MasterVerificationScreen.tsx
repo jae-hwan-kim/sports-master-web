@@ -12,7 +12,12 @@ import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { useCreateCertification } from '@/hooks/useCreateCertification'
+import { useSignUp } from '@/hooks/useSignUp'
+import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { RootStackParamList } from '@/navigation/RootNavigator'
+import { useAuthStore } from '@/store/authStore'
+import { useSignUpDraftStore } from '@/store/signupDraftStore'
+import { mapSignUpError } from '@/utils/signupValidation'
 
 // 팝업 3종(앨범 접근 권한 안내 / 미첨부 경고 / 나중에 선택하기 확인)을 모두
 // 이 화면의 모달 state로 흡수 — 별도 화면/프레임으로 분리하지 않음
@@ -25,6 +30,53 @@ export function MasterVerificationScreen() {
   const [modal, setModal] = useState<ModalKind>(null)
   const [errorMessage, setErrorMessage] = useState('')
   const { mutate: createCertification, isPending: submitting } = useCreateCertification()
+  const { mutate: signUp, isPending: registering } = useSignUp()
+  const { mutate: switchMode, isPending: switchingMode } = useSwitchMode()
+  const setAuthSession = useAuthStore((state) => state.setAuthSession)
+  const setModeSelected = useAuthStore((state) => state.setModeSelected)
+  const draft = useSignUpDraftStore((state) => state.draft)
+  const clearDraft = useSignUpDraftStore((state) => state.clearDraft)
+  const setPendingError = useSignUpDraftStore((state) => state.setPendingError)
+
+  // 명인 인증 화면의 '선택완료'/'나중에' 시점에 모드를 확정한다.
+  // - draft가 있으면(이메일 가입) 이 시점에 실제 계정을 생성(mode: expert)
+  // - draft가 없으면(소셜 가입 — 계정은 이미 생성돼 있음) 모드만 지정
+  const confirmExpertMode = (onSuccess: () => void) => {
+    if (draft) {
+      signUp(
+        { ...draft, mode: 'expert' },
+        {
+          onSuccess: (data) => {
+            setAuthSession(data.accessToken, data.refreshToken, data.user)
+            clearDraft()
+            onSuccess()
+          },
+          onError: (error) => {
+            setPendingError(mapSignUpError(error))
+            navigation.navigate('SignUp')
+          },
+        }
+      )
+      return
+    }
+
+    switchMode(
+      { mode: 'expert' },
+      {
+        onSuccess: (data) => {
+          setModeSelected(data.currentMode)
+          onSuccess()
+        },
+        onError: (error) => {
+          const message =
+            (error as { response?: { data?: { message?: string } } })?.response?.data?.message ??
+            '모드 설정에 실패했습니다. 잠시 후 다시 시도해 주세요.'
+          setErrorMessage(message)
+          setModal('submitError')
+        },
+      }
+    )
+  }
 
   const handlePickImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -48,29 +100,31 @@ export function MasterVerificationScreen() {
       return
     }
 
-    createCertification(
-      { fileUri: certificateImageUri, type: 'license' },
-      {
-        // 성공 시 심사 대기(pending) 상태로 전환됨 — 서버가 status: 'pending'으로 응답
-        onSuccess: () => {
-          navigation.navigate('MasterWelcome')
-        },
-        onError: (error) => {
-          const message =
-            (error as { response?: { data?: { message?: string } } })?.response?.data?.message ??
-            '자격증 이미지 업로드에 실패했습니다. 다시 시도해 주세요.'
-          setErrorMessage(message)
-          setModal('submitError')
-        },
-      }
-    )
+    confirmExpertMode(() => {
+      createCertification(
+        { fileUri: certificateImageUri, type: 'license' },
+        {
+          // 성공 시 심사 대기(pending) 상태로 전환됨 — 서버가 status: 'pending'으로 응답
+          onSuccess: () => {
+            navigation.navigate('MasterWelcome')
+          },
+          onError: (error) => {
+            const message =
+              (error as { response?: { data?: { message?: string } } })?.response?.data?.message ??
+              '자격증 이미지 업로드에 실패했습니다. 다시 시도해 주세요.'
+            setErrorMessage(message)
+            setModal('submitError')
+          },
+        }
+      )
+    })
   }
 
   const handleSkipConfirm = () => {
     setModal(null)
-    // 인증 보류(skip) 처리: 별도 스킵 API가 없어 로컬 상태 전환만 수행 후 이동
+    // 인증 보류(skip) 처리: 별도 스킵 API가 없어 모드 확정 후 바로 이동
     // (목적에 맞는 "인증 보류" 엔드포인트가 백엔드에 없음 — notes 참고)
-    navigation.navigate('MasterWelcome')
+    confirmExpertMode(() => navigation.navigate('MasterWelcome'))
   }
 
   const handleOpenSettings = () => {
@@ -141,7 +195,12 @@ export function MasterVerificationScreen() {
 
         {/* Actions — Figma: 카드 하단에서 36px, 두 버튼 사이 16px 고정 */}
         <View className="mt-9 gap-4">
-          <Button label="선택완료" variant="gold" onPress={handleSubmit} loading={submitting} />
+          <Button
+            label="선택완료"
+            variant="gold"
+            onPress={handleSubmit}
+            loading={submitting || registering || switchingMode}
+          />
           <Pressable
             hitSlop={8}
             accessibilityRole="button"

@@ -1,4 +1,6 @@
 // src/screens/CustomerWelcome/CustomerWelcomeScreen.tsx
+import { useEffect, useRef } from 'react'
+
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
@@ -6,20 +8,71 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
+import { useSignUp } from '@/hooks/useSignUp'
+import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { RootStackParamList } from '@/navigation/RootNavigator'
+import { useAuthStore } from '@/store/authStore'
+import { useSignUpDraftStore } from '@/store/signupDraftStore'
+import { mapSignUpError } from '@/utils/signupValidation'
 import { ArrowNextIcon } from '@/assets/icons'
 import bgImage from '@/assets/icons/background.png'
 
-// 이 화면은 서버 상태를 조회하거나 변경하지 않는 순수 전환 화면입니다.
-// (회원가입/로그인 직후 완료 안내 → 홈으로 라우팅만 수행)
-// 제공된 엔드포인트 중 이 화면 목적(가입 완료 안내, 홈 이동)에 대응하는 API가 없어 연동을 생략합니다.
+// 이 화면 진입 시점에 모드를 확정한다(customer).
+// - draft가 있으면(이메일 가입) 이 시점에 실제 계정을 생성
+// - draft가 없으면(소셜 가입 — 계정은 이미 생성돼 있음) 모드만 지정
+// 실패 시 SignUp 화면으로 되돌려 에러를 보여준다.
 export function CustomerWelcomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   // insets.top/insets.bottom은 런타임에만 알 수 있는 동적 값이라 style 사용이 불가피한 의도적 예외
   const insets = useSafeAreaInsets()
+  const { mutate: signUp } = useSignUp()
+  const { mutate: switchMode } = useSwitchMode()
+  const setAuthSession = useAuthStore((state) => state.setAuthSession)
+  const setModeSelected = useAuthStore((state) => state.setModeSelected)
+  const draft = useSignUpDraftStore((state) => state.draft)
+  const clearDraft = useSignUpDraftStore((state) => state.clearDraft)
+  const setPendingError = useSignUpDraftStore((state) => state.setPendingError)
+  const hasRegisteredRef = useRef(false)
+
+  useEffect(() => {
+    if (hasRegisteredRef.current) return
+    hasRegisteredRef.current = true
+
+    if (draft) {
+      signUp(
+        { ...draft, mode: 'customer' },
+        {
+          onSuccess: (data) => {
+            setAuthSession(data.accessToken, data.refreshToken, data.user)
+            clearDraft()
+          },
+          onError: (error) => {
+            setPendingError(mapSignUpError(error))
+            navigation.navigate('SignUp')
+          },
+        }
+      )
+      return
+    }
+
+    switchMode(
+      { mode: 'customer' },
+      {
+        onSuccess: (data) => {
+          setModeSelected(data.currentMode)
+        },
+        onError: (error) => {
+          setPendingError(mapSignUpError(error))
+          navigation.navigate('SignUp')
+        },
+      }
+    )
+    // 최초 진입 시 1회만 실행 — draft/signUp/switchMode/의존 값은 store·훅에서 안정적으로 제공됨
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handlePress = () => {
-    navigation.navigate('Home')
+    navigation.navigate('CustomerHome')
   }
 
   return (

@@ -7,7 +7,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { RoleCard } from '@/components/RoleCard'
 import { ScreenHeader } from '@/components/ScreenHeader'
-import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type Role = 'master' | 'customer'
@@ -16,25 +15,19 @@ type Role = 'master' | 'customer'
 // '회원가입_모드선택' / '회원가입_고객선택' / '회원가입_명인선택' 3개 프레임을 카드 순서 차이 변형으로 보고 단일 화면으로 흡수
 // 카드는 1차 탭에서 바로 다음 화면으로 넘어가지 않고 선택 상태(그라데이션 보더)만 표시 —
 // 이미 선택된 카드를 한 번 더 탭해야 실제로 다음 화면으로 진행
+// 이 화면 시점엔 계정이 아직 생성되지 않았다(draft만 존재) — 역할 선택은 다음 화면(MasterVerification
+// 선택완료·나중에 / CustomerWelcome 진입)에서 register 호출 시 mode로 함께 전달된다.
 export function SignUpRoleSelectScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useSafeAreaInsets()
-  const { mutate: switchMode, isPending } = useSwitchMode()
   const [selectedRole, setSelectedRole] = useState<Role | null>(null)
 
-  // 명인 모드는 서버가 ExpertProfile 존재를 요구해(BadRequestException) 가입 직후엔 전환할 수 없음 —
-  // 실제 모드 전환은 자격증 인증(승인) 이후 이뤄져야 하므로, 여기서는 인증 화면으로만 이동
   const goToMasterVerification = () => {
     navigation.navigate('MasterVerification')
   }
 
   const confirmCustomer = () => {
-    switchMode(
-      { mode: 'customer' },
-      {
-        onSuccess: () => navigation.navigate('CustomerWelcome'),
-      }
-    )
+    navigation.navigate('CustomerWelcome')
   }
 
   const handlePressMaster = () => {
@@ -75,7 +68,6 @@ export function SignUpRoleSelectScreen() {
             description="물리치료사, 건강운동관리사 자격증으로 명인이 될 준비가 되어있습니다"
             selected={selectedRole === 'master'}
             onPress={handlePressMaster}
-            disabled={isPending}
           />
           <RoleCard
             variant="customer"
@@ -83,7 +75,6 @@ export function SignUpRoleSelectScreen() {
             description="명인과 함께 건강한 운동과 몸을 만들고 싶습니다"
             selected={selectedRole === 'customer'}
             onPress={handlePressCustomer}
-            disabled={isPending}
           />
         </View>
       </ScrollView>

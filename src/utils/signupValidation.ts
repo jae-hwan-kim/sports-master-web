@@ -14,7 +14,10 @@ export const signUpSchema = z.object({
   password: z
     .string()
     .min(1, '*비밀번호를 입력해주세요')
-    .regex(/^(?=.*[a-z])(?=.*[0-9]).{8,}$/, '비밀번호는 소문자, 숫자를 포함한 8자 이상입니다'),
+    .regex(
+      /^(?=.*[a-z])(?=.*[0-9]).{8,12}$/,
+      '비밀번호는 소문자, 숫자를 포함한 12자 이내 입니다'
+    ),
 })
 
 export type SignUpFormValues = z.infer<typeof signUpSchema>
@@ -63,4 +66,30 @@ export function isEmailFormatError(error: unknown): boolean {
 export function isPasswordFormatError(error: unknown): boolean {
   const text = getApiErrorText(error)
   return text.includes('비밀번호')
+}
+
+export type SignUpFieldError = {
+  field: 'nickname' | 'email' | 'password' | 'form'
+  message: string
+}
+
+// 계정 생성(register) 호출이 SignUp 화면이 아닌 이후 화면(MasterVerification/CustomerWelcome)에서
+// 일어나므로, 실패 시 어느 필드 에러인지 판별해 SignUp 화면으로 돌아가 보여줄 수 있도록 매핑한다.
+export function mapSignUpError(error: unknown): SignUpFieldError {
+  if (isNicknameDuplicateError(error)) {
+    return { field: 'nickname', message: '이미 사용중인 닉네임입니다' }
+  }
+  if (isEmailFormatError(error)) {
+    return { field: 'email', message: '올바르지 않은 이메일 형식입니다' }
+  }
+  if (isEmailDuplicateError(error)) {
+    return { field: 'email', message: '이미 사용중인 이메일입니다' }
+  }
+  if (isPasswordFormatError(error)) {
+    return { field: 'password', message: '비밀번호 형식이 올바르지 않습니다' }
+  }
+  return {
+    field: 'form',
+    message: extractApiErrorMessage(error, '회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'),
+  }
 }

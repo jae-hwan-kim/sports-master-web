@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
@@ -20,18 +20,13 @@ import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
-import { useSignUp } from '@/hooks/useSignUp'
+import { useGoogleAuth } from '@/hooks/useGoogleAuth'
+import { useGoogleLogin } from '@/hooks/useGoogleLogin'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
-import {
-  extractApiErrorMessage,
-  isEmailDuplicateError,
-  isEmailFormatError,
-  isNicknameDuplicateError,
-  isPasswordFormatError,
-  signUpSchema,
-  type SignUpFormValues,
-} from '@/utils/signupValidation'
+import { useSignUpDraftStore } from '@/store/signupDraftStore'
+import { extractApiErrorMessage, signUpSchema, type SignUpFormValues } from '@/utils/signupValidation'
+import { navigateAfterAuth } from '@/utils/socialAuthNavigation'
 
 type SocialProvider = 'google' | 'kakao' | 'apple'
 
@@ -52,8 +47,11 @@ export function SignUpScreen() {
   const [socialLoading, setSocialLoading] = useState(false)
   const [socialError, setSocialError] = useState<string | null>(null)
   const [formError, setFormError] = useState<string | null>(null)
-  const setTokens = useAuthStore((state) => state.setTokens)
-  const { mutate: signUp, isPending: isSubmitting } = useSignUp()
+  const setAuthSession = useAuthStore((state) => state.setAuthSession)
+  const setDraft = useSignUpDraftStore((state) => state.setDraft)
+  const consumePendingError = useSignUpDraftStore((state) => state.consumePendingError)
+  const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
+  const { promptGoogle } = useGoogleAuth()
   const insets = useSafeAreaInsets()
   // insets는 런타임 계산 값이라 className으로 표현할 수 없어 style로 최소 사용
   // 네비바(ScreenHeader) 높이는 54(고정 mt) + 56 — KeyboardAvoidingView 오프셋 계산에 사용
@@ -74,52 +72,72 @@ export function SignUpScreen() {
     formState: { errors },
   } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: { nickname: '', email: '', password: '' },
+    defaultValues: useSignUpDraftStore.getState().draft ?? { nickname: '', email: '', password: '' },
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
   })
 
+  // 계정 생성(POST /auth/register)은 여기서 하지 않는다 — 명인/고객 역할이 확정되는 시점
+  // (MasterVerification 선택완료·나중에 / CustomerWelcome 진입)에 mode와 함께 한 번에 생성한다.
+  // 이 화면은 입력값을 draft store에 잠시 보관하고 역할선택 화면으로 넘어가기만 한다.
   const onSubmit = handleFormSubmit((values) => {
     setFormError(null)
-    // 백엔드 /auth/register의 phone/mode는 @IsOptional이라 생략 시 서버 기본값(mode: customer)이
-    // 적용됩니다. 빈 문자열('')을 보내면 그대로 저장되어 null이 아닌 ''이 남으므로 필드 자체를
-    // 생략합니다. (역할은 이후 SignUpRoleSelect 화면에서 PATCH /home/mode(useSwitchMode)로 재설정)
-    signUp(
-      {
-        email: values.email,
-        password: values.password,
-        nickname: values.nickname,
-      },
-      {
-        onSuccess: (data) => {
-          setTokens(data.accessToken, data.refreshToken)
-          navigation.navigate('SignUpRoleSelect')
-        },
-        onError: (error) => {
-          if (isNicknameDuplicateError(error)) {
-            setError('nickname', { message: '이미 사용중인 닉네임입니다' })
-          } else if (isEmailFormatError(error)) {
-            setError('email', { message: '올바르지 않은 이메일 형식입니다' })
-          } else if (isEmailDuplicateError(error)) {
-            setError('email', { message: '이미 사용중인 이메일입니다' })
-          } else if (isPasswordFormatError(error)) {
-            setError('password', { message: '비밀번호 형식이 올바르지 않습니다' })
-          } else {
-            setFormError(
-              extractApiErrorMessage(error, '회원가입에 실패했습니다. 잠시 후 다시 시도해주세요')
-            )
-          }
-        },
-      }
-    )
+    setDraft(values)
+    navigation.navigate('SignUpRoleSelect')
   })
+
+  // 이후 화면에서 계정 생성이 실패하면 이 화면으로 돌아와 해당 필드(또는 폼 전체)에 에러를 보여준다.
+  useEffect(() => {
+    const pendingError = consumePendingError()
+    if (!pendingError) return
+    if (pendingError.field === 'form') {
+      setFormError(pendingError.message)
+    } else {
+      setError(pendingError.field, { message: pendingError.message })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleSocialConfirm = async () => {
     setSocialError(null)
+
+    if (socialDialog === 'google') {
+      setSocialLoading(true)
+      try {
+        const result = await promptGoogle()
+        if (!result) {
+          // 사용자가 브라우저에서 취소한 경우 — 에러로 취급하지 않고 조용히 종료
+          setSocialLoading(false)
+          return
+        }
+
+        googleLogin(result, {
+          onSuccess: (data) => {
+            setAuthSession(data.accessToken, data.refreshToken, data.user)
+            setSocialLoading(false)
+            setSocialDialog(null)
+            // isNewUser거나 모드 미확정(중간 이탈 후 재시도 포함)이면 역할선택으로,
+            // 이미 모드가 확정된 기존 계정이면 바로 해당 홈으로 이동
+            navigateAfterAuth(navigation, {
+              isNewUser: data.isNewUser,
+              hasSelectedMode: data.user.hasSelectedMode,
+              currentMode: data.user.currentMode,
+            })
+          },
+          onError: (error) => {
+            setSocialError(extractApiErrorMessage(error, '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialLoading(false)
+          },
+        })
+      } catch {
+        setSocialError('구글 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요')
+        setSocialLoading(false)
+      }
+      return
+    }
+
+    // TODO: 카카오/애플 SDK 연동 전까지는 실제 인증 요청 없이 준비중 안내만 표시한다
     setSocialLoading(true)
-    // TODO: 소셜 SDK 연동 전까지는 실제 인증 요청 없이 준비중 안내만 표시한다
-    // google/apple: 각 SDK로 idToken/identityToken 취득 후 POST /auth/signup/google, /apple
-    // kakao: 카카오 SDK 인가코드 취득 후 POST /auth/signup/kakao
     setSocialError(`${SOCIAL_LABEL[socialDialog as SocialProvider]} 회원가입은 아직 준비중입니다`)
     setSocialLoading(false)
   }
@@ -206,7 +224,7 @@ export function SignUpScreen() {
 
         {/* 회원가입 버튼 — Figma: 마지막 입력 필드 하단에서 36px */}
         <View className="mt-9">
-          <Button label="회원가입" variant="primary" onPress={onSubmit} disabled={isSubmitting} />
+          <Button label="회원가입" variant="primary" onPress={onSubmit} />
         </View>
 
         {/* 구분선 + 소셜 회원가입 + 로그인 안내 — 세 블록을 하나로 묶어 gap으로 간격 통일 */}
@@ -287,7 +305,7 @@ export function SignUpScreen() {
         description={socialError ?? '계정연동을 위한 화면으로 이동합니다'}
         onConfirm={handleSocialConfirm}
         onCancel={handleSocialCancel}
-        confirmLoading={socialLoading}
+        confirmLoading={socialLoading || isGoogleLoginPending}
       />
     </KeyboardAvoidingView>
   )
