@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Platform } from 'react-native'
 
 import { useAuthStore } from '@/store/authStore'
 
@@ -10,8 +11,13 @@ if (!apiUrl && !__DEV__) {
   )
 }
 
+// 안드로이드 에뮬레이터의 localhost는 에뮬레이터 자신을 가리켜 호스트 Mac에 못 닿으므로
+// 10.0.2.2(에뮬레이터 → 호스트 루프백 별칭)로 바꿔써야 한다. iOS 시뮬레이터는 호스트
+// 네트워크를 공유해 localhost 그대로 써도 된다.
+const devFallbackUrl = Platform.OS === 'android' ? 'http://10.0.2.2:3000' : 'http://localhost:3000'
+
 export const apiClient = axios.create({
-  baseURL: apiUrl ?? 'http://localhost:3000',
+  baseURL: apiUrl ?? devFallbackUrl,
   timeout: 10000,
 })
 
