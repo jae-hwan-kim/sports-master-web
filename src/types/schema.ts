@@ -407,6 +407,11 @@ export interface components {
              * @example abc123def456
              */
             code: string;
+            /**
+             * @description 카카오 authorize 요청에 사용한 redirect_uri(콜백 중계 엔드포인트 주소)
+             * @example http://localhost:3000/auth/kakao/callback
+             */
+            redirectUri: string;
         };
         AppleLoginDto: {
             /**
