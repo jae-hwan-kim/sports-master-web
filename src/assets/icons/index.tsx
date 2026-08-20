@@ -9,6 +9,8 @@ import GoogleSvg from './google.svg'
 import KakaoSvg from './kakao.svg'
 import MasterSvg from './master.svg'
 import SettingsSvg from './settings.svg'
+import StarFillSvg from './star-fill.svg'
+import StarNoneSvg from './star-none.svg'
 import VisibilityOffSvg from './visibility-off.svg'
 import VisibilityOnSvg from './visibility-on.svg'
 
@@ -60,4 +62,12 @@ export function MasterIcon({ size = 54, ...rest }: IconProps) {
 
 export function CustomerIcon({ size = 54, ...rest }: IconProps) {
   return <CustomerSvg width={size} height={size} {...rest} />
+}
+
+export function StarFillIcon({ size = 16, ...rest }: IconProps) {
+  return <StarFillSvg width={size} height={size} {...rest} />
+}
+
+export function StarNoneIcon({ size = 16, ...rest }: IconProps) {
+  return <StarNoneSvg width={size} height={size} {...rest} />
 }
