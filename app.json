@@ -28,7 +28,14 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "sports.master"
+      "package": "sports.master",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [{ "scheme": "com.googleusercontent.apps.26841070939-1fgiabcvk1kb27vo1a6hhjfmo3a4h2iv" }],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
