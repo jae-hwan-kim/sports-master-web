@@ -40,6 +40,7 @@ export function RootNavigator() {
       <Stack.Screen name="MasterVerification" component={MasterVerificationScreen} />
       <Stack.Screen name="CustomerWelcome" component={CustomerWelcomeScreen} />
       <Stack.Screen name="MasterWelcome" component={MasterWelcomeScreen} />
+      <Stack.Screen name="MasterHome" component={MasterTabNavigator} />
       <Stack.Screen name="CustomerHome" component={CustomerHomeScreen} />
       <Stack.Screen name="MasterSettings" component={MasterSettingsScreen} />
       <Stack.Screen name="MasterProfileEdit" component={MasterProfileEditScreen} />
