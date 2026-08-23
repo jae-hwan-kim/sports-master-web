@@ -5,11 +5,16 @@ import AppleSvg from './apple.svg'
 import ArrowNextSvg from './arrow-next.svg'
 import BackSvg from './back.svg'
 import CustomerSvg from './customer.svg'
+import DiagnosisSvg from './diagnosis.svg'
 import GoogleSvg from './google.svg'
+import HomeSvg from './home.svg'
 import KakaoSvg from './kakao.svg'
+import LinkSvg from './link.svg'
 import MasterSvg from './master.svg'
+import PersonSvg from './person.svg'
 import SettingsSvg from './settings.svg'
 import StarFillSvg from './star-fill.svg'
+import StarMedalSvg from './star-medal.svg'
 import StarNoneSvg from './star-none.svg'
 import VisibilityOffSvg from './visibility-off.svg'
 import VisibilityOnSvg from './visibility-on.svg'
@@ -70,4 +75,25 @@ export function StarFillIcon({ size = 16, ...rest }: IconProps) {
 
 export function StarNoneIcon({ size = 16, ...rest }: IconProps) {
   return <StarNoneSvg width={size} height={size} {...rest} />
+}
+
+// 하단 탭바 아이콘 (44x44 탭 영역 포함)
+export function HomeTabIcon({ size = 44, ...rest }: IconProps) {
+  return <HomeSvg width={size} height={size} {...rest} />
+}
+
+export function DiagnosisTabIcon({ size = 44, ...rest }: IconProps) {
+  return <DiagnosisSvg width={size} height={size} {...rest} />
+}
+
+export function ProfileTabIcon({ size = 44, ...rest }: IconProps) {
+  return <PersonSvg width={size} height={size} {...rest} />
+}
+
+export function LinkIcon({ size = 44, ...rest }: IconProps) {
+  return <LinkSvg width={size} height={size} {...rest} />
+}
+
+export function StarMedalIcon({ size = 100, ...rest }: IconProps) {
+  return <StarMedalSvg width={size} height={size} {...rest} />
 }
