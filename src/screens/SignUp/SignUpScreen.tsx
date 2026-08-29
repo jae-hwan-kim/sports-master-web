@@ -20,6 +20,8 @@ import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
+import { useCheckEmail } from '@/hooks/useCheckEmail'
+import { useCheckNickname } from '@/hooks/useCheckNickname'
 import { useGoogleAuth } from '@/hooks/useGoogleAuth'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
 import { useKakaoAuth } from '@/hooks/useKakaoAuth'
@@ -27,10 +29,34 @@ import { useKakaoLogin } from '@/hooks/useKakaoLogin'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 import { useSignUpDraftStore } from '@/store/signupDraftStore'
-import { extractApiErrorMessage, signUpSchema, type SignUpFormValues } from '@/utils/signupValidation'
+import {
+  extractApiErrorMessage,
+  signUpSchema,
+  validateEmailFormat,
+  validateNicknameFormat,
+  type SignUpFormValues,
+} from '@/utils/signupValidation'
 import { navigateAfterAuth } from '@/utils/socialAuthNavigation'
 
 type SocialProvider = 'google' | 'kakao' | 'apple'
+
+type CheckDialog = { visible: boolean; title: string; description: string }
+const CHECK_DIALOG_CLOSED: CheckDialog = { visible: false, title: '', description: '' }
+
+function CheckButton({ onPress, loading }: { onPress: () => void; loading?: boolean }) {
+  return (
+    <Pressable
+      hitSlop={4}
+      disabled={loading}
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel="사용가능 확인"
+      className="h-[24px] w-[72px] items-center justify-center rounded-[4px] bg-primary"
+    >
+      <Text className="text-[10px] font-semibold text-white">사용가능 확인</Text>
+    </Pressable>
+  )
+}
 
 const SOCIAL_LABEL: Record<SocialProvider, string> = {
   google: '구글',
@@ -49,9 +75,12 @@ export function SignUpScreen() {
   const [socialLoading, setSocialLoading] = useState(false)
   const [socialError, setSocialError] = useState<string | null>(null)
   const [formError, setFormError] = useState<string | null>(null)
+  const [checkDialog, setCheckDialog] = useState<CheckDialog>(CHECK_DIALOG_CLOSED)
   const setAuthSession = useAuthStore((state) => state.setAuthSession)
   const setDraft = useSignUpDraftStore((state) => state.setDraft)
   const consumePendingError = useSignUpDraftStore((state) => state.consumePendingError)
+  const { mutate: checkNickname, isPending: isCheckingNickname } = useCheckNickname()
+  const { mutate: checkEmail, isPending: isCheckingEmail } = useCheckEmail()
   const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
   const { promptGoogle } = useGoogleAuth()
   const { mutate: kakaoLogin, isPending: isKakaoLoginPending } = useKakaoLogin()
@@ -73,6 +102,7 @@ export function SignUpScreen() {
     handleSubmit: handleFormSubmit,
     clearErrors,
     setError,
+    getValues,
     formState: { errors },
   } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
@@ -179,6 +209,44 @@ export function SignUpScreen() {
     setSocialLoading(false)
   }
 
+  const handleCheckNickname = () => {
+    const value = getValues('nickname')
+    const formatError = validateNicknameFormat(value)
+    if (formatError) {
+      setCheckDialog({ visible: true, title: '닉네임 사용불가', description: formatError })
+      return
+    }
+    checkNickname(value, {
+      onSuccess: ({ available }) =>
+        setCheckDialog({
+          visible: true,
+          title: available ? '닉네임 사용가능' : '닉네임 사용불가',
+          description: available ? '중복되지 않으므로 사용 가능합니다' : '이미 존재하는 닉네임입니다',
+        }),
+      onError: () =>
+        setCheckDialog({ visible: true, title: '닉네임 사용불가', description: '닉네임 확인에 실패했습니다' }),
+    })
+  }
+
+  const handleCheckEmail = () => {
+    const value = getValues('email')
+    const formatError = validateEmailFormat(value)
+    if (formatError) {
+      setCheckDialog({ visible: true, title: '이메일 형식 오류', description: formatError })
+      return
+    }
+    checkEmail(value, {
+      onSuccess: ({ available }) =>
+        setCheckDialog({
+          visible: true,
+          title: available ? '이메일 사용가능' : '가입불가 이메일',
+          description: available ? '사용 가능한 이메일입니다' : '이미 가입된 이메일입니다',
+        }),
+      onError: () =>
+        setCheckDialog({ visible: true, title: '이메일 형식 오류', description: '이메일 확인에 실패했습니다' }),
+    })
+  }
+
   const handleSocialCancel = () => {
     if (socialLoading) return
     setSocialDialog(null)
@@ -224,6 +292,9 @@ export function SignUpScreen() {
                 errorMessage={errors.nickname?.message}
                 autoCapitalize="none"
                 maxLength={8}
+                rightButton={
+                  <CheckButton onPress={handleCheckNickname} loading={isCheckingNickname} />
+                }
               />
             )}
           />
@@ -239,6 +310,9 @@ export function SignUpScreen() {
                 errorMessage={errors.email?.message}
                 keyboardType="email-address"
                 autoCapitalize="none"
+                rightButton={
+                  <CheckButton onPress={handleCheckEmail} loading={isCheckingEmail} />
+                }
               />
             )}
           />
@@ -343,6 +417,12 @@ export function SignUpScreen() {
         onConfirm={handleSocialConfirm}
         onCancel={handleSocialCancel}
         confirmLoading={socialLoading || isGoogleLoginPending || isKakaoLoginPending}
+      />
+      <ConfirmDialog
+        visible={checkDialog.visible}
+        title={checkDialog.title}
+        description={checkDialog.description}
+        onConfirm={() => setCheckDialog(CHECK_DIALOG_CLOSED)}
       />
     </KeyboardAvoidingView>
   )
