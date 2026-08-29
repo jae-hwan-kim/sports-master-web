@@ -1,30 +1,61 @@
 import masterBg from '../../assets/icons/master-background.png'
 
+import { useQuery } from '@tanstack/react-query'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Alert, FlatList, ImageBackground, Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useState } from 'react'
 
+import { apiClient } from '@/api/client'
 import { ArrowNextIcon, LinkIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
+import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
+import { useSwitchMode } from '@/hooks/useSwitchMode'
+import { useAuthStore } from '@/store/authStore'
+import type { components } from '@/types/schema'
 
-type DiagnosisItem = {
-  id: string
-  code: string
-  region: string
-  age: string
-  date: string
+type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
+type DiagnosisIncomingItemDto = components['schemas']['DiagnosisIncomingItemDto']
+
+const GRADE_LABEL: Record<string, string> = {
+  bronze: '브론즈',
+  silver: '실버메달',
+  gold: '스타메달',
+  platinum: '플래티넘',
+  diamond: '다이아몬드',
 }
 
-// TODO: GET /home/diagnosis-requests/preview API 연동 후 교체
-const DUMMY_DIAGNOSIS: DiagnosisItem[] = [
-  { id: '1', code: '#NNNNNNNN', region: '지역명', age: '최대글자11자', date: 'YYYY. MM. DD' },
-  { id: '2', code: '#NNNNNNNN', region: '지역명', age: '최대글자11자', date: 'YYYY. MM. DD' },
-  { id: '3', code: '#NNNNNNNN', region: '지역명', age: '최대글자11자', date: 'YYYY. MM. DD' },
-]
+async function fetchExpertGrade(): Promise<ExpertProfileResponseDto> {
+  const { data } = await apiClient.get<{ data: ExpertProfileResponseDto }>('/home/expert-grade')
+  return data.data
+}
 
-function MasterModeBadge() {
+async function fetchDiagnosisPreview(): Promise<DiagnosisIncomingItemDto[]> {
+  const { data } = await apiClient.get<{ data: DiagnosisIncomingItemDto[] }>('/home/diagnosis-requests/preview')
+  return data.data
+}
+
+function formatDate(iso: string): string {
+  const d = new Date(iso)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}. ${m}. ${day}`
+}
+
+// 더미 데이터 테스트: 아래 주석 해제 후 diagnosisItems 대신 DUMMY_ITEMS 사용
+// const DUMMY_ITEMS: DiagnosisIncomingItemDto[] = [
+//   { id: 1, customerProfile: { personalCode: 'USR-000001', region: '서울 강남구', age: 28, name: '김고객' }, createdAt: '2025-07-01T09:00:00Z' },
+//   { id: 2, customerProfile: { personalCode: 'USR-000002', region: '부산 해운대구', age: 35, name: '이고객' }, createdAt: '2025-07-02T10:00:00Z' },
+//   { id: 3, customerProfile: { personalCode: 'USR-000003', region: '대구 중구', age: 22, name: '박고객' }, createdAt: '2025-07-03T11:00:00Z' },
+// ]
+
+function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?: boolean }) {
   return (
-    <View
+    <Pressable
+      hitSlop={8}
+      onPress={onPress}
+      disabled={disabled}
       style={{
         width: 80,
         height: 20,
@@ -59,7 +90,7 @@ function MasterModeBadge() {
       >
         명인모드
       </Text>
-    </View>
+    </Pressable>
   )
 }
 
@@ -94,12 +125,105 @@ function StatDivider() {
   )
 }
 
+function EmptyNoProfile() {
+  return (
+    <View
+      style={{
+        borderRadius: 8,
+        backgroundColor: '#D9D9D9',
+        height: 278,
+        width: 338,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 8,
+      }}
+    >
+      <Text style={{ color: '#74768E', fontSize: 18, fontFamily: 'Pretendard-ExtraBold', textAlign: 'center' }}>
+        아직 요청 고객이 없습니다
+      </Text>
+      <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium', textAlign: 'center' }}>
+        프로필을 작성해 전문성을 보여주세요!
+      </Text>
+      <Pressable
+        hitSlop={8}
+        onPress={() => Alert.alert('준비 중', '프로필 작성 기능을 준비 중입니다.')}
+        style={{
+          marginTop: 12,
+          backgroundColor: '#C6A75E',
+          borderRadius: 8,
+          height: 50,
+          width: 145,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Text style={{ color: '#F2F2F2', fontSize: 17, fontFamily: 'Pretendard-Medium' }}>
+          프로필 작성하기
+        </Text>
+      </Pressable>
+    </View>
+  )
+}
+
+function EmptyHasTip() {
+  return (
+    <View
+      style={{
+        borderRadius: 8,
+        backgroundColor: '#F0F0F0',
+        padding: 24,
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: 180,
+        gap: 8,
+      }}
+    >
+      <Text style={{ color: '#74768E', fontSize: 14, fontFamily: 'Pretendard-Medium', textAlign: 'center' }}>
+        Tip.
+      </Text>
+      <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Regular', textAlign: 'center', lineHeight: 20 }}>
+        {'링크를 통해 외부 고객도 리뷰 작성이 가능합니다\n리뷰 점수를 높여 고객요청 확률을 높여봅시다!'}
+      </Text>
+    </View>
+  )
+}
+
 export function MasterHomeScreen() {
   const insets = useSafeAreaInsets()
   const rootNav = useRootNavigation()
+  const setModeSelected = useAuthStore((s) => s.setModeSelected)
+  const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
+  const [linkCopyVisible, setLinkCopyVisible] = useState(false)
+
+  const { data: expertProfile, isError: expertProfileError } = useQuery({
+    queryKey: ['expertGrade'],
+    queryFn: fetchExpertGrade,
+    retry: false,
+  })
+
+  const { data: diagnosisItems = [] } = useQuery({
+    queryKey: ['diagnosisPreview'],
+    queryFn: fetchDiagnosisPreview,
+  })
+
+  const hasProfile = expertProfile !== undefined && !expertProfileError
+  const gradeLabel = expertProfile?.expertGrade ? (GRADE_LABEL[expertProfile.expertGrade] ?? expertProfile.expertGrade) : '-'
+  const reviewCount = expertProfile ? String(expertProfile.totalReviewCount > 999 ? '999+' : expertProfile.totalReviewCount) : '-'
+  const avgRating = expertProfile ? String(Number(expertProfile.averageRating).toFixed(1)) : '-'
+  const topPercentile = expertProfile?.topPercentile != null ? `${expertProfile.topPercentile}%` : '-'
+
+  const handleModeSwitch = () => {
+    switchMode({ mode: 'customer' }, {
+      onSuccess: () => {
+        setModeSelected('customer')
+        rootNav?.reset({ index: 0, routes: [{ name: 'CustomerHome' }] })
+      },
+    })
+  }
 
   const handleReviewLink = () => {
-    Alert.alert('링크 복사', 'naver.com 링크가 복사되었습니다.')
+    // TODO: 실제 리뷰 링크 생성은 chatRoomId 필요 — 채팅 기능 개발 시 교체
+    setLinkCopyVisible(true)
   }
 
   return (
@@ -110,7 +234,7 @@ export function MasterHomeScreen() {
         resizeMode="cover"
         style={{ paddingTop: insets.top }}
       >
-        {/* 전체 dark 오버레이 — 배경 이미지 흐릿하게 */}
+        {/* 전체 dark 오버레이 */}
         <View
           style={{
             position: 'absolute',
@@ -132,7 +256,7 @@ export function MasterHomeScreen() {
         <View
           style={{ height: 56, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', paddingHorizontal: 16, gap: 8 }}
         >
-          <MasterModeBadge />
+          <MasterModeBadge onPress={handleModeSwitch} disabled={isSwitching} />
           <Pressable
             hitSlop={8}
             onPress={() => rootNav?.navigate('MasterSettings')}
@@ -190,7 +314,7 @@ export function MasterHomeScreen() {
             <StarMedalIcon size={100} />
           </View>
 
-          <View style={{ flex: 1, paddingLeft: 16, paddingTop: 18, justifyContent: 'space-between', paddingBottom: 16 }}>
+          <View style={{ flex: 1, paddingLeft: 16, paddingTop: 18, justifyContent: 'space-between', paddingBottom: 24 }}>
             <View>
               <Text style={{ color: '#F2F2F2', fontSize: 18, fontFamily: 'Pretendard-ExtraBold' }}>
                 명인 등급
@@ -199,24 +323,23 @@ export function MasterHomeScreen() {
                 style={{ color: '#D9D9D9', fontSize: 13, fontFamily: 'Pretendard-Medium', marginTop: 7 }}
               >
                 현재 명인 등급{' '}
-                <Text style={{ color: '#FBBC05' }}>스타메달</Text>
+                <Text style={{ color: '#FBBC05' }}>{gradeLabel}</Text>
                 {' '}입니다
               </Text>
             </View>
 
-            {/* 통계 — alignSelf: flex-start로 row가 늘어나지 않게 고정 */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start' }}>
-              <StatBox value="999+" label="리뷰" />
+            <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start', marginLeft: 16 }}>
+              <StatBox value={reviewCount} label="리뷰" />
               <StatDivider />
-              <StatBox value="4.8" label="평점" />
+              <StatBox value={avgRating} label="평점" />
               <StatDivider />
-              <StatBox value="1%" label="상위" />
+              <StatBox value={topPercentile} label="상위" />
             </View>
           </View>
         </View>
       </ImageBackground>
 
-      {/* 하단 진단요청 고객 섹션 — marginTop: -16으로 ImageBackground와 겹쳐 radius가 보이게 */}
+      {/* 하단 진단요청 고객 섹션 */}
       <View
         style={{
           flex: 1,
@@ -229,13 +352,12 @@ export function MasterHomeScreen() {
           shadowRadius: 8,
           elevation: 5,
           paddingTop: 23,
-          paddingHorizontal: 32,
         }}
       >
-        {/* 섹션 헤더 */}
+        {/* 섹션 헤더 — paddingLeft:32, paddingRight:25 → Figma 화살표 좌:333 우:25 여백 */}
         <Pressable
           hitSlop={8}
-          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}
+          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 32, paddingRight: 25, marginBottom: 16 }}
         >
           <View>
             <Text style={{ color: '#1F2A43', fontSize: 18, fontFamily: 'Pretendard-ExtraBold' }}>
@@ -252,53 +374,72 @@ export function MasterHomeScreen() {
 
         {/* 진단요청 목록 */}
         <FlatList
-          data={DUMMY_DIAGNOSIS}
-          keyExtractor={(item) => item.id}
+          data={diagnosisItems}
+          keyExtractor={(item) => String(item.id)}
           scrollEnabled={false}
+          contentContainerStyle={{ paddingHorizontal: 32 }}
           ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
           renderItem={({ item }) => (
             <View
               style={{
                 height: 82,
                 borderRadius: 8,
-                backgroundColor: '#EFEFEF',
+                backgroundColor: '#FFFFFF',
                 flexDirection: 'row',
                 alignItems: 'center',
                 paddingHorizontal: 16,
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.08,
+                shadowRadius: 4,
+                elevation: 2,
               }}
             >
               <View style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#B0B0B0' }} />
               <View style={{ flex: 1, marginLeft: 19 }}>
                 <Text style={{ color: '#B48247', fontSize: 13, fontFamily: 'Pretendard-Medium' }}>
-                  {item.code}
+                  #{item.customerProfile?.personalCode ?? '-'}
                 </Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                   <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium' }}>
-                    {item.region} {item.age}
+                    {item.customerProfile?.region ?? '-'}{' '}
+                    {item.customerProfile?.age != null ? `${item.customerProfile.age}세` : '-'}
                   </Text>
                   <Text style={{ color: '#74768E', fontSize: 12, fontFamily: 'Pretendard-Regular' }}>
-                    {item.date}
+                    {item.createdAt ? formatDate(item.createdAt) : '-'}
                   </Text>
                 </View>
               </View>
             </View>
           )}
+          ListEmptyComponent={hasProfile ? <EmptyHasTip /> : <EmptyNoProfile />}
           ListFooterComponent={
-            <Text
-              style={{
-                color: 'rgba(116,118,142,0.5)',
-                fontSize: 10,
-                fontFamily: 'Pretendard-Medium',
-                textAlign: 'right',
-                marginTop: 16,
-                paddingBottom: 16,
-              }}
-            >
-              가장 먼저 요청한 3인이 보여집니다
-            </Text>
+            diagnosisItems.length > 0 ? (
+              <Text
+                style={{
+                  color: 'rgba(116,118,142,0.5)',
+                  fontSize: 10,
+                  fontFamily: 'Pretendard-Medium',
+                  textAlign: 'right',
+                  marginTop: 16,
+                  paddingBottom: 16,
+                }}
+              >
+                가장 먼저 요청한 3인이 보여집니다
+              </Text>
+            ) : null
           }
         />
       </View>
+
+      {/* 링크 복사 확인 다이얼로그 */}
+      <ConfirmDialog
+        visible={linkCopyVisible}
+        title="링크 복사 완료"
+        description="링크가 클립보드에 복사되었습니다"
+        confirmLabel="확인"
+        onConfirm={() => setLinkCopyVisible(false)}
+      />
     </View>
   )
 }
