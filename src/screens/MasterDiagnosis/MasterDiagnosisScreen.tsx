@@ -2,16 +2,11 @@ import { useState } from 'react'
 import { FlatList, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import type { DiagnosisIncomingItem } from '@/api/diagnosis'
-import { MOCK_DIAGNOSIS_REQUESTS } from '@/api/diagnosis.mock'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { DiagnosisRequestModal } from '@/components/DiagnosisRequestModal'
+import { useIncomingDiagnosisRequests } from '@/hooks/useIncomingDiagnosisRequests'
 
-// TODO: API 연동 시 아래 Mock을 useIncomingDiagnosisRequests() hook으로 교체
-const useMockData = () => ({
-  data: MOCK_DIAGNOSIS_REQUESTS as DiagnosisIncomingItem[],
-  isLoading: false,
-})
+import type { DiagnosisIncomingItem } from '@/api/diagnosis'
 
 function EmptyState() {
   return (
@@ -28,7 +23,7 @@ function EmptyState() {
 
 export function MasterDiagnosisScreen() {
   const insets = useSafeAreaInsets()
-  const { data: items = [], isLoading } = useMockData()
+  const { data: items = [], isLoading } = useIncomingDiagnosisRequests()
   const [selectedItem, setSelectedItem] = useState<DiagnosisIncomingItem | null>(null)
 
   return (
