@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { FlatList, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import type { DiagnosisIncomingItem } from '@/api/diagnosis'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { DiagnosisRequestModal } from '@/components/DiagnosisRequestModal'
+import { useDeleteDiagnosisRequest } from '@/hooks/useDeleteDiagnosisRequest'
 import { useIncomingDiagnosisRequests } from '@/hooks/useIncomingDiagnosisRequests'
-
-import type { DiagnosisIncomingItem } from '@/api/diagnosis'
 
 function EmptyState() {
   return (
@@ -24,6 +24,7 @@ function EmptyState() {
 export function MasterDiagnosisScreen() {
   const insets = useSafeAreaInsets()
   const { data: items = [], isLoading } = useIncomingDiagnosisRequests()
+  const { mutate: deleteDiagnosis } = useDeleteDiagnosisRequest()
   const [selectedItem, setSelectedItem] = useState<DiagnosisIncomingItem | null>(null)
 
   return (
@@ -68,7 +69,7 @@ export function MasterDiagnosisScreen() {
               <DiagnosisRequestCard
                 item={item}
                 onPress={() => setSelectedItem(item)}
-                onDelete={() => {/* TODO: API 연동 시 삭제 mutation 호출 */}}
+                onDelete={() => deleteDiagnosis(item.id)}
               />
             )}
             ListEmptyComponent={<EmptyState />}

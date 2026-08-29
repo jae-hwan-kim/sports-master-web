@@ -24,3 +24,7 @@ export async function fetchIncomingDiagnosisRequests(): Promise<DiagnosisIncomin
   const { data } = await apiClient.get<{ data: DiagnosisIncomingItem[] }>('/diagnoses/incoming')
   return data.data
 }
+
+export async function deleteIncomingDiagnosisRequest(id: number): Promise<void> {
+  await apiClient.delete(`/diagnoses/${id}`)
+}
