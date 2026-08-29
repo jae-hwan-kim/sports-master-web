@@ -7,16 +7,24 @@ import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { DiagnosisRequestModal } from '@/components/DiagnosisRequestModal'
 import { useDeleteDiagnosisRequest } from '@/hooks/useDeleteDiagnosisRequest'
 import { useIncomingDiagnosisRequests } from '@/hooks/useIncomingDiagnosisRequests'
+import LogoSvg from '@/assets/icons/logo.svg'
 
 function EmptyState() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, paddingTop: 80 }}>
-      <Text style={{ color: '#74768E', fontSize: 18, fontFamily: 'Pretendard-ExtraBold', textAlign: 'center' }}>
-        아직 요청 고객이 없습니다
-      </Text>
-      <Text style={{ color: '#A0A2B8', fontSize: 13, fontFamily: 'Pretendard-Regular', textAlign: 'center', lineHeight: 20 }}>
-        {'Tip. 리뷰로 점수를 높여\n진단요청 확률을 높여봅시다!'}
-      </Text>
+    <View style={{ flex: 1 }}>
+      {/* 텍스트: 패널 내 상대 위치 기준 약 36% 지점 (Figma top:414, 패널top:178, 패널h:696) */}
+      <View style={{ paddingTop: '36%', alignItems: 'center', gap: 12 }}>
+        <Text style={{ color: '#74768E', fontSize: 18, fontFamily: 'Pretendard-ExtraBold', textAlign: 'center' }}>
+          아직 요청 고객이 없습니다
+        </Text>
+        <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium', textAlign: 'center' }}>
+          Tip. 리뷰로 점수를 높여 진단요청 확률을 높여봅시다!
+        </Text>
+      </View>
+      {/* 일러스트: 텍스트 아래, 우측으로 삐져나옴 (Figma left:200/402, bottom 영역) */}
+      <View style={{ position: 'absolute', bottom: 0, right: -40 }}>
+        <LogoSvg width={276} height={278} />
+      </View>
     </View>
   )
 }
