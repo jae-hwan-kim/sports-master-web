@@ -1,15 +1,25 @@
+import { useQuery } from '@tanstack/react-query'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useState } from 'react'
 import { Pressable, ScrollView, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import { apiClient } from '@/api/client'
 import { ArrowNextIcon } from '@/assets/icons'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { useLogout } from '@/hooks/useLogout'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
+import type { components } from '@/types/schema'
+
+type UserResponseDto = components['schemas']['UserResponseDto']
+
+async function fetchMe(): Promise<UserResponseDto> {
+  const { data } = await apiClient.get<{ data: UserResponseDto }>('/users/me')
+  return data.data
+}
 
 type BlockedField = 'phone' | 'email' | 'password' | null
 
@@ -26,6 +36,8 @@ export function MasterProfileEditScreen() {
   const isSocial = socialProvider !== null && socialProvider !== 'local'
   const logout = useLogout()
 
+  const { data: me } = useQuery({ queryKey: ['me'], queryFn: fetchMe })
+
   const [blockedField, setBlockedField] = useState<BlockedField>(null)
   const [allDeviceLogoutVisible, setAllDeviceLogoutVisible] = useState(false)
 
@@ -41,7 +53,7 @@ export function MasterProfileEditScreen() {
     <View className="flex-1 bg-[#F2F2F2]">
       <ScreenHeader onBack={() => navigation.goBack()} />
 
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {/* 타이틀 */}
         <View className="px-6 pt-[34px]">
           <Text className="text-[28px] font-extrabold text-black">개인 정보 관리</Text>
@@ -54,30 +66,32 @@ export function MasterProfileEditScreen() {
         <View className="mt-[27px]">
           <ProfileField
             label="휴대전화 번호"
-            value="010-0000-0000"
+            value={me?.phone ?? '-'}
             onPress={() => handleFieldPress('phone')}
           />
+          <View style={{ height: 4 }} />
           <ProfileField
             label="이메일"
-            value="yourid@example.com"
+            value={me?.email ?? '-'}
             onPress={() => handleFieldPress('email')}
           />
+          <View style={{ height: 4 }} />
           <ProfileField
             label="비밀번호"
             value="••••••••"
             onPress={() => handleFieldPress('password')}
           />
         </View>
-
-        {/* 모든 기기에서 로그아웃 */}
-        <Pressable
-          hitSlop={8}
-          onPress={() => setAllDeviceLogoutVisible(true)}
-          className="mt-8 items-center"
-        >
-          <Text className="text-[13px] font-medium text-gray2">모든 기기에서 로그아웃</Text>
-        </Pressable>
       </ScrollView>
+
+      {/* 모든 기기에서 로그아웃 — 화면 하단 고정 */}
+      <Pressable
+        hitSlop={8}
+        onPress={() => setAllDeviceLogoutVisible(true)}
+        style={{ paddingBottom: insets.bottom + 16, paddingTop: 16, alignItems: 'center' }}
+      >
+        <Text className="text-[13px] font-medium text-gray2">모든 기기에서 로그아웃</Text>
+      </Pressable>
 
       {/* 소셜 변경 불가 다이얼로그 */}
       <ConfirmDialog
@@ -90,8 +104,8 @@ export function MasterProfileEditScreen() {
       {/* 모든 기기 로그아웃 확인 */}
       <ConfirmDialog
         visible={allDeviceLogoutVisible}
-        title="모든 기기에서 로그아웃"
-        description="모든 기기에서 로그아웃 하시겠습니까?"
+        title="전체 로그아웃 할까요?"
+        description="로그인된 모든 기기에서 로그아웃 됩니다"
         confirmLabel="로그아웃"
         cancelLabel="취소"
         onConfirm={() => {
