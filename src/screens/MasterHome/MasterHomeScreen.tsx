@@ -7,15 +7,17 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useState } from 'react'
 
 import { apiClient } from '@/api/client'
+import type { DiagnosisIncomingItem } from '@/api/diagnosis'
+import { formatDate } from '@/utils/date'
 import { ArrowNextIcon, LinkIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
+import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { useAuthStore } from '@/store/authStore'
 import type { components } from '@/types/schema'
 
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
-type DiagnosisIncomingItemDto = components['schemas']['DiagnosisIncomingItemDto']
 
 const GRADE_LABEL: Record<string, string> = {
   bronze: '브론즈',
@@ -30,25 +32,11 @@ async function fetchExpertGrade(): Promise<ExpertProfileResponseDto> {
   return data.data
 }
 
-async function fetchDiagnosisPreview(): Promise<DiagnosisIncomingItemDto[]> {
-  const { data } = await apiClient.get<{ data: DiagnosisIncomingItemDto[] }>('/home/diagnosis-requests/preview')
+async function fetchDiagnosisPreview(): Promise<DiagnosisIncomingItem[]> {
+  const { data } = await apiClient.get<{ data: DiagnosisIncomingItem[] }>('/home/diagnosis-requests/preview')
   return data.data
 }
 
-function formatDate(iso: string): string {
-  const d = new Date(iso)
-  const y = d.getFullYear()
-  const m = String(d.getMonth() + 1).padStart(2, '0')
-  const day = String(d.getDate()).padStart(2, '0')
-  return `${y}. ${m}. ${day}`
-}
-
-// 더미 데이터 테스트: 아래 주석 해제 후 diagnosisItems 대신 DUMMY_ITEMS 사용
-// const DUMMY_ITEMS: DiagnosisIncomingItemDto[] = [
-//   { id: 1, customerProfile: { personalCode: 'USR-000001', region: '서울 강남구', age: 28, name: '김고객' }, createdAt: '2025-07-01T09:00:00Z' },
-//   { id: 2, customerProfile: { personalCode: 'USR-000002', region: '부산 해운대구', age: 35, name: '이고객' }, createdAt: '2025-07-02T10:00:00Z' },
-//   { id: 3, customerProfile: { personalCode: 'USR-000003', region: '대구 중구', age: 22, name: '박고객' }, createdAt: '2025-07-03T11:00:00Z' },
-// ]
 
 function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?: boolean }) {
   return (
@@ -380,37 +368,7 @@ export function MasterHomeScreen() {
           contentContainerStyle={{ paddingHorizontal: 32 }}
           ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
           renderItem={({ item }) => (
-            <View
-              style={{
-                height: 82,
-                borderRadius: 8,
-                backgroundColor: '#FFFFFF',
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingHorizontal: 16,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.08,
-                shadowRadius: 4,
-                elevation: 2,
-              }}
-            >
-              <View style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#B0B0B0' }} />
-              <View style={{ flex: 1, marginLeft: 19 }}>
-                <Text style={{ color: '#B48247', fontSize: 13, fontFamily: 'Pretendard-Medium' }}>
-                  #{item.customerProfile?.personalCode ?? '-'}
-                </Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-                  <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium' }}>
-                    {item.customerProfile?.region ?? '-'}{' '}
-                    {item.customerProfile?.age != null ? `${item.customerProfile.age}세` : '-'}
-                  </Text>
-                  <Text style={{ color: '#74768E', fontSize: 12, fontFamily: 'Pretendard-Regular' }}>
-                    {item.createdAt ? formatDate(item.createdAt) : '-'}
-                  </Text>
-                </View>
-              </View>
-            </View>
+            <DiagnosisRequestCard item={item} onPress={() => {}} />
           )}
           ListEmptyComponent={hasProfile ? <EmptyHasTip /> : <EmptyNoProfile />}
           ListFooterComponent={
