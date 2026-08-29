@@ -212,6 +212,19 @@ Figma → 코드 워크플로우는 화면 하나당 여러 에이전트를 호�
 
 ---
 
+## Figma 구현 전 필수 확인 항목
+
+화면 코드를 작성하기 **전에** Figma에서 아래 세 가지를 반드시 파악할 것.
+파악 없이 구현하면 구현 후 재수정이 발생한다.
+
+| # | 항목 | 확인 내용 |
+|---|------|-----------|
+| 1 | **배경색** | 화면 bg, 패널 bg, 아이템 bg — 같아 보여도 다를 수 있음 (예: `#F2F2F2` vs `#FFFFFF`) |
+| 2 | **아이템 구분선/간격** | `ItemSeparatorComponent` 필요 여부, 높이값 (shadow가 separator 역할이면 gap 필수) |
+| 3 | **Shadow 방향과 색** | `shadowOffset` x/y 부호, `shadowOpacity`, `shadowRadius` — 특히 패널 상단 shadow는 y 음수 |
+
+---
+
 ## 체크리스트 (PR 전)
 
 ```
