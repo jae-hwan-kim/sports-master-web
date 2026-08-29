@@ -9,10 +9,11 @@ type TextFieldProps = TextInputProps & {
   label?: string
   errorMessage?: string
   secureToggle?: boolean
+  rightButton?: React.ReactNode
 }
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(function TextField(
-  { label, errorMessage, secureToggle = false, secureTextEntry, onFocus, onBlur, ...rest },
+  { label, errorMessage, secureToggle = false, secureTextEntry, onFocus, onBlur, rightButton, ...rest },
   ref
 ) {
   const [isFocused, setIsFocused] = useState(false)
@@ -44,16 +45,20 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
           }}
           {...rest}
         />
-        {secureToggle && (
-          <Pressable
-            hitSlop={8}
-            onPress={() => setIsSecure((prev) => !prev)}
-            accessibilityRole="button"
-            accessibilityLabel={isSecure ? '비밀번호 표시' : '비밀번호 숨기기'}
-            className="h-11 w-11 items-center justify-center"
-          >
-            <VisibilityIcon off={isSecure} />
-          </Pressable>
+        {rightButton ? (
+          <View className="ml-2 shrink-0">{rightButton}</View>
+        ) : (
+          secureToggle && (
+            <Pressable
+              hitSlop={8}
+              onPress={() => setIsSecure((prev) => !prev)}
+              accessibilityRole="button"
+              accessibilityLabel={isSecure ? '비밀번호 표시' : '비밀번호 숨기기'}
+              className="h-11 w-11 items-center justify-center"
+            >
+              <VisibilityIcon off={isSecure} />
+            </Pressable>
+          )
         )}
       </View>
       {hasError && (
