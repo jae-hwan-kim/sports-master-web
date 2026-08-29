@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { DiagnosisTabIcon, HomeTabIcon, ProfileTabIcon } from '@/assets/icons'
+import { MasterDiagnosisScreen } from '@/screens/MasterDiagnosis/MasterDiagnosisScreen'
 import { MasterHomeScreen } from '@/screens/MasterHome/MasterHomeScreen'
 
 export type MasterTabParamList = {
@@ -86,7 +87,7 @@ export function MasterTabNavigator() {
       tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tab.Screen name="HomeTab" component={MasterHomeScreen} />
-      <Tab.Screen name="DiagnosisTab" component={PlaceholderScreen} />
+      <Tab.Screen name="DiagnosisTab" component={MasterDiagnosisScreen} />
       <Tab.Screen name="ProfileTab" component={PlaceholderScreen} />
     </Tab.Navigator>
   )
