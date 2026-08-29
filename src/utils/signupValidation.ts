@@ -68,6 +68,19 @@ export function isPasswordFormatError(error: unknown): boolean {
   return text.includes('비밀번호')
 }
 
+export function validateNicknameFormat(value: string): string | null {
+  if (!value || value.trim() === '' || /\s/.test(value) || value.length > 8) {
+    return '닉네임은 최대8자 입니다\n(숫자,특수기호,한글,영문 조합)'
+  }
+  return null
+}
+
+export function validateEmailFormat(value: string): string | null {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!value || !emailRegex.test(value)) return '정확한 이메일 형식을 확인해주세요'
+  return null
+}
+
 export type SignUpFieldError = {
   field: 'nickname' | 'email' | 'password' | 'form'
   message: string
