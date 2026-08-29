@@ -276,6 +276,33 @@ export interface paths {
         patch: operations["HomeController_switchMode"];
         trace?: never;
     };
+    "/users/me": {
+        parameters: { query?: never; header?: never; path?: never; cookie?: never; };
+        /** 내 정보 조회 */
+        get: operations["UsersController_getMe"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** 내 정보 수정 */
+        patch: operations["UsersController_updateMe"];
+        trace?: never;
+    };
+    "/expert-profiles/me": {
+        parameters: { query?: never; header?: never; path?: never; cookie?: never; };
+        /** 내 명인 프로필 조회 */
+        get: operations["ExpertProfilesController_getMe"];
+        put?: never;
+        /** 명인 프로필 최초 생성 */
+        post: operations["ExpertProfilesController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** 내 명인 프로필 수정 */
+        patch: operations["ExpertProfilesController_updateMe"];
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -607,6 +634,8 @@ export interface components {
              * @example https://cdn.example.com/edu/1.pdf
              */
             educationPdfUrl?: string;
+            /** @description 리뷰 수 기준 상위 백분위 (전체 명인 중 상위 N%) */
+            topPercentile?: number | null;
             /**
              * Format: date-time
              * @description 생성일
@@ -619,6 +648,24 @@ export interface components {
              * @example 2024-06-01T12:00:00.000Z
              */
             updatedAt: string;
+        };
+        UserResponseDto: {
+            /** @description 유저 ID */
+            id: number;
+            /** @description 이메일 */
+            email?: string | null;
+            /** @description 이름 */
+            name: string;
+            /** @description 전화번호 */
+            phone?: string | null;
+            /** @description 개인 코드 */
+            personalCode: string;
+            /** @description 현재 모드 */
+            currentMode: "expert" | "customer";
+            /** @description 소셜 제공자 */
+            socialProvider: "local" | "kakao" | "apple" | "google";
+            /** Format: date-time */
+            createdAt: string;
         };
         ReviewTokenResponseDto: {
             /**
@@ -1111,6 +1158,76 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ResponseDto"] & {
                         data?: components["schemas"]["UpdateModeResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    UsersController_getMe: {
+        parameters: { query?: never; header?: never; path?: never; cookie?: never; };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: { [name: string]: unknown; };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["UserResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    UsersController_updateMe: {
+        parameters: { query?: never; header?: never; path?: never; cookie?: never; };
+        requestBody?: { content: { "application/json": { phone?: string; email?: string; currentPassword?: string; newPassword?: string; }; }; };
+        responses: {
+            200: {
+                headers: { [name: string]: unknown; };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["UserResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    ExpertProfilesController_getMe: {
+        parameters: { query?: never; header?: never; path?: never; cookie?: never; };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: { [name: string]: unknown; };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["ExpertProfileResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    ExpertProfilesController_create: {
+        parameters: { query?: never; header?: never; path?: never; cookie?: never; };
+        requestBody?: { content: { "application/json": { region: string; centerName: string; representativeService: string; bio?: string; }; }; };
+        responses: {
+            201: {
+                headers: { [name: string]: unknown; };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["ExpertProfileResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    ExpertProfilesController_updateMe: {
+        parameters: { query?: never; header?: never; path?: never; cookie?: never; };
+        requestBody?: { content: { "application/json": { region?: string; centerName?: string; representativeService?: string; bio?: string; keywordTags?: string[]; openChatUrl?: string; }; }; };
+        responses: {
+            200: {
+                headers: { [name: string]: unknown; };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["ExpertProfileResponseDto"];
                     };
                 };
             };
