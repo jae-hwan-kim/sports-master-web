@@ -19,7 +19,7 @@ const GOOGLE_URL_SCHEME = GOOGLE_CLIENT_ID
 
 const discovery = { authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth', tokenEndpoint: 'https://oauth2.googleapis.com/token' }
 
-// eslint-disable-next-line no-console
+ 
 console.log('[google-auth] module load', Platform.OS, {
   iosClientId: GOOGLE_IOS_CLIENT_ID,
   androidClientId: GOOGLE_ANDROID_CLIENT_ID,
@@ -32,7 +32,7 @@ console.log('[google-auth] module load', Platform.OS, {
 // 카카오처럼 code를 그대로 넘길 수 없음).
 export function useGoogleAuth() {
   const redirectUri = AuthSession.makeRedirectUri({ scheme: GOOGLE_URL_SCHEME })
-  // eslint-disable-next-line no-console
+   
   console.log('[google-auth] hook render', Platform.OS, { redirectUri })
   const [request, , promptAsync] = AuthSession.useAuthRequest(
     {
@@ -45,7 +45,7 @@ export function useGoogleAuth() {
   )
 
   const promptGoogle = async (): Promise<{ idToken: string } | null> => {
-    // eslint-disable-next-line no-console
+     
     console.log('[google-auth] promptGoogle called', { hasClientId: !!GOOGLE_CLIENT_ID, hasRequest: !!request })
     if (!GOOGLE_CLIENT_ID) {
       throw new Error('GOOGLE_CLIENT_ID_NOT_SET')
