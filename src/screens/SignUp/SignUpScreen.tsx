@@ -99,7 +99,8 @@ export function SignUpScreen() {
 
   const {
     control,
-    handleSubmit: handleFormSubmit,
+    trigger,
+    getFieldState,
     clearErrors,
     setError,
     getValues,
@@ -114,34 +115,45 @@ export function SignUpScreen() {
   // 계정 생성(POST /auth/register)은 여기서 하지 않는다 — 명인/고객 역할이 확정되는 시점
   // (MasterVerification 선택완료·나중에 / CustomerWelcome 진입)에 mode와 함께 한 번에 생성한다.
   // 이 화면은 입력값을 draft store에 잠시 보관하고 역할선택 화면으로 넘어가기만 한다.
-  const onSubmit = handleFormSubmit(async (values) => {
+  const onSubmit = async () => {
     setFormError(null)
+    const values = getValues()
 
-    try {
-      const { available: nicknameAvailable } = await checkNicknameAsync(values.nickname)
-      if (!nicknameAvailable) {
-        setError('nickname', { message: '이미 사용중인 닉네임입니다' })
-        return
-      }
-    } catch {
+    // Zod 전체 검증 — 실패 필드에 inline 에러 자동 표시
+    const isZodValid = await trigger()
+
+    // 형식상 유효한 닉네임/이메일에 한해 중복 체크 병렬 실행
+    const nicknameValid = !getFieldState('nickname').invalid && !!values.nickname
+    const emailValid = !getFieldState('email').invalid && !!values.email
+
+    const [nicknameResult, emailResult] = await Promise.allSettled([
+      nicknameValid ? checkNicknameAsync(values.nickname) : Promise.resolve({ available: true }),
+      emailValid ? checkEmailAsync(values.email) : Promise.resolve({ available: true }),
+    ])
+
+    let hasApiError = false
+
+    if (nicknameResult.status === 'rejected') {
       setError('nickname', { message: '닉네임 확인에 실패했습니다' })
-      return
+      hasApiError = true
+    } else if (!nicknameResult.value.available) {
+      setError('nickname', { message: '이미 사용중인 닉네임입니다' })
+      hasApiError = true
     }
 
-    try {
-      const { available: emailAvailable } = await checkEmailAsync(values.email)
-      if (!emailAvailable) {
-        setError('email', { message: '이미 가입된 이메일입니다' })
-        return
-      }
-    } catch {
+    if (emailResult.status === 'rejected') {
       setError('email', { message: '이메일 확인에 실패했습니다' })
-      return
+      hasApiError = true
+    } else if (!emailResult.value.available) {
+      setError('email', { message: '이미 가입된 이메일입니다' })
+      hasApiError = true
     }
+
+    if (!isZodValid || hasApiError) return
 
     setDraft(values)
     navigation.navigate('SignUpRoleSelect')
-  })
+  }
 
   // 이후 화면에서 계정 생성이 실패하면 이 화면으로 돌아와 해당 필드(또는 폼 전체)에 에러를 보여준다.
   useEffect(() => {
