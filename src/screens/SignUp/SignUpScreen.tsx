@@ -79,8 +79,8 @@ export function SignUpScreen() {
   const setAuthSession = useAuthStore((state) => state.setAuthSession)
   const setDraft = useSignUpDraftStore((state) => state.setDraft)
   const consumePendingError = useSignUpDraftStore((state) => state.consumePendingError)
-  const { mutate: checkNickname, isPending: isCheckingNickname } = useCheckNickname()
-  const { mutate: checkEmail, isPending: isCheckingEmail } = useCheckEmail()
+  const { mutate: checkNickname, mutateAsync: checkNicknameAsync, isPending: isCheckingNickname } = useCheckNickname()
+  const { mutate: checkEmail, mutateAsync: checkEmailAsync, isPending: isCheckingEmail } = useCheckEmail()
   const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
   const { promptGoogle } = useGoogleAuth()
   const { mutate: kakaoLogin, isPending: isKakaoLoginPending } = useKakaoLogin()
@@ -114,8 +114,31 @@ export function SignUpScreen() {
   // 계정 생성(POST /auth/register)은 여기서 하지 않는다 — 명인/고객 역할이 확정되는 시점
   // (MasterVerification 선택완료·나중에 / CustomerWelcome 진입)에 mode와 함께 한 번에 생성한다.
   // 이 화면은 입력값을 draft store에 잠시 보관하고 역할선택 화면으로 넘어가기만 한다.
-  const onSubmit = handleFormSubmit((values) => {
+  const onSubmit = handleFormSubmit(async (values) => {
     setFormError(null)
+
+    try {
+      const { available: nicknameAvailable } = await checkNicknameAsync(values.nickname)
+      if (!nicknameAvailable) {
+        setError('nickname', { message: '이미 사용중인 닉네임입니다' })
+        return
+      }
+    } catch {
+      setError('nickname', { message: '닉네임 확인에 실패했습니다' })
+      return
+    }
+
+    try {
+      const { available: emailAvailable } = await checkEmailAsync(values.email)
+      if (!emailAvailable) {
+        setError('email', { message: '이미 가입된 이메일입니다' })
+        return
+      }
+    } catch {
+      setError('email', { message: '이메일 확인에 실패했습니다' })
+      return
+    }
+
     setDraft(values)
     navigation.navigate('SignUpRoleSelect')
   })
