@@ -5,6 +5,7 @@ import { CustomerHomeScreen } from '@/screens/CustomerHome/CustomerHomeScreen'
 import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
 import { LoginScreen } from '@/screens/Login/LoginScreen'
 import { MasterMessageGuideScreen } from '@/screens/MasterMessageGuide/MasterMessageGuideScreen'
+import { MasterDetailProfileEditScreen } from '@/screens/MasterDetailProfileEdit/MasterDetailProfileEditScreen'
 import { MasterProfileEditScreen } from '@/screens/MasterProfileEdit/MasterProfileEditScreen'
 import { MasterSettingsScreen } from '@/screens/MasterSettings/MasterSettingsScreen'
 import { MasterVerificationScreen } from '@/screens/MasterVerification/MasterVerificationScreen'
@@ -25,6 +26,7 @@ export type RootStackParamList = {
   CustomerHome: undefined
   MasterSettings: undefined
   MasterProfileEdit: undefined
+  MasterDetailProfileEdit: undefined
   MasterMessageGuide: undefined
 }
 
@@ -44,6 +46,7 @@ export function RootNavigator() {
       <Stack.Screen name="CustomerHome" component={CustomerHomeScreen} />
       <Stack.Screen name="MasterSettings" component={MasterSettingsScreen} />
       <Stack.Screen name="MasterProfileEdit" component={MasterProfileEditScreen} />
+      <Stack.Screen name="MasterDetailProfileEdit" component={MasterDetailProfileEditScreen} />
       <Stack.Screen name="MasterMessageGuide" component={MasterMessageGuideScreen} />
     </Stack.Navigator>
   )

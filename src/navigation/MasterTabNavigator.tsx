@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { DiagnosisTabIcon, HomeTabIcon, ProfileTabIcon } from '@/assets/icons'
+import { MasterProfileStackNavigator } from '@/navigation/MasterProfileStackNavigator'
 import { MasterDiagnosisScreen } from '@/screens/MasterDiagnosis/MasterDiagnosisScreen'
 import { MasterHomeScreen } from '@/screens/MasterHome/MasterHomeScreen'
 
@@ -24,10 +25,6 @@ const TAB_LABELS: Record<keyof MasterTabParamList, string> = {
   HomeTab: '홈',
   DiagnosisTab: '진단요청',
   ProfileTab: '프로필',
-}
-
-function PlaceholderScreen() {
-  return <View className="flex-1 bg-[#F2F2F2]" />
 }
 
 function CustomTabBar({
@@ -88,7 +85,7 @@ export function MasterTabNavigator() {
     >
       <Tab.Screen name="HomeTab" component={MasterHomeScreen} />
       <Tab.Screen name="DiagnosisTab" component={MasterDiagnosisScreen} />
-      <Tab.Screen name="ProfileTab" component={PlaceholderScreen} />
+      <Tab.Screen name="ProfileTab" component={MasterProfileStackNavigator} />
     </Tab.Navigator>
   )
 }
