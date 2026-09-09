@@ -1,27 +1,24 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { deleteIncomingDiagnosisRequest } from '@/api/diagnosis'
+import { markDiagnosisAsViewed } from '@/api/diagnosis'
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
 
-export function useDeleteDiagnosisRequest() {
+export function useMarkDiagnosisViewed() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (id: number) => deleteIncomingDiagnosisRequest(id),
+    mutationFn: (id: number) => markDiagnosisAsViewed(id),
     onMutate: async (id) => {
       await queryClient.cancelQueries({ queryKey: ['diagnoses', 'incoming'] })
       const prev = queryClient.getQueryData<DiagnosisIncomingItem[]>(['diagnoses', 'incoming'])
       queryClient.setQueryData<DiagnosisIncomingItem[]>(
         ['diagnoses', 'incoming'],
-        (old) => old?.filter((item) => item.id !== id) ?? []
+        (old) => old?.map((item) => (item.id === id ? { ...item, isViewed: true } : item)) ?? []
       )
       return { prev }
     },
     onError: (_err, _id, ctx) => {
       queryClient.setQueryData(['diagnoses', 'incoming'], ctx?.prev)
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['diagnoses', 'incoming'] })
     },
   })
 }

@@ -13,8 +13,7 @@ type Props = {
 }
 
 export function DiagnosisRequestCard({ item, onPress, onDelete }: Props) {
-  const { customerProfile, createdAt, status } = item
-  const isDeleted = status === 'deleted'
+  const { customerProfile, createdAt, isViewed } = item
   const [deleteVisible, setDeleteVisible] = useState(false)
 
   return (
@@ -25,7 +24,7 @@ export function DiagnosisRequestCard({ item, onPress, onDelete }: Props) {
         style={{
           height: 82,
           borderRadius: 8,
-          backgroundColor: isDeleted ? '#D9D9D9' : '#F2F2F2',
+          backgroundColor: '#F2F2F2',
           flexDirection: 'row',
           alignItems: 'center',
           paddingHorizontal: 16,
@@ -50,7 +49,7 @@ export function DiagnosisRequestCard({ item, onPress, onDelete }: Props) {
             <Text style={{ color: '#B48247', fontSize: 13, fontFamily: 'Pretendard-Medium' }}>
               #{customerProfile.personalCode}
             </Text>
-            {!isDeleted && (
+            {isViewed && (
               <Pressable
                 hitSlop={8}
                 onPress={() => setDeleteVisible(true)}

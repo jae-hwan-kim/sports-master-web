@@ -2,6 +2,7 @@ export const MOCK_DIAGNOSIS_REQUESTS = [
   {
     id: 1,
     status: 'pending',
+    isViewed: false,
     customerProfile: {
       personalCode: 'USR-000001',
       nickname: '달리기왕',
@@ -17,42 +18,9 @@ export const MOCK_DIAGNOSIS_REQUESTS = [
     createdAt: '2025-07-01T09:00:00Z',
   },
   {
-    id: 2,
-    status: 'deleted',
-    customerProfile: {
-      personalCode: 'USR-000002',
-      nickname: '수영러',
-      profileImageUrl: null,
-      name: '이수영',
-      age: 35,
-      gender: 'female',
-      region: '부산 해운대구',
-      sport: '수영',
-      keywordTags: ['어깨 통증'],
-      introduction: null,
-    },
-    createdAt: '2025-07-02T10:00:00Z',
-  },
-  {
-    id: 3,
-    status: 'deleted',
-    customerProfile: {
-      personalCode: 'USR-000003',
-      nickname: null,
-      profileImageUrl: null,
-      name: '박민준',
-      age: 22,
-      gender: 'male',
-      region: '대구 중구',
-      sport: '헬스',
-      keywordTags: ['체중 감량', '식단 관리'],
-      introduction: '체중 감량을 목표로 헬스를 시작했습니다.',
-    },
-    createdAt: '2025-07-03T11:00:00Z',
-  },
-  {
     id: 4,
     status: 'pending',
+    isViewed: true,
     customerProfile: {
       personalCode: 'USR-000004',
       nickname: '요가마스터',
@@ -70,6 +38,7 @@ export const MOCK_DIAGNOSIS_REQUESTS = [
   {
     id: 5,
     status: 'pending',
+    isViewed: false,
     customerProfile: {
       personalCode: 'USR-000005',
       nickname: null,
@@ -87,6 +56,7 @@ export const MOCK_DIAGNOSIS_REQUESTS = [
   {
     id: 6,
     status: 'pending',
+    isViewed: false,
     customerProfile: {
       personalCode: 'USR-000006',
       nickname: null,

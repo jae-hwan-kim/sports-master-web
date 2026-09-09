@@ -7,6 +7,7 @@ import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { DiagnosisRequestModal } from '@/components/DiagnosisRequestModal'
 import { useDeleteDiagnosisRequest } from '@/hooks/useDeleteDiagnosisRequest'
 import { useIncomingDiagnosisRequests } from '@/hooks/useIncomingDiagnosisRequests'
+import { useMarkDiagnosisViewed } from '@/hooks/useMarkDiagnosisViewed'
 import LogoSvg from '@/assets/icons/logo.svg'
 
 function EmptyState() {
@@ -33,6 +34,7 @@ export function MasterDiagnosisScreen() {
   const insets = useSafeAreaInsets()
   const { data: items = [], isLoading } = useIncomingDiagnosisRequests()
   const { mutate: deleteDiagnosis } = useDeleteDiagnosisRequest()
+  const { mutate: markViewed } = useMarkDiagnosisViewed()
   const [selectedItem, setSelectedItem] = useState<DiagnosisIncomingItem | null>(null)
 
   return (
@@ -76,7 +78,10 @@ export function MasterDiagnosisScreen() {
             renderItem={({ item }) => (
               <DiagnosisRequestCard
                 item={item}
-                onPress={() => setSelectedItem(item)}
+                onPress={() => {
+                  setSelectedItem(item)
+                  if (!item.isViewed) markViewed(item.id)
+                }}
                 onDelete={() => deleteDiagnosis(item.id)}
               />
             )}

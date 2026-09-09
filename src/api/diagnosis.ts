@@ -16,6 +16,7 @@ export type DiagnosisCustomerProfile = {
 export type DiagnosisIncomingItem = {
   id: number
   status: string
+  isViewed: boolean
   customerProfile: DiagnosisCustomerProfile
   createdAt: string
 }
@@ -23,6 +24,10 @@ export type DiagnosisIncomingItem = {
 export async function fetchIncomingDiagnosisRequests(): Promise<DiagnosisIncomingItem[]> {
   const { data } = await apiClient.get<{ data: DiagnosisIncomingItem[] }>('/diagnoses/incoming')
   return data.data
+}
+
+export async function markDiagnosisAsViewed(id: number): Promise<void> {
+  await apiClient.patch(`/diagnoses/${id}/view`)
 }
 
 export async function deleteIncomingDiagnosisRequest(id: number): Promise<void> {
