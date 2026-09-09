@@ -50,8 +50,7 @@ export function MasterReviewScreen() {
   const [deleteDialogVisible, setDeleteDialogVisible] = useState(false)
   const [infoModalVisible, setInfoModalVisible] = useState(false)
 
-  // sort 파라미터 매핑 (latest→'recent', best→'best', photo→photoOnly)
-  const sortParam = activeSort === 'latest' ? 'recent' : activeSort === 'best' ? 'best' : undefined
+  const sortParam = activeSort === 'latest' ? 'latest' : activeSort === 'best' ? 'best' : undefined
   const photoOnly = activeSort === 'photo' ? true : undefined
 
   const { data: summary } = useReviewSummary()
