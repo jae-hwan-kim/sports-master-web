@@ -5,15 +5,18 @@ type ChipProps = {
   label: string
   selected?: boolean
   onPress?: () => void
+  variant?: 'primary' | 'dark'
 }
 
-export function Chip({ label, selected = false, onPress }: ChipProps) {
+export function Chip({ label, selected = false, onPress, variant = 'primary' }: ChipProps) {
+  const selectedBg = variant === 'dark' ? 'border-gray3 bg-gray3' : 'border-primary bg-primary'
+
   return (
     <Pressable
       hitSlop={8}
       onPress={onPress}
       className={`items-center justify-center rounded-full border ${
-        selected ? 'border-primary bg-primary' : 'border-gray1 bg-white'
+        selected ? selectedBg : 'border-gray1 bg-white'
       }`}
       style={{ height: verticalScale(36), paddingHorizontal: scale(16) }}
     >
