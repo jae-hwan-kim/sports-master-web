@@ -79,11 +79,41 @@ function ReadonlyTextRow({ text }: { text: string }) {
   )
 }
 
+function CertFileRow({ url }: { url: string }) {
+  const filename = url.split('/').pop() ?? url
+  return (
+    <ReadonlyBox>
+      <View className="flex-row items-center justify-between">
+        <Text
+          className="flex-1 text-small1 text-gray3 mr-3"
+          style={{ fontFamily: 'Pretendard-Medium' }}
+          numberOfLines={1}
+        >
+          {filename}
+        </Text>
+        <Pressable
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel="이미지확인"
+          onPress={() => Linking.openURL(url)}
+          className="bg-[#C6A75E] rounded-[4px] px-3 py-1"
+        >
+          <Text
+            className="text-[12px] text-[#F2F2F2]"
+            style={{ fontFamily: 'Pretendard-Medium' }}
+          >
+            이미지확인
+          </Text>
+        </Pressable>
+      </View>
+    </ReadonlyBox>
+  )
+}
+
 // ─── 메인 화면 ───────────────────────────────────────────────────────────────
 
 export function MasterDetailProfileScreen() {
-  // RootStackParamList에 MasterDetailProfileEdit 등록 필요
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList & { MasterDetailProfileEdit: undefined }>>()
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useSafeAreaInsets()
 
   const { data: profileData } = useMyExpertProfile()
@@ -122,7 +152,7 @@ export function MasterDetailProfileScreen() {
           hitSlop={8}
           accessibilityRole="button"
           accessibilityLabel="편집"
-          onPress={() => navigation.navigate('MasterDetailProfileEdit' as never)}
+          onPress={() => navigation.navigate('MasterDetailProfileEdit')}
         >
           <EditSvg width={44} height={44} />
         </Pressable>
@@ -187,6 +217,12 @@ export function MasterDetailProfileScreen() {
             </Pressable>
           </View>
 
+          {/* 센터연락처 — BE 스키마 추가 후 profile.centerPhone 연결 */}
+          <View>
+            <SectionLabel label="센터연락처" />
+            <ReadonlyTextRow text="-" />
+          </View>
+
           {/* 키워드 Chip 목록 (가로 스크롤) */}
           <View>
             <SectionLabel label="키워드" />
@@ -229,7 +265,14 @@ export function MasterDetailProfileScreen() {
                 )}
               />
             ) : (
-              <View className="bg-white rounded-[4px]" style={{ width: 80, height: 80 }} />
+              <ReadonlyBox>
+                <Text
+                  className="text-small1 text-gray2"
+                  style={{ fontFamily: 'Pretendard-Medium' }}
+                >
+                  이미지가 없습니다
+                </Text>
+              </ReadonlyBox>
             )}
           </View>
 
@@ -291,9 +334,7 @@ export function MasterDetailProfileScreen() {
                 scrollEnabled={false}
                 keyExtractor={(item, index) => `cert-${index}`}
                 ItemSeparatorComponent={() => <View className="h-3" />}
-                renderItem={({ item }) => (
-                  <ReadonlyTextRow text={item.split('/').pop() ?? item} />
-                )}
+                renderItem={({ item }) => <CertFileRow url={item} />}
               />
             ) : (
               <ReadonlyTextRow text="등록된 증명서 없음" />

@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react'
 import {
   FlatList,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   Pressable,
   ScrollView,
@@ -16,7 +17,7 @@ import {
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { ArrowBackIcon, SettingsIcon } from '@/assets/icons'
+import { ArrowBackIcon } from '@/assets/icons'
 import { ImageUploadGrid } from '@/components/profile/ImageUploadGrid'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { ProfileCard } from '@/components/profile/ProfileCard'
@@ -34,26 +35,31 @@ export function MasterDetailProfileEditScreen() {
 
   const [region, setRegion] = useState('')
   const [openChatUrl, setOpenChatUrl] = useState('')
+  const [centerPhone, setCenterPhone] = useState('')
   const [keywords, setKeywords] = useState<string[]>([])
   const [images, setImages] = useState<string[]>([])
   const [portfolioPdfName, setPortfolioPdfName] = useState('')
-  const [portfolioPdfUri, setPortfolioPdfUri] = useState('')
   const [careerText, setCareerText] = useState('')
   const [certifications, setCertifications] = useState<string[]>([])
+
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
 
   useEffect(() => {
     if (!profile) return
     setRegion(profile.region ?? '')
     setOpenChatUrl(profile.kakaoOpenChatUrl ?? '')
+    // centerPhone — BE 스키마 추가 후 setCenterPhone(profile.centerPhone ?? '') 연결
     setKeywords(profile.keywordTags ?? [])
     setImages(profile.portfolioImageUrls ?? [])
     setCareerText(profile.careerText ?? '')
     if (profile.educationPdfUrl) {
       const segments = profile.educationPdfUrl.split('/')
       setPortfolioPdfName(segments[segments.length - 1] ?? 'portfolio.pdf')
-      setPortfolioPdfUri(profile.educationPdfUrl)
     }
   }, [profile])
+
+  const regionCount = region ? region.split(', ').length : 0
 
   const handlePickCoverPhoto = useCallback(async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -74,7 +80,6 @@ export function MasterDetailProfileEditScreen() {
       copyToCacheDirectory: true,
     })
     if (!result.canceled && result.assets[0]) {
-      setPortfolioPdfUri(result.assets[0].uri)
       setPortfolioPdfName(result.assets[0].name)
     }
   }, [])
@@ -96,24 +101,37 @@ export function MasterDetailProfileEditScreen() {
     setCertifications((prev) => prev.filter((_, i) => i !== index))
   }, [])
 
-  const handleSave = () => {
+  const handleConfirmedSave = () => {
+    setShowConfirmDialog(false)
     updateMutation.mutate(
       {
         region: region || undefined,
         openChatUrl: openChatUrl || undefined,
         keywordTags: keywords.length > 0 ? keywords : undefined,
-        // careerText maps to bio in the current PATCH endpoint
         bio: careerText || undefined,
-        portfolioImageUrls: images.length > 0 ? images : undefined,
-        educationPdfUrl: portfolioPdfUri || undefined,
-        certificationUris: certifications.length > 0 ? certifications : undefined,
+        // portfolioImageUrls, educationPdfUrl, certificationUris — BE 스키마 추가 후 generate-types 실행 필요
       },
-      { onSuccess: () => navigation.goBack() }
+      { onSuccess: () => setShowSuccessDialog(true) }
     )
   }
 
+  const handleSuccessConfirm = () => {
+    setShowSuccessDialog(false)
+    navigation.goBack()
+  }
+
+  const renderCertItem = useCallback(
+    ({ item: uri, index }: { item: string; index: number }) => (
+      <CertificationRow
+        label={uri.split('/').pop() ?? `자격증 이미지 ${index + 1}`}
+        onRemove={() => handleRemoveCertification(index)}
+      />
+    ),
+    [handleRemoveCertification]
+  )
+
   return (
-    <View className="flex-1 bg-[#D9D9D9]">
+    <View className="flex-1 bg-[#F2F2F2]">
       {/* 헤더 */}
       <View style={{ paddingTop: insets.top }}>
         <View className="h-14 flex-row items-center justify-between px-4">
@@ -125,33 +143,24 @@ export function MasterDetailProfileEditScreen() {
           >
             <ArrowBackIcon />
           </Pressable>
-          <View className="flex-row items-center gap-2">
-            <Pressable
-              hitSlop={8}
-              onPress={() => navigation.navigate('Settings' as never)}
-              accessibilityRole="button"
-              accessibilityLabel="설정"
+          <Pressable
+            hitSlop={8}
+            onPress={() => setShowConfirmDialog(true)}
+            disabled={updateMutation.isPending}
+            className="h-[24px] w-[56px] items-center justify-center rounded-[4px] bg-[#1F2A43]"
+            accessibilityRole="button"
+            accessibilityLabel="수정완료"
+          >
+            <Text
+              className="text-[12px] text-[#F2F2F2]"
+              style={{
+                fontFamily: 'Pretendard-SemiBold',
+                opacity: updateMutation.isPending ? 0.4 : 1,
+              }}
             >
-              <SettingsIcon size={44} />
-            </Pressable>
-            <Pressable
-              hitSlop={8}
-              onPress={handleSave}
-              disabled={updateMutation.isPending}
-              accessibilityRole="button"
-              accessibilityLabel="저장"
-            >
-              <Text
-                className="text-[16px] text-[#1F2A43]"
-                style={{
-                  fontFamily: 'Pretendard-SemiBold',
-                  opacity: updateMutation.isPending ? 0.4 : 1,
-                }}
-              >
-                저장
-              </Text>
-            </Pressable>
-          </View>
+              수정완료
+            </Text>
+          </Pressable>
         </View>
       </View>
 
@@ -180,7 +189,7 @@ export function MasterDetailProfileEditScreen() {
             </Text>
           </View>
 
-          {/* 프로필 카드 — 탭으로 대표 사진 변경 */}
+          {/* 프로필 카드 */}
           {profile && (
             <View className="mx-6">
               <View>
@@ -192,7 +201,6 @@ export function MasterDetailProfileEditScreen() {
                   accessibilityRole="button"
                   accessibilityLabel="대표 사진 변경"
                 >
-                  {/* 투명 오버레이 — 우상단 편집 배지 */}
                   <View className="absolute right-3 top-3 h-8 w-8 items-center justify-center rounded-full bg-black/50">
                     <Text className="text-white" style={{ fontSize: 14 }}>
                       ✎
@@ -204,7 +212,7 @@ export function MasterDetailProfileEditScreen() {
           )}
 
           {/* 지역 */}
-          <SectionLabel label="지역" />
+          <SectionLabel label="지역" count={regionCount} max={3} />
           <View className="mx-6">
             <RegionSelector value={region} onChange={setRegion} />
           </View>
@@ -222,16 +230,28 @@ export function MasterDetailProfileEditScreen() {
             />
           </View>
 
+          {/* 센터연락처 — BE 스키마 추가 후 mutation에 centerPhone 포함 */}
+          <SectionLabel label="센터연락처" />
+          <View className="mx-6">
+            <TextField
+              value={centerPhone}
+              onChangeText={setCenterPhone}
+              label="연락처 입력 (예: 010-0000-0000)"
+              keyboardType="phone-pad"
+              autoCorrect={false}
+            />
+          </View>
+
           {/* 키워드 */}
-          <SectionLabel label="키워드" />
+          <SectionLabel label="키워드" count={keywords.length} max={3} />
           <View className="mx-6">
             <KeywordChipInput keywords={keywords} onChange={setKeywords} />
           </View>
 
           {/* 이미지 */}
-          <SectionLabel label="이미지" />
+          <SectionLabel label="이미지" count={images.length} max={3} />
           <View className="mx-6">
-            <ImageUploadGrid images={images} onChange={setImages} maxCount={5} />
+            <ImageUploadGrid images={images} onChange={setImages} maxCount={3} />
           </View>
 
           {/* 포트폴리오 */}
@@ -240,7 +260,7 @@ export function MasterDetailProfileEditScreen() {
             <Pressable
               hitSlop={8}
               onPress={handlePickPdf}
-              className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]"
+              className="flex-row items-center rounded-[4px] bg-white px-[13px] py-[15px]"
               accessibilityRole="button"
               accessibilityLabel="PDF 선택"
             >
@@ -257,10 +277,7 @@ export function MasterDetailProfileEditScreen() {
           {/* 학력 및 경력사항 */}
           <SectionLabel label="학력 및 경력사항" />
           <View className="mx-6">
-            <View
-              className="rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]"
-              style={{ minHeight: 164 }}
-            >
+            <View className="rounded-[4px] bg-white px-[13px] py-[15px]" style={{ minHeight: 164 }}>
               <TextInput
                 value={careerText}
                 onChangeText={setCareerText}
@@ -268,6 +285,8 @@ export function MasterDetailProfileEditScreen() {
                 placeholder="출신학교, 경력사항, 논문, 이력 등을 입력하세요"
                 placeholderTextColor="#74768E"
                 className="text-[13px] text-[#1F2A43]"
+                autoCapitalize="none"
+                autoCorrect={false}
                 style={{
                   fontFamily: 'Pretendard-Medium',
                   minHeight: 140,
@@ -285,18 +304,13 @@ export function MasterDetailProfileEditScreen() {
               keyExtractor={(uri, index) => `cert-${index}-${uri}`}
               scrollEnabled={false}
               ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-              renderItem={({ item: uri, index }) => (
-                <CertificationRow
-                  label={`자격증 이미지 ${index + 1}`}
-                  onRemove={() => handleRemoveCertification(index)}
-                />
-              )}
+              renderItem={renderCertItem}
               ListFooterComponent={
                 <View style={{ marginTop: certifications.length > 0 ? 12 : 0 }}>
                   <Pressable
                     hitSlop={8}
                     onPress={handleAddCertification}
-                    className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]"
+                    className="flex-row items-center rounded-[4px] bg-white px-[13px] py-[15px]"
                     accessibilityRole="button"
                     accessibilityLabel="자격증 이미지 추가"
                   >
@@ -313,26 +327,135 @@ export function MasterDetailProfileEditScreen() {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      {/* 저장 확인 다이얼로그 */}
+      <Modal visible={showConfirmDialog} transparent animationType="fade">
+        <View className="flex-1 items-center justify-center bg-black/60">
+          <View className="w-[340px] overflow-hidden rounded-[16px] bg-[#F2F2F2]">
+            <View className="items-center gap-2 px-6 pb-6 pt-8">
+              <Text
+                className="text-[24px] text-[#07091C]"
+                style={{ fontFamily: 'Pretendard-SemiBold' }}
+              >
+                프로필을 저장할까요?
+              </Text>
+              <Text
+                className="text-[16px] text-[#74768E]"
+                style={{ fontFamily: 'Pretendard-Medium' }}
+              >
+                수정사항이 즉시 반영됩니다
+              </Text>
+            </View>
+            <View className="h-[1px] bg-[#D9D9D9]" />
+            <View className="flex-row">
+              <Pressable
+                hitSlop={0}
+                onPress={() => setShowConfirmDialog(false)}
+                className="h-[50px] flex-1 items-center justify-center bg-[#102343]"
+                accessibilityRole="button"
+                accessibilityLabel="취소"
+              >
+                <Text
+                  className="text-[16px] text-white"
+                  style={{ fontFamily: 'Pretendard-SemiBold' }}
+                >
+                  취소
+                </Text>
+              </Pressable>
+              <View className="w-[1px] bg-[#D9D9D9]" />
+              <Pressable
+                hitSlop={0}
+                onPress={handleConfirmedSave}
+                className="h-[50px] flex-1 items-center justify-center bg-[#C6A75E]"
+                accessibilityRole="button"
+                accessibilityLabel="저장하기"
+              >
+                <Text
+                  className="text-[16px] text-white"
+                  style={{ fontFamily: 'Pretendard-SemiBold' }}
+                >
+                  저장하기
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* 저장 완료 다이얼로그 */}
+      <Modal visible={showSuccessDialog} transparent animationType="fade">
+        <View className="flex-1 items-center justify-center bg-black/60">
+          <View className="w-[340px] overflow-hidden rounded-[16px] bg-[#F2F2F2]">
+            <View className="items-center gap-2 px-6 pb-6 pt-8">
+              <Text
+                className="text-[24px] text-[#07091C]"
+                style={{ fontFamily: 'Pretendard-SemiBold' }}
+              >
+                저장이 완료되었습니다!
+              </Text>
+              <Text
+                className="text-[16px] text-[#74768E]"
+                style={{ fontFamily: 'Pretendard-Medium' }}
+              >
+                언제든 수정이 가능합니다
+              </Text>
+            </View>
+            <View className="h-[1px] bg-[#D9D9D9]" />
+            <View className="items-center py-3">
+              <Pressable
+                hitSlop={8}
+                onPress={handleSuccessConfirm}
+                className="h-[50px] w-[145px] items-center justify-center rounded-[8px] bg-[#C6A75E]"
+                accessibilityRole="button"
+                accessibilityLabel="확인"
+              >
+                <Text
+                  className="text-[16px] text-white"
+                  style={{ fontFamily: 'Pretendard-SemiBold' }}
+                >
+                  확인
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   )
 }
 
-function SectionLabel({ label }: { label: string }) {
+function SectionLabel({
+  label,
+  count,
+  max,
+}: {
+  label: string
+  count?: number
+  max?: number
+}) {
   return (
-    <View className="mx-6 mb-2 mt-6">
+    <View className="mx-6 mb-2 mt-6 flex-row items-center gap-2">
       <Text
         className="text-[20px] text-[#1F2A43]"
         style={{ fontFamily: 'Pretendard-SemiBold' }}
       >
         {label}
       </Text>
+      {count !== undefined && max !== undefined && (
+        <Text
+          className="text-[12px] text-[#B48247]"
+          style={{ fontFamily: 'Pretendard-SemiBold' }}
+        >
+          {count}/{max}
+        </Text>
+      )}
     </View>
   )
 }
 
 function CertificationRow({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (
-    <View className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]">
+    <View className="flex-row items-center rounded-[4px] bg-white px-[13px] py-[15px]">
       <Text
         className="flex-1 text-[13px] text-[#1F2A43]"
         style={{ fontFamily: 'Pretendard-Medium' }}
