@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Controller, useForm } from 'react-hook-form'
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -20,6 +21,7 @@ import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
+import { useAppleAuth } from '@/hooks/useAppleAuth'
 import { useAppleLogin } from '@/hooks/useAppleLogin'
 import { useGoogleAuth } from '@/hooks/useGoogleAuth'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
@@ -81,7 +83,9 @@ export function LoginScreen() {
   const { mutate: kakaoLogin, isPending: isKakaoLoginPending } = useKakaoLogin()
   const { promptKakao } = useKakaoAuth()
   const { mutate: appleLogin, isPending: isAppleLoginPending } = useAppleLogin()
+  const { promptApple } = useAppleAuth()
   const setAuthSession = useAuthStore((state) => state.setAuthSession)
+  const setAutoLoginStore = useAuthStore((state) => state.setAutoLogin)
 
   const onSubmit = handleFormSubmit((values) => {
     setFormError(null)
@@ -96,7 +100,10 @@ export function LoginScreen() {
         })
       },
       onError: (error) => {
-        const message = extractApiErrorMessage(error, '로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
+        const message = extractApiErrorMessage(
+          error,
+          '로그인에 실패했습니다. 잠시 후 다시 시도해주세요'
+        )
         if (isInvalidCredentialsError(error)) {
           setError('password', { message })
           return
@@ -124,6 +131,7 @@ export function LoginScreen() {
         if (!result) {
           // 사용자가 브라우저에서 취소한 경우 — 에러로 취급하지 않고 조용히 종료
           setSocialLoading(false)
+          setSocialDialog(null)
           return
         }
 
@@ -139,51 +147,14 @@ export function LoginScreen() {
             })
           },
           onError: (error) => {
-            setSocialError(extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialError(
+              extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
+            )
             setSocialLoading(false)
           },
         })
       } catch {
         setSocialError('구글 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요')
-        setSocialLoading(false)
-      }
-      return
-    }
-
-    if (socialDialog === 'apple') {
-      setSocialLoading(true)
-      try {
-        // TODO: expo-apple-authentication 설치 후 실제 Apple 로그인 플로우로 identityToken 취득 필요
-        // 예) const credential = await AppleAuthentication.signInAsync({...})
-        //     const identityToken = credential.identityToken
-        // 현재 프로젝트에 Apple 로그인 SDK가 없어 identityToken을 발급받을 수 없으므로,
-        // SDK 연동 전까지는 아래 호출이 실행되지 않도록 가드한다.
-        const identityToken: string | null = null
-        if (!identityToken) {
-          throw new Error('APPLE_SDK_NOT_INSTALLED')
-        }
-
-        appleLogin(
-          { identityToken },
-          {
-            onSuccess: (data) => {
-              setAuthSession(data.accessToken, data.refreshToken, data.user)
-              setSocialLoading(false)
-              setSocialDialog(null)
-              navigateAfterAuth(navigation, {
-                isNewUser: data.isNewUser,
-                hasSelectedMode: data.user.hasSelectedMode,
-                currentMode: data.user.currentMode,
-              })
-            },
-            onError: (error) => {
-              setSocialError(extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요'))
-              setSocialLoading(false)
-            },
-          }
-        )
-      } catch {
-        setSocialError('애플 로그인 SDK가 아직 연동되지 않았습니다. expo-apple-authentication 설치가 필요합니다')
         setSocialLoading(false)
       }
       return
@@ -196,6 +167,7 @@ export function LoginScreen() {
         if (!result) {
           // 사용자가 브라우저에서 취소한 경우 — 에러로 취급하지 않고 조용히 종료
           setSocialLoading(false)
+          setSocialDialog(null)
           return
         }
 
@@ -211,12 +183,56 @@ export function LoginScreen() {
             })
           },
           onError: (error) => {
-            setSocialError(extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialError(
+              extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
+            )
             setSocialLoading(false)
           },
         })
       } catch {
         setSocialError('카카오 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요')
+        setSocialLoading(false)
+      }
+      return
+    }
+
+    if (socialDialog === 'apple') {
+      setSocialLoading(true)
+      try {
+        const result = await promptApple()
+        if (!result) {
+          // 사용자가 취소한 경우 — 에러로 취급하지 않고 조용히 종료
+          setSocialLoading(false)
+          setSocialDialog(null)
+          return
+        }
+
+        appleLogin(result, {
+          onSuccess: (data) => {
+            setAuthSession(data.accessToken, data.refreshToken, data.user)
+            setSocialLoading(false)
+            setSocialDialog(null)
+            navigateAfterAuth(navigation, {
+              isNewUser: data.isNewUser,
+              hasSelectedMode: data.user.hasSelectedMode,
+              currentMode: data.user.currentMode,
+            })
+          },
+          onError: (error) => {
+            setSocialError(
+              extractApiErrorMessage(error, '소셜 로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
+            )
+            setSocialLoading(false)
+          },
+        })
+      } catch (error: unknown) {
+        const message =
+          error instanceof Error && error.message === 'APPLE_LOGIN_IOS_ONLY'
+            ? '애플 로그인은 iOS에서만 사용 가능합니다'
+            : error instanceof Error && error.message === 'APPLE_LOGIN_NOT_AVAILABLE'
+              ? '이 기기에서 애플 로그인을 사용할 수 없습니다'
+              : '애플 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요'
+        setSocialError(message)
         setSocialLoading(false)
       }
     }
@@ -307,12 +323,15 @@ export function LoginScreen() {
             hitSlop={8}
             accessibilityRole="button"
             accessibilityLabel="비밀번호 찾기"
+            onPress={() =>
+              Alert.alert('비밀번호 찾기', '현재 준비 중인 기능입니다.')
+            }
           >
             <Text className="text-[13px] font-medium text-gray2">비밀번호 찾기</Text>
           </Pressable>
         </View>
 
-        {/* 구분선 + 소셜 로그인 + 회원가입 안내 — 세 블록을 하나로 묶어 gap으로 간격 통일 */}
+        {/* 구분선 + 소셜 로그인 + 회원가입 안내 */}
         <View className="mt-[60px] gap-5">
           <View className="flex-row items-center gap-3">
             <View className="h-px flex-1 bg-gray1" />
@@ -333,12 +352,15 @@ export function LoginScreen() {
               icon={<KakaoIcon size={24} />}
               onPress={() => setSocialDialog('kakao')}
             />
-            <Button
-              label="애플로 로그인"
-              variant="socialIcon"
-              icon={<AppleIcon size={24} />}
-              onPress={() => setSocialDialog('apple')}
-            />
+            {/* Apple 로그인: iOS 전용 — expo-apple-authentication 사용 */}
+            {Platform.OS === 'ios' && (
+              <Button
+                label="애플로 로그인"
+                variant="socialIcon"
+                icon={<AppleIcon size={24} />}
+                onPress={() => setSocialDialog('apple')}
+              />
+            )}
           </View>
 
           <View className="flex-row items-center gap-3">
@@ -358,7 +380,7 @@ export function LoginScreen() {
           </View>
         </View>
 
-        {/* 약관 안내 — Figma: 회원가입 안내 행 하단에서 108px 고정 */}
+        {/* 약관 안내 */}
         <View className="mt-[108px] items-center gap-1">
           <Text className="text-center text-[10px] font-normal tracking-[0.2px] leading-[1.45] text-gray2">
             로그인시 아래 내용에 동의하는 것으로 간주됩니다
@@ -368,6 +390,9 @@ export function LoginScreen() {
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel="개인정보 처리방침"
+              onPress={() =>
+                Alert.alert('개인정보 처리방침', '서비스 준비 중입니다.')
+              }
             >
               <Text className="text-[10px] font-normal tracking-[0.2px] leading-[1.45] text-gray2 underline">
                 개인정보 처리방침
@@ -377,6 +402,9 @@ export function LoginScreen() {
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel="이용약관"
+              onPress={() =>
+                Alert.alert('이용약관', '서비스 준비 중입니다.')
+              }
             >
               <Text className="text-[10px] font-normal tracking-[0.2px] leading-[1.45] text-gray2 underline">
                 이용약관
@@ -389,10 +417,18 @@ export function LoginScreen() {
       <ConfirmDialog
         visible={socialDialog !== null}
         title={socialDialog ? `${SOCIAL_LABEL[socialDialog]}로 로그인하기` : ''}
-        description={socialError ?? '계정연동을 위한 화면으로 이동합니다'}
+        description={
+          socialError ??
+          (socialDialog === 'apple'
+            ? '애플 계정으로 로그인합니다'
+            : '계정연동을 위한 화면으로 이동합니다')
+        }
+        isError={!!socialError}
         onConfirm={handleSocialConfirm}
         onCancel={handleSocialCancel}
-        confirmLoading={socialLoading || isGoogleLoginPending || isKakaoLoginPending || isAppleLoginPending}
+        confirmLoading={
+          socialLoading || isGoogleLoginPending || isKakaoLoginPending || isAppleLoginPending
+        }
       />
       <ConfirmDialog
         visible={autoLoginDialogVisible}
@@ -400,6 +436,7 @@ export function LoginScreen() {
         description="다음 앱 시작 시 자동으로 로그인 됩니다"
         onConfirm={() => {
           setAutoLogin(true)
+          setAutoLoginStore(true)
           setAutoLoginDialogVisible(false)
         }}
         onCancel={() => setAutoLoginDialogVisible(false)}

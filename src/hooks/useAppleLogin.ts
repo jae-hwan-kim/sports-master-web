@@ -15,6 +15,7 @@ async function appleLogin(payload: AppleLoginDto): Promise<OAuthTokenResponseDto
 export function useAppleLogin() {
   return useMutation({
     mutationFn: appleLogin,
+    retry: false,
     onError: (error) => {
       Sentry.captureException(error, { tags: { flow: 'apple-login' } })
     },

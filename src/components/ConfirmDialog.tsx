@@ -10,6 +10,7 @@ type ConfirmDialogProps = {
   confirmLoading?: boolean
   confirmLabel?: string
   cancelLabel?: string
+  isError?: boolean
 }
 
 export function ConfirmDialog({
@@ -21,6 +22,7 @@ export function ConfirmDialog({
   confirmLoading = false,
   confirmLabel = '확인',
   cancelLabel = '취소',
+  isError = false,
 }: ConfirmDialogProps) {
   const singleButton = !onCancel
 
@@ -32,9 +34,11 @@ export function ConfirmDialog({
       onRequestClose={onCancel ?? onConfirm}
     >
       <View className="flex-1 items-center justify-center bg-black/50 px-6">
-        <View className="w-full max-w-[340px] items-center rounded-2xl bg-white px-5 pb-6 pt-11">
+        <View className="w-full max-w-[340px] items-center rounded-2xl bg-[#FFFFFF] px-5 pb-6 pt-11">
           <Text className="text-center font-semibold text-black text-popup-lg">{title}</Text>
-          <Text className="mt-4 text-center font-medium text-gray2 text-small3">
+          <Text
+            className={`mt-4 text-center font-medium text-small3 ${isError ? 'text-[#ea4335]' : 'text-gray2'}`}
+          >
             {description}
           </Text>
           <View className={`mt-12 flex-row gap-2 ${singleButton ? '' : 'w-full'}`}>

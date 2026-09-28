@@ -22,6 +22,8 @@ import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
 import { useCheckEmail } from '@/hooks/useCheckEmail'
 import { useCheckNickname } from '@/hooks/useCheckNickname'
+import { useAppleAuth } from '@/hooks/useAppleAuth'
+import { useAppleLogin } from '@/hooks/useAppleLogin'
 import { useGoogleAuth } from '@/hooks/useGoogleAuth'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
 import { useKakaoAuth } from '@/hooks/useKakaoAuth'
@@ -81,6 +83,8 @@ export function SignUpScreen() {
   const consumePendingError = useSignUpDraftStore((state) => state.consumePendingError)
   const { mutate: checkNickname, mutateAsync: checkNicknameAsync, isPending: isCheckingNickname } = useCheckNickname()
   const { mutate: checkEmail, mutateAsync: checkEmailAsync, isPending: isCheckingEmail } = useCheckEmail()
+  const { mutate: appleLogin, isPending: isAppleLoginPending } = useAppleLogin()
+  const { promptApple } = useAppleAuth()
   const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
   const { promptGoogle } = useGoogleAuth()
   const { mutate: kakaoLogin, isPending: isKakaoLoginPending } = useKakaoLogin()
@@ -177,6 +181,7 @@ export function SignUpScreen() {
         if (!result) {
           // 사용자가 브라우저에서 취소한 경우 — 에러로 취급하지 않고 조용히 종료
           setSocialLoading(false)
+          setSocialDialog(null)
           return
         }
 
@@ -212,6 +217,7 @@ export function SignUpScreen() {
         if (!result) {
           // 사용자가 브라우저에서 취소한 경우 — 에러로 취급하지 않고 조용히 종료
           setSocialLoading(false)
+          setSocialDialog(null)
           return
         }
 
@@ -238,10 +244,43 @@ export function SignUpScreen() {
       return
     }
 
-    // TODO: 애플 SDK 연동 전까지는 실제 인증 요청 없이 준비중 안내만 표시한다
-    setSocialLoading(true)
-    setSocialError(`${SOCIAL_LABEL[socialDialog as SocialProvider]} 회원가입은 아직 준비중입니다`)
-    setSocialLoading(false)
+    if (socialDialog === 'apple') {
+      setSocialLoading(true)
+      try {
+        const result = await promptApple()
+        if (!result) {
+          setSocialLoading(false)
+          setSocialDialog(null)
+          return
+        }
+
+        appleLogin(result, {
+          onSuccess: (data) => {
+            setAuthSession(data.accessToken, data.refreshToken, data.user)
+            setSocialLoading(false)
+            setSocialDialog(null)
+            navigateAfterAuth(navigation, {
+              isNewUser: data.isNewUser,
+              hasSelectedMode: data.user.hasSelectedMode,
+              currentMode: data.user.currentMode,
+            })
+          },
+          onError: (error) => {
+            setSocialError(extractApiErrorMessage(error, '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialLoading(false)
+          },
+        })
+      } catch (error: unknown) {
+        const message =
+          error instanceof Error && error.message === 'APPLE_LOGIN_IOS_ONLY'
+            ? '애플 로그인은 iOS에서만 사용 가능합니다'
+            : error instanceof Error && error.message === 'APPLE_LOGIN_NOT_AVAILABLE'
+              ? '이 기기에서 애플 로그인을 사용할 수 없습니다'
+              : '애플 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요'
+        setSocialError(message)
+        setSocialLoading(false)
+      }
+    }
   }
 
   const handleCheckNickname = () => {
@@ -356,7 +395,7 @@ export function SignUpScreen() {
             name="password"
             render={({ field: { value, onChange } }) => (
               <TextField
-                label="비밀번호(영소문자+숫자 조합 8자 이상)"
+                label="비밀번호(영소문자+숫자 조합 8~12자)"
                 value={value}
                 onChangeText={onChange}
                 onFocus={() => clearErrors('password')}
@@ -396,12 +435,14 @@ export function SignUpScreen() {
               icon={<KakaoIcon size={24} />}
               onPress={() => setSocialDialog('kakao')}
             />
-            <Button
-              label="애플로 회원가입"
-              variant="socialIcon"
-              icon={<AppleIcon size={24} />}
-              onPress={() => setSocialDialog('apple')}
-            />
+            {Platform.OS === 'ios' && (
+              <Button
+                label="애플로 회원가입"
+                variant="socialIcon"
+                icon={<AppleIcon size={24} />}
+                onPress={() => setSocialDialog('apple')}
+              />
+            )}
           </View>
 
           <View className="flex-row items-center gap-3">
@@ -448,10 +489,16 @@ export function SignUpScreen() {
       <ConfirmDialog
         visible={socialDialog !== null}
         title={socialDialog ? `${SOCIAL_LABEL[socialDialog]}로 가입하기` : ''}
-        description={socialError ?? '계정연동을 위한 화면으로 이동합니다'}
+        description={
+          socialError ??
+          (socialDialog === 'apple'
+            ? '애플 계정으로 가입합니다'
+            : '계정연동을 위한 화면으로 이동합니다')
+        }
+        isError={!!socialError}
         onConfirm={handleSocialConfirm}
         onCancel={handleSocialCancel}
-        confirmLoading={socialLoading || isGoogleLoginPending || isKakaoLoginPending}
+        confirmLoading={socialLoading || isGoogleLoginPending || isKakaoLoginPending || isAppleLoginPending}
       />
       <ConfirmDialog
         visible={checkDialog.visible}
