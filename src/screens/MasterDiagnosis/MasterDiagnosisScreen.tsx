@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { FlatList, Text, View } from 'react-native'
+import { useCallback, useState } from 'react'
+import { ActivityIndicator, FlatList, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
@@ -37,6 +37,20 @@ export function MasterDiagnosisScreen() {
   const { mutate: markViewed } = useMarkDiagnosisViewed()
   const [selectedItem, setSelectedItem] = useState<DiagnosisIncomingItem | null>(null)
 
+  const renderItem = useCallback(
+    ({ item }: { item: DiagnosisIncomingItem }) => (
+      <DiagnosisRequestCard
+        item={item}
+        onPress={() => {
+          setSelectedItem(item)
+          if (!item.isViewed) markViewed(item.id)
+        }}
+        onDelete={() => deleteDiagnosis(item.id)}
+      />
+    ),
+    [deleteDiagnosis, markViewed]
+  )
+
   return (
     <View style={{ flex: 1, backgroundColor: '#F2F2F2' }}>
       {/* 헤더 */}
@@ -63,7 +77,11 @@ export function MasterDiagnosisScreen() {
           elevation: 4,
         }}
       >
-        {!isLoading && (
+        {isLoading ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#C6A75E" />
+          </View>
+        ) : (
           <FlatList
             data={items}
             keyExtractor={(item) => String(item.id)}
@@ -75,16 +93,7 @@ export function MasterDiagnosisScreen() {
               flexGrow: 1,
             }}
             ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
-            renderItem={({ item }) => (
-              <DiagnosisRequestCard
-                item={item}
-                onPress={() => {
-                  setSelectedItem(item)
-                  if (!item.isViewed) markViewed(item.id)
-                }}
-                onDelete={() => deleteDiagnosis(item.id)}
-              />
-            )}
+            renderItem={renderItem}
             ListEmptyComponent={<EmptyState />}
           />
         )}

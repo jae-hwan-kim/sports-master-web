@@ -18,6 +18,8 @@ module.exports = {
       fontFamily: {
         'pretendard-regular': ['Pretendard-Regular'],
         'pretendard-medium': ['Pretendard-Medium'],
+        'pretendard-semibold': ['Pretendard-SemiBold'],
+        'pretendard-bold': ['Pretendard-Bold'],
         'pretendard-extrabold': ['Pretendard-ExtraBold'],
       },
       fontSize: {

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Image, Pressable, Text, View } from 'react-native'
+import { Image } from 'expo-image'
+import { Platform, Pressable, Text, View } from 'react-native'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
 import { formatDate } from '@/utils/date'
@@ -21,51 +22,43 @@ export function DiagnosisRequestCard({ item, onPress, onDelete }: Props) {
       <Pressable
         hitSlop={8}
         onPress={onPress}
-        style={{
-          height: 82,
-          borderRadius: 8,
-          backgroundColor: '#F2F2F2',
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingHorizontal: 16,
-          shadowColor: '#8B8B8B',
-          shadowOffset: { width: 1, height: 1 },
-          shadowOpacity: 0.25,
-          shadowRadius: 6,
-          elevation: 2,
-        }}
+        className="h-[82px] rounded-lg bg-white flex-row items-center px-4"
+        style={Platform.select({
+          ios: { shadowColor: '#8B8B8B', shadowOffset: { width: 1, height: 1 }, shadowOpacity: 0.25, shadowRadius: 6 },
+          android: { elevation: 2 },
+        })}
       >
         {/* 프로필 이미지 — left:16, size:50, top:16 (Figma) */}
         {customerProfile.profileImageUrl ? (
-          <Image source={{ uri: customerProfile.profileImageUrl }} style={{ width: 50, height: 50, borderRadius: 25 }} />
+          <Image source={{ uri: customerProfile.profileImageUrl }} style={{ width: 50, height: 50, borderRadius: 25 }} contentFit="cover" />
         ) : (
-          <View style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#B0B0B0' }} />
+          <View className="w-[50px] h-[50px] rounded-full bg-[#B0B0B0]" />
         )}
 
         {/* 텍스트 영역 — marginLeft:22 (Figma: 88-50-16=22), gap:20 (Figma gap-y:20) */}
-        <View style={{ flex: 1, marginLeft: 22, alignSelf: 'stretch', paddingTop: 16, gap: 20 }}>
-          {/* 상단 행: personalCode + 삭제 버튼(정상 카드만) */}
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Text style={{ color: '#B48247', fontSize: 13, fontFamily: 'Pretendard-Medium' }}>
+        <View className="flex-1 ml-[22px] self-stretch pt-4 gap-5">
+          {/* 상단 행: personalCode + 삭제 버튼(isViewed 카드만) */}
+          <View className="flex-row justify-between items-center">
+            <Text className="text-secondary text-small1 font-pretendard-medium">
               #{customerProfile.personalCode}
             </Text>
             {isViewed && (
               <Pressable
                 hitSlop={8}
                 onPress={() => setDeleteVisible(true)}
-                style={{ backgroundColor: '#B48247', borderRadius: 4, paddingHorizontal: 8, paddingVertical: 2 }}
+                className="bg-primary rounded px-2 py-0.5"
               >
-                <Text style={{ color: '#FFFFFF', fontSize: 11, fontFamily: 'Pretendard-SemiBold' }}>삭제</Text>
+                <Text className="text-[#FFFFFF] text-[11px] font-pretendard-semibold">삭제</Text>
               </Pressable>
             )}
           </View>
 
           {/* 하단 행: 지역 + 날짜 */}
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium' }}>
+          <View className="flex-row justify-between items-center">
+            <Text className="text-gray2 text-small1 font-pretendard-medium">
               {customerProfile.region ?? '-'}
             </Text>
-            <Text style={{ color: '#74768E', fontSize: 12, fontFamily: 'Pretendard-Regular' }}>
+            <Text className="text-gray2 text-small2 font-pretendard-regular">
               {formatDate(createdAt)}
             </Text>
           </View>

@@ -1,6 +1,7 @@
 import masterBg from '../../assets/icons/master-background.png'
 
 import { useQuery } from '@tanstack/react-query'
+import * as Clipboard from 'expo-clipboard'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Alert, FlatList, ImageBackground, Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -14,8 +15,12 @@ import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
+import type { MasterTabParamList } from '@/navigation/MasterTabNavigator'
 import { useAuthStore } from '@/store/authStore'
 import type { components } from '@/types/schema'
+
+import { useNavigation } from '@react-navigation/native'
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
 
@@ -179,6 +184,7 @@ function EmptyHasTip() {
 export function MasterHomeScreen() {
   const insets = useSafeAreaInsets()
   const rootNav = useRootNavigation()
+  const tabNav = useNavigation<BottomTabNavigationProp<MasterTabParamList>>()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const [linkCopyVisible, setLinkCopyVisible] = useState(false)
@@ -209,8 +215,11 @@ export function MasterHomeScreen() {
     })
   }
 
-  const handleReviewLink = () => {
-    // TODO: 실제 리뷰 링크 생성은 chatRoomId 필요 — 채팅 기능 개발 시 교체
+  const handleReviewLink = async () => {
+    // TODO: 실제 리뷰 링크는 chatRoomId 기반으로 교체 예정 — 채팅 기능 개발 시
+    const expertId = expertProfile?.id ?? ''
+    const reviewLink = `https://sportsmaster.app/review/${expertId}`
+    await Clipboard.setStringAsync(reviewLink)
     setLinkCopyVisible(true)
   }
 
@@ -295,7 +304,7 @@ export function MasterHomeScreen() {
         >
           <LinearGradient
             colors={['rgba(7,9,28,0.6)', 'rgba(87,103,125,0.6)']}
-            style={{ position: 'absolute', inset: 0 } as object}
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
           />
 
           <View style={{ position: 'absolute', right: 0, top: 0 }}>
@@ -331,7 +340,7 @@ export function MasterHomeScreen() {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#F2F2F2',
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
           shadowColor: '#000',
@@ -345,6 +354,7 @@ export function MasterHomeScreen() {
         {/* 섹션 헤더 — paddingLeft:32, paddingRight:25 → Figma 화살표 좌:333 우:25 여백 */}
         <Pressable
           hitSlop={8}
+          onPress={() => tabNav.navigate('DiagnosisTab')}
           style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 32, paddingRight: 25, marginBottom: 16 }}
         >
           <View>
@@ -368,7 +378,7 @@ export function MasterHomeScreen() {
           contentContainerStyle={{ paddingHorizontal: 32 }}
           ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
           renderItem={({ item }) => (
-            <DiagnosisRequestCard item={item} onPress={() => {}} />
+            <DiagnosisRequestCard item={item} onPress={() => tabNav.navigate('DiagnosisTab')} />
           )}
           ListEmptyComponent={hasProfile ? <EmptyHasTip /> : <EmptyNoProfile />}
           ListFooterComponent={
@@ -394,7 +404,7 @@ export function MasterHomeScreen() {
       <ConfirmDialog
         visible={linkCopyVisible}
         title="링크 복사 완료"
-        description="링크가 클립보드에 복사되었습니다"
+        description="복사한 링크로 리뷰 요청이 가능합니다"
         confirmLabel="확인"
         onConfirm={() => setLinkCopyVisible(false)}
       />
