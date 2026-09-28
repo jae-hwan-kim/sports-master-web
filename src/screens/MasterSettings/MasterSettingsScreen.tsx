@@ -1,9 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { useState } from 'react'
 import { FlatList, Pressable, Text, View } from 'react-native'
-
-import LogoSvg from '../../assets/icons/logo.svg'
 
 import { ArrowNextIcon } from '@/assets/icons'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
@@ -11,6 +10,8 @@ import { ScreenHeader } from '@/components/ScreenHeader'
 import { useLogout } from '@/hooks/useLogout'
 import { useWithdraw } from '@/hooks/useWithdraw'
 import { RootStackParamList } from '@/navigation/RootNavigator'
+
+import LogoSvg from '../../assets/icons/logo.svg'
 
 type SettingItem = {
   id: string
@@ -27,8 +28,16 @@ export function MasterSettingsScreen() {
   const [withdrawVisible, setWithdrawVisible] = useState(false)
 
   const SETTINGS_ITEMS: SettingItem[] = [
-    { id: 'profile', label: '개인 정보 관리', onPress: () => navigation.navigate('MasterProfileEdit') },
-    { id: 'guide', label: '기본 문구 가이드라인', onPress: () => navigation.navigate('MasterMessageGuide') },
+    {
+      id: 'profile',
+      label: '개인 정보 관리',
+      onPress: () => navigation.navigate('MasterProfileEdit'),
+    },
+    {
+      id: 'guide',
+      label: '기본 문구 가이드라인',
+      onPress: () => navigation.navigate('MasterMessageGuide'),
+    },
     { id: 'logout', label: '로그아웃', onPress: () => setLogoutVisible(true) },
     { id: 'withdraw', label: '계정탈퇴', onPress: () => setWithdrawVisible(true), danger: true },
   ]
@@ -37,7 +46,7 @@ export function MasterSettingsScreen() {
     <View className="flex-1 bg-[#F2F2F2]">
       <ScreenHeader onBack={() => navigation.goBack()} />
 
-      <Text className="px-6 pt-[34px] pb-[27px] text-[28px] font-extrabold text-black">설정</Text>
+      <Text className="px-6 pb-[27px] pt-[34px] text-[28px] font-extrabold text-black">설정</Text>
 
       <FlatList
         data={SETTINGS_ITEMS}
@@ -57,7 +66,9 @@ export function MasterSettingsScreen() {
               elevation: 2,
             }}
           >
-            <Text className={`text-[16px] font-semibold ${item.danger ? 'text-[#EA4335]' : 'text-[#07091C]'}`}>
+            <Text
+              className={`text-[16px] font-semibold ${item.danger ? 'text-[#EA4335]' : 'text-[#07091C]'}`}
+            >
               {item.label}
             </Text>
             <ArrowNextIcon size={44} />

@@ -1,6 +1,7 @@
-import * as Sentry from '@sentry/react-native'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import * as Sentry from '@sentry/react-native'
+
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'

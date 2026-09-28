@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
 import { Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -47,7 +48,11 @@ function CustomTabBar({
         const iconColor = isFocused ? '#1F2A43' : '#D9D9D9'
 
         const onPress = () => {
-          const event = navigation.emit({ type: 'tabPress', target: route.key, canPreventDefault: true })
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          })
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name)
           }
@@ -64,10 +69,7 @@ function CustomTabBar({
             className="flex-1 items-center justify-center gap-0.5"
           >
             <Icon size={44} color={iconColor} />
-            <Text
-              style={{ color: iconColor }}
-              className="text-[12px] font-semibold"
-            >
+            <Text style={{ color: iconColor }} className="text-[12px] font-semibold">
               {label}
             </Text>
           </Pressable>

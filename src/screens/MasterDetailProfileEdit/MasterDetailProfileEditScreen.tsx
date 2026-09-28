@@ -1,8 +1,6 @@
-import * as DocumentPicker from 'expo-document-picker'
-import * as ImagePicker from 'expo-image-picker'
-
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { useCallback, useEffect, useState } from 'react'
 import {
   FlatList,
@@ -17,12 +15,15 @@ import {
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import * as DocumentPicker from 'expo-document-picker'
+import * as ImagePicker from 'expo-image-picker'
+
 import { ArrowBackIcon } from '@/assets/icons'
+import { TextField } from '@/components/TextField'
 import { ImageUploadGrid } from '@/components/profile/ImageUploadGrid'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { RegionSelector } from '@/components/profile/RegionSelector'
-import { TextField } from '@/components/TextField'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
 import { useUpdateExpertProfile } from '@/hooks/useUpdateExpertProfile'
 import { RootStackParamList } from '@/navigation/RootNavigator'
@@ -175,10 +176,7 @@ export function MasterDetailProfileEditScreen() {
         >
           {/* 타이틀 */}
           <View className="px-6 pb-4 pt-2">
-            <Text
-              className="text-[28px] text-black"
-              style={{ fontFamily: 'Pretendard-ExtraBold' }}
-            >
+            <Text className="text-[28px] text-black" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
               상세프로필
             </Text>
             <Text
@@ -424,28 +422,14 @@ export function MasterDetailProfileEditScreen() {
   )
 }
 
-function SectionLabel({
-  label,
-  count,
-  max,
-}: {
-  label: string
-  count?: number
-  max?: number
-}) {
+function SectionLabel({ label, count, max }: { label: string; count?: number; max?: number }) {
   return (
     <View className="mx-6 mb-2 mt-6 flex-row items-center gap-2">
-      <Text
-        className="text-[20px] text-[#1F2A43]"
-        style={{ fontFamily: 'Pretendard-SemiBold' }}
-      >
+      <Text className="text-[20px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
         {label}
       </Text>
       {count !== undefined && max !== undefined && (
-        <Text
-          className="text-[12px] text-[#B48247]"
-          style={{ fontFamily: 'Pretendard-SemiBold' }}
-        >
+        <Text className="text-[12px] text-[#B48247]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
           {count}/{max}
         </Text>
       )}
@@ -463,7 +447,12 @@ function CertificationRow({ label, onRemove }: { label: string; onRemove: () => 
       >
         {label}
       </Text>
-      <Pressable hitSlop={8} onPress={onRemove} accessibilityRole="button" accessibilityLabel="삭제">
+      <Pressable
+        hitSlop={8}
+        onPress={onRemove}
+        accessibilityRole="button"
+        accessibilityLabel="삭제"
+      >
         <Text className="text-[#74768E]" style={{ fontSize: 14 }}>
           ✕
         </Text>

@@ -1,5 +1,4 @@
 import { forwardRef, useState } from 'react'
-
 import { Pressable, Text, TextInput, TextInputProps, View } from 'react-native'
 import { moderateScale } from 'react-native-size-matters'
 
@@ -13,7 +12,16 @@ type TextFieldProps = TextInputProps & {
 }
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(function TextField(
-  { label, errorMessage, secureToggle = false, secureTextEntry, onFocus, onBlur, rightButton, ...rest },
+  {
+    label,
+    errorMessage,
+    secureToggle = false,
+    secureTextEntry,
+    onFocus,
+    onBlur,
+    rightButton,
+    ...rest
+  },
   ref
 ) {
   const [isFocused, setIsFocused] = useState(false)

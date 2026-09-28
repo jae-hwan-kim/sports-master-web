@@ -1,15 +1,17 @@
-import masterBg from '../../assets/icons/master-background.png'
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+import { useNavigation } from '@react-navigation/native'
 
-import { useQuery } from '@tanstack/react-query'
-import * as Clipboard from 'expo-clipboard'
-import { LinearGradient } from 'expo-linear-gradient'
+import { useState } from 'react'
 import { Alert, FlatList, ImageBackground, Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { useState } from 'react'
+
+import * as Clipboard from 'expo-clipboard'
+import { LinearGradient } from 'expo-linear-gradient'
+
+import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
-import { formatDate } from '@/utils/date'
 import { ArrowNextIcon, LinkIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
@@ -18,9 +20,9 @@ import { useSwitchMode } from '@/hooks/useSwitchMode'
 import type { MasterTabParamList } from '@/navigation/MasterTabNavigator'
 import { useAuthStore } from '@/store/authStore'
 import type { components } from '@/types/schema'
+import { formatDate } from '@/utils/date'
 
-import { useNavigation } from '@react-navigation/native'
-import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+import masterBg from '../../assets/icons/master-background.png'
 
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
 
@@ -38,10 +40,11 @@ async function fetchExpertGrade(): Promise<ExpertProfileResponseDto> {
 }
 
 async function fetchDiagnosisPreview(): Promise<DiagnosisIncomingItem[]> {
-  const { data } = await apiClient.get<{ data: DiagnosisIncomingItem[] }>('/home/diagnosis-requests/preview')
+  const { data } = await apiClient.get<{ data: DiagnosisIncomingItem[] }>(
+    '/home/diagnosis-requests/preview'
+  )
   return data.data
 }
-
 
 function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?: boolean }) {
   return (
@@ -91,12 +94,22 @@ function StatBox({ value, label }: { value: string; label: string }) {
   return (
     <View style={{ width: 56, alignItems: 'center', gap: 8 }}>
       <Text
-        style={{ color: '#F2F2F2', fontSize: 18, fontFamily: 'Pretendard-ExtraBold', textAlign: 'center' }}
+        style={{
+          color: '#F2F2F2',
+          fontSize: 18,
+          fontFamily: 'Pretendard-ExtraBold',
+          textAlign: 'center',
+        }}
       >
         {value}
       </Text>
       <Text
-        style={{ color: '#F2F2F2', fontSize: 13, fontFamily: 'Pretendard-Medium', textAlign: 'center' }}
+        style={{
+          color: '#F2F2F2',
+          fontSize: 13,
+          fontFamily: 'Pretendard-Medium',
+          textAlign: 'center',
+        }}
       >
         {label}
       </Text>
@@ -131,10 +144,24 @@ function EmptyNoProfile() {
         gap: 8,
       }}
     >
-      <Text style={{ color: '#74768E', fontSize: 18, fontFamily: 'Pretendard-ExtraBold', textAlign: 'center' }}>
+      <Text
+        style={{
+          color: '#74768E',
+          fontSize: 18,
+          fontFamily: 'Pretendard-ExtraBold',
+          textAlign: 'center',
+        }}
+      >
         아직 요청 고객이 없습니다
       </Text>
-      <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium', textAlign: 'center' }}>
+      <Text
+        style={{
+          color: '#74768E',
+          fontSize: 13,
+          fontFamily: 'Pretendard-Medium',
+          textAlign: 'center',
+        }}
+      >
         프로필을 작성해 전문성을 보여주세요!
       </Text>
       <Pressable
@@ -171,11 +198,28 @@ function EmptyHasTip() {
         gap: 8,
       }}
     >
-      <Text style={{ color: '#74768E', fontSize: 14, fontFamily: 'Pretendard-Medium', textAlign: 'center' }}>
+      <Text
+        style={{
+          color: '#74768E',
+          fontSize: 14,
+          fontFamily: 'Pretendard-Medium',
+          textAlign: 'center',
+        }}
+      >
         Tip.
       </Text>
-      <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Regular', textAlign: 'center', lineHeight: 20 }}>
-        {'링크를 통해 외부 고객도 리뷰 작성이 가능합니다\n리뷰 점수를 높여 고객요청 확률을 높여봅시다!'}
+      <Text
+        style={{
+          color: '#74768E',
+          fontSize: 13,
+          fontFamily: 'Pretendard-Regular',
+          textAlign: 'center',
+          lineHeight: 20,
+        }}
+      >
+        {
+          '링크를 통해 외부 고객도 리뷰 작성이 가능합니다\n리뷰 점수를 높여 고객요청 확률을 높여봅시다!'
+        }
       </Text>
     </View>
   )
@@ -201,18 +245,26 @@ export function MasterHomeScreen() {
   })
 
   const hasProfile = expertProfile !== undefined && !expertProfileError
-  const gradeLabel = expertProfile?.expertGrade ? (GRADE_LABEL[expertProfile.expertGrade] ?? expertProfile.expertGrade) : '-'
-  const reviewCount = expertProfile ? String(expertProfile.totalReviewCount > 999 ? '999+' : expertProfile.totalReviewCount) : '-'
+  const gradeLabel = expertProfile?.expertGrade
+    ? (GRADE_LABEL[expertProfile.expertGrade] ?? expertProfile.expertGrade)
+    : '-'
+  const reviewCount = expertProfile
+    ? String(expertProfile.totalReviewCount > 999 ? '999+' : expertProfile.totalReviewCount)
+    : '-'
   const avgRating = expertProfile ? String(Number(expertProfile.averageRating).toFixed(1)) : '-'
-  const topPercentile = expertProfile?.topPercentile != null ? `${expertProfile.topPercentile}%` : '-'
+  const topPercentile =
+    expertProfile?.topPercentile != null ? `${expertProfile.topPercentile}%` : '-'
 
   const handleModeSwitch = () => {
-    switchMode({ mode: 'customer' }, {
-      onSuccess: () => {
-        setModeSelected('customer')
-        rootNav?.reset({ index: 0, routes: [{ name: 'CustomerHome' }] })
-      },
-    })
+    switchMode(
+      { mode: 'customer' },
+      {
+        onSuccess: () => {
+          setModeSelected('customer')
+          rootNav?.reset({ index: 0, routes: [{ name: 'CustomerHome' }] })
+        },
+      }
+    )
   }
 
   const handleReviewLink = async () => {
@@ -226,11 +278,7 @@ export function MasterHomeScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: '#1E2A3A' }}>
       {/* 상단 배경 사진 영역 */}
-      <ImageBackground
-        source={masterBg}
-        resizeMode="cover"
-        style={{ paddingTop: insets.top }}
-      >
+      <ImageBackground source={masterBg} resizeMode="cover" style={{ paddingTop: insets.top }}>
         {/* 전체 dark 오버레이 */}
         <View
           style={{
@@ -246,12 +294,26 @@ export function MasterHomeScreen() {
         <LinearGradient
           colors={['#F2F2F2', 'rgba(242,242,242,0)']}
           locations={[0, 1]}
-          style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 120, pointerEvents: 'none' }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 120,
+            pointerEvents: 'none',
+          }}
         />
 
         {/* 내비게이션 바 */}
         <View
-          style={{ height: 56, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', paddingHorizontal: 16, gap: 8 }}
+          style={{
+            height: 56,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            paddingHorizontal: 16,
+            gap: 8,
+          }}
         >
           <MasterModeBadge onPress={handleModeSwitch} disabled={isSwitching} />
           <Pressable
@@ -285,7 +347,12 @@ export function MasterHomeScreen() {
             내 고객이라면 누구나 리뷰 작성 가능
           </Text>
           <Text
-            style={{ color: '#D9D9D9', fontSize: 13, fontFamily: 'Pretendard-Medium', paddingRight: 12 }}
+            style={{
+              color: '#D9D9D9',
+              fontSize: 13,
+              fontFamily: 'Pretendard-Medium',
+              paddingRight: 12,
+            }}
           >
             링크 보내기
           </Text>
@@ -311,21 +378,39 @@ export function MasterHomeScreen() {
             <StarMedalIcon size={100} />
           </View>
 
-          <View style={{ flex: 1, paddingLeft: 16, paddingTop: 18, justifyContent: 'space-between', paddingBottom: 24 }}>
+          <View
+            style={{
+              flex: 1,
+              paddingLeft: 16,
+              paddingTop: 18,
+              justifyContent: 'space-between',
+              paddingBottom: 24,
+            }}
+          >
             <View>
               <Text style={{ color: '#F2F2F2', fontSize: 18, fontFamily: 'Pretendard-ExtraBold' }}>
                 명인 등급
               </Text>
               <Text
-                style={{ color: '#D9D9D9', fontSize: 13, fontFamily: 'Pretendard-Medium', marginTop: 7 }}
+                style={{
+                  color: '#D9D9D9',
+                  fontSize: 13,
+                  fontFamily: 'Pretendard-Medium',
+                  marginTop: 7,
+                }}
               >
-                현재 명인 등급{' '}
-                <Text style={{ color: '#FBBC05' }}>{gradeLabel}</Text>
-                {' '}입니다
+                현재 명인 등급 <Text style={{ color: '#FBBC05' }}>{gradeLabel}</Text> 입니다
               </Text>
             </View>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start', marginLeft: 16 }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                alignSelf: 'flex-start',
+                marginLeft: 16,
+              }}
+            >
               <StatBox value={reviewCount} label="리뷰" />
               <StatDivider />
               <StatBox value={avgRating} label="평점" />
@@ -355,14 +440,26 @@ export function MasterHomeScreen() {
         <Pressable
           hitSlop={8}
           onPress={() => tabNav.navigate('DiagnosisTab')}
-          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 32, paddingRight: 25, marginBottom: 16 }}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingLeft: 32,
+            paddingRight: 25,
+            marginBottom: 16,
+          }}
         >
           <View>
             <Text style={{ color: '#1F2A43', fontSize: 18, fontFamily: 'Pretendard-ExtraBold' }}>
               진단요청 고객
             </Text>
             <Text
-              style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium', marginTop: 6 }}
+              style={{
+                color: '#74768E',
+                fontSize: 13,
+                fontFamily: 'Pretendard-Medium',
+                marginTop: 6,
+              }}
             >
               나를 찾는 고객 프로필 전부 확인하기
             </Text>

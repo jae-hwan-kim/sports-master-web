@@ -18,8 +18,14 @@ type RoleCardProps = {
 // 그 안에 타이틀+설명이, 박스 모서리에 아이콘 배지가 겹쳐서 걸쳐있음.
 // selected=false: 내부 박스만 옅은 골드 실선 보더 / selected=true: 내부 보더는 그대로 유지한 채
 // 바깥 카드에 솔리드 골드(#B48247) 보더 4px를 별도 오버레이로 추가해 하이라이트(1차 탭 = 선택, 재탭 = 확정은 상위에서 처리)
-export function RoleCard({ variant, title, description, selected = false, onPress, disabled }: RoleCardProps) {
-
+export function RoleCard({
+  variant,
+  title,
+  description,
+  selected = false,
+  onPress,
+  disabled,
+}: RoleCardProps) {
   return (
     <Pressable
       hitSlop={8}
@@ -37,12 +43,8 @@ export function RoleCard({ variant, title, description, selected = false, onPres
         elevation: 4,
       }}
     >
-      <View
-        className="absolute left-[25px] top-[25px] h-[150px] w-[250px] items-center justify-center rounded-xl border border-[#C6A75E] px-4"
-      >
-        <Text className={`text-2xl font-semibold`}>
-          {title}
-        </Text>
+      <View className="absolute left-[25px] top-[25px] h-[150px] w-[250px] items-center justify-center rounded-xl border border-[#C6A75E] px-4">
+        <Text className={`text-2xl font-semibold`}>{title}</Text>
         <Text className="mt-2 text-center text-[13px] font-medium leading-[1.4] text-gray2">
           {description}
         </Text>

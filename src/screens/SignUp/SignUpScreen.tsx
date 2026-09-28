@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import {
   KeyboardAvoidingView,
@@ -20,10 +20,10 @@ import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
-import { useCheckEmail } from '@/hooks/useCheckEmail'
-import { useCheckNickname } from '@/hooks/useCheckNickname'
 import { useAppleAuth } from '@/hooks/useAppleAuth'
 import { useAppleLogin } from '@/hooks/useAppleLogin'
+import { useCheckEmail } from '@/hooks/useCheckEmail'
+import { useCheckNickname } from '@/hooks/useCheckNickname'
 import { useGoogleAuth } from '@/hooks/useGoogleAuth'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
 import { useKakaoAuth } from '@/hooks/useKakaoAuth'
@@ -32,11 +32,11 @@ import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 import { useSignUpDraftStore } from '@/store/signupDraftStore'
 import {
+  type SignUpFormValues,
   extractApiErrorMessage,
   signUpSchema,
   validateEmailFormat,
   validateNicknameFormat,
-  type SignUpFormValues,
 } from '@/utils/signupValidation'
 import { navigateAfterAuth } from '@/utils/socialAuthNavigation'
 
@@ -81,8 +81,16 @@ export function SignUpScreen() {
   const setAuthSession = useAuthStore((state) => state.setAuthSession)
   const setDraft = useSignUpDraftStore((state) => state.setDraft)
   const consumePendingError = useSignUpDraftStore((state) => state.consumePendingError)
-  const { mutate: checkNickname, mutateAsync: checkNicknameAsync, isPending: isCheckingNickname } = useCheckNickname()
-  const { mutate: checkEmail, mutateAsync: checkEmailAsync, isPending: isCheckingEmail } = useCheckEmail()
+  const {
+    mutate: checkNickname,
+    mutateAsync: checkNicknameAsync,
+    isPending: isCheckingNickname,
+  } = useCheckNickname()
+  const {
+    mutate: checkEmail,
+    mutateAsync: checkEmailAsync,
+    isPending: isCheckingEmail,
+  } = useCheckEmail()
   const { mutate: appleLogin, isPending: isAppleLoginPending } = useAppleLogin()
   const { promptApple } = useAppleAuth()
   const { mutate: googleLogin, isPending: isGoogleLoginPending } = useGoogleLogin()
@@ -111,7 +119,11 @@ export function SignUpScreen() {
     formState: { errors },
   } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: useSignUpDraftStore.getState().draft ?? { nickname: '', email: '', password: '' },
+    defaultValues: useSignUpDraftStore.getState().draft ?? {
+      nickname: '',
+      email: '',
+      password: '',
+    },
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
   })
@@ -199,7 +211,12 @@ export function SignUpScreen() {
             })
           },
           onError: (error) => {
-            setSocialError(extractApiErrorMessage(error, '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialError(
+              extractApiErrorMessage(
+                error,
+                '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'
+              )
+            )
             setSocialLoading(false)
           },
         })
@@ -233,7 +250,12 @@ export function SignUpScreen() {
             })
           },
           onError: (error) => {
-            setSocialError(extractApiErrorMessage(error, '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialError(
+              extractApiErrorMessage(
+                error,
+                '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'
+              )
+            )
             setSocialLoading(false)
           },
         })
@@ -266,7 +288,12 @@ export function SignUpScreen() {
             })
           },
           onError: (error) => {
-            setSocialError(extractApiErrorMessage(error, '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'))
+            setSocialError(
+              extractApiErrorMessage(
+                error,
+                '소셜 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요'
+              )
+            )
             setSocialLoading(false)
           },
         })
@@ -295,10 +322,16 @@ export function SignUpScreen() {
         setCheckDialog({
           visible: true,
           title: available ? '닉네임 사용가능' : '닉네임 사용불가',
-          description: available ? '중복되지 않으므로 사용 가능합니다' : '이미 존재하는 닉네임입니다',
+          description: available
+            ? '중복되지 않으므로 사용 가능합니다'
+            : '이미 존재하는 닉네임입니다',
         }),
       onError: () =>
-        setCheckDialog({ visible: true, title: '닉네임 사용불가', description: '닉네임 확인에 실패했습니다' }),
+        setCheckDialog({
+          visible: true,
+          title: '닉네임 사용불가',
+          description: '닉네임 확인에 실패했습니다',
+        }),
     })
   }
 
@@ -317,7 +350,11 @@ export function SignUpScreen() {
           description: available ? '사용 가능한 이메일입니다' : '이미 가입된 이메일입니다',
         }),
       onError: () =>
-        setCheckDialog({ visible: true, title: '이메일 형식 오류', description: '이메일 확인에 실패했습니다' }),
+        setCheckDialog({
+          visible: true,
+          title: '이메일 형식 오류',
+          description: '이메일 확인에 실패했습니다',
+        }),
     })
   }
 
@@ -384,9 +421,7 @@ export function SignUpScreen() {
                 errorMessage={errors.email?.message}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                rightButton={
-                  <CheckButton onPress={handleCheckEmail} loading={isCheckingEmail} />
-                }
+                rightButton={<CheckButton onPress={handleCheckEmail} loading={isCheckingEmail} />}
               />
             )}
           />
@@ -464,7 +499,9 @@ export function SignUpScreen() {
 
         {/* 약관 안내 — Figma: 로그인 안내 행 하단에서 98px 고정 */}
         <View className="mt-[98px] items-center gap-1">
-          <Text className={LEGAL_TEXT_CLASS}>회원가입시 아래 내용에 동의하는 것으로 간주됩니다.</Text>
+          <Text className={LEGAL_TEXT_CLASS}>
+            회원가입시 아래 내용에 동의하는 것으로 간주됩니다.
+          </Text>
           <View className="flex-row items-center gap-[27px]">
             <Pressable
               hitSlop={8}
@@ -498,7 +535,9 @@ export function SignUpScreen() {
         isError={!!socialError}
         onConfirm={handleSocialConfirm}
         onCancel={handleSocialCancel}
-        confirmLoading={socialLoading || isGoogleLoginPending || isKakaoLoginPending || isAppleLoginPending}
+        confirmLoading={
+          socialLoading || isGoogleLoginPending || isKakaoLoginPending || isAppleLoginPending
+        }
       />
       <ConfirmDialog
         visible={checkDialog.visible}

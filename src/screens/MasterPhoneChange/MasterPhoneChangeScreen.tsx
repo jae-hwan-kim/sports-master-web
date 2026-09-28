@@ -1,10 +1,11 @@
-import { useState } from 'react'
-
-import { useQuery } from '@tanstack/react-query'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { useState } from 'react'
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
@@ -73,7 +74,9 @@ export function MasterPhoneChangeScreen() {
           <View className="my-[20px] h-[1px] bg-[#E9E9E9]" />
 
           {/* 변경할 번호 입력 */}
-          <Text className="mb-[8px] text-[14px] font-semibold text-[#1F2A43]">변경할 번호 입력</Text>
+          <Text className="mb-[8px] text-[14px] font-semibold text-[#1F2A43]">
+            변경할 번호 입력
+          </Text>
           <TextField
             keyboardType="phone-pad"
             placeholder="010-0000-0000"

@@ -1,5 +1,6 @@
-import * as AppleAuthentication from 'expo-apple-authentication'
 import { Platform } from 'react-native'
+
+import * as AppleAuthentication from 'expo-apple-authentication'
 
 // Apple Sign In은 iOS 13+ 에서만 사용 가능.
 // expo-apple-authentication 제공 signInAsync()를 통해 identityToken과

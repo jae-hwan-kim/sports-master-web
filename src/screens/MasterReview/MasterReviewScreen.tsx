@@ -1,11 +1,9 @@
-import { useCallback, useMemo, useState } from 'react'
-
-import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import type { RootStackParamList } from '@/navigation/RootNavigator'
+
+import { useCallback, useMemo, useState } from 'react'
+import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowBackIcon, LinkIcon } from '@/assets/icons'
 import InfoSvg from '@/assets/icons/info.svg'
@@ -14,11 +12,12 @@ import { DeleteRequestDialog } from '@/components/review/DeleteRequestDialog'
 import { RatingsSummary } from '@/components/review/RatingsSummary'
 import { ReviewFilterTabs, ReviewSort } from '@/components/review/ReviewFilterTabs'
 import { ReviewInfoModal } from '@/components/review/ReviewInfoModal'
-import { ReviewItem as ReviewItemComponent, ReviewData } from '@/components/review/ReviewItem'
+import { ReviewData, ReviewItem as ReviewItemComponent } from '@/components/review/ReviewItem'
 import { useDeleteReviewRequest } from '@/hooks/useDeleteReviewRequest'
-import { useMyReviews, ReviewItem as ReviewItemHook } from '@/hooks/useMyReviews'
+import { ReviewItem as ReviewItemHook, useMyReviews } from '@/hooks/useMyReviews'
 import { useRequestReviewLink } from '@/hooks/useRequestReviewLink'
 import { useReviewSummary } from '@/hooks/useReviewSummary'
+import type { RootStackParamList } from '@/navigation/RootNavigator'
 import type { components } from '@/types/schema'
 
 type CreateReviewTokenDto = components['schemas']['CreateReviewTokenDto']
@@ -40,7 +39,6 @@ function toReviewData(item: ReviewItemHook): ReviewData {
   }
 }
 
-
 export function MasterReviewScreen() {
   const insets = useSafeAreaInsets()
   const nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
@@ -56,7 +54,12 @@ export function MasterReviewScreen() {
 
   const { data: summary } = useReviewSummary()
 
-  const { data: reviewsData, fetchNextPage, hasNextPage, isFetchingNextPage } = useMyReviews({
+  const {
+    data: reviewsData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useMyReviews({
     sort: sortParam,
     photoOnly,
   })
@@ -102,9 +105,14 @@ export function MasterReviewScreen() {
 
   const handleDeleteConfirm = useCallback(() => {
     const ids = Array.from(selectedIds)
-    Promise.allSettled(ids.map((id) => new Promise<void>((resolve, reject) =>
-      deleteReviewRequest(id, { onSuccess: () => resolve(), onError: (e) => reject(e) })
-    ))).then((results) => {
+    Promise.allSettled(
+      ids.map(
+        (id) =>
+          new Promise<void>((resolve, reject) =>
+            deleteReviewRequest(id, { onSuccess: () => resolve(), onError: (e) => reject(e) })
+          )
+      )
+    ).then((results) => {
       const failed = results.filter((r) => r.status === 'rejected')
       if (failed.length > 0) {
         // 일부 실패 — 상태 초기화는 하되 실패 사실을 로그로만 남김
@@ -164,7 +172,9 @@ export function MasterReviewScreen() {
             lineHeight: 20,
           }}
         >
-          {'총 별점과 작성된 리뷰를 확인할 수 있습니다.\n리뷰 삭제를 원할 경우, 삭제 요청을 통해 심사 후 처리됩니다.'}
+          {
+            '총 별점과 작성된 리뷰를 확인할 수 있습니다.\n리뷰 삭제를 원할 경우, 삭제 요청을 통해 심사 후 처리됩니다.'
+          }
         </Text>
       </View>
 
@@ -199,13 +209,17 @@ export function MasterReviewScreen() {
 
   // 빈 상태 (Figma: 텍스트 + 링크 버튼 + 우측 하단 로고 배경)
   const ListEmpty = (
-    <View style={{ minHeight: 360, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 24, gap: 12 }}>
+    <View
+      style={{
+        minHeight: 360,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 24,
+        gap: 12,
+      }}
+    >
       {/* 배경 로고 — 우측 하단 */}
-      <LogoSvg
-        width={220}
-        height={220}
-        style={{ position: 'absolute', right: -20, bottom: -20 }}
-      />
+      <LogoSvg width={220} height={220} style={{ position: 'absolute', right: -20, bottom: -20 }} />
 
       <Text
         style={{
@@ -363,10 +377,7 @@ export function MasterReviewScreen() {
       />
 
       {/* 리뷰 안내 모달 (i 버튼) */}
-      <ReviewInfoModal
-        visible={infoModalVisible}
-        onClose={() => setInfoModalVisible(false)}
-      />
+      <ReviewInfoModal visible={infoModalVisible} onClose={() => setInfoModalVisible(false)} />
     </View>
   )
 }

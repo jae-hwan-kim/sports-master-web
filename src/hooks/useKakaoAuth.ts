@@ -1,5 +1,6 @@
-import * as WebBrowser from 'expo-web-browser'
 import { Platform } from 'react-native'
+
+import * as WebBrowser from 'expo-web-browser'
 
 const KAKAO_REST_API_KEY = process.env.EXPO_PUBLIC_KAKAO_REST_API_KEY ?? ''
 // 카카오에 등록된 redirect_uri(http만 허용) — 백엔드 GET /auth/kakao/callback이 이 값을 받아

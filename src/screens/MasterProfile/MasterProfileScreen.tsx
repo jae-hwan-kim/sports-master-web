@@ -1,8 +1,9 @@
-import { LinearGradient } from 'expo-linear-gradient'
-
 import { useNavigation } from '@react-navigation/native'
+
 import { ActivityIndicator, Image, Platform, Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { LinearGradient } from 'expo-linear-gradient'
 
 import PersonSvg from '@/assets/icons/person.svg'
 import { ProfileCard } from '@/components/profile/ProfileCard'
@@ -35,7 +36,7 @@ const MOCK_PROFILE: ExpertProfileResponseDto = {
 function EmptyProfileCard() {
   return (
     <View
-      className="rounded-2xl overflow-hidden"
+      className="overflow-hidden rounded-2xl"
       style={{
         backgroundColor: 'rgba(255,255,255,0.3)',
         ...Platform.select({
@@ -50,9 +51,9 @@ function EmptyProfileCard() {
       }}
     >
       <View className="p-[13px] pt-[11px]">
-        <View className="rounded-xl overflow-hidden" style={{ height: 470 }}>
+        <View className="overflow-hidden rounded-xl" style={{ height: 470 }}>
           {/* 플레이스홀더 배경 + 실루엣 */}
-          <View className="flex-1 bg-[#D9D9D9] items-center justify-center">
+          <View className="flex-1 items-center justify-center bg-[#D9D9D9]">
             <PersonSvg width={136} height={160} />
           </View>
 
@@ -60,7 +61,7 @@ function EmptyProfileCard() {
           <Image
             // eslint-disable-next-line @typescript-eslint/no-require-imports
             source={require('@/assets/icons/logo.png')}
-            className="absolute top-3 right-3"
+            className="absolute right-3 top-3"
             style={{ width: 52, height: 52 }}
             resizeMode="contain"
           />
@@ -75,17 +76,16 @@ function EmptyProfileCard() {
 
           {/* 이름 / 소개 */}
           <View className="absolute bottom-[96px] left-6 right-6">
-            <Text
-              className="text-black text-[20px]"
-              style={{ fontFamily: 'Pretendard-SemiBold' }}
-            >
+            <Text className="text-[20px] text-black" style={{ fontFamily: 'Pretendard-SemiBold' }}>
               이름최대8글자
             </Text>
             <Text
-              className="text-gray3 text-[13px] mt-1 leading-5"
+              className="mt-1 text-[13px] leading-5 text-gray3"
               style={{ fontFamily: 'Pretendard-Medium' }}
             >
-              {'여기에는 고객들에게 보여지는 한줄 소개가\n나타나는 곳으로 띄어쓰기 포함 30자 내로 작성합니다.'}
+              {
+                '여기에는 고객들에게 보여지는 한줄 소개가\n나타나는 곳으로 띄어쓰기 포함 30자 내로 작성합니다.'
+              }
             </Text>
           </View>
 
@@ -95,18 +95,39 @@ function EmptyProfileCard() {
             style={{ height: 56, bottom: 20 }}
           >
             <View className="flex-1 items-center justify-center" style={{ gap: 8 }}>
-              <Text className="text-gray3 text-[18px] leading-5" style={{ fontFamily: 'Pretendard-ExtraBold' }}>0</Text>
-              <Text className="text-gray3 text-[13px]" style={{ fontFamily: 'Pretendard-Medium' }}>리뷰</Text>
+              <Text
+                className="text-[18px] leading-5 text-gray3"
+                style={{ fontFamily: 'Pretendard-ExtraBold' }}
+              >
+                0
+              </Text>
+              <Text className="text-[13px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+                리뷰
+              </Text>
             </View>
-            <View className="bg-gray2 w-px" style={{ height: 38.5 }} />
+            <View className="w-px bg-gray2" style={{ height: 38.5 }} />
             <View className="flex-1 items-center justify-center" style={{ gap: 8 }}>
-              <Text className="text-gray3 text-[18px] leading-5" style={{ fontFamily: 'Pretendard-ExtraBold' }}>0.0</Text>
-              <Text className="text-gray3 text-[13px]" style={{ fontFamily: 'Pretendard-Medium' }}>평점</Text>
+              <Text
+                className="text-[18px] leading-5 text-gray3"
+                style={{ fontFamily: 'Pretendard-ExtraBold' }}
+              >
+                0.0
+              </Text>
+              <Text className="text-[13px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+                평점
+              </Text>
             </View>
-            <View className="bg-gray2 w-px" style={{ height: 38.5 }} />
+            <View className="w-px bg-gray2" style={{ height: 38.5 }} />
             <View className="flex-1 items-center justify-center" style={{ gap: 8 }}>
-              <Text className="text-gray3 text-[18px] leading-5" style={{ fontFamily: 'Pretendard-ExtraBold' }}>100%</Text>
-              <Text className="text-gray3 text-[13px]" style={{ fontFamily: 'Pretendard-Medium' }}>상위</Text>
+              <Text
+                className="text-[18px] leading-5 text-gray3"
+                style={{ fontFamily: 'Pretendard-ExtraBold' }}
+              >
+                100%
+              </Text>
+              <Text className="text-[13px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+                상위
+              </Text>
             </View>
           </View>
         </View>
@@ -153,14 +174,11 @@ export function MasterProfileScreen() {
 
       {/* 헤더 */}
       <View className="px-[26px]" style={{ marginTop: 24 }}>
-        <Text
-          className="text-black text-[28px]"
-          style={{ fontFamily: 'Pretendard-ExtraBold' }}
-        >
+        <Text className="text-[28px] text-black" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
           프로필
         </Text>
         <Text
-          className="text-[#74768E] text-[13px] mt-[10px]"
+          className="mt-[10px] text-[13px] text-[#74768E]"
           style={{ fontFamily: 'Pretendard-Medium' }}
         >
           전문성을 강조할 자료로 능력을 보여주세요
@@ -184,21 +202,21 @@ export function MasterProfileScreen() {
       </View>
 
       {/* 상세프로필로 이동 버튼 */}
-      <View className="items-end px-[26px]" style={{ marginTop: 36, marginBottom: insets.bottom + 12 }}>
+      <View
+        className="items-end px-[26px]"
+        style={{ marginTop: 36, marginBottom: insets.bottom + 12 }}
+      >
         <Pressable
           hitSlop={8}
           onPress={() => navigation.navigate('MasterDetailProfile')}
           className="flex-row items-center justify-center"
           style={{ backgroundColor: '#74768E', height: 36, width: 156, borderRadius: 76 }}
         >
-          <Text
-            className="text-[#F2F2F2] text-[13px]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[13px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
             상세프로필로 이동
           </Text>
           <Text
-            className="text-[#F2F2F2] text-[13px] ml-[6px]"
+            className="ml-[6px] text-[13px] text-[#F2F2F2]"
             style={{ fontFamily: 'Pretendard-Medium' }}
           >
             {'>'}

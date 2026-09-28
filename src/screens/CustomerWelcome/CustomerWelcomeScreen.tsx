@@ -1,21 +1,22 @@
 // src/screens/CustomerWelcome/CustomerWelcomeScreen.tsx
-import { useEffect, useRef } from 'react'
 
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { useEffect, useRef } from 'react'
 import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
+import { ArrowNextIcon } from '@/assets/icons'
+import bgImage from '@/assets/icons/background.png'
 import { useSignUp } from '@/hooks/useSignUp'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 import { useSignUpDraftStore } from '@/store/signupDraftStore'
 import { mapSignUpError } from '@/utils/signupValidation'
-import { ArrowNextIcon } from '@/assets/icons'
-import bgImage from '@/assets/icons/background.png'
 
 // 이 화면 진입 시점에 모드를 확정한다(customer).
 // - draft가 있으면(이메일 가입) 이 시점에 실제 계정을 생성

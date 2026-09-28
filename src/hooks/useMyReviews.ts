@@ -40,8 +40,7 @@ async function fetchMyReviews({
 export function useMyReviews({ sort, photoOnly }: UseMyReviewsParams = {}) {
   return useInfiniteQuery({
     queryKey: ['reviews', 'me', sort, photoOnly],
-    queryFn: ({ pageParam }) =>
-      fetchMyReviews({ pageParam: pageParam as number, sort, photoOnly }),
+    queryFn: ({ pageParam }) => fetchMyReviews({ pageParam: pageParam as number, sort, photoOnly }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const fetched = allPages.flatMap((p) => p.data).length

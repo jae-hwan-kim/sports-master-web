@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/react-native'
+
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
@@ -20,7 +21,14 @@ async function createCertification(
   const filename = fileUri.split('/').pop() ?? `certificate-${Date.now()}.jpg`
   const extMatch = /\.(\w+)$/.exec(filename)
   const ext = extMatch?.[1]?.toLowerCase() ?? 'jpg'
-  const mimeType = ext === 'png' ? 'image/png' : ext === 'webp' ? 'image/webp' : ext === 'pdf' ? 'application/pdf' : 'image/jpeg'
+  const mimeType =
+    ext === 'png'
+      ? 'image/png'
+      : ext === 'webp'
+        ? 'image/webp'
+        : ext === 'pdf'
+          ? 'application/pdf'
+          : 'image/jpeg'
 
   const formData = new FormData()
   // React Native의 FormData는 { uri, name, type } 형태를 파일로 인식함

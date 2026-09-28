@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { ScrollView, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -27,10 +28,12 @@ export function MasterMessageGuideScreen() {
     <View className="flex-1 bg-[#F2F2F2]">
       <ScreenHeader onBack={() => navigation.goBack()} />
 
-      <View className="px-6 pt-[34px] pb-[35px]">
+      <View className="px-6 pb-[35px] pt-[34px]">
         <Text className="text-[28px] font-extrabold text-black">기본 문구 가이드라인</Text>
         <Text className="mt-2 text-[13px] font-medium text-gray2">
-          {'처음 고객과 소통하는 명인을 위한 가이드 라인입니다!\n필수는 아니며, 오픈 채팅방의 인사말로 복사해 사용 가능합니다'}
+          {
+            '처음 고객과 소통하는 명인을 위한 가이드 라인입니다!\n필수는 아니며, 오픈 채팅방의 인사말로 복사해 사용 가능합니다'
+          }
         </Text>
       </View>
 
@@ -50,9 +53,20 @@ export function MasterMessageGuideScreen() {
       >
         <ScrollView
           style={{ flex: 1 }}
-          contentContainerStyle={{ paddingHorizontal: 26, paddingTop: 36, paddingBottom: insets.bottom + 24 }}
+          contentContainerStyle={{
+            paddingHorizontal: 26,
+            paddingTop: 36,
+            paddingBottom: insets.bottom + 24,
+          }}
         >
-          <Text style={{ color: '#07091C', fontSize: 16, fontFamily: 'Pretendard-Medium', lineHeight: 26 }}>
+          <Text
+            style={{
+              color: '#07091C',
+              fontSize: 16,
+              fontFamily: 'Pretendard-Medium',
+              lineHeight: 26,
+            }}
+          >
             {GUIDE_TEXT}
           </Text>
         </ScrollView>

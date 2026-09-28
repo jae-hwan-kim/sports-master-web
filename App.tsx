@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react-native'
 import { useEffect } from 'react'
 
 import { useFonts } from 'expo-font'
@@ -8,6 +9,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { RootNavigator } from '@/navigation/RootNavigator'
+
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN ?? '',
+  tracesSampleRate: 1.0,
+  enabled: !!process.env.EXPO_PUBLIC_SENTRY_DSN,
+})
 import PretendardRegular from '@/assets/fonts/Pretendard-Regular.otf'
 import PretendardMedium from '@/assets/fonts/Pretendard-Medium.otf'
 import PretendardExtraBold from '@/assets/fonts/Pretendard-ExtraBold.otf'

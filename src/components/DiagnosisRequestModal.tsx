@@ -40,15 +40,15 @@ function DarkChip({ label }: { label: string }) {
 
 export function DiagnosisRequestModal({ item, onClose }: Props) {
   return (
-    <Modal
-      visible={item !== null}
-      transparent
-      animationType="fade"
-      onRequestClose={onClose}
-    >
+    <Modal visible={item !== null} transparent animationType="fade" onRequestClose={onClose}>
       {/* 반투명 오버레이 — Figma: rgba(7,9,28,0.6) */}
       <Pressable
-        style={{ flex: 1, backgroundColor: 'rgba(7,9,28,0.6)', justifyContent: 'center', alignItems: 'center' }}
+        style={{
+          flex: 1,
+          backgroundColor: 'rgba(7,9,28,0.6)',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
         onPress={onClose}
       >
         <Pressable onPress={() => {}} style={{ width: 340 }}>
@@ -66,7 +66,9 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
   const ageGender = [
     customerProfile.age != null ? `${customerProfile.age}세` : null,
     genderLabel(customerProfile.gender),
-  ].filter(Boolean).join('/')
+  ]
+    .filter(Boolean)
+    .join('/')
   if (ageGender) chips.push(ageGender)
   if (customerProfile.region) chips.push(truncate(customerProfile.region, 6))
   if (customerProfile.sport) chips.push(customerProfile.sport)
@@ -92,10 +94,25 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
         {customerProfile.profileImageUrl ? (
           <Image
             source={{ uri: customerProfile.profileImageUrl }}
-            style={{ width: 60, height: 60, borderRadius: 30, borderWidth: 5, borderColor: '#FFFFFF' }}
+            style={{
+              width: 60,
+              height: 60,
+              borderRadius: 30,
+              borderWidth: 5,
+              borderColor: '#FFFFFF',
+            }}
           />
         ) : (
-          <View style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: '#D9D9D9', borderWidth: 5, borderColor: '#FFFFFF' }} />
+          <View
+            style={{
+              width: 60,
+              height: 60,
+              borderRadius: 30,
+              backgroundColor: '#D9D9D9',
+              borderWidth: 5,
+              borderColor: '#FFFFFF',
+            }}
+          />
         )}
       </View>
 
@@ -103,7 +120,15 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
       <Pressable
         hitSlop={8}
         onPress={onClose}
-        style={{ position: 'absolute', top: 13, right: 10, width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}
+        style={{
+          position: 'absolute',
+          top: 13,
+          right: 10,
+          width: 44,
+          height: 44,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
         accessibilityRole="button"
         accessibilityLabel="닫기"
       >
@@ -115,20 +140,47 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
         chips: marginHorizontal:23 추가 → left=43 (Figma 일치)
         소개글: marginHorizontal:12 추가 → left=32 (Figma 일치)
       */}
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 20 }}
+      >
         {/* personalCode — Figma: top:43, h:28, center, #B48247, 16px Medium */}
-        <Text style={{ textAlign: 'center', color: '#B48247', fontSize: 16, fontFamily: 'Pretendard-Medium', marginBottom: 4 }}>
+        <Text
+          style={{
+            textAlign: 'center',
+            color: '#B48247',
+            fontSize: 16,
+            fontFamily: 'Pretendard-Medium',
+            marginBottom: 4,
+          }}
+        >
           #{customerProfile.personalCode}
         </Text>
 
         {/* 닉네임 — Figma: top:75, h:28, center, #07091C, 18px ExtraBold */}
-        <Text style={{ textAlign: 'center', color: '#07091C', fontSize: 18, fontFamily: 'Pretendard-ExtraBold', marginBottom: 16 }}>
+        <Text
+          style={{
+            textAlign: 'center',
+            color: '#07091C',
+            fontSize: 18,
+            fontFamily: 'Pretendard-ExtraBold',
+            marginBottom: 16,
+          }}
+        >
           {customerProfile.nickname ?? customerProfile.name}
         </Text>
 
         {/* chips — Figma: top:117(1행), top:153(2행), left:43 → marginHorizontal:23 */}
         {chips.length > 0 && (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 8, marginHorizontal: 23 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: 8,
+              marginBottom: 8,
+              marginHorizontal: 23,
+            }}
+          >
             {chips.map((chip, i) => (
               <DarkChip key={i} label={chip} />
             ))}
@@ -150,16 +202,38 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
             marginHorizontal: 12,
           }}
         >
-          <Text style={{ color: '#1F2A43', fontSize: 12, fontFamily: 'Pretendard-Medium', lineHeight: 18 }}>
+          <Text
+            style={{
+              color: '#1F2A43',
+              fontSize: 12,
+              fontFamily: 'Pretendard-Medium',
+              lineHeight: 18,
+            }}
+          >
             {customerProfile.introduction ?? ''}
           </Text>
         </View>
 
         {/* 요청일시 — Figma: top:401, 소개글 하단(385)에서 16px */}
-        <Text style={{ textAlign: 'center', color: '#74768E', fontSize: 12, fontFamily: 'Pretendard-SemiBold' }}>
+        <Text
+          style={{
+            textAlign: 'center',
+            color: '#74768E',
+            fontSize: 12,
+            fontFamily: 'Pretendard-SemiBold',
+          }}
+        >
           요청일시
         </Text>
-        <Text style={{ textAlign: 'center', color: '#B48247', fontSize: 12, fontFamily: 'Pretendard-SemiBold', marginTop: 2 }}>
+        <Text
+          style={{
+            textAlign: 'center',
+            color: '#B48247',
+            fontSize: 12,
+            fontFamily: 'Pretendard-SemiBold',
+            marginTop: 2,
+          }}
+        >
           {formatDateTime(createdAt)}
         </Text>
       </ScrollView>

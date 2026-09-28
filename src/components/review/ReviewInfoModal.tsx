@@ -63,7 +63,7 @@ export function ReviewInfoModal({ visible, onClose }: Props) {
             }}
           >
             <Text
-              className="text-gray2 mb-3 text-small1"
+              className="mb-3 text-small1 text-gray2"
               style={{ fontFamily: 'Pretendard-Medium' }}
             >
               리뷰 관리 INFORMATION
@@ -71,15 +71,15 @@ export function ReviewInfoModal({ visible, onClose }: Props) {
 
             {/* Bullet list */}
             {INFO_ITEMS.slice(0, 3).map((item, i) => (
-              <View key={i} className="flex-row gap-1 mb-1">
+              <View key={i} className="mb-1 flex-row gap-1">
                 <Text
-                  className="text-gray2 text-small2"
+                  className="text-small2 text-gray2"
                   style={{ fontFamily: 'Pretendard-Medium', lineHeight: 16 }}
                 >
                   •
                 </Text>
                 <Text
-                  className="text-gray2 flex-1 text-small2"
+                  className="flex-1 text-small2 text-gray2"
                   style={{ fontFamily: 'Pretendard-Medium', lineHeight: 16 }}
                 >
                   {item}
@@ -90,13 +90,13 @@ export function ReviewInfoModal({ visible, onClose }: Props) {
             {/* Last bullet item with red emphasis */}
             <View className="flex-row gap-1">
               <Text
-                className="text-gray2 text-small2"
+                className="text-small2 text-gray2"
                 style={{ fontFamily: 'Pretendard-Medium', lineHeight: 16 }}
               >
                 •
               </Text>
               <Text
-                className="text-gray2 flex-1 text-small2"
+                className="flex-1 text-small2 text-gray2"
                 style={{ fontFamily: 'Pretendard-Medium', lineHeight: 16 }}
               >
                 {LAST_ITEM_MAIN}

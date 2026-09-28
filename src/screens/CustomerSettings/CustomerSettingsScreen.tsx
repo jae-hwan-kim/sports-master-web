@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { useCallback, useState } from 'react'
 import {
   FlatList,
@@ -101,10 +102,7 @@ export function CustomerSettingsScreen() {
   const renderViewGenderAgeChip = useCallback(
     ({ item }: { item: string }) => (
       <View className="mr-2 h-[34px] items-center justify-center rounded-full bg-[#1F2A43] px-4">
-        <Text
-          className="text-[13px] text-[#F2F2F2]"
-          style={{ fontFamily: 'Pretendard-Medium' }}
-        >
+        <Text className="text-[13px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
           {item}
         </Text>
       </View>
@@ -142,19 +140,14 @@ export function CustomerSettingsScreen() {
       return (
         <Pressable
           hitSlop={4}
-          onPress={() =>
-            setDraftGender(selected ? null : (item as '여성' | '남성'))
-          }
+          onPress={() => setDraftGender(selected ? null : (item as '여성' | '남성'))}
           className={`mr-2 h-[34px] min-w-[60px] items-center justify-center rounded-full px-4 ${
             selected ? 'bg-[#1F2A43]' : 'bg-[#A2A2A2]'
           }`}
           accessibilityRole="button"
           accessibilityLabel={item}
         >
-          <Text
-            className="text-[13px] text-[#F2F2F2]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[13px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
             {item}
           </Text>
         </Pressable>
@@ -190,10 +183,7 @@ export function CustomerSettingsScreen() {
     [draftAgeGroup]
   )
 
-  const viewGenderAgeChips = [
-    ...(gender ? [gender] : []),
-    ...(ageGroup ? [ageGroup] : []),
-  ]
+  const viewGenderAgeChips = [...(gender ? [gender] : []), ...(ageGroup ? [ageGroup] : [])]
 
   return (
     <KeyboardAvoidingView
@@ -276,10 +266,7 @@ export function CustomerSettingsScreen() {
           >
             닉네임
           </Text>
-          <Text
-            className="text-[13px] text-[#C6A75E]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[13px] text-[#C6A75E]" style={{ fontFamily: 'Pretendard-Medium' }}>
             #USER00001
           </Text>
         </View>
@@ -326,11 +313,7 @@ export function CustomerSettingsScreen() {
               </Text>
             </View>
           ) : (
-            <TextField
-              value={draftSport}
-              onChangeText={setDraftSport}
-              label="내가 즐기는 스포츠"
-            />
+            <TextField value={draftSport} onChangeText={setDraftSport} label="내가 즐기는 스포츠" />
           )}
         </View>
 
@@ -385,10 +368,7 @@ export function CustomerSettingsScreen() {
         {/* 탐색키워드 */}
         <View className="px-6 pb-6">
           <View className="mb-3 flex-row items-center gap-2">
-            <Text
-              className="text-[17px] text-[#07091C]"
-              style={{ fontFamily: 'Pretendard-Bold' }}
-            >
+            <Text className="text-[17px] text-[#07091C]" style={{ fontFamily: 'Pretendard-Bold' }}>
               탐색키워드
             </Text>
             {mode === 'edit' && (

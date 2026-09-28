@@ -1,16 +1,17 @@
 // src/screens/Onboarding/OnboardingScreen.tsx
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { moderateScale } from 'react-native-size-matters'
-import { Image } from 'expo-image'
 
+import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import { RootStackParamList } from '@/navigation/RootNavigator'
 import bgImage from '@/assets/icons/background.png'
 import logoImage from '@/assets/icons/logo.png'
+import { RootStackParamList } from '@/navigation/RootNavigator'
 
 export function OnboardingScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
@@ -53,7 +54,7 @@ export function OnboardingScreen() {
           급이 다른 자격,{'\n'}품격 있는 운동의 시작
         </Text>
         <Text
-          className="font-pretendard-regular mt-3 leading-[22px] text-gray2"
+          className="mt-3 font-pretendard-regular leading-[22px] text-gray2"
           style={{ fontSize: moderateScale(17) }}
         >
           물리치료사, 건강운동관리사 자격을 갖춘{'\n'}트레이닝 전문가와 기관을 탐색합니다
@@ -67,7 +68,10 @@ export function OnboardingScreen() {
             accessibilityLabel="로그인"
             className="flex-1 items-center justify-center rounded-lg bg-primary"
           >
-            <Text className="font-pretendard-medium text-white" style={{ fontSize: moderateScale(17) }}>
+            <Text
+              className="font-pretendard-medium text-white"
+              style={{ fontSize: moderateScale(17) }}
+            >
               로그인
             </Text>
           </Pressable>
@@ -78,7 +82,10 @@ export function OnboardingScreen() {
             accessibilityLabel="회원가입"
             className="ml-[26px] flex-1 items-center justify-center rounded-lg border border-[#4A5198] bg-[#102343]"
           >
-            <Text className="font-pretendard-medium text-white" style={{ fontSize: moderateScale(17) }}>
+            <Text
+              className="font-pretendard-medium text-white"
+              style={{ fontSize: moderateScale(17) }}
+            >
               회원가입
             </Text>
           </Pressable>

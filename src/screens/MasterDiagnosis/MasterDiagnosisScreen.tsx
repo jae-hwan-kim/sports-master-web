@@ -3,22 +3,36 @@ import { ActivityIndicator, FlatList, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
+import LogoSvg from '@/assets/icons/logo.svg'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { DiagnosisRequestModal } from '@/components/DiagnosisRequestModal'
 import { useDeleteDiagnosisRequest } from '@/hooks/useDeleteDiagnosisRequest'
 import { useIncomingDiagnosisRequests } from '@/hooks/useIncomingDiagnosisRequests'
 import { useMarkDiagnosisViewed } from '@/hooks/useMarkDiagnosisViewed'
-import LogoSvg from '@/assets/icons/logo.svg'
 
 function EmptyState() {
   return (
     <View style={{ flex: 1 }}>
       {/* 텍스트: 패널 내 상대 위치 기준 약 36% 지점 (Figma top:414, 패널top:178, 패널h:696) */}
       <View style={{ paddingTop: '36%', alignItems: 'center', gap: 12 }}>
-        <Text style={{ color: '#74768E', fontSize: 18, fontFamily: 'Pretendard-ExtraBold', textAlign: 'center' }}>
+        <Text
+          style={{
+            color: '#74768E',
+            fontSize: 18,
+            fontFamily: 'Pretendard-ExtraBold',
+            textAlign: 'center',
+          }}
+        >
           아직 요청 고객이 없습니다
         </Text>
-        <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium', textAlign: 'center' }}>
+        <Text
+          style={{
+            color: '#74768E',
+            fontSize: 13,
+            fontFamily: 'Pretendard-Medium',
+            textAlign: 'center',
+          }}
+        >
           Tip. 리뷰로 점수를 높여 진단요청 확률을 높여봅시다!
         </Text>
       </View>
@@ -58,7 +72,15 @@ export function MasterDiagnosisScreen() {
         <Text style={{ color: '#07091C', fontSize: 28, fontFamily: 'Pretendard-ExtraBold' }}>
           진단요청
         </Text>
-        <Text style={{ color: '#74768E', fontSize: 13, fontFamily: 'Pretendard-Medium', marginTop: 4, lineHeight: 20 }}>
+        <Text
+          style={{
+            color: '#74768E',
+            fontSize: 13,
+            fontFamily: 'Pretendard-Medium',
+            marginTop: 4,
+            lineHeight: 20,
+          }}
+        >
           {'먼저 요청한 순으로 보여지며,\n프로필을 눌러 세부 사항을 확인할 수 있습니다.'}
         </Text>
       </View>

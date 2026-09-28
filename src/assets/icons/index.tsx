@@ -115,4 +115,3 @@ export function EditIcon({ size = 24, ...rest }: IconProps) {
 export function ProfilePersonIcon({ size = 54, ...rest }: IconProps) {
   return <ProfilePersonSvg width={size} height={(size * 104) / 88} {...rest} />
 }
-

@@ -1,9 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { useState } from 'react'
 import { Pressable, ScrollView, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import { ArrowNextIcon } from '@/assets/icons'
@@ -161,7 +163,15 @@ function ProfileField({
       hitSlop={8}
       onPress={onPress}
       className="flex-row items-center justify-between px-6"
-      style={{ height: 84, backgroundColor: '#F2F2F2', shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 2, shadowOffset: { width: 0, height: 2 }, elevation: 2 }}
+      style={{
+        height: 84,
+        backgroundColor: '#F2F2F2',
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        shadowOffset: { width: 0, height: 2 },
+        elevation: 2,
+      }}
     >
       <View className="gap-1">
         <Text className="text-[16px] font-medium text-gray2">{label}</Text>

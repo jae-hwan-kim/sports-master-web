@@ -1,10 +1,12 @@
-import { useQuery } from '@tanstack/react-query'
-import { Image } from 'expo-image'
-
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { FlatList, Linking, Pressable, ScrollView, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { Image } from 'expo-image'
+
+import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import { ArrowBackIcon } from '@/assets/icons'
@@ -48,21 +50,14 @@ async function fetchMyCertifications(): Promise<CertificationResponseDto[]> {
 
 function SectionLabel({ label }: { label: string }) {
   return (
-    <Text
-      className="text-popup-md text-gray3 mb-3"
-      style={{ fontFamily: 'Pretendard-SemiBold' }}
-    >
+    <Text className="mb-3 text-popup-md text-gray3" style={{ fontFamily: 'Pretendard-SemiBold' }}>
       {label}
     </Text>
   )
 }
 
 function ReadonlyBox({ children }: { children: React.ReactNode }) {
-  return (
-    <View className="bg-[#F2F2F2] rounded-[4px] px-[13px] py-[15px]">
-      {children}
-    </View>
-  )
+  return <View className="rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]">{children}</View>
 }
 
 function ReadonlyTextRow({ text }: { text: string }) {
@@ -85,7 +80,7 @@ function CertFileRow({ url }: { url: string }) {
     <ReadonlyBox>
       <View className="flex-row items-center justify-between">
         <Text
-          className="flex-1 text-small1 text-gray3 mr-3"
+          className="mr-3 flex-1 text-small1 text-gray3"
           style={{ fontFamily: 'Pretendard-Medium' }}
           numberOfLines={1}
         >
@@ -96,12 +91,9 @@ function CertFileRow({ url }: { url: string }) {
           accessibilityRole="button"
           accessibilityLabel="이미지확인"
           onPress={() => Linking.openURL(url)}
-          className="bg-[#C6A75E] rounded-[4px] px-3 py-1"
+          className="rounded-[4px] bg-[#C6A75E] px-3 py-1"
         >
-          <Text
-            className="text-[12px] text-[#F2F2F2]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[12px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
             이미지확인
           </Text>
         </Pressable>
@@ -125,9 +117,7 @@ export function MasterDetailProfileScreen() {
   })
 
   // careerText 불릿 아이템
-  const careerItems = profile?.careerText
-    ? profile.careerText.split('\n').filter(Boolean)
-    : []
+  const careerItems = profile?.careerText ? profile.careerText.split('\n').filter(Boolean) : []
 
   // 증명서 파일 URL 목록 (flatten)
   const certFileUrls: string[] = (certifications ?? []).flatMap((c) => c.fileUrls)
@@ -164,11 +154,8 @@ export function MasterDetailProfileScreen() {
         contentContainerStyle={{ paddingBottom: 40 }}
       >
         {/* 타이틀 영역 */}
-        <View className="px-[26px] pt-[22px] pb-6">
-          <Text
-            className="text-title text-black"
-            style={{ fontFamily: 'Pretendard-ExtraBold' }}
-          >
+        <View className="px-[26px] pb-6 pt-[22px]">
+          <Text className="text-title text-black" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
             상세프로필
           </Text>
           <Text
@@ -187,8 +174,7 @@ export function MasterDetailProfileScreen() {
         )}
 
         {/* ── 섹션들 ── */}
-        <View className="px-[26px] gap-y-8">
-
+        <View className="gap-y-8 px-[26px]">
           {/* 지역 */}
           <View>
             <SectionLabel label="지역" />
@@ -237,10 +223,7 @@ export function MasterDetailProfileScreen() {
                 scrollEnabled
               />
             ) : (
-              <Text
-                className="text-small1 text-gray2"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
+              <Text className="text-small1 text-gray2" style={{ fontFamily: 'Pretendard-Medium' }}>
                 키워드 없음
               </Text>
             )}
@@ -300,13 +283,13 @@ export function MasterDetailProfileScreen() {
                   renderItem={({ item }) => (
                     <View className="flex-row items-start">
                       <Text
-                        className="text-small1 text-gray3 mr-2"
+                        className="mr-2 text-small1 text-gray3"
                         style={{ fontFamily: 'Pretendard-Medium' }}
                       >
                         {'•'}
                       </Text>
                       <Text
-                        className="flex-1 text-small1 text-gray3 leading-5"
+                        className="flex-1 text-small1 leading-5 text-gray3"
                         style={{ fontFamily: 'Pretendard-Medium' }}
                       >
                         {item}
@@ -340,7 +323,6 @@ export function MasterDetailProfileScreen() {
               <ReadonlyTextRow text="등록된 증명서 없음" />
             )}
           </View>
-
         </View>
       </ScrollView>
     </View>

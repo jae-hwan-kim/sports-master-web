@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react'
-
-import * as Sentry from '@sentry/react-native'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import * as Sentry from '@sentry/react-native'
+
+import { useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import {
   Alert,
@@ -32,10 +32,10 @@ import { useLogin } from '@/hooks/useLogin'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 import {
+  type LoginFormValues,
   extractApiErrorMessage,
   isInvalidCredentialsError,
   loginSchema,
-  type LoginFormValues,
 } from '@/utils/loginValidation'
 import { navigateAfterAuth } from '@/utils/socialAuthNavigation'
 
@@ -326,9 +326,7 @@ export function LoginScreen() {
             hitSlop={8}
             accessibilityRole="button"
             accessibilityLabel="비밀번호 찾기"
-            onPress={() =>
-              Alert.alert('비밀번호 찾기', '현재 준비 중인 기능입니다.')
-            }
+            onPress={() => Alert.alert('비밀번호 찾기', '현재 준비 중인 기능입니다.')}
           >
             <Text className="text-[13px] font-medium text-gray2">비밀번호 찾기</Text>
           </Pressable>
@@ -385,7 +383,7 @@ export function LoginScreen() {
 
         {/* 약관 안내 */}
         <View className="mt-[108px] items-center gap-1">
-          <Text className="text-center text-[10px] font-normal tracking-[0.2px] leading-[1.45] text-gray2">
+          <Text className="text-center text-[10px] font-normal leading-[1.45] tracking-[0.2px] text-gray2">
             로그인시 아래 내용에 동의하는 것으로 간주됩니다
           </Text>
           <View className="flex-row items-center gap-[27px]">
@@ -393,11 +391,9 @@ export function LoginScreen() {
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel="개인정보 처리방침"
-              onPress={() =>
-                Alert.alert('개인정보 처리방침', '서비스 준비 중입니다.')
-              }
+              onPress={() => Alert.alert('개인정보 처리방침', '서비스 준비 중입니다.')}
             >
-              <Text className="text-[10px] font-normal tracking-[0.2px] leading-[1.45] text-gray2 underline">
+              <Text className="text-[10px] font-normal leading-[1.45] tracking-[0.2px] text-gray2 underline">
                 개인정보 처리방침
               </Text>
             </Pressable>
@@ -405,11 +401,9 @@ export function LoginScreen() {
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel="이용약관"
-              onPress={() =>
-                Alert.alert('이용약관', '서비스 준비 중입니다.')
-              }
+              onPress={() => Alert.alert('이용약관', '서비스 준비 중입니다.')}
             >
-              <Text className="text-[10px] font-normal tracking-[0.2px] leading-[1.45] text-gray2 underline">
+              <Text className="text-[10px] font-normal leading-[1.45] tracking-[0.2px] text-gray2 underline">
                 이용약관
               </Text>
             </Pressable>

@@ -35,9 +35,9 @@ export function ConfirmDialog({
     >
       <View className="flex-1 items-center justify-center bg-black/50 px-6">
         <View className="w-full max-w-[340px] items-center rounded-2xl bg-[#FFFFFF] px-5 pb-6 pt-11">
-          <Text className="text-center font-semibold text-black text-popup-lg">{title}</Text>
+          <Text className="text-center text-popup-lg font-semibold text-black">{title}</Text>
           <Text
-            className={`mt-4 text-center font-medium text-small3 ${isError ? 'text-[#ea4335]' : 'text-gray2'}`}
+            className={`mt-4 text-center text-small3 font-medium ${isError ? 'text-[#ea4335]' : 'text-gray2'}`}
           >
             {description}
           </Text>
@@ -53,7 +53,7 @@ export function ConfirmDialog({
               {confirmLoading ? (
                 <ActivityIndicator color="#FFFFFF" />
               ) : (
-                <Text className="font-medium text-white text-main">{confirmLabel}</Text>
+                <Text className="text-main font-medium text-white">{confirmLabel}</Text>
               )}
             </Pressable>
             {onCancel ? (
@@ -65,7 +65,7 @@ export function ConfirmDialog({
                   confirmLoading ? 'opacity-50' : 'opacity-100'
                 }`}
               >
-                <Text className="font-medium text-white text-main">{cancelLabel}</Text>
+                <Text className="text-main font-medium text-white">{cancelLabel}</Text>
               </Pressable>
             ) : null}
           </View>

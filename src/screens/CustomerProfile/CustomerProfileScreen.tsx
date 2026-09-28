@@ -1,6 +1,7 @@
 // src/screens/CustomerProfile/CustomerProfileScreen.tsx
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { Pressable, ScrollView, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -28,7 +29,7 @@ const MOCK_CUSTOMER_PROFILE: CustomerProfile = {
 function Avatar() {
   return (
     <View
-      className="overflow-hidden items-center justify-center rounded-full"
+      className="items-center justify-center overflow-hidden rounded-full"
       style={{ width: 60, height: 60, backgroundColor: '#C6A75E' }}
     >
       {/* size=36 → 높이는 비율 유지(≈43) — 원은 overflow-hidden이 잘라줌 */}
@@ -53,10 +54,7 @@ function MenuRow({ label, onPress, showTopDivider = false }: MenuRowProps) {
         className="flex-row items-center justify-between px-4"
         style={{ height: 50, backgroundColor: '#FFFFFF', borderRadius: 8 }}
       >
-        <Text
-          className="text-[14px]"
-          style={{ fontFamily: 'Pretendard-Medium', color: '#1F2A43' }}
-        >
+        <Text className="text-[14px]" style={{ fontFamily: 'Pretendard-Medium', color: '#1F2A43' }}>
           {label}
         </Text>
         <ArrowNextIcon size={20} color="#1F2A43" />
@@ -74,7 +72,7 @@ function Section({ title, children }: SectionProps) {
   return (
     <View className="mx-4 mt-6">
       <Text
-        className="text-[16px] mb-2"
+        className="mb-2 text-[16px]"
         style={{ fontFamily: 'Pretendard-SemiBold', color: '#1F2A43' }}
       >
         {title}
@@ -111,9 +109,12 @@ export function CustomerProfileScreen() {
 
   return (
     <View className="flex-1 bg-[#F2F2F2]" style={{ paddingTop: insets.top }}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 32 }}
+      >
         {/* Header */}
-        <View className="px-[26px] mt-6">
+        <View className="mt-6 px-[26px]">
           <Text
             className="text-[28px]"
             style={{ fontFamily: 'Pretendard-ExtraBold', color: '#07091C' }}
@@ -121,7 +122,7 @@ export function CustomerProfileScreen() {
             프로필
           </Text>
           <Text
-            className="text-[13px] mt-[10px]"
+            className="mt-[10px] text-[13px]"
             style={{ fontFamily: 'Pretendard-Medium', color: '#74768E' }}
           >
             내 정보와 리뷰를 관리합니다
@@ -131,14 +132,14 @@ export function CustomerProfileScreen() {
         {/* Profile Card */}
         {profile && (
           <View
-            className="mx-4 mt-6 rounded-[12px] p-4 flex-row items-center"
+            className="mx-4 mt-6 flex-row items-center rounded-[12px] p-4"
             style={{ backgroundColor: '#FFFFFF' }}
           >
             {/* Avatar */}
             <Avatar />
 
             {/* Nickname + Tag */}
-            <View className="flex-1 ml-3 justify-center">
+            <View className="ml-3 flex-1 justify-center">
               <Text
                 className="text-[16px]"
                 style={{ fontFamily: 'Pretendard-SemiBold', color: '#1F2A43' }}
@@ -146,7 +147,7 @@ export function CustomerProfileScreen() {
                 {profile.nickname}
               </Text>
               <Text
-                className="text-[12px] mt-[2px]"
+                className="mt-[2px] text-[12px]"
                 style={{ fontFamily: 'Pretendard-Medium', color: '#C6A75E' }}
               >
                 {profile.userTag}
@@ -157,7 +158,7 @@ export function CustomerProfileScreen() {
             <Pressable
               hitSlop={8}
               onPress={handleAccountSettings}
-              className="rounded-full items-center justify-center px-3"
+              className="items-center justify-center rounded-full px-3"
               style={{ height: 32, backgroundColor: '#C6A75E' }}
             >
               <Text

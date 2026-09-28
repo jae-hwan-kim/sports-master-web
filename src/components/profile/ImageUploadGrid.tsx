@@ -1,7 +1,8 @@
-import * as ImagePicker from 'expo-image-picker'
-import { Image } from 'expo-image'
-import { FlatList, Pressable, Text, View } from 'react-native'
 import { useCallback } from 'react'
+import { FlatList, Pressable, Text, View } from 'react-native'
+
+import { Image } from 'expo-image'
+import * as ImagePicker from 'expo-image-picker'
 
 type Props = {
   images: string[]
@@ -64,11 +65,10 @@ export function ImageUploadGrid({ images, onChange, maxCount = 5 }: Props) {
               className="items-center justify-center rounded-lg border border-dashed border-gray1 bg-white"
               style={{ width: THUMBNAIL_SIZE, height: THUMBNAIL_SIZE }}
             >
-              <Text className="text-gray2" style={{ fontSize: 28 }}>+</Text>
-              <Text
-                className="text-gray2 text-small2"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
+              <Text className="text-gray2" style={{ fontSize: 28 }}>
+                +
+              </Text>
+              <Text className="text-small2 text-gray2" style={{ fontFamily: 'Pretendard-Medium' }}>
                 {images.length}/{maxCount}
               </Text>
             </Pressable>

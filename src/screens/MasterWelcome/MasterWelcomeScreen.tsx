@@ -2,14 +2,15 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { LinearGradient } from 'expo-linear-gradient'
 import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { moderateScale } from 'react-native-size-matters'
 
-import { RootStackParamList } from '@/navigation/RootNavigator'
+import { LinearGradient } from 'expo-linear-gradient'
+
 import { ArrowNextIcon } from '@/assets/icons'
 import bgImage from '@/assets/icons/background.png'
+import { RootStackParamList } from '@/navigation/RootNavigator'
 
 export function MasterWelcomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()

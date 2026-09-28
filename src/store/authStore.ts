@@ -5,7 +5,11 @@ import type { components } from '@/types/schema'
 type CurrentMode = components['schemas']['AuthUserDto']['currentMode']
 type SocialProvider = components['schemas']['AuthUserDto']['socialProvider']
 // 로그인/가입/구글 등 인증 응답에 공통으로 실린 유저 정보 중 라우팅 분기에 필요한 최소 부분만 사용
-type AuthUserInfo = { currentMode: CurrentMode; hasSelectedMode: boolean; socialProvider: SocialProvider }
+type AuthUserInfo = {
+  currentMode: CurrentMode
+  hasSelectedMode: boolean
+  socialProvider: SocialProvider
+}
 
 // TODO: 자동로그인 영속화를 위해 expo-secure-store 설치 후 persist 미들웨어 연동 필요
 // (현재는 앱 재시작 시 토큰이 사라짐 — AuthController_refresh 연동은 SecureStore 도입 이후 진행)

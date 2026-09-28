@@ -1,6 +1,7 @@
-import { Image } from 'expo-image'
-import { FlatList, Pressable, Text, View } from 'react-native'
 import { useState } from 'react'
+import { FlatList, Pressable, Text, View } from 'react-native'
+
+import { Image } from 'expo-image'
 
 import { Checkbox } from '@/components/Checkbox'
 import { StarRating } from '@/components/StarRating'
@@ -41,33 +42,30 @@ export function ReviewItem({ review, isDeleteMode, selected, onSelectChange }: P
       {/* Top row: avatar / nickname + rating / date / checkbox */}
       <View className="flex-row items-start">
         {/* Avatar */}
-        <View
-          className="rounded-full bg-gray1 overflow-hidden"
-          style={{ width: 36, height: 36 }}
-        >
+        <View className="overflow-hidden rounded-full bg-gray1" style={{ width: 36, height: 36 }}>
           {avatarUri ? (
-            <Image source={{ uri: avatarUri }} style={{ width: 36, height: 36 }} contentFit="cover" />
+            <Image
+              source={{ uri: avatarUri }}
+              style={{ width: 36, height: 36 }}
+              contentFit="cover"
+            />
           ) : (
             <View className="flex-1 items-center justify-center">
-              <Text className="text-gray2" style={{ fontSize: 16 }}>👤</Text>
+              <Text className="text-gray2" style={{ fontSize: 16 }}>
+                👤
+              </Text>
             </View>
           )}
         </View>
 
         {/* Nickname + rating + date */}
         <View className="ml-2 flex-1">
-          <Text
-            className="text-gray2 text-small2"
-            style={{ fontFamily: 'Pretendard-SemiBold' }}
-          >
+          <Text className="text-small2 text-gray2" style={{ fontFamily: 'Pretendard-SemiBold' }}>
             {nickname}
           </Text>
           <View className="mt-1 flex-row items-center gap-2">
             <StarRating value={rating} size={12} renderStar={StarIcon} />
-            <Text
-              className="text-gray2 text-small2"
-              style={{ fontFamily: 'Pretendard-SemiBold' }}
-            >
+            <Text className="text-small2 text-gray2" style={{ fontFamily: 'Pretendard-SemiBold' }}>
               {date}
             </Text>
           </View>
@@ -82,7 +80,7 @@ export function ReviewItem({ review, isDeleteMode, selected, onSelectChange }: P
             style={{ width: 44, height: 44 }}
           >
             <View
-              className={`rounded border items-center justify-center ${
+              className={`items-center justify-center rounded border ${
                 selected ? 'border-secondary bg-secondary' : 'border-gray3 bg-transparent'
               }`}
               style={{ width: 18, height: 18 }}
@@ -118,7 +116,7 @@ export function ReviewItem({ review, isDeleteMode, selected, onSelectChange }: P
       {/* Review text */}
       <View className="mt-2 pr-9">
         <Text
-          className="text-gray3 text-small2"
+          className="text-small2 text-gray3"
           style={{ fontFamily: 'Pretendard-Medium', lineHeight: 20 }}
           numberOfLines={expanded ? undefined : COLLAPSED_LINES}
         >

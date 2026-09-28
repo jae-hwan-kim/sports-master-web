@@ -1,6 +1,7 @@
+import { Platform, Pressable, Image as RNImage, Text, View } from 'react-native'
+
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Image as RNImage, Platform, Pressable, Text, View } from 'react-native'
 
 import { StarMedalIcon } from '@/assets/icons'
 import ProfilePersonSvg from '@/assets/icons/profile-person.svg'
@@ -29,7 +30,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
 
   return (
     <View
-      className="rounded-2xl overflow-hidden"
+      className="overflow-hidden rounded-2xl"
       style={{
         backgroundColor: 'rgba(255,255,255,0.3)',
         ...Platform.select({
@@ -45,7 +46,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
     >
       {/* Image frame with padding */}
       <View className="p-[13px] pt-[11px]">
-        <View className="rounded-xl overflow-hidden" style={{ height: 470 }}>
+        <View className="overflow-hidden rounded-xl" style={{ height: 470 }}>
           {/* Cover image */}
           {coverUri ? (
             <>
@@ -62,7 +63,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
               />
             </>
           ) : (
-            <View className="absolute top-0 left-0 right-0 bottom-0 bg-gray1 items-center justify-center">
+            <View className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center bg-gray1">
               <ProfilePersonSvg width={108} height={128} />
             </View>
           )}
@@ -71,16 +72,16 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
           <RNImage
             // eslint-disable-next-line @typescript-eslint/no-require-imports
             source={require('@/assets/icons/logo.png')}
-            className="absolute top-3 right-3"
+            className="absolute right-3 top-3"
             style={{ width: 52, height: 52 }}
             resizeMode="contain"
           />
 
-{/* Text overlay */}
+          {/* Text overlay */}
           <View className="absolute bottom-[96px] left-6 right-6">
             <View className="flex-row items-center gap-1">
               <Text
-                className="text-black text-[20px]"
+                className="text-[20px] text-black"
                 style={{ fontFamily: 'Pretendard-SemiBold' }}
                 numberOfLines={1}
               >
@@ -89,7 +90,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
               <StarMedalIcon size={20} />
             </View>
             <Text
-              className="text-gray3 text-small1 mt-[12px]"
+              className="mt-[12px] text-small1 text-gray3"
               style={{ fontFamily: 'Pretendard-Medium' }}
               numberOfLines={2}
             >
@@ -107,19 +108,16 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
             {/* 리뷰 */}
             <View className="flex-1 items-center justify-center gap-2">
               <Text
-                className="text-gray3 text-[18px] leading-5"
+                className="text-[18px] leading-5 text-gray3"
                 style={{ fontFamily: 'Pretendard-ExtraBold' }}
               >
                 {totalReviewCount != null
-                ? totalReviewCount >= 999
-                  ? '999+'
-                  : String(totalReviewCount)
-                : '-'}
+                  ? totalReviewCount >= 999
+                    ? '999+'
+                    : String(totalReviewCount)
+                  : '-'}
               </Text>
-              <Text
-                className="text-gray3 text-small1"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
+              <Text className="text-small1 text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 리뷰
               </Text>
             </View>
@@ -130,15 +128,12 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
             {/* 평점 */}
             <View className="flex-1 items-center justify-center gap-2">
               <Text
-                className="text-gray3 text-[18px] leading-5"
+                className="text-[18px] leading-5 text-gray3"
                 style={{ fontFamily: 'Pretendard-ExtraBold' }}
               >
                 {averageRating != null ? averageRating.toFixed(1) : '-'}
               </Text>
-              <Text
-                className="text-gray3 text-small1"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
+              <Text className="text-small1 text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 평점
               </Text>
             </View>
@@ -149,15 +144,12 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
             {/* 상위% */}
             <View className="flex-1 items-center justify-center gap-2">
               <Text
-                className="text-gray3 text-[18px] leading-5"
+                className="text-[18px] leading-5 text-gray3"
                 style={{ fontFamily: 'Pretendard-ExtraBold' }}
               >
                 {topPercentile != null ? `${topPercentile}%` : '-'}
               </Text>
-              <Text
-                className="text-gray3 text-small1"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
+              <Text className="text-small1 text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 상위
               </Text>
             </View>

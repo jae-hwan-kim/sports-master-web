@@ -1,11 +1,12 @@
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { useState } from 'react'
+import { Linking, Platform, Pressable, ScrollView, Text, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { Linking, Platform, Pressable, ScrollView, Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { AddCircleIcon } from '@/assets/icons'
 import { Button } from '@/components/Button'
@@ -142,7 +143,9 @@ export function MasterVerificationScreen() {
         keyboardShouldPersistTaps="handled"
       >
         {/* Title — Figma: 헤더(상단여백54+네비바56=110) 아래 34px 고정 */}
-        <Text className="mt-[34px] text-[28px] font-pretendard-extrabold text-black">명인 인증</Text>
+        <Text className="mt-[34px] font-pretendard-extrabold text-[28px] text-black">
+          명인 인증
+        </Text>
         <Text className="mt-2 text-[13px] font-medium text-gray2">
           물리치료사, 건강운동관리사 자격증 이미지 첨부
         </Text>

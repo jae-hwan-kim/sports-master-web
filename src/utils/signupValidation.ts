@@ -7,17 +7,11 @@ export const signUpSchema = z.object({
     .min(1, '닉네임을 입력해주세요')
     .max(8, '띄어쓰기 없이 한글, 영문 8자 이내입니다')
     .regex(/^\S+$/, '띄어쓰기 없이 한글, 영문 8자 이내입니다'),
-  email: z
-    .string()
-    .min(1, '이메일을 입력해주세요')
-    .email('올바르지 않은 이메일 형식입니다'),
+  email: z.string().min(1, '이메일을 입력해주세요').email('올바르지 않은 이메일 형식입니다'),
   password: z
     .string()
     .min(1, '비밀번호를 입력해주세요')
-    .regex(
-      /^(?=.*[a-z])(?=.*[0-9]).{8,12}$/,
-      '비밀번호는 소문자, 숫자를 포함한 8~12자입니다'
-    ),
+    .regex(/^(?=.*[a-z])(?=.*[0-9]).{8,12}$/, '비밀번호는 소문자, 숫자를 포함한 8~12자입니다'),
 })
 
 export type SignUpFormValues = z.infer<typeof signUpSchema>
