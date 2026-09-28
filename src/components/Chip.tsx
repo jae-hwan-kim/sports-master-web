@@ -1,5 +1,5 @@
 import { Pressable, Text } from 'react-native'
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
+import { moderateScale } from 'react-native-size-matters'
 
 type ChipProps = {
   label: string
@@ -15,10 +15,9 @@ export function Chip({ label, selected = false, onPress, variant = 'primary' }: 
     <Pressable
       hitSlop={8}
       onPress={onPress}
-      className={`items-center justify-center rounded-full border ${
+      className={`h-[24px] items-center justify-center rounded-full border px-4 ${
         selected ? selectedBg : 'border-gray1 bg-white'
       }`}
-      style={{ height: verticalScale(36), paddingHorizontal: scale(16) }}
     >
       <Text
         className={`font-medium ${selected ? 'text-white' : 'text-gray3'}`}

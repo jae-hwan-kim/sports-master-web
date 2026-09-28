@@ -1,81 +1,64 @@
-import { FlatList, Pressable, Text, TextInput, View } from 'react-native'
-import { useRef, useState } from 'react'
-
-import { Chip } from '@/components/Chip'
+import { FlatList, Pressable, Text } from 'react-native'
+import { useCallback } from 'react'
 
 type Props = {
   keywords: string[]
   onChange: (keywords: string[]) => void
 }
 
+const PRESET_KEYWORDS = [
+  '컨디셔닝', '재활운동', '체형교정', '기능성운동', '선수트레이닝',
+  '아동발달', '방문재활', '1:1 지도', '필라테스', '특수치료',
+  '체형분석', '식단관리', '시니어운동', '수술재활', '원장직강',
+]
+
 export function KeywordChipInput({ keywords, onChange }: Props) {
-  const [inputValue, setInputValue] = useState('')
-  const inputRef = useRef<TextInput>(null)
+  const toggle = useCallback(
+    (keyword: string) => {
+      if (keywords.includes(keyword)) {
+        onChange(keywords.filter((k) => k !== keyword))
+      } else if (keywords.length < 3) {
+        onChange([...keywords, keyword])
+      }
+    },
+    [keywords, onChange]
+  )
 
-  const addKeyword = () => {
-    const trimmed = inputValue.trim()
-    if (!trimmed || keywords.includes(trimmed)) {
-      setInputValue('')
-      return
-    }
-    onChange([...keywords, trimmed])
-    setInputValue('')
-  }
-
-  const removeKeyword = (target: string) => {
-    onChange(keywords.filter((k) => k !== target))
-  }
-
-  return (
-    <View className="gap-2">
-      {/* Input row */}
-      <View className="flex-row items-center gap-2">
-        <TextInput
-          ref={inputRef}
-          className="h-[44px] flex-1 rounded-lg border border-gray1 bg-white px-3 text-gray3 text-small1"
-          style={{ fontFamily: 'Pretendard-Medium' }}
-          value={inputValue}
-          onChangeText={setInputValue}
-          placeholder="키워드 입력 후 추가"
-          placeholderTextColor="#74768E"
-          returnKeyType="done"
-          onSubmitEditing={addKeyword}
-        />
+  const renderItem = useCallback(
+    ({ item }: { item: string }) => {
+      const selected = keywords.includes(item)
+      return (
         <Pressable
-          hitSlop={8}
-          onPress={addKeyword}
-          className="h-[44px] items-center justify-center rounded-lg bg-primary px-4"
+          hitSlop={4}
+          onPress={() => toggle(item)}
+          className={`m-1 flex-1 h-[34px] items-center justify-center rounded-[82px] border px-2 ${
+            selected
+              ? 'bg-[#1F2A43] border-[#1F2A43]'
+              : 'bg-[#F2F2F2] border-[#74768E]'
+          }`}
+          accessibilityRole="button"
+          accessibilityLabel={item}
         >
-          <Text className="text-white text-small1" style={{ fontFamily: 'Pretendard-Medium' }}>
-            추가
+          <Text
+            className={`text-[13px] ${selected ? 'text-[#F2F2F2]' : 'text-[#07091C]'}`}
+            style={{ fontFamily: 'Pretendard-Medium' }}
+            numberOfLines={1}
+          >
+            {item}
           </Text>
         </Pressable>
-      </View>
+      )
+    },
+    [keywords, toggle]
+  )
 
-      {/* Chip list */}
-      {keywords.length > 0 && (
-        <FlatList
-          data={keywords}
-          keyExtractor={(item, index) => `${item}-${index}`}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ gap: 8, paddingVertical: 4 }}
-          renderItem={({ item }) => (
-            <View className="flex-row items-center gap-1">
-              <Chip label={item} selected />
-              <Pressable
-                hitSlop={8}
-                onPress={() => removeKeyword(item)}
-                className="h-5 w-5 items-center justify-center rounded-full bg-gray2"
-              >
-                <Text className="text-white" style={{ fontSize: 10 }}>
-                  ✕
-                </Text>
-              </Pressable>
-            </View>
-          )}
-        />
-      )}
-    </View>
+  return (
+    <FlatList
+      data={PRESET_KEYWORDS}
+      keyExtractor={(item) => item}
+      numColumns={3}
+      scrollEnabled={false}
+      renderItem={renderItem}
+    />
   )
 }

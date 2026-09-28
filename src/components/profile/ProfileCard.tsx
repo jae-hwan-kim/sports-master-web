@@ -1,4 +1,5 @@
 import { Image } from 'expo-image'
+import { LinearGradient } from 'expo-linear-gradient'
 import { Image as RNImage, Platform, Pressable, Text, View } from 'react-native'
 
 import { StarMedalIcon } from '@/assets/icons'
@@ -47,11 +48,19 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
         <View className="rounded-xl overflow-hidden" style={{ height: 470 }}>
           {/* Cover image */}
           {coverUri ? (
-            <Image
-              source={{ uri: coverUri }}
-              style={{ width: '100%', height: '100%' }}
-              contentFit="cover"
-            />
+            <>
+              <Image
+                source={{ uri: coverUri }}
+                style={{ width: '100%', height: '100%' }}
+                contentFit="cover"
+              />
+              <LinearGradient
+                colors={['transparent', 'rgba(242,242,242,0.6)', 'rgba(242,242,242,0.9)']}
+                locations={[0, 0.16, 0.59]}
+                className="absolute bottom-0 left-0 right-0"
+                style={{ height: 220 }}
+              />
+            </>
           ) : (
             <View className="absolute top-0 left-0 right-0 bottom-0 bg-gray1 items-center justify-center">
               <ProfilePersonSvg width={108} height={128} />
@@ -77,6 +86,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
               >
                 {displayName}
               </Text>
+              <StarMedalIcon size={20} />
             </View>
             <Text
               className="text-gray3 text-small1 mt-[12px]"
