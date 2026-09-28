@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import { CustomerTabNavigator } from '@/navigation/CustomerTabNavigator'
 import { MasterTabNavigator } from '@/navigation/MasterTabNavigator'
-import { CustomerHomeScreen } from '@/screens/CustomerHome/CustomerHomeScreen'
+import { CustomerSettingsScreen } from '@/screens/CustomerSettings/CustomerSettingsScreen'
 import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
 import { LoginScreen } from '@/screens/Login/LoginScreen'
 import { MasterMessageGuideScreen } from '@/screens/MasterMessageGuide/MasterMessageGuideScreen'
@@ -25,6 +26,7 @@ export type RootStackParamList = {
   MasterWelcome: undefined
   MasterHome: undefined
   CustomerHome: undefined
+  CustomerSettings: undefined
   MasterSettings: undefined
   MasterProfileEdit: undefined
   MasterDetailProfileEdit: undefined
@@ -45,7 +47,8 @@ export function RootNavigator() {
       <Stack.Screen name="CustomerWelcome" component={CustomerWelcomeScreen} />
       <Stack.Screen name="MasterWelcome" component={MasterWelcomeScreen} />
       <Stack.Screen name="MasterHome" component={MasterTabNavigator} />
-      <Stack.Screen name="CustomerHome" component={CustomerHomeScreen} />
+      <Stack.Screen name="CustomerHome" component={CustomerTabNavigator} />
+      <Stack.Screen name="CustomerSettings" component={CustomerSettingsScreen} />
       <Stack.Screen name="MasterSettings" component={MasterSettingsScreen} />
       <Stack.Screen name="MasterProfileEdit" component={MasterProfileEditScreen} />
       <Stack.Screen name="MasterDetailProfileEdit" component={MasterDetailProfileEditScreen} />

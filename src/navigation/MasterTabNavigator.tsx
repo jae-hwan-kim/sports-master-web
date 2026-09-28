@@ -29,7 +29,7 @@ const TAB_LABELS: Record<keyof MasterTabParamList, string> = {
 
 function CustomTabBar({
   state,
-  descriptors,
+  descriptors: _descriptors,
   navigation,
 }: Parameters<NonNullable<React.ComponentProps<typeof Tab.Navigator>['tabBar']>>[0]) {
   const insets = useSafeAreaInsets()
