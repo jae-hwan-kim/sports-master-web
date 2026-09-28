@@ -19,21 +19,12 @@ const GOOGLE_URL_SCHEME = GOOGLE_CLIENT_ID
 
 const discovery = { authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth', tokenEndpoint: 'https://oauth2.googleapis.com/token' }
 
- 
-console.log('[google-auth] module load', Platform.OS, {
-  iosClientId: GOOGLE_IOS_CLIENT_ID,
-  androidClientId: GOOGLE_ANDROID_CLIENT_ID,
-  resolvedClientId: GOOGLE_CLIENT_ID,
-  scheme: GOOGLE_URL_SCHEME,
-})
 
 // 구글 로그인은 Authorization Code + PKCE 플로우로 code를 받은 뒤, 프론트에서 직접
 // 토큰 엔드포인트와 교환해 id_token을 얻는다(백엔드가 idToken을 검증하는 방식이라
 // 카카오처럼 code를 그대로 넘길 수 없음).
 export function useGoogleAuth() {
   const redirectUri = AuthSession.makeRedirectUri({ scheme: GOOGLE_URL_SCHEME })
-   
-  console.log('[google-auth] hook render', Platform.OS, { redirectUri })
   const [request, , promptAsync] = AuthSession.useAuthRequest(
     {
       clientId: GOOGLE_CLIENT_ID,
@@ -45,13 +36,11 @@ export function useGoogleAuth() {
   )
 
   const promptGoogle = async (): Promise<{ idToken: string } | null> => {
-     
-    console.log('[google-auth] promptGoogle called', { hasClientId: !!GOOGLE_CLIENT_ID, hasRequest: !!request })
     if (!GOOGLE_CLIENT_ID) {
       throw new Error('GOOGLE_CLIENT_ID_NOT_SET')
     }
     if (!request) {
-      return null
+      throw new Error('GOOGLE_REQUEST_NOT_INITIALIZED')
     }
 
     const result = await promptAsync()
