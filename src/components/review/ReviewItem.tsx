@@ -83,7 +83,7 @@ export function ReviewItem({ review, isDeleteMode, selected, onSelectChange }: P
           >
             <View
               className={`rounded border items-center justify-center ${
-                selected ? 'border-primary bg-primary' : 'border-gray3 bg-transparent'
+                selected ? 'border-secondary bg-secondary' : 'border-gray3 bg-transparent'
               }`}
               style={{ width: 18, height: 18 }}
             >

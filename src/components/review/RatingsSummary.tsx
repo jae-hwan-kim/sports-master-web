@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 
 import { StarRating } from '@/components/StarRating'
 
@@ -54,41 +54,46 @@ export function RatingsSummary({ avg, distribution, totalCount }: Props) {
       <View className="bg-gray1 self-stretch" style={{ width: 1, marginVertical: 12 }} />
 
       {/* Right: distribution bars */}
-      <View className="flex-1 justify-center gap-[7px] px-[23px]">
-        {STAR_LABELS.map((label, i) => {
-          const count = distribution[i]
-          const barWidth = (count / maxCount) * TRACK_WIDTH
-
-          return (
-            <View key={label} className="flex-row items-center">
-              <Text
-                className="text-small2 w-7 text-[#A2A2A2]"
-                style={{ fontFamily: 'Pretendard-SemiBold' }}
-              >
-                {label}
-              </Text>
-              {/* Track */}
-              <View
-                className="rounded-full bg-gray1"
-                style={{ width: TRACK_WIDTH, height: 4 }}
-              >
-                {/* Fill */}
-                {barWidth > 0 && (
-                  <View
-                    className="absolute left-0 top-0 rounded-full h-full bg-[#A2A2A2]"
-                    style={{ width: barWidth }}
-                  />
-                )}
+      <View className="flex-1 justify-center px-[23px]">
+        <FlatList
+          data={STAR_LABELS}
+          keyExtractor={(item) => item}
+          scrollEnabled={false}
+          ItemSeparatorComponent={() => <View style={{ height: 7 }} />}
+          renderItem={({ item: label, index: i }) => {
+            const count = distribution[i]
+            const barWidth = (count / maxCount) * TRACK_WIDTH
+            return (
+              <View className="flex-row items-center">
+                <Text
+                  className={`text-small2 w-7 ${i === 0 ? 'text-[#C6A75E]' : 'text-[#A2A2A2]'}`}
+                  style={{ fontFamily: 'Pretendard-SemiBold' }}
+                >
+                  {label}
+                </Text>
+                {/* Track */}
+                <View
+                  className="rounded-full bg-gray1"
+                  style={{ width: TRACK_WIDTH, height: 4 }}
+                >
+                  {/* Fill */}
+                  {barWidth > 0 && (
+                    <View
+                      className="absolute left-0 top-0 rounded-full h-full bg-[#C6A75E]"
+                      style={{ width: barWidth }}
+                    />
+                  )}
+                </View>
+                <Text
+                  className={`text-small2 ml-[10px] ${i === 0 ? 'text-[#1F2A43]' : 'text-[#A2A2A2]'}`}
+                  style={{ fontFamily: 'Pretendard-SemiBold', minWidth: 24, textAlign: 'right' }}
+                >
+                  {count > 999 ? '999+' : String(count)}
+                </Text>
               </View>
-              <Text
-                className="text-small2 text-[#A2A2A2] ml-[10px]"
-                style={{ fontFamily: 'Pretendard-SemiBold', minWidth: 24, textAlign: 'right' }}
-              >
-                {count > 999 ? '999+' : String(count)}
-              </Text>
-            </View>
-          )
-        })}
+            )
+          }}
+        />
       </View>
     </View>
   )

@@ -4,6 +4,8 @@ import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useNavigation } from '@react-navigation/native'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import type { RootStackParamList } from '@/navigation/RootNavigator'
 
 import { ArrowBackIcon, LinkIcon } from '@/assets/icons'
 import InfoSvg from '@/assets/icons/info.svg'
@@ -41,8 +43,7 @@ function toReviewData(item: ReviewItemHook): ReviewData {
 
 export function MasterReviewScreen() {
   const insets = useSafeAreaInsets()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const nav = useNavigation<any>()
+  const nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
   const [activeSort, setActiveSort] = useState<ReviewSort>('latest')
   const [isDeleteMode, setIsDeleteMode] = useState(false)
@@ -84,8 +85,11 @@ export function MasterReviewScreen() {
       setIsDeleteMode(true)
     } else if (selectedIds.size > 0) {
       setDeleteDialogVisible(true)
+    } else {
+      // 선택 없을 때 → 삭제 모드 취소
+      setIsDeleteMode(false)
+      setSelectedIds(new Set())
     }
-    // 선택 없을 때는 동작 안함
   }, [isDeleteMode, selectedIds])
 
   const handleSelectChange = useCallback((id: number, selected: boolean) => {
