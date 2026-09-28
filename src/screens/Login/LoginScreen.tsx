@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 
+import * as Sentry from '@sentry/react-native'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -153,7 +154,9 @@ export function LoginScreen() {
             setSocialLoading(false)
           },
         })
-      } catch {
+      } catch (error) {
+        // 원인을 삼키면 Android 전용 OAuth 설정 오류 같은 문제를 추적할 수 없어 Sentry로 보낸다
+        Sentry.captureException(error, { tags: { flow: 'google-auth', platform: Platform.OS } })
         setSocialError('구글 로그인 설정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요')
         setSocialLoading(false)
       }

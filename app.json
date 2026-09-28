@@ -10,16 +10,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "sports.master",
-      "usesAppleSignIn": true,
-      "infoPlist": {
-        "CFBundleURLTypes": [
-          {
-            "CFBundleURLSchemes": [
-              "com.googleusercontent.apps.26841070939-t19a28k7ecdhnggdefacfqrbf7nsbkpo"
-            ]
-          }
-        ]
-      }
+      "usesAppleSignIn": true
     },
     "android": {
       "adaptiveIcon": {
@@ -29,14 +20,7 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "sports.master",
-      "intentFilters": [
-        {
-          "action": "VIEW",
-          "data": [{ "scheme": "com.googleusercontent.apps.26841070939-1fgiabcvk1kb27vo1a6hhjfmo3a4h2iv" }],
-          "category": ["BROWSABLE", "DEFAULT"]
-        }
-      ]
+      "package": "sports.master"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -52,6 +36,12 @@
         "expo-image-picker",
         {
           "photosPermission": "자격증 이미지를 첨부하려면 사진 접근 권한이 필요합니다."
+        }
+      ],
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.26841070939-t19a28k7ecdhnggdefacfqrbf7nsbkpo"
         }
       ]
     ],

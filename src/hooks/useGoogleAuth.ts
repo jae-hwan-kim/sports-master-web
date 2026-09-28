@@ -1,67 +1,56 @@
-import * as AuthSession from 'expo-auth-session'
-import * as WebBrowser from 'expo-web-browser'
+import {
+  GoogleSignin,
+  isErrorWithCode,
+  isSuccessResponse,
+  statusCodes,
+} from '@react-native-google-signin/google-signin'
 import { Platform } from 'react-native'
 
-WebBrowser.maybeCompleteAuthSession()
-
+// iOS 유형 클라이언트 ID — iOS에서 발급되는 idToken의 aud 값이 된다.
 const GOOGLE_IOS_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID ?? ''
-const GOOGLE_ANDROID_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID ?? ''
-const GOOGLE_CLIENT_ID = Platform.OS === 'android' ? GOOGLE_ANDROID_CLIENT_ID : GOOGLE_IOS_CLIENT_ID
+// Android는 Web 유형 클라이언트 ID로 idToken을 발급받는다(aud = Web client ID).
+// 앱 신뢰성은 Google Play services가 패키지명 + SHA-1을 Android 유형 클라이언트와
+// 대조해 검증하므로, Android client ID를 앱 코드에서 직접 쓸 일은 없다.
+const GOOGLE_WEB_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID ?? ''
 
-// Google iOS/Android 유형 OAuth 클라이언트 둘 다 콘솔에 Redirect URI를 등록하지 않고,
-// 대신 각 플랫폼 클라이언트 ID의 "역방향 표기"를 커스텀 URL 스킴으로 써서 리다이렉트를
-// 받는다 — 앱 커스텀 스킴(sportsmaster)이나 패키지명을 그대로 쓰면 invalid_request로
-// 거부된다. app.json에 각 플랫폼별로 동일한 스킴이 등록되어 있어야 함
-// (iOS: infoPlist.CFBundleURLTypes, Android: android.intentFilters).
-const GOOGLE_URL_SCHEME = GOOGLE_CLIENT_ID
-  ? `com.googleusercontent.apps.${GOOGLE_CLIENT_ID.replace('.apps.googleusercontent.com', '')}`
-  : ''
-
-const discovery = { authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth', tokenEndpoint: 'https://oauth2.googleapis.com/token' }
-
-
-// 구글 로그인은 Authorization Code + PKCE 플로우로 code를 받은 뒤, 프론트에서 직접
-// 토큰 엔드포인트와 교환해 id_token을 얻는다(백엔드가 idToken을 검증하는 방식이라
-// 카카오처럼 code를 그대로 넘길 수 없음).
+// 브라우저 기반 OAuth(expo-auth-session)를 쓰지 않는 이유: Google이 Android 유형
+// 클라이언트의 custom URI scheme 리다이렉트를 기본 차단해(400 invalid_request,
+// "Custom URI scheme is not enabled for your Android client") 해당 플로우가 Android에서
+// 동작하지 않는다. 콘솔에서 예외적으로 켤 수는 있으나 deprecated 경로라 재발 위험이
+// 있어, Google이 권장하는 네이티브 SDK(Play services / Credential Manager)를 쓴다.
 export function useGoogleAuth() {
-  const redirectUri = AuthSession.makeRedirectUri({ scheme: GOOGLE_URL_SCHEME })
-  const [request, , promptAsync] = AuthSession.useAuthRequest(
-    {
-      clientId: GOOGLE_CLIENT_ID,
-      scopes: ['openid', 'email', 'profile'],
-      redirectUri,
-      usePKCE: true,
-    },
-    discovery
-  )
-
   const promptGoogle = async (): Promise<{ idToken: string } | null> => {
-    if (!GOOGLE_CLIENT_ID) {
+    const requiredClientId = Platform.OS === 'android' ? GOOGLE_WEB_CLIENT_ID : GOOGLE_IOS_CLIENT_ID
+    // configure에 빈 클라이언트 ID를 넘기면 네이티브 SDK가 앱 시작 시점에 터지므로,
+    // 모듈 로드 시점이 아니라 실제 로그인 직전에 값을 확인하고 설정한다(호출은 멱등).
+    if (!requiredClientId) {
       throw new Error('GOOGLE_CLIENT_ID_NOT_SET')
     }
-    if (!request) {
-      throw new Error('GOOGLE_REQUEST_NOT_INITIALIZED')
-    }
+    GoogleSignin.configure({
+      iosClientId: GOOGLE_IOS_CLIENT_ID,
+      webClientId: GOOGLE_WEB_CLIENT_ID,
+    })
 
-    const result = await promptAsync()
-    if (result.type !== 'success') {
-      return null
-    }
+    try {
+      // Android 전용 사전 점검 — iOS에서는 no-op으로 true를 반환한다.
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true })
+      // 직전 세션이 캐시되어 있으면 계정 선택 없이 같은 계정으로 재로그인되므로 매번 초기화
+      await GoogleSignin.signOut()
 
-    const tokenResult = await AuthSession.exchangeCodeAsync(
-      {
-        clientId: GOOGLE_CLIENT_ID,
-        code: result.params.code,
-        redirectUri,
-        extraParams: { code_verifier: request.codeVerifier ?? '' },
-      },
-      discovery
-    )
+      const response = await GoogleSignin.signIn()
+      if (!isSuccessResponse(response)) {
+        // 사용자가 계정 선택을 취소한 경우 — 에러로 취급하지 않고 조용히 종료
+        return null
+      }
 
-    if (!tokenResult.idToken) {
-      return null
+      const { idToken } = response.data
+      return idToken ? { idToken } : null
+    } catch (error) {
+      if (isErrorWithCode(error) && error.code === statusCodes.SIGN_IN_CANCELLED) {
+        return null
+      }
+      throw error
     }
-    return { idToken: tokenResult.idToken }
   }
 
   return { promptGoogle }
