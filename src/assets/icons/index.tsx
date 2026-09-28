@@ -6,12 +6,15 @@ import ArrowNextSvg from './arrow-next.svg'
 import BackSvg from './back.svg'
 import CustomerSvg from './customer.svg'
 import DiagnosisSvg from './diagnosis.svg'
+import EditSvg from './edit.svg'
 import GoogleSvg from './google.svg'
 import HomeSvg from './home.svg'
 import KakaoSvg from './kakao.svg'
 import LinkSvg from './link.svg'
 import MasterSvg from './master.svg'
 import PersonSvg from './person.svg'
+import ProfilePersonSvg from './profile-person.svg'
+import SearchSvg from './search.svg'
 import SettingsSvg from './settings.svg'
 import StarFillSvg from './star-fill.svg'
 import StarMedalSvg from './star-medal.svg'
@@ -90,6 +93,11 @@ export function ProfileTabIcon({ size = 44, ...rest }: IconProps) {
   return <PersonSvg width={size} height={size} {...rest} />
 }
 
+// search.svg는 44x44 탭 영역 포함 (내부 24x24 글리프 + 여백)
+export function SearchTabIcon({ size = 44, ...rest }: IconProps) {
+  return <SearchSvg width={size} height={size} {...rest} />
+}
+
 export function LinkIcon({ size = 44, ...rest }: IconProps) {
   return <LinkSvg width={size} height={size} {...rest} />
 }
@@ -97,3 +105,14 @@ export function LinkIcon({ size = 44, ...rest }: IconProps) {
 export function StarMedalIcon({ size = 100, ...rest }: IconProps) {
   return <StarMedalSvg width={size} height={size} {...rest} />
 }
+
+// edit.svg는 자체 여백 없는 24x24 글리프
+export function EditIcon({ size = 24, ...rest }: IconProps) {
+  return <EditSvg width={size} height={size} {...rest} />
+}
+
+// profile-person.svg는 프로필 아바타용 실루엣 아이콘 (원본 88×104, 비율 유지)
+export function ProfilePersonIcon({ size = 54, ...rest }: IconProps) {
+  return <ProfilePersonSvg width={size} height={(size * 104) / 88} {...rest} />
+}
+
