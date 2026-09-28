@@ -21,9 +21,10 @@ async function fetchMe(): Promise<UserResponseDto> {
   return data.data
 }
 
-type BlockedField = 'phone' | 'email' | 'password' | null
+type BlockedField = 'name' | 'phone' | 'email' | 'password' | null
 
 const BLOCKED_DIALOG: Record<NonNullable<BlockedField>, { title: string; description: string }> = {
+  name: { title: '닉네임 변경 불가', description: '소셜 로그인은 닉네임 변경 불가합니다' },
   phone: { title: '전화번호 변경 불가', description: '소셜 로그인은 전화번호 변경 불가합니다' },
   email: { title: '이메일 변경 불가', description: '소셜 로그인은 메일 주소 변경 불가합니다' },
   password: { title: '비밀번호 변경 불가', description: '소셜 로그인은 비밀번호 변경 불가합니다' },
@@ -40,13 +41,30 @@ export function MasterProfileEditScreen() {
 
   const [blockedField, setBlockedField] = useState<BlockedField>(null)
   const [allDeviceLogoutVisible, setAllDeviceLogoutVisible] = useState(false)
+  const [editNotReadyVisible, setEditNotReadyVisible] = useState(false)
 
   const handleFieldPress = (field: BlockedField) => {
-    if (isSocial && field) {
+    if (!field) return
+    if (isSocial) {
       setBlockedField(field)
       return
     }
-    // TODO: 일반 로그인 — 각 필드 편집 화면으로 이동
+    // 일반 로그인: 전화번호는 변경 화면으로 이동, 나머지는 준비 중 안내
+    if (field === 'phone') {
+      navigation.navigate('MasterPhoneChange')
+      return
+    }
+    setEditNotReadyVisible(true)
+  }
+
+  const handleAllDeviceLogout = async () => {
+    setAllDeviceLogoutVisible(false)
+    try {
+      await apiClient.post('/auth/logout')
+    } catch {
+      // 서버 실패 시에도 로컬 클리어 진행
+    }
+    logout()
   }
 
   return (
@@ -64,6 +82,12 @@ export function MasterProfileEditScreen() {
 
         {/* 필드 목록 */}
         <View className="mt-[27px]">
+          <ProfileField
+            label="닉네임"
+            value={me?.name ?? '-'}
+            onPress={() => handleFieldPress('name')}
+          />
+          <View style={{ height: 4 }} />
           <ProfileField
             label="휴대전화 번호"
             value={me?.phone ?? '-'}
@@ -108,11 +132,16 @@ export function MasterProfileEditScreen() {
         description="로그인된 모든 기기에서 로그아웃 됩니다"
         confirmLabel="로그아웃"
         cancelLabel="취소"
-        onConfirm={() => {
-          setAllDeviceLogoutVisible(false)
-          logout()
-        }}
+        onConfirm={handleAllDeviceLogout}
         onCancel={() => setAllDeviceLogoutVisible(false)}
+      />
+
+      {/* 일반 로그인 편집 준비 중 안내 */}
+      <ConfirmDialog
+        visible={editNotReadyVisible}
+        title="서비스 준비 중"
+        description="해당 정보 변경 기능은 곧 제공될 예정입니다"
+        onConfirm={() => setEditNotReadyVisible(false)}
       />
     </View>
   )

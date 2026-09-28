@@ -5,6 +5,7 @@ import { CustomerHomeScreen } from '@/screens/CustomerHome/CustomerHomeScreen'
 import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
 import { LoginScreen } from '@/screens/Login/LoginScreen'
 import { MasterMessageGuideScreen } from '@/screens/MasterMessageGuide/MasterMessageGuideScreen'
+import { MasterPhoneChangeScreen } from '@/screens/MasterPhoneChange/MasterPhoneChangeScreen'
 import { MasterDetailProfileEditScreen } from '@/screens/MasterDetailProfileEdit/MasterDetailProfileEditScreen'
 import { MasterProfileEditScreen } from '@/screens/MasterProfileEdit/MasterProfileEditScreen'
 import { MasterSettingsScreen } from '@/screens/MasterSettings/MasterSettingsScreen'
@@ -28,6 +29,7 @@ export type RootStackParamList = {
   MasterProfileEdit: undefined
   MasterDetailProfileEdit: undefined
   MasterMessageGuide: undefined
+  MasterPhoneChange: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -48,6 +50,7 @@ export function RootNavigator() {
       <Stack.Screen name="MasterProfileEdit" component={MasterProfileEditScreen} />
       <Stack.Screen name="MasterDetailProfileEdit" component={MasterDetailProfileEditScreen} />
       <Stack.Screen name="MasterMessageGuide" component={MasterMessageGuideScreen} />
+      <Stack.Screen name="MasterPhoneChange" component={MasterPhoneChangeScreen} />
     </Stack.Navigator>
   )
 }
