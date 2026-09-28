@@ -28,7 +28,7 @@ export function RoleCard({ variant, title, description, selected = false, onPres
       accessibilityRole="button"
       accessibilityState={{ selected }}
       accessibilityLabel={`${title}. ${description}${selected ? '. 선택됨. 한 번 더 눌러 확정' : ''}`}
-      className={`h-[200px] w-[300px] rounded-2xl bg-[#F2F2F2] ${disabled ? 'opacity-50' : ''}`}
+      className={`h-[200px] w-[300px] rounded-2xl bg-[#FFFFFF] ${disabled ? 'opacity-50' : ''}`}
       style={{
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },

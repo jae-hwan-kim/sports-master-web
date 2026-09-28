@@ -142,7 +142,7 @@ export function MasterVerificationScreen() {
         keyboardShouldPersistTaps="handled"
       >
         {/* Title — Figma: 헤더(상단여백54+네비바56=110) 아래 34px 고정 */}
-        <Text className="mt-[34px] text-[28px] font-extrabold text-black">명인 인증</Text>
+        <Text className="mt-[34px] text-[28px] font-pretendard-extrabold text-black">명인 인증</Text>
         <Text className="mt-2 text-[13px] font-medium text-gray2">
           물리치료사, 건강운동관리사 자격증 이미지 첨부
         </Text>

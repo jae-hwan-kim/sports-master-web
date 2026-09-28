@@ -41,7 +41,7 @@ export function OnboardingScreen() {
         />
 
         <View
-          className="mb-[15px] mt-[37px] h-[190px] w-px flex-grow bg-gray2"
+          className="mb-[15px] mt-[37px] h-[190px] w-px bg-gray2"
           accessible={false}
           importantForAccessibility="no-hide-descendants"
         />

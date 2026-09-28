@@ -41,7 +41,7 @@ export function Button({
         accessibilityRole="button"
         accessibilityLabel={label}
         accessibilityState={{ disabled }}
-        className="h-[50px] flex-1 items-center justify-center rounded-lg border border-gray1 bg-white"
+        className="h-[50px] flex-1 items-center justify-center rounded-lg border border-gray1 bg-[#FFFFFF]"
       >
         {icon}
       </Pressable>

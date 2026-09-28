@@ -55,7 +55,7 @@ export function SignUpRoleSelectScreen() {
         contentContainerStyle={{ paddingBottom: insets.bottom + 40 }}
       >
         {/* Title — Figma: 헤더(상단여백54+네비바56=110) 아래 34px 고정 */}
-        <Text className="mt-[34px] text-[28px] font-extrabold text-black">모드선택</Text>
+        <Text className="mt-[34px] text-[28px] font-pretendard-extrabold text-black">모드선택</Text>
         <Text className="mt-2 text-[13px] font-medium text-gray2">
           전문가인 명인, 이용자인 고객 중 선택해주세요
         </Text>
