@@ -138,9 +138,15 @@ importers:
         specifier: ^5.0.3
         version: 5.0.14(@types/react@19.2.17)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
+      '@babel/plugin-transform-react-jsx':
+        specifier: 7.29.7
+        version: 7.29.7(@babel/core@7.29.7)
       '@react-native-community/cli':
         specifier: ^20.2.0
         version: 20.2.0(supports-color@10.2.2)(typescript@6.0.3)
+      '@sentry/cli':
+        specifier: 2.58.4
+        version: 2.58.4(supports-color@10.2.2)
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.9.5)(supports-color@10.2.2)
@@ -6032,9 +6038,9 @@ snapshots:
   '@sentry/cli-win32-x64@2.58.4':
     optional: true
 
-  '@sentry/cli@2.58.4':
+  '@sentry/cli@2.58.4(supports-color@10.2.2)':
     dependencies:
-      https-proxy-agent: 5.0.1
+      https-proxy-agent: 5.0.1(supports-color@10.2.2)
       node-fetch: 2.7.0
       progress: 2.0.3
       proxy-from-env: 1.1.0
@@ -6058,7 +6064,7 @@ snapshots:
     dependencies:
       '@sentry/babel-plugin-component-annotate': 4.9.1
       '@sentry/browser': 10.38.0
-      '@sentry/cli': 2.58.4
+      '@sentry/cli': 2.58.4(supports-color@10.2.2)
       '@sentry/core': 10.38.0
       '@sentry/react': 10.38.0(react@19.2.3)
       '@sentry/types': 10.38.0
@@ -6339,7 +6345,7 @@ snapshots:
 
   acorn@8.17.0: {}
 
-  agent-base@6.0.2:
+  agent-base@6.0.2(supports-color@10.2.2):
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
     transitivePeerDependencies:
@@ -6476,7 +6482,7 @@ snapshots:
     dependencies:
       follow-redirects: 1.16.0
       form-data: 4.0.6
-      https-proxy-agent: 5.0.1
+      https-proxy-agent: 5.0.1(supports-color@10.2.2)
       proxy-from-env: 2.1.0
     transitivePeerDependencies:
       - debug
@@ -7761,9 +7767,9 @@ snapshots:
       statuses: 2.0.2
       toidentifier: 1.0.1
 
-  https-proxy-agent@5.0.1:
+  https-proxy-agent@5.0.1(supports-color@10.2.2):
     dependencies:
-      agent-base: 6.0.2
+      agent-base: 6.0.2(supports-color@10.2.2)
       debug: 4.4.3(supports-color@10.2.2)
     transitivePeerDependencies:
       - supports-color
