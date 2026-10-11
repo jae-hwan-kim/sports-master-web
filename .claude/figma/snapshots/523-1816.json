@@ -1,0 +1,222 @@
+{
+  "id": "523:1816",
+  "name": "명인환영",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    874
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#F2F2F2"
+    }
+  ],
+  "children": [
+    {
+      "id": "523:1817",
+      "name": "상단여백",
+      "type": "FRAME",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "children": [
+        {
+          "id": "523:1818",
+          "name": "Background",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:1819",
+      "name": "배경사진",
+      "type": "FRAME",
+      "box": [
+        0,
+        0,
+        403,
+        874
+      ],
+      "children": [
+        {
+          "id": "523:1820",
+          "name": "IMG_0934 2 1",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            874
+          ],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "image": true
+            }
+          ]
+        },
+        {
+          "id": "523:1821",
+          "name": "Background",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            403,
+            874
+          ],
+          "fills": [
+            {
+              "type": "GRADIENT_LINEAR",
+              "stops": [
+                "#07091C@0",
+                "#07091C@0.51",
+                "#07091C@1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "523:1822",
+          "name": "Welcome message",
+          "type": "TEXT",
+          "box": [
+            96,
+            170,
+            209,
+            36
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "text": "명인님 환영합니다!",
+          "fontFamily": "Pretendard",
+          "fontWeight": 800,
+          "fontSize": 28,
+          "lineHeightPx": 36,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER"
+        },
+        {
+          "id": "523:1823",
+          "name": "Button container",
+          "type": "FRAME",
+          "box": [
+            241,
+            713,
+            118,
+            44
+          ],
+          "children": [
+            {
+              "id": "523:1824",
+              "name": "Button icon",
+              "type": "INSTANCE",
+              "box": [
+                315,
+                713,
+                44,
+                44
+              ],
+              "componentId": "433:1945",
+              "children": [
+                {
+                  "id": "I523:1824;433:1907",
+                  "name": "arrow_forward_ios",
+                  "type": "GROUP",
+                  "box": [
+                    325,
+                    723,
+                    24,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "id": "I523:1824;433:1902",
+                      "name": "Bounding box",
+                      "type": "RECTANGLE",
+                      "box": [
+                        325,
+                        723,
+                        24,
+                        24
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:1824;433:1906",
+                      "name": "arrow_forward_ios",
+                      "type": "VECTOR",
+                      "box": [
+                        331.25,
+                        725,
+                        11.78,
+                        20
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#F2F2F2"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "523:1825",
+              "name": "Button text",
+              "type": "TEXT",
+              "box": [
+                241,
+                728,
+                66,
+                14
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "눌러서 홈으로",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

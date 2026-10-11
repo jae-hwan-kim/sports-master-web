@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Platform, Pressable, Text, View } from 'react-native'
+import { Platform, Pressable, View } from 'react-native'
 
 import { Image } from 'expo-image'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
+import { Text } from '@/components/AppText'
 import { formatDate } from '@/utils/date'
 
 import { ConfirmDialog } from './ConfirmDialog'

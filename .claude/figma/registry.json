@@ -1,0 +1,854 @@
+{
+  "fileKey": "LuJi9V3DEQleIG6Npw264J",
+  "fileName": "Project 운동명인",
+  "pages": [
+    "321:458"
+  ],
+  "version": "2407018480101126355",
+  "syncedAt": "2026-10-10T14:49:08.518Z",
+  "handledComments": [],
+  "frames": {
+    "791:4157": {
+      "name": "명인홈_MAX",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "403394d3ddff"
+    },
+    "732:5498": {
+      "name": "진단요청",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "150cb4dd513e"
+    },
+    "732:5696": {
+      "name": "진단요청_프로필 확인 완료",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "b8d0d6e41e30"
+    },
+    "732:5793": {
+      "name": "진단요청_프로필 삭제 완료",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "ca1787c4c35b"
+    },
+    "1833:11645": {
+      "name": "고객홈",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "87be8d086972"
+    },
+    "1822:10998": {
+      "name": "마이페이지_Default",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "e60c22a020d0"
+    },
+    "1822:11031": {
+      "name": "계정설정",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "9c0ba8dc2b90"
+    },
+    "1822:11063": {
+      "name": "계정설정",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "b4d166618953"
+    },
+    "1934:11296": {
+      "name": "마이페이지_Default",
+      "page": "완료화면 전체 정리공간",
+      "screen": "CustomerProfile",
+      "ignore": false,
+      "hash": "b6a2ccc922a3"
+    },
+    "1934:11329": {
+      "name": "계정설정",
+      "page": "완료화면 전체 정리공간",
+      "screen": "CustomerSettings",
+      "ignore": false,
+      "hash": "3f6ce6808614"
+    },
+    "523:1773": {
+      "name": "온보딩",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Onboarding",
+      "ignore": false,
+      "hash": "5d30c6dfc271"
+    },
+    "523:1655": {
+      "name": "로그인",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Login",
+      "ignore": false,
+      "hash": "3e46d77f5f72"
+    },
+    "523:1683": {
+      "name": "로그인_텍스트 작성",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Login",
+      "ignore": false,
+      "hash": "f630281e9188"
+    },
+    "523:1836": {
+      "name": "로그인_구글",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Login",
+      "ignore": false,
+      "hash": "a5b7728294eb"
+    },
+    "523:1866": {
+      "name": "로그인_카카오",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Login",
+      "ignore": false,
+      "hash": "161e608d84c6"
+    },
+    "523:1896": {
+      "name": "로그인_애플",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Login",
+      "ignore": false,
+      "hash": "9db832935e30"
+    },
+    "523:1926": {
+      "name": "자동로그인 설정",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Login",
+      "ignore": false,
+      "hash": "8ff4932dd111"
+    },
+    "523:1957": {
+      "name": "로그인_텍스트 오류",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Login",
+      "ignore": false,
+      "hash": "fb7cd778c29c"
+    },
+    "523:1987": {
+      "name": "로그인_텍스트 숨김",
+      "page": "완료화면 전체 정리공간 / 로그인",
+      "screen": "Login",
+      "ignore": false,
+      "hash": "a96085da3e08"
+    },
+    "523:1720": {
+      "name": "회원가입",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "6dcda274e8c6"
+    },
+    "523:1746": {
+      "name": "회원가입_텍스트 작성",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "f80082e3fd75"
+    },
+    "523:2101": {
+      "name": "회원가입_텍스트 작성_비번off",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "68c5bb5e152f"
+    },
+    "523:2128": {
+      "name": "회원가입_텍스트 오류",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "647a5e38d181"
+    },
+    "523:2157": {
+      "name": "회원가입_모드선택",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUpRoleSelect",
+      "ignore": false,
+      "hash": "0bc882dadce3"
+    },
+    "523:2165": {
+      "name": "회원가입_고객선택",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUpRoleSelect",
+      "ignore": false,
+      "hash": "c1d1650e7ec4"
+    },
+    "523:2173": {
+      "name": "회원가입_명인선택",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUpRoleSelect",
+      "ignore": false,
+      "hash": "925625d62107"
+    },
+    "523:2017": {
+      "name": "회원가입_구글",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "4558e6fc0839"
+    },
+    "523:2045": {
+      "name": "회원가입_카카오",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "0442cdbcbfb8"
+    },
+    "523:2073": {
+      "name": "회원가입_애플",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "2780f0264bc3"
+    },
+    "523:1796": {
+      "name": "명인인증",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "MasterVerification",
+      "ignore": false,
+      "hash": "22a62aeadd34"
+    },
+    "523:1805": {
+      "name": "나중에 선택하기",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "MasterVerification",
+      "ignore": false,
+      "hash": "1d93ce492600"
+    },
+    "523:2181": {
+      "name": "명인_앨범 엑세스 팝업",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "MasterVerification",
+      "ignore": false,
+      "hash": "d9a919846b8b"
+    },
+    "523:1786": {
+      "name": "고객 환영",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "CustomerWelcome",
+      "ignore": false,
+      "hash": "c748b069511d"
+    },
+    "523:1816": {
+      "name": "명인환영",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "MasterWelcome",
+      "ignore": false,
+      "hash": "a786c493222d"
+    },
+    "621:3235": {
+      "name": "명인_이미지선택X 선택완료 터치",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "MasterVerification",
+      "ignore": false,
+      "hash": "3ca10c59f762"
+    },
+    "1163:6431": {
+      "name": "회원가입 사용가능 확인",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "e5be8d39a622"
+    },
+    "1163:6464": {
+      "name": "사용가능 닉네임",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "0d8196c0bcaf"
+    },
+    "1163:6499": {
+      "name": "사용불가 닉네임_중복",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "6a331698d367"
+    },
+    "1163:6534": {
+      "name": "사용불가 닉네임_글자초과",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "586d4cd53055"
+    },
+    "1163:6569": {
+      "name": "사용가능 이메일",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "790fee4ad708"
+    },
+    "1163:6604": {
+      "name": "이메일 형식 오류",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "967e934a751e"
+    },
+    "1163:6639": {
+      "name": "가입불가 이메일_이미 존재",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "SignUp",
+      "ignore": false,
+      "hash": "3b610a486d39"
+    },
+    "791:4505": {
+      "name": "명인홈_Default",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterHome",
+      "ignore": false,
+      "hash": "abd506b0a177"
+    },
+    "791:4558": {
+      "name": "명인홈_링크복사 완료",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterHome",
+      "ignore": false,
+      "hash": "70ab04e8a785"
+    },
+    "791:4613": {
+      "name": "명인홈_프로필 작성 후",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterHome",
+      "ignore": false,
+      "hash": "28ee5732c05f"
+    },
+    "1125:5013": {
+      "name": "설정",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterSettings",
+      "ignore": false,
+      "hash": "b72d2454072f"
+    },
+    "1125:5030": {
+      "name": "로그아웃",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterSettings",
+      "ignore": false,
+      "hash": "fd44dd4b5130"
+    },
+    "1125:5049": {
+      "name": "계정탈퇴",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterSettings",
+      "ignore": false,
+      "hash": "127ea8b86bad"
+    },
+    "1125:5068": {
+      "name": "개인정보관리",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterProfileEdit",
+      "ignore": false,
+      "hash": "134e4121af7e"
+    },
+    "1308:10647": {
+      "name": "핸드폰번호 변경",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterPhoneChange",
+      "ignore": false,
+      "hash": "73ef05493cb0"
+    },
+    "1125:5089": {
+      "name": "오픈채팅 기본 문구",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterMessageGuide",
+      "ignore": false,
+      "hash": "a313fafc716f"
+    },
+    "1125:5240": {
+      "name": "전화번호 변경X",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterProfileEdit",
+      "ignore": false,
+      "hash": "30a9014ba8ed"
+    },
+    "1125:5289": {
+      "name": "이메일 변경X",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterProfileEdit",
+      "ignore": false,
+      "hash": "55cd0b892b00"
+    },
+    "1125:5345": {
+      "name": "비번 변경X",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterProfileEdit",
+      "ignore": false,
+      "hash": "a0447428b85a"
+    },
+    "1125:5401": {
+      "name": "모든기기 로그아웃",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterProfileEdit",
+      "ignore": false,
+      "hash": "542c0b1412df"
+    },
+    "1136:5002": {
+      "name": "명인홈_MAX",
+      "page": "완료화면 전체 정리공간 / 명인 / 홈",
+      "screen": "MasterHome",
+      "ignore": false,
+      "hash": "17c2e7abd93b"
+    },
+    "732:5979": {
+      "name": "진단요청_empty",
+      "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
+      "screen": "MasterDiagnosis",
+      "ignore": false,
+      "hash": "1355ebf4613e"
+    },
+    "732:5586": {
+      "name": "진단요청_상세",
+      "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
+      "screen": "MasterDiagnosis",
+      "ignore": false,
+      "hash": "4c616dcdd24f"
+    },
+    "732:5880": {
+      "name": "진단요청_삭제",
+      "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
+      "screen": "MasterDiagnosis",
+      "ignore": false,
+      "hash": "4f439cb6eaa4"
+    },
+    "1057:5166": {
+      "name": "진단요청",
+      "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
+      "screen": "MasterDiagnosis",
+      "ignore": false,
+      "hash": "1d9c99847f8d"
+    },
+    "1057:5254": {
+      "name": "진단요청_프로필 확인 완료",
+      "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
+      "screen": "MasterDiagnosis",
+      "ignore": false,
+      "hash": "de12598a8524"
+    },
+    "1057:5351": {
+      "name": "진단요청_프로필 삭제 완료",
+      "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
+      "screen": "MasterDiagnosis",
+      "ignore": false,
+      "hash": "ed5220c9df07"
+    },
+    "1184:3481": {
+      "name": "프로필_Default",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterProfile",
+      "ignore": false,
+      "hash": "ffed7bd4d6c3"
+    },
+    "1376:10189": {
+      "name": "상세페이지_Full",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfile",
+      "ignore": false,
+      "hash": "030ff00ebd60"
+    },
+    "1376:10264": {
+      "name": "상세페이지_Full_수정",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "bd7a49c56349"
+    },
+    "1472:11166": {
+      "name": "상세페이지_Full_지역선택",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "718725460090"
+    },
+    "1476:12494": {
+      "name": "상세페이지_Full_지역선택_강서구",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "c0f5598de174"
+    },
+    "1476:12822": {
+      "name": "상세페이지_Full_지역선택_경기",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "49d33cd9bb78"
+    },
+    "1476:13158": {
+      "name": "상세페이지_Full_지역선택_덕양구",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "187701a5bde5"
+    },
+    "1476:14417": {
+      "name": "상세페이지_수정완료Full",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "addb9574b8b8"
+    },
+    "1476:14787": {
+      "name": "상세페이지_수정완료 저장",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "5b5eee1ce45e"
+    },
+    "1484:15004": {
+      "name": "상세페이지_Full_지역수정완료",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "b5be78c01632"
+    },
+    "1937:12138": {
+      "name": "상세페이지_Full_지역수정완료",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "36b6d58d49e3"
+    },
+    "1442:8896": {
+      "name": "서울",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "5dc4ac56301c"
+    },
+    "1461:9263": {
+      "name": "인천",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "a19e88279722"
+    },
+    "1461:9411": {
+      "name": "대전",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "6853b6effbda"
+    },
+    "1461:9503": {
+      "name": "세종",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "bc5c77b8ba7b"
+    },
+    "1461:9571": {
+      "name": "충남",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "d1984f0fe258"
+    },
+    "1461:9719": {
+      "name": "충북",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "c95f2edcc71a"
+    },
+    "1461:9037": {
+      "name": "경기",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "1a728a756c47"
+    },
+    "1461:10672": {
+      "name": "경남",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "99696515885d"
+    },
+    "1461:10896": {
+      "name": "강원",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "04fe76f1a5a7"
+    },
+    "1461:9835": {
+      "name": "전남광주",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "c193e47ea2e9"
+    },
+    "1461:10323": {
+      "name": "경북",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "3b81792e2f2a"
+    },
+    "1461:10464": {
+      "name": "부산",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "28cdee717677"
+    },
+    "1461:10604": {
+      "name": "울산",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "2c618d314c4d"
+    },
+    "1461:11032": {
+      "name": "제주",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "32e3753addb1"
+    },
+    "1461:11100": {
+      "name": "전국",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "460b765cb9ee"
+    },
+    "1461:10059": {
+      "name": "전북",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "a8e8f3bb5788"
+    },
+    "1461:10215": {
+      "name": "대구",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": null,
+      "ignore": true,
+      "hash": "948e98f3da02"
+    },
+    "1376:12041": {
+      "name": "프로필",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterProfile",
+      "ignore": false,
+      "hash": "9d33bd6d1420"
+    },
+    "1308:10012": {
+      "name": "리뷰_Default",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterReview",
+      "ignore": false,
+      "hash": "36e488b9fa7d"
+    },
+    "1308:10088": {
+      "name": "리뷰_Information",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterReview",
+      "ignore": false,
+      "hash": "e75a9468ed42"
+    },
+    "1376:10614": {
+      "name": "상세페이지_Default_All Blank",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfile",
+      "ignore": false,
+      "hash": "a61b37dae0db"
+    },
+    "1376:10681": {
+      "name": "상세페이지_Default_자격증 존재",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfile",
+      "ignore": false,
+      "hash": "34cc1d6de554"
+    },
+    "1376:10751": {
+      "name": "상세페이지_수정하기 Default",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "5f107984aa45"
+    },
+    "1376:10866": {
+      "name": "상세페이지_수정하기_이미지,증명서 업로드",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "eda79f83c3a5"
+    },
+    "1376:10981": {
+      "name": "상세페이지_수정완료_프로필저장",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "c564b30970ca"
+    },
+    "1376:11098": {
+      "name": "상세페이지_수정취소",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfileEdit",
+      "ignore": false,
+      "hash": "50973a5fe4ad"
+    },
+    "1376:11225": {
+      "name": "상세페이지_자격증이미지확인",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterDetailProfile",
+      "ignore": false,
+      "hash": "5e9107a1f88c"
+    },
+    "1308:8925": {
+      "name": "리뷰_최신순",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterReview",
+      "ignore": false,
+      "hash": "49ff823fa925"
+    },
+    "1308:9049": {
+      "name": "리뷰_삭제요청(체크)",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterReview",
+      "ignore": false,
+      "hash": "c9162011b5f4"
+    },
+    "1308:9174": {
+      "name": "리뷰_삭제요청 진행",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterReview",
+      "ignore": false,
+      "hash": "6db66bc0647d"
+    },
+    "1308:9300": {
+      "name": "리뷰_베스트순",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterReview",
+      "ignore": false,
+      "hash": "e6c2187b8fd1"
+    },
+    "1308:9424": {
+      "name": "리뷰_사진리뷰",
+      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
+      "screen": "MasterReview",
+      "ignore": false,
+      "hash": "6e23a9f1bf47"
+    },
+    "2187:11603": {
+      "name": "고객홈",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": "CustomerHome",
+      "ignore": false,
+      "hash": "0463f413c527"
+    },
+    "2187:11788": {
+      "name": "명인빠른추천",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "426aebf54d19",
+      "todo": true
+    },
+    "2187:11801": {
+      "name": "진행여부 파악",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "5d80ce9e2047",
+      "todo": true
+    },
+    "2187:11812": {
+      "name": "Q1",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "6d23a9abe8c2",
+      "todo": true
+    },
+    "2187:12425": {
+      "name": "Q1-3_선택완료",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "5383686d9f9f",
+      "todo": true
+    },
+    "2187:11827": {
+      "name": "Q1-2_지역선택",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "fd220522aaba",
+      "todo": true
+    },
+    "2187:12465": {
+      "name": "Q1-2_지역선택",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "b13bc74ca9f3",
+      "todo": true
+    },
+    "2187:11841": {
+      "name": "Q3",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "7ff6f08c5738",
+      "todo": true
+    },
+    "2187:11867": {
+      "name": "Q2",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "90dbdffe035a",
+      "todo": true
+    },
+    "2187:11886": {
+      "name": "추천3인",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": null,
+      "ignore": false,
+      "hash": "00447561b497",
+      "todo": true
+    },
+    "1822:11265": {
+      "name": "계정설정_Default",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "CustomerSettings",
+      "ignore": false,
+      "hash": "d93f93893789"
+    },
+    "1934:11360": {
+      "name": "정보수정",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "CustomerSettings",
+      "ignore": false,
+      "hash": "2bb4ab358ad2"
+    },
+    "1934:11854": {
+      "name": "수정완료",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "CustomerSettings",
+      "ignore": false,
+      "hash": "ea41da5cf8a1"
+    },
+    "1934:11977": {
+      "name": "수정종료_뒤로가기터치",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "CustomerSettings",
+      "ignore": false,
+      "hash": "5c3b5d637aa6"
+    }
+  }
+}

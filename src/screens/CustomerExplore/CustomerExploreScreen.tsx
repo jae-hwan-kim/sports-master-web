@@ -1,5 +1,7 @@
 // src/screens/CustomerExplore/CustomerExploreScreen.tsx
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+
+import { Text } from '@/components/AppText'
 
 // TODO: 명인탐색 화면 구현 전 임시 placeholder
 export function CustomerExploreScreen() {

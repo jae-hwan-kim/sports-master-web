@@ -1,5 +1,6 @@
-import { Pressable, Text } from 'react-native'
-import { moderateScale } from 'react-native-size-matters'
+import { Pressable } from 'react-native'
+
+import { Text } from '@/components/AppText'
 
 type ChipProps = {
   label: string
@@ -21,7 +22,7 @@ export function Chip({ label, selected = false, onPress, variant = 'primary' }: 
     >
       <Text
         className={`font-medium ${selected ? 'text-white' : 'text-gray3'}`}
-        style={{ fontSize: moderateScale(13) }}
+        style={{ fontSize: 13 }}
       >
         {label}
       </Text>

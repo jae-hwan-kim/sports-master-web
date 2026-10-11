@@ -1,0 +1,1104 @@
+{
+  "id": "1125:5030",
+  "name": "로그아웃",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    874
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#F2F2F2"
+    }
+  ],
+  "children": [
+    {
+      "id": "1125:5031",
+      "name": "여백",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "componentId": "523:4129",
+      "children": [
+        {
+          "id": "I1125:5031;523:4115",
+          "name": "Rectangle 34624651",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ]
+        },
+        {
+          "id": "I1125:5031;523:4116",
+          "name": "Status Bar - iPhone",
+          "type": "INSTANCE",
+          "box": [
+            17,
+            2,
+            367,
+            50
+          ],
+          "layoutMode": "VERTICAL",
+          "itemSpacing": -31,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "50:506",
+          "children": [
+            {
+              "id": "I1125:5031;523:4116;759:11360",
+              "name": "Frame",
+              "type": "FRAME",
+              "box": [
+                17,
+                16,
+                367,
+                22
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 134,
+              "primaryAxisAlignItems": "SPACE_BETWEEN",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "I1125:5031;523:4116;759:11361",
+                  "name": "Time",
+                  "type": "FRAME",
+                  "box": [
+                    17,
+                    16,
+                    121.5,
+                    22
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 10,
+                  "paddingLeft": 20,
+                  "paddingRight": 6,
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I1125:5031;523:4116;759:11362",
+                      "name": "Time",
+                      "type": "TEXT",
+                      "box": [
+                        37,
+                        16,
+                        37,
+                        22
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "text": "9:41",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 590,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER",
+                      "layoutSizingHorizontal": "HUG",
+                      "layoutSizingVertical": "HUG"
+                    }
+                  ]
+                },
+                {
+                  "id": "I1125:5031;523:4116;759:11363",
+                  "name": "Dynamic Island spacer",
+                  "type": "FRAME",
+                  "box": [
+                    138.5,
+                    22,
+                    124,
+                    10
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FIXED",
+                  "layoutSizingVertical": "FIXED"
+                },
+                {
+                  "id": "I1125:5031;523:4116;759:11364",
+                  "name": "Levels",
+                  "type": "FRAME",
+                  "box": [
+                    262.5,
+                    20.5,
+                    121.5,
+                    13
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 7,
+                  "paddingLeft": 6,
+                  "paddingRight": 20,
+                  "primaryAxisAlignItems": "MAX",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I1125:5031;523:4116;759:11365",
+                      "name": "Cellular Connection",
+                      "type": "VECTOR",
+                      "box": [
+                        286.33,
+                        20.89,
+                        19.2,
+                        12.23
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED"
+                    },
+                    {
+                      "id": "I1125:5031;523:4116;759:11366",
+                      "name": "Wifi",
+                      "type": "VECTOR",
+                      "box": [
+                        312.53,
+                        20.84,
+                        17.14,
+                        12.33
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED"
+                    },
+                    {
+                      "id": "I1125:5031;523:4116;759:11367",
+                      "name": "Battery",
+                      "type": "GROUP",
+                      "box": [
+                        336.67,
+                        20.5,
+                        27.33,
+                        13
+                      ],
+                      "radius": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED",
+                      "children": [
+                        {
+                          "id": "I1125:5031;523:4116;759:11368",
+                          "name": "Border",
+                          "type": "RECTANGLE",
+                          "box": [
+                            336.67,
+                            20.5,
+                            25,
+                            13
+                          ],
+                          "strokes": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "strokeWeight": 1,
+                          "radius": 4.3,
+                          "opacity": 0.35
+                        },
+                        {
+                          "id": "I1125:5031;523:4116;759:11369",
+                          "name": "Cap",
+                          "type": "VECTOR",
+                          "box": [
+                            362.67,
+                            25.28,
+                            1.33,
+                            4.08
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "opacity": 0.4
+                        },
+                        {
+                          "id": "I1125:5031;523:4116;759:11370",
+                          "name": "Capacity",
+                          "type": "RECTANGLE",
+                          "box": [
+                            338.67,
+                            22.5,
+                            21,
+                            9
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "radius": 2.5
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1125:5032",
+      "name": "Navigation bar_back",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        54,
+        402,
+        56
+      ],
+      "componentId": "224:507",
+      "children": [
+        {
+          "id": "I1125:5032;194:565",
+          "name": "Rectangle 34624783",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            54,
+            402,
+            56
+          ]
+        },
+        {
+          "id": "I1125:5032;224:371",
+          "name": "back",
+          "type": "INSTANCE",
+          "box": [
+            16,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:653",
+          "children": [
+            {
+              "id": "I1125:5032;224:371;179:543",
+              "name": "arrow_back_ios",
+              "type": "GROUP",
+              "box": [
+                26,
+                70,
+                24,
+                24
+              ],
+              "children": [
+                {
+                  "id": "I1125:5032;224:371;179:538",
+                  "name": "Bounding box",
+                  "type": "RECTANGLE",
+                  "box": [
+                    26,
+                    70,
+                    24,
+                    24
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#D9D9D9"
+                    }
+                  ]
+                },
+                {
+                  "id": "I1125:5032;224:371;179:542",
+                  "name": "arrow_back_ios",
+                  "type": "VECTOR",
+                  "box": [
+                    26,
+                    72,
+                    11.78,
+                    20
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#07091C"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I1125:5032;224:376",
+          "name": "setting",
+          "type": "INSTANCE",
+          "box": [
+            341,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:656"
+        }
+      ]
+    },
+    {
+      "id": "1125:5033",
+      "name": "Login Title",
+      "type": "TEXT",
+      "box": [
+        26,
+        130,
+        49,
+        33
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#000000"
+        }
+      ],
+      "text": "설정",
+      "fontFamily": "Pretendard",
+      "fontWeight": 800,
+      "fontSize": 28,
+      "lineHeightPx": 33.41,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "1125:5034",
+      "name": "Frame 1739336830",
+      "type": "FRAME",
+      "box": [
+        0,
+        187,
+        402,
+        72
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.1,
+          "offset": [
+            0,
+            2
+          ],
+          "radius": 4
+        }
+      ],
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 237,
+      "paddingLeft": 24,
+      "paddingRight": 4,
+      "paddingTop": 12,
+      "paddingBottom": 12,
+      "primaryAxisAlignItems": "SPACE_BETWEEN",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "children": [
+        {
+          "id": "1125:5035",
+          "name": "개인 정보 관리",
+          "type": "TEXT",
+          "box": [
+            24,
+            213.5,
+            91,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "text": "개인 정보 관리",
+          "fontFamily": "Pretendard",
+          "fontWeight": 600,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        },
+        {
+          "id": "1125:5036",
+          "name": "이동",
+          "type": "INSTANCE",
+          "box": [
+            354,
+            201,
+            44,
+            44
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "770:4348",
+          "children": [
+            {
+              "id": "I1125:5036;770:4346",
+              "name": "Vector 41",
+              "type": "VECTOR",
+              "box": [
+                370,
+                217,
+                11.31,
+                11.31
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1.55,
+              "radius": 0.93
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1125:5037",
+      "name": "Frame 1739336831",
+      "type": "FRAME",
+      "box": [
+        0,
+        263,
+        402,
+        72
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.1,
+          "offset": [
+            0,
+            2
+          ],
+          "radius": 4
+        }
+      ],
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 237,
+      "paddingLeft": 24,
+      "paddingRight": 4,
+      "paddingTop": 12,
+      "paddingBottom": 12,
+      "primaryAxisAlignItems": "SPACE_BETWEEN",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "children": [
+        {
+          "id": "1125:5038",
+          "name": "기본 문구 가이드라인",
+          "type": "TEXT",
+          "box": [
+            24,
+            289.5,
+            133,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "text": "기본 문구 가이드라인",
+          "fontFamily": "Pretendard",
+          "fontWeight": 600,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        },
+        {
+          "id": "1125:5039",
+          "name": "이동",
+          "type": "INSTANCE",
+          "box": [
+            354,
+            277,
+            44,
+            44
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "770:4348",
+          "children": [
+            {
+              "id": "I1125:5039;770:4346",
+              "name": "Vector 41",
+              "type": "VECTOR",
+              "box": [
+                370,
+                293,
+                11.31,
+                11.31
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1.55,
+              "radius": 0.93
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1125:5040",
+      "name": "Frame 1739336832",
+      "type": "FRAME",
+      "box": [
+        0,
+        339,
+        402,
+        72
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.1,
+          "offset": [
+            0,
+            2
+          ],
+          "radius": 4
+        }
+      ],
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 237,
+      "paddingLeft": 24,
+      "paddingRight": 4,
+      "paddingTop": 12,
+      "paddingBottom": 12,
+      "primaryAxisAlignItems": "SPACE_BETWEEN",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "children": [
+        {
+          "id": "1125:5041",
+          "name": "로그아웃",
+          "type": "TEXT",
+          "box": [
+            24,
+            365.5,
+            56,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "text": "로그아웃",
+          "fontFamily": "Pretendard",
+          "fontWeight": 600,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        },
+        {
+          "id": "1125:5042",
+          "name": "이동",
+          "type": "INSTANCE",
+          "box": [
+            354,
+            353,
+            44,
+            44
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "770:4348",
+          "children": [
+            {
+              "id": "I1125:5042;770:4346",
+              "name": "Vector 41",
+              "type": "VECTOR",
+              "box": [
+                370,
+                369,
+                11.31,
+                11.31
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1.55,
+              "radius": 0.93
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1125:5043",
+      "name": "Frame 1739336833",
+      "type": "FRAME",
+      "box": [
+        0,
+        415,
+        402,
+        72
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.1,
+          "offset": [
+            0,
+            2
+          ],
+          "radius": 4
+        }
+      ],
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 237,
+      "paddingLeft": 24,
+      "paddingRight": 4,
+      "paddingTop": 12,
+      "paddingBottom": 12,
+      "primaryAxisAlignItems": "SPACE_BETWEEN",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "children": [
+        {
+          "id": "1125:5044",
+          "name": "계정탈퇴",
+          "type": "TEXT",
+          "box": [
+            24,
+            441.5,
+            56,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "text": "계정탈퇴",
+          "fontFamily": "Pretendard",
+          "fontWeight": 600,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        },
+        {
+          "id": "1125:5045",
+          "name": "이동",
+          "type": "INSTANCE",
+          "box": [
+            354,
+            429,
+            44,
+            44
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "770:4348",
+          "children": [
+            {
+              "id": "I1125:5045;770:4346",
+              "name": "Vector 41",
+              "type": "VECTOR",
+              "box": [
+                370,
+                445,
+                11.31,
+                11.31
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1.55,
+              "radius": 0.93
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1125:5046",
+      "name": "아트보드 4 3",
+      "type": "RECTANGLE",
+      "box": [
+        200,
+        497,
+        276,
+        278
+      ],
+      "fills": [
+        {
+          "type": "IMAGE",
+          "image": true
+        }
+      ]
+    },
+    {
+      "id": "1125:5047",
+      "name": "Background",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        0,
+        402,
+        874
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C",
+          "opacity": 0.6
+        }
+      ]
+    },
+    {
+      "id": "1125:5048",
+      "name": "Popup",
+      "type": "INSTANCE",
+      "box": [
+        32,
+        324,
+        340,
+        230
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.1,
+          "offset": [
+            0,
+            0
+          ],
+          "radius": 12.7
+        }
+      ],
+      "componentId": "426:1859",
+      "children": [
+        {
+          "id": "I1125:5048;426:1825",
+          "name": "Rectangle 34624682",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            324,
+            340,
+            230
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 16
+        },
+        {
+          "id": "I1125:5048;426:1826",
+          "name": "Frame 1739336827",
+          "type": "FRAME",
+          "box": [
+            63,
+            412,
+            276,
+            19
+          ],
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "I1125:5048;426:1827",
+              "name": "업로드 전까지 이용에 제한이 있습니다.",
+              "type": "TEXT",
+              "box": [
+                71,
+                412,
+                260,
+                19
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "모든 정보는 그대로 유지됩니다",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 16,
+              "lineHeightPx": 19.09,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I1125:5048;426:1829",
+          "name": "Frame 1739336828",
+          "type": "FRAME",
+          "box": [
+            52,
+            368,
+            300,
+            28
+          ],
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 16,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "primaryAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "children": [
+            {
+              "id": "I1125:5048;426:1830",
+              "name": "나중에 업로드 하시겠습니까?",
+              "type": "TEXT",
+              "box": [
+                64,
+                368,
+                276,
+                29
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#000000"
+                }
+              ],
+              "text": "로그아웃 하시겠습니까?",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 24,
+              "lineHeightPx": 28.64,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I1125:5048;426:1832",
+          "name": "Select_1",
+          "type": "INSTANCE",
+          "box": [
+            52,
+            480,
+            145,
+            50
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#C6A75E"
+            }
+          ],
+          "radius": 8,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "paddingTop": 16,
+          "paddingBottom": 16,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:831",
+          "children": [
+            {
+              "id": "I1125:5048;426:1832;179:346",
+              "name": "로그인",
+              "type": "TEXT",
+              "box": [
+                95,
+                495,
+                59,
+                20
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "로그아웃",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 17,
+              "lineHeightPx": 20.29,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I1125:5048;426:1833",
+          "name": "Select_2",
+          "type": "INSTANCE",
+          "box": [
+            205,
+            480,
+            145,
+            50
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#102343"
+            }
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#4A5198"
+            }
+          ],
+          "strokeWeight": 1,
+          "radius": 8,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "paddingTop": 16,
+          "paddingBottom": 16,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:832",
+          "children": [
+            {
+              "id": "I1125:5048;426:1833;179:347",
+              "name": "회원가입",
+              "type": "TEXT",
+              "box": [
+                262.5,
+                495,
+                30,
+                20
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "취소",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 17,
+              "lineHeightPx": 20.29,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

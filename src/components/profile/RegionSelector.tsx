@@ -1,6 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
-import { FlatList, Modal, Pressable, Text, View } from 'react-native'
+import { FlatList, Modal, Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { Text } from '@/components/AppText'
 
 type Props = {
   value: string

@@ -1,10 +1,11 @@
-import { Platform, Pressable, Image as RNImage, Text, View } from 'react-native'
+import { Platform, Pressable, Image as RNImage, View } from 'react-native'
 
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { StarMedalIcon } from '@/assets/icons'
 import ProfilePersonSvg from '@/assets/icons/profile-person.svg'
+import { Text } from '@/components/AppText'
 import { components } from '@/types/schema'
 
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']

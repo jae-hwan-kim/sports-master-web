@@ -4,13 +4,14 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useEffect, useRef } from 'react'
-import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { ArrowNextIcon } from '@/assets/icons'
 import bgImage from '@/assets/icons/background.png'
+import { Text } from '@/components/AppText'
 import { useSignUp } from '@/hooks/useSignUp'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { RootStackParamList } from '@/navigation/RootNavigator'

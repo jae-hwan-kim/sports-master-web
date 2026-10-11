@@ -1,5 +1,7 @@
 // src/screens/CustomerHome/CustomerHomeScreen.tsx
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+
+import { Text } from '@/components/AppText'
 
 // TODO: 실제 고객 홈 구현 전 임시 placeholder
 export function CustomerHomeScreen() {

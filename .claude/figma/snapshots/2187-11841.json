@@ -1,0 +1,1541 @@
+{
+  "id": "2187:11841",
+  "name": "Q3",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    874
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#07091C"
+    }
+  ],
+  "children": [
+    {
+      "id": "2187:11842",
+      "name": "여백",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "componentId": "523:4129",
+      "children": [
+        {
+          "id": "I2187:11842;523:4115",
+          "name": "Rectangle 34624651",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ]
+        },
+        {
+          "id": "I2187:11842;523:4116",
+          "name": "Status Bar - iPhone",
+          "type": "INSTANCE",
+          "box": [
+            17,
+            2,
+            367,
+            50
+          ],
+          "layoutMode": "VERTICAL",
+          "itemSpacing": -31,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "50:506",
+          "children": [
+            {
+              "id": "I2187:11842;523:4116;759:11360",
+              "name": "Frame",
+              "type": "FRAME",
+              "box": [
+                17,
+                16,
+                367,
+                22
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 134,
+              "primaryAxisAlignItems": "SPACE_BETWEEN",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "I2187:11842;523:4116;759:11361",
+                  "name": "Time",
+                  "type": "FRAME",
+                  "box": [
+                    17,
+                    16,
+                    121.5,
+                    22
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 10,
+                  "paddingLeft": 20,
+                  "paddingRight": 6,
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I2187:11842;523:4116;759:11362",
+                      "name": "Time",
+                      "type": "TEXT",
+                      "box": [
+                        37,
+                        16,
+                        37,
+                        22
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "text": "9:41",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 590,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER",
+                      "layoutSizingHorizontal": "HUG",
+                      "layoutSizingVertical": "HUG"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2187:11842;523:4116;759:11363",
+                  "name": "Dynamic Island spacer",
+                  "type": "FRAME",
+                  "box": [
+                    138.5,
+                    22,
+                    124,
+                    10
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FIXED",
+                  "layoutSizingVertical": "FIXED"
+                },
+                {
+                  "id": "I2187:11842;523:4116;759:11364",
+                  "name": "Levels",
+                  "type": "FRAME",
+                  "box": [
+                    262.5,
+                    20.5,
+                    121.5,
+                    13
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 7,
+                  "paddingLeft": 6,
+                  "paddingRight": 20,
+                  "primaryAxisAlignItems": "MAX",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I2187:11842;523:4116;759:11365",
+                      "name": "Cellular Connection",
+                      "type": "VECTOR",
+                      "box": [
+                        286.33,
+                        20.89,
+                        19.2,
+                        12.23
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED"
+                    },
+                    {
+                      "id": "I2187:11842;523:4116;759:11366",
+                      "name": "Wifi",
+                      "type": "VECTOR",
+                      "box": [
+                        312.53,
+                        20.84,
+                        17.14,
+                        12.33
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED"
+                    },
+                    {
+                      "id": "I2187:11842;523:4116;759:11367",
+                      "name": "Battery",
+                      "type": "GROUP",
+                      "box": [
+                        336.67,
+                        20.5,
+                        27.33,
+                        13
+                      ],
+                      "radius": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED",
+                      "children": [
+                        {
+                          "id": "I2187:11842;523:4116;759:11368",
+                          "name": "Border",
+                          "type": "RECTANGLE",
+                          "box": [
+                            336.67,
+                            20.5,
+                            25,
+                            13
+                          ],
+                          "strokes": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "strokeWeight": 1,
+                          "radius": 4.3,
+                          "opacity": 0.35
+                        },
+                        {
+                          "id": "I2187:11842;523:4116;759:11369",
+                          "name": "Cap",
+                          "type": "VECTOR",
+                          "box": [
+                            362.67,
+                            25.28,
+                            1.33,
+                            4.08
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "opacity": 0.4
+                        },
+                        {
+                          "id": "I2187:11842;523:4116;759:11370",
+                          "name": "Capacity",
+                          "type": "RECTANGLE",
+                          "box": [
+                            338.67,
+                            22.5,
+                            21,
+                            9
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "radius": 2.5
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2187:11843",
+      "name": "Vector 142",
+      "type": "VECTOR",
+      "box": [
+        32,
+        123,
+        338,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "strokeWeight": 4
+    },
+    {
+      "id": "2187:11844",
+      "name": "Vector 143",
+      "type": "VECTOR",
+      "box": [
+        32,
+        123,
+        338,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#B48247"
+        }
+      ],
+      "strokeWeight": 4
+    },
+    {
+      "id": "2187:11845",
+      "name": "연관 키워드를 선택해주세요",
+      "type": "TEXT",
+      "box": [
+        71,
+        359,
+        261,
+        36
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "text": "연관 키워드를 선택해주세요",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 24,
+      "lineHeightPx": 36,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "CENTER"
+    },
+    {
+      "id": "2187:11846",
+      "name": "(최대 3개 선택가능)",
+      "type": "TEXT",
+      "box": [
+        134,
+        395,
+        134,
+        20
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#A2A2A2"
+        }
+      ],
+      "text": "(최대 3개 선택가능)",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 17,
+      "lineHeightPx": 20.29,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "CENTER"
+    },
+    {
+      "id": "2187:11847",
+      "name": "Rectangle 34624887",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        635,
+        402,
+        239
+      ],
+      "fills": [
+        {
+          "type": "GRADIENT_LINEAR",
+          "stops": [
+            "#00134B@0",
+            "#1A4B8E@0.65",
+            "#429EF4@1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2187:11848",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        28,
+        451,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11848;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            43,
+            453,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "컨디셔닝",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11849",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        112,
+        451,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11849;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            127,
+            453,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "재활운동",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11850",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        196,
+        451,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11850;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            211,
+            453,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "체형교정",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11851",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        279,
+        451,
+        88,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11851;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            294.5,
+            453,
+            57,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "기능성운동",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11852",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        28,
+        485,
+        100,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11852;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            44,
+            487,
+            68,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "선수트레이닝",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11853",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        137,
+        485,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11853;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            152,
+            487,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "아동발달",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11854",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        221,
+        485,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11854;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            236,
+            487,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "방문재활",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11855",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        304,
+        485,
+        71,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11855;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            319,
+            487,
+            41,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "1:1 지도",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11856",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        28,
+        519,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11856;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            43,
+            521,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "필라테스",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11857",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        112,
+        519,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11857;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            127,
+            521,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "특수치료",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11858",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        196,
+        519,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11858;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            211,
+            521,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "체형분석",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11859",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        279,
+        519,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11859;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            294,
+            521,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "식단관리",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11860",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        28,
+        553,
+        88,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11860;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            43.5,
+            555,
+            57,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "시니어운동",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11861",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        125,
+        553,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11861;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            140,
+            555,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "수술재활",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11862",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "box": [
+        209,
+        553,
+        75,
+        26
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 82,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:530",
+      "children": [
+        {
+          "id": "I2187:11862;224:521",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            224,
+            555,
+            45,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "원장직강",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11863",
+      "name": "Frame 1739336865",
+      "type": "FRAME",
+      "box": [
+        14,
+        740,
+        370,
+        69
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#10336F",
+          "opacity": 0.41
+        }
+      ],
+      "radius": 16,
+      "effects": [
+        {
+          "type": "GLASS"
+        },
+        {
+          "type": "DROP_SHADOW",
+          "color": "#062246",
+          "opacity": 0.25,
+          "offset": [
+            4,
+            4
+          ],
+          "radius": 10
+        }
+      ],
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "paddingTop": 24,
+      "paddingBottom": 24,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "children": [
+        {
+          "id": "2187:11864",
+          "name": "선택완료",
+          "type": "TEXT",
+          "box": [
+            171,
+            765,
+            56,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2",
+              "opacity": 0.85
+            }
+          ],
+          "text": "선택완료",
+          "fontFamily": "Pretendard",
+          "fontWeight": 400,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2187:11865",
+      "name": "Q3",
+      "type": "TEXT",
+      "box": [
+        178,
+        311,
+        49,
+        36
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#C6A75E"
+        }
+      ],
+      "text": "Q3",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 36,
+      "lineHeightPx": 36,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "CENTER"
+    },
+    {
+      "id": "2187:11866",
+      "name": "Navigation bar_back",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        54,
+        402,
+        56
+      ],
+      "componentId": "224:507",
+      "children": [
+        {
+          "id": "I2187:11866;194:565",
+          "name": "Rectangle 34624783",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            54,
+            402,
+            56
+          ]
+        },
+        {
+          "id": "I2187:11866;224:371",
+          "name": "back",
+          "type": "INSTANCE",
+          "box": [
+            16,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:653",
+          "children": [
+            {
+              "id": "I2187:11866;224:371;179:543",
+              "name": "arrow_back_ios",
+              "type": "GROUP",
+              "box": [
+                26,
+                70,
+                24,
+                24
+              ],
+              "children": [
+                {
+                  "id": "I2187:11866;224:371;179:538",
+                  "name": "Bounding box",
+                  "type": "RECTANGLE",
+                  "box": [
+                    26,
+                    70,
+                    24,
+                    24
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#D9D9D9"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2187:11866;224:371;179:542",
+                  "name": "arrow_back_ios",
+                  "type": "VECTOR",
+                  "box": [
+                    26,
+                    72,
+                    11.78,
+                    20
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I2187:11866;224:376",
+          "name": "setting",
+          "type": "INSTANCE",
+          "box": [
+            341,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:656"
+        }
+      ]
+    }
+  ]
+}

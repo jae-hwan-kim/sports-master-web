@@ -9,8 +9,6 @@ import {
   Platform,
   Pressable,
   ScrollView,
-  Text,
-  TextInput,
   View,
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -19,6 +17,7 @@ import * as DocumentPicker from 'expo-document-picker'
 import * as ImagePicker from 'expo-image-picker'
 
 import { ArrowBackIcon } from '@/assets/icons'
+import { Text, TextInput } from '@/components/AppText'
 import { TextField } from '@/components/TextField'
 import { ImageUploadGrid } from '@/components/profile/ImageUploadGrid'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'

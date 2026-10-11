@@ -1,6 +1,7 @@
-import { Pressable, Text, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 
 import { CustomerIcon, MasterIcon } from '@/assets/icons'
+import { Text } from '@/components/AppText'
 
 type RoleCardVariant = 'master' | 'customer'
 

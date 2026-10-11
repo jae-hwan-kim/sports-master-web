@@ -1,5 +1,6 @@
-import { Pressable, Text, View } from 'react-native'
-import { moderateScale, scale } from 'react-native-size-matters'
+import { Pressable, View } from 'react-native'
+
+import { Text } from '@/components/AppText'
 
 type CheckboxProps = {
   label: string
@@ -14,15 +15,15 @@ export function Checkbox({ label, checked, onToggle }: CheckboxProps) {
         className={`items-center justify-center rounded border ${
           checked ? 'border-primary bg-primary' : 'border-gray1 bg-transparent'
         }`}
-        style={{ height: scale(20), width: scale(20) }}
+        style={{ height: 20, width: 20 }}
       >
         {checked && (
-          <Text className="font-medium text-white" style={{ fontSize: moderateScale(11) }}>
+          <Text className="font-medium text-white" style={{ fontSize: 11 }}>
             ✓
           </Text>
         )}
       </View>
-      <Text className="font-medium text-gray3" style={{ fontSize: moderateScale(13) }}>
+      <Text className="font-medium text-gray3" style={{ fontSize: 13 }}>
         {label}
       </Text>
     </Pressable>

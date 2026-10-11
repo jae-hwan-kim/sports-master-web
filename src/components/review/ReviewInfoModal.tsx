@@ -1,5 +1,7 @@
-import { Modal, Pressable, Text, View } from 'react-native'
+import { Modal, Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { Text } from '@/components/AppText'
 
 type Props = {
   visible: boolean

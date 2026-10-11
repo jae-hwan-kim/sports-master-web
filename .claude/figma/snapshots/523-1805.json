@@ -1,0 +1,726 @@
+{
+  "id": "523:1805",
+  "name": "나중에 선택하기",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    874
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#F2F2F2"
+    }
+  ],
+  "children": [
+    {
+      "id": "523:1806",
+      "name": "상단여백",
+      "type": "FRAME",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "children": [
+        {
+          "id": "523:1807",
+          "name": "Background",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:1808",
+      "name": "Navigation Bar",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        54,
+        402,
+        56
+      ],
+      "componentId": "224:507",
+      "children": [
+        {
+          "id": "I523:1808;194:565",
+          "name": "Rectangle 34624783",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            54,
+            402,
+            56
+          ]
+        },
+        {
+          "id": "I523:1808;224:376",
+          "name": "setting",
+          "type": "INSTANCE",
+          "box": [
+            341,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:656"
+        }
+      ]
+    },
+    {
+      "id": "523:1809",
+      "name": "Description",
+      "type": "TEXT",
+      "box": [
+        26,
+        186,
+        223,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "물리치료사, 건강운동관리사 자격증 이미지 첨부",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:1810",
+      "name": "Title",
+      "type": "TEXT",
+      "box": [
+        26,
+        144,
+        104,
+        33
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#000000"
+        }
+      ],
+      "text": "명인 인증",
+      "fontFamily": "Pretendard",
+      "fontWeight": 800,
+      "fontSize": 28,
+      "lineHeightPx": 33.41,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:1811",
+      "name": "자격증 업로드",
+      "type": "INSTANCE",
+      "box": [
+        50,
+        262,
+        300,
+        200
+      ],
+      "componentId": "426:1680",
+      "children": [
+        {
+          "id": "I523:1811;426:1638",
+          "name": "Rectangle 34624682",
+          "type": "RECTANGLE",
+          "box": [
+            50,
+            262,
+            300,
+            200
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 16,
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#000000",
+              "opacity": 0.1,
+              "offset": [
+                0,
+                0
+              ],
+              "radius": 12.7
+            }
+          ]
+        },
+        {
+          "id": "I523:1811;426:1642",
+          "name": "Rectangle 34624818",
+          "type": "VECTOR",
+          "box": [
+            75,
+            287,
+            250,
+            150
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B48247"
+            }
+          ],
+          "strokeWeight": 1,
+          "radius": 8
+        },
+        {
+          "id": "I523:1811;426:1639",
+          "name": "Frame 1739336827",
+          "type": "FRAME",
+          "box": [
+            137,
+            275,
+            125,
+            24
+          ],
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "I523:1811;426:1640",
+              "name": "이미지 업로드",
+              "type": "TEXT",
+              "box": [
+                145,
+                275,
+                109,
+                24
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#07091C"
+                }
+              ],
+              "text": "이미지 업로드",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 20,
+              "lineHeightPx": 23.87,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I523:1811;426:1648",
+          "name": "식별 가능한 물리치료사 or 건강운동관리사 자격증 이미지를 첨부해 주세요",
+          "type": "TEXT",
+          "box": [
+            99,
+            330,
+            200,
+            28
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#74768E"
+            }
+          ],
+          "text": "식별 가능한 물리치료사 or 건강운동관리사\n자격증 이미지를 첨부해 주세요",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 12,
+          "lineHeightPx": 14.32,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER"
+        },
+        {
+          "id": "I523:1811;426:1649",
+          "name": "add more",
+          "type": "INSTANCE",
+          "box": [
+            178,
+            383,
+            44,
+            44
+          ],
+          "componentId": "179:660",
+          "children": [
+            {
+              "id": "I523:1811;426:1649;179:525",
+              "name": "add_circle",
+              "type": "GROUP",
+              "box": [
+                188,
+                393,
+                24,
+                24
+              ],
+              "children": [
+                {
+                  "id": "I523:1811;426:1649;179:520",
+                  "name": "Bounding box",
+                  "type": "RECTANGLE",
+                  "box": [
+                    188,
+                    393,
+                    24,
+                    24
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#D9D9D9"
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:1811;426:1649;179:524",
+                  "name": "add_circle",
+                  "type": "VECTOR",
+                  "box": [
+                    190,
+                    395,
+                    20,
+                    20
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#74768E"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:1812",
+      "name": "Selection Option",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        498,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#C6A75E"
+        }
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:833",
+      "children": [
+        {
+          "id": "I523:1812;179:358",
+          "name": "선택완료",
+          "type": "TEXT",
+          "box": [
+            171.5,
+            513,
+            59,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "선택완료",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 17,
+          "lineHeightPx": 20.29,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "523:1813",
+      "name": "Select Input",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        564,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:834",
+      "children": [
+        {
+          "id": "I523:1813;179:356",
+          "name": "다시선택",
+          "type": "TEXT",
+          "box": [
+            147.5,
+            579,
+            107,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "나중에 선택하기",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 17,
+          "lineHeightPx": 20.29,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "523:1814",
+      "name": "Background",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        0,
+        402,
+        874
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C",
+          "opacity": 0.6
+        }
+      ]
+    },
+    {
+      "id": "523:1815",
+      "name": "Popup",
+      "type": "INSTANCE",
+      "box": [
+        32,
+        324,
+        340,
+        230
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.1,
+          "offset": [
+            0,
+            0
+          ],
+          "radius": 12.7
+        }
+      ],
+      "componentId": "426:1859",
+      "children": [
+        {
+          "id": "I523:1815;426:1825",
+          "name": "Rectangle 34624682",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            324,
+            340,
+            230
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 16
+        },
+        {
+          "id": "I523:1815;426:1826",
+          "name": "Frame 1739336827",
+          "type": "FRAME",
+          "box": [
+            63,
+            412,
+            276,
+            19
+          ],
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "I523:1815;426:1827",
+              "name": "업로드 전까지 이용에 제한이 있습니다.",
+              "type": "TEXT",
+              "box": [
+                71,
+                412,
+                260,
+                19
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "업로드 전까지 이용에 제한이 있습니다.",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 16,
+              "lineHeightPx": 19.09,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I523:1815;426:1829",
+          "name": "Frame 1739336828",
+          "type": "FRAME",
+          "box": [
+            52,
+            368,
+            300,
+            28
+          ],
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 16,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "primaryAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "children": [
+            {
+              "id": "I523:1815;426:1830",
+              "name": "나중에 업로드 하시겠습니까?",
+              "type": "TEXT",
+              "box": [
+                64,
+                368,
+                276,
+                29
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#000000"
+                }
+              ],
+              "text": "나중에 업로드 하시겠습니까?",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 24,
+              "lineHeightPx": 28.64,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I523:1815;426:1832",
+          "name": "Select_1",
+          "type": "INSTANCE",
+          "box": [
+            52,
+            480,
+            145,
+            50
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#C6A75E"
+            }
+          ],
+          "radius": 8,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "paddingTop": 16,
+          "paddingBottom": 16,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:831",
+          "children": [
+            {
+              "id": "I523:1815;426:1832;179:346",
+              "name": "로그인",
+              "type": "TEXT",
+              "box": [
+                85.5,
+                495,
+                78,
+                20
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "지금 업로드",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 17,
+              "lineHeightPx": 20.29,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I523:1815;426:1833",
+          "name": "Select_2",
+          "type": "INSTANCE",
+          "box": [
+            205,
+            480,
+            145,
+            50
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#102343"
+            }
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#4A5198"
+            }
+          ],
+          "strokeWeight": 1,
+          "radius": 8,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "paddingTop": 16,
+          "paddingBottom": 16,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:832",
+          "children": [
+            {
+              "id": "I523:1815;426:1833;179:347",
+              "name": "회원가입",
+              "type": "TEXT",
+              "box": [
+                255,
+                495,
+                45,
+                20
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "나중에",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 17,
+              "lineHeightPx": 20.29,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

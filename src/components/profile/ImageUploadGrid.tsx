@@ -1,8 +1,10 @@
 import { useCallback } from 'react'
-import { FlatList, Pressable, Text, View } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
+
+import { Text } from '@/components/AppText'
 
 type Props = {
   images: string[]

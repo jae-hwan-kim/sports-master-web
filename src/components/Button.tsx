@@ -1,5 +1,6 @@
-import { ActivityIndicator, Pressable, Text } from 'react-native'
-import { moderateScale } from 'react-native-size-matters'
+import { ActivityIndicator, Pressable } from 'react-native'
+
+import { Text } from '@/components/AppText'
 
 type ButtonVariant = 'primary' | 'gold' | 'social' | 'socialIcon'
 
@@ -67,7 +68,7 @@ export function Button({
           {icon}
           <Text
             className={`font-medium ${hasWhiteText ? 'text-[#F2F2F2]' : 'text-black'}`}
-            style={{ fontSize: moderateScale(17) }}
+            style={{ fontSize: 17 }}
           >
             {label}
           </Text>

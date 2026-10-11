@@ -1,8 +1,8 @@
 import { forwardRef, useState } from 'react'
-import { Pressable, Text, TextInput, TextInputProps, View } from 'react-native'
-import { moderateScale } from 'react-native-size-matters'
+import { Pressable, TextInputProps, View } from 'react-native'
 
 import { VisibilityIcon } from '@/assets/icons'
+import { Text, TextInput } from '@/components/AppText'
 
 type TextFieldProps = TextInputProps & {
   label?: string
@@ -39,7 +39,8 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
         <TextInput
           ref={ref}
           className="flex-1 font-medium text-black"
-          style={{ fontSize: moderateScale(16) }}
+          style={{ fontSize: 16, paddingVertical: 0, textAlignVertical: 'center' }}
+          numberOfLines={1}
           placeholderTextColor="rgba(0,0,0,0.2)"
           placeholder={label}
           secureTextEntry={secureToggle ? isSecure : secureTextEntry}
@@ -74,7 +75,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
           accessibilityRole="alert"
           accessibilityLiveRegion="polite"
           className="mt-1 pl-4 font-medium text-[#ea4335]"
-          style={{ fontSize: moderateScale(13) }}
+          style={{ fontSize: 13 }}
         >
           {errorMessage}
         </Text>

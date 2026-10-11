@@ -1,5 +1,7 @@
 import { useCallback } from 'react'
-import { FlatList, Pressable, Text } from 'react-native'
+import { FlatList, Pressable } from 'react-native'
+
+import { Text } from '@/components/AppText'
 
 type Props = {
   keywords: string[]

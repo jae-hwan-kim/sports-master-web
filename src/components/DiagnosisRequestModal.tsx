@@ -1,6 +1,7 @@
-import { Image, Modal, Pressable, ScrollView, Text, View } from 'react-native'
+import { Image, Modal, Pressable, ScrollView, View } from 'react-native'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
+import { Text } from '@/components/AppText'
 import { formatDateTime } from '@/utils/date'
 
 type Props = {

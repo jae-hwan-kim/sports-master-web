@@ -2,14 +2,14 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { moderateScale } from 'react-native-size-matters'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { ArrowNextIcon } from '@/assets/icons'
 import bgImage from '@/assets/icons/background.png'
+import { Text } from '@/components/AppText'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 export function MasterWelcomeScreen() {
@@ -45,7 +45,7 @@ export function MasterWelcomeScreen() {
         >
           <Text
             className="text-center font-pretendard-extrabold leading-9 text-white"
-            style={{ fontSize: moderateScale(28) }}
+            style={{ fontSize: 28 }}
           >
             명인님 환영합니다!
           </Text>
@@ -60,10 +60,7 @@ export function MasterWelcomeScreen() {
             accessibilityLabel="눌러서 홈으로"
             className="flex-row items-center self-end py-3"
           >
-            <Text
-              className="font-pretendard-semibold text-[#F2F2F2]"
-              style={{ fontSize: moderateScale(12) }}
-            >
+            <Text className="font-pretendard-semibold text-[#F2F2F2]" style={{ fontSize: 12 }}>
               눌러서 홈으로
             </Text>
             <ArrowNextIcon color="#F2F2F2" />

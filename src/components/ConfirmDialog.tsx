@@ -1,4 +1,6 @@
-import { ActivityIndicator, Modal, Pressable, Text, View } from 'react-native'
+import { ActivityIndicator, Modal, Pressable, View } from 'react-native'
+
+import { Text } from '@/components/AppText'
 
 type ConfirmDialogProps = {
   visible: boolean

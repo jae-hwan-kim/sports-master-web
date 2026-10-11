@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { ScrollView, Text, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import { Text } from '@/components/AppText'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 

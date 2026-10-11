@@ -1,5 +1,4 @@
 import { Pressable, View } from 'react-native'
-import { scale } from 'react-native-size-matters'
 
 type StarIconProps = {
   size: number
@@ -19,7 +18,7 @@ export function StarRating({ value, max = 5, onChange, size = 24, renderStar }: 
   const stars = Array.from({ length: max }, (_, index) => index + 1)
 
   return (
-    <View className="flex-row items-center" style={{ gap: scale(4) }}>
+    <View className="flex-row items-center" style={{ gap: 4 }}>
       {stars.map((star) => {
         const filled = star <= value
         const content = renderStar({ size, filled })

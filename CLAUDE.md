@@ -189,13 +189,16 @@ if (status !== 'granted') { /* 안내 UI */ }
 | 임의값 `w-[123px]` | 지원 |
 | `overflow-hidden` | iOS/Android 동작 차이 주의 |
 
-### react-native-size-matters 사용 기준 (웹/시뮬레이터 불일치 방지)
+### 기기 크기 대응 (Figma 1px = RN 1pt)
 
-`scale`/`verticalScale`은 `Dimensions.get('window')` 기준 기기 가로/세로 길이에 비례해서 값을 곱하는 함수라, **기기 화면 크기가 다르면 같은 코드도 다른 px로 렌더링됨** — 특히 웹 프리뷰 뷰포트 높이가 라이브러리 기본 기준값(680)과 다르면 시뮬레이터와 눈에 띄게 달라 보일 수 있음(예: 뷰포트 812에서 `verticalScale(50)` ≈ 59.7px).
+실기기에서 크기가 달라지는 원인은 ① 시스템 글자 크기 설정 ② 기기 폭 비례 스케일 ③ iPad 네이티브 레이아웃 ④ 폰트 파일 누락(시스템 폰트 대체)이다.
 
-- **Figma가 고정 px로 명시한 요소(버튼/입력창 높이, 아이콘 크기 등)는 절대 `scale`/`verticalScale`을 쓰지 말 것** — `h-[50px]`처럼 className 고정값 사용. 모든 플랫폼에서 항상 동일한 값이어야 함.
-- `moderateScale`(폰트 크기 등 약간의 반응형이 허용되는 값)만 제한적으로 허용. 그마저도 웹/시뮬레이터 차이가 체감되면 고정값으로 전환 고려.
-- 화면 작업 후 반드시 Expo 웹 프리뷰와 실기기/시뮬레이터 양쪽에서 눈으로 비교해 크기 차이가 없는지 확인.
+- **크기는 고정, 공간은 유연**: 글자·버튼·아이콘 크기는 Figma 값 그대로 고정(`text-[17px]`, `h-[50px]`). 화면 폭 차이는 `flex-1`, `w-full` + 좌우 padding, `ScrollView`로 흡수. 고정 폭(`w-[340px]`)은 375pt 기기에서도 들어가는지 확인
+- **`react-native-size-matters` 등 폭 비례 스케일 금지** (eslint 차단, 패키지 제거됨)
+- **`Text`/`TextInput`은 `@/components/AppText`에서 import** (eslint 차단) — 시스템 글자 확대 상한 `MAX_FONT_SCALE = 1.2`, Android `includeFontPadding: false` 적용. 고정 높이 컨테이너는 1.2배 글자에서도 잘리지 않아야 함
+- **폰트**: `fontFamily`로 쓰는 Pretendard weight는 반드시 `src/assets/fonts`에 있고 `App.tsx` `useFonts`에 등록돼 있어야 함 (Android는 custom font에 `fontWeight`가 적용되지 않음 → weight별 family 사용)
+- **iPad**: `supportsTablet: false` — iPhone 호환 모드로 Figma와 동일하게 표시 (iPad 전용 디자인 생기기 전까지 유지)
+- 화면 작업 후 iPhone SE / 16 Pro / Pro Max + 시스템 글자 최대 설정에서 확인
 
 ---
 
@@ -209,6 +212,13 @@ Figma → 코드 워크플로우는 화면 하나당 여러 에이전트를 호�
 - **저비용 모델/effort 활용**: 단순 필터링·요약처럼 깊은 추론이 필요 없는 단계는 `effort: 'low'`, `model: 'haiku'` 등을 지정 (`dto-to-module.workflow.js`의 Notion 규칙 추출 단계 참고). 코드 생성/수정처럼 품질이 중요한 단계만 기본 모델 유지.
 - **화면 수 과다 생성 방지**: Figma 분석 단계에서 같은 화면의 상태 변형(입력중/에러/포커스 등)을 별도 화면으로 쪼개지 않도록 — 화면 수가 늘어나면 파이프라인 전체(생성+리뷰+수정)가 그만큼 반복돼 토큰이 배로 늘어남.
 - **재검증 워크플로우는 필요할 때만 수동 실행**: `design-fidelity-review`처럼 사후 정밀 대조가 필요한 워크플로우는 생성 파이프라인에 자동으로 끼워넣지 말고 별도 실행으로 유지 — 매번 자동 실행되면 비용이 누적됨.
+
+---
+
+## Figma 동기화 (/figma-sync)
+
+- 감시 대상·화면 매핑: `.claude/figma/registry.json` (스냅샷: `.claude/figma/snapshots/`) — 스크립트로만 갱신, 직접 편집은 `screen`/`ignore` 필드만
+- 새 화면을 Figma로 만들었으면 반드시 `pnpm figma:sync link <nodeId> <ScreenName>`으로 등록 (미등록 시 다음 sync에서 "신규 프레임"으로 다시 잡힘)
 
 ---
 
@@ -237,4 +247,5 @@ Figma → 코드 워크플로우는 화면 하나당 여러 에이전트를 호�
 □ 퍼미션 → 거부 UI 처리
 □ typecheck 통과 (pnpm typecheck)
 □ lint 통과 (pnpm lint:fix)
+□ Text/TextInput → @/components/AppText, 폭 비례 스케일 없음
 ```

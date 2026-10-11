@@ -1,9 +1,10 @@
 import { useCallback, useState } from 'react'
-import { ActivityIndicator, FlatList, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
 import LogoSvg from '@/assets/icons/logo.svg'
+import { Text } from '@/components/AppText'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { DiagnosisRequestModal } from '@/components/DiagnosisRequestModal'
 import { useDeleteDiagnosisRequest } from '@/hooks/useDeleteDiagnosisRequest'

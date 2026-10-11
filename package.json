@@ -12,7 +12,9 @@
     "generate-types": "openapi-typescript $SWAGGER_URL --output ./src/types/schema.ts",
     "fmt": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "lint:fix": "eslint . --fix",
-    "fix:style": "pnpm run fmt && pnpm run lint:fix"
+    "fix:style": "pnpm run fmt && pnpm run lint:fix",
+    "figma:sync": "node --env-file-if-exists=.env scripts/figma-sync.mjs",
+    "device:check": "node --env-file-if-exists=.env scripts/device-check.mjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
@@ -49,7 +51,6 @@
     "react-native-reanimated": "^4.5.0",
     "react-native-safe-area-context": "^5.7.0",
     "react-native-screens": "^4.25.2",
-    "react-native-size-matters": "^0.4.2",
     "react-native-svg": "^15.15.4",
     "react-native-web": "^0.21.2",
     "react-native-worklets": "^0.10.0",

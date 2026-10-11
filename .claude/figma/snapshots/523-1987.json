@@ -1,0 +1,3225 @@
+{
+  "id": "523:1987",
+  "name": "로그인_텍스트 숨김",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    874
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#F2F2F2"
+    }
+  ],
+  "children": [
+    {
+      "id": "523:1988",
+      "name": "상단여백",
+      "type": "FRAME",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "children": [
+        {
+          "id": "523:1989",
+          "name": "Background",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:1990",
+      "name": "Navigation Bar",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        54,
+        402,
+        56
+      ],
+      "componentId": "224:507",
+      "children": [
+        {
+          "id": "I523:1990;194:565",
+          "name": "Rectangle 34624783",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            54,
+            402,
+            56
+          ]
+        },
+        {
+          "id": "I523:1990;224:371",
+          "name": "back",
+          "type": "INSTANCE",
+          "box": [
+            16,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:653",
+          "children": [
+            {
+              "id": "I523:1990;224:371;179:543",
+              "name": "arrow_back_ios",
+              "type": "GROUP",
+              "box": [
+                26,
+                70,
+                24,
+                24
+              ],
+              "children": [
+                {
+                  "id": "I523:1990;224:371;179:538",
+                  "name": "Bounding box",
+                  "type": "RECTANGLE",
+                  "box": [
+                    26,
+                    70,
+                    24,
+                    24
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#D9D9D9"
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:1990;224:371;179:542",
+                  "name": "arrow_back_ios",
+                  "type": "VECTOR",
+                  "box": [
+                    26,
+                    72,
+                    11.78,
+                    20
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#07091C"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I523:1990;224:376",
+          "name": "setting",
+          "type": "INSTANCE",
+          "box": [
+            341,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:656"
+        }
+      ]
+    },
+    {
+      "id": "523:1991",
+      "name": "Select Input",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        398,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:834",
+      "children": [
+        {
+          "id": "I523:1991;179:356",
+          "name": "다시선택",
+          "type": "TEXT",
+          "box": [
+            178.5,
+            413,
+            45,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "로그인",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 17,
+          "lineHeightPx": 20.29,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "523:1992",
+      "name": "Vector 95",
+      "type": "VECTOR",
+      "box": [
+        26,
+        548,
+        100,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 1
+    },
+    {
+      "id": "523:1993",
+      "name": "Vector 96",
+      "type": "VECTOR",
+      "box": [
+        276,
+        548,
+        100,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 1
+    },
+    {
+      "id": "523:1994",
+      "name": "Login Alternative Text",
+      "type": "TEXT",
+      "box": [
+        140,
+        540,
+        114,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "or 아래 계정으로 로그인",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:1995",
+      "name": "Vector 97",
+      "type": "VECTOR",
+      "box": [
+        26,
+        654,
+        87,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 1
+    },
+    {
+      "id": "523:1996",
+      "name": "Vector 98",
+      "type": "VECTOR",
+      "box": [
+        288,
+        654,
+        88,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 1
+    },
+    {
+      "id": "523:1997",
+      "name": "No Account Question",
+      "type": "TEXT",
+      "box": [
+        127,
+        646,
+        92,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "계정이 없으신가요? ",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:1998",
+      "name": "Sign Up",
+      "type": "TEXT",
+      "box": [
+        230,
+        646,
+        45,
+        16
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "text": "회원가입",
+      "fontFamily": "Pretendard",
+      "fontWeight": 600,
+      "fontSize": 13,
+      "lineHeightPx": 15.51,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:1999",
+      "name": "Recent Items Text",
+      "type": "TEXT",
+      "box": [
+        26,
+        186,
+        191,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "최근에 이용한 항목으로  로그인 해주세요",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2000",
+      "name": "txtfield",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        262,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 14,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:930",
+      "children": [
+        {
+          "id": "I523:2000;181:931",
+          "name": "글 작성하는 곳",
+          "type": "TEXT",
+          "box": [
+            42,
+            277,
+            320,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#07091C"
+            }
+          ],
+          "text": "yourid@example.com",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        }
+      ]
+    },
+    {
+      "id": "523:2001",
+      "name": "txtfield",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        328,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 14,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:930",
+      "children": [
+        {
+          "id": "I523:2001;181:931",
+          "name": "글 작성하는 곳",
+          "type": "TEXT",
+          "box": [
+            42,
+            343,
+            320,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#07091C"
+            }
+          ],
+          "text": "********",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        }
+      ]
+    },
+    {
+      "id": "523:2002",
+      "name": "Action Button",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        576,
+        112,
+        50
+      ],
+      "componentId": "413:567",
+      "children": [
+        {
+          "id": "I523:2002;413:566",
+          "name": "Frame 1707483606",
+          "type": "FRAME",
+          "box": [
+            26,
+            576,
+            112,
+            50
+          ],
+          "children": [
+            {
+              "id": "I523:2002;413:532",
+              "name": "Rectangle 34624807",
+              "type": "RECTANGLE",
+              "box": [
+                26,
+                576,
+                111,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 8
+            }
+          ]
+        },
+        {
+          "id": "I523:2002;413:537",
+          "name": "Icons/Icon/Google",
+          "type": "INSTANCE",
+          "box": [
+            69.39,
+            589,
+            24.22,
+            24
+          ],
+          "componentId": "408:522",
+          "children": [
+            {
+              "id": "I523:2002;413:537;345:38242",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                81.5,
+                598.82,
+                11.62,
+                11.27
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#4285F4"
+                }
+              ]
+            },
+            {
+              "id": "I523:2002;413:537;345:38243",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                70.68,
+                603.28,
+                18.83,
+                9.72
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#34A853"
+                }
+              ]
+            },
+            {
+              "id": "I523:2002;413:537;345:38244",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                69.39,
+                595.61,
+                5.33,
+                10.78
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FBBC05"
+                }
+              ]
+            },
+            {
+              "id": "I523:2002;413:537;345:38245",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                70.68,
+                589,
+                18.92,
+                9.72
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#EA4335"
+                }
+              ]
+            },
+            {
+              "id": "I523:2002;413:537;345:38246",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                69.39,
+                589,
+                24.22,
+                24
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2003",
+      "name": "Action Button",
+      "type": "INSTANCE",
+      "box": [
+        146,
+        576,
+        110,
+        50
+      ],
+      "componentId": "413:588",
+      "children": [
+        {
+          "id": "I523:2003;413:586",
+          "name": "Frame 1707483608",
+          "type": "FRAME",
+          "box": [
+            146,
+            576,
+            110,
+            50
+          ],
+          "children": [
+            {
+              "id": "I523:2003;413:568",
+              "name": "Frame 1707483607",
+              "type": "FRAME",
+              "box": [
+                146,
+                576,
+                110,
+                50
+              ],
+              "children": [
+                {
+                  "id": "I523:2003;413:535",
+                  "name": "Rectangle 34624809",
+                  "type": "RECTANGLE",
+                  "box": [
+                    146,
+                    576,
+                    110,
+                    50
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "strokes": [
+                    {
+                      "type": "SOLID",
+                      "color": "#D9D9D9"
+                    }
+                  ],
+                  "strokeWeight": 1,
+                  "radius": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I523:2003;413:587",
+          "name": "카카오로고",
+          "type": "INSTANCE",
+          "box": [
+            189,
+            589,
+            24,
+            24
+          ],
+          "componentId": "408:624",
+          "children": [
+            {
+              "id": "I523:2003;413:587;408:620",
+              "name": "Group 40",
+              "type": "GROUP",
+              "box": [
+                189,
+                590,
+                24,
+                22.15
+              ],
+              "children": [
+                {
+                  "id": "I523:2003;413:587;408:606",
+                  "name": "Union",
+                  "type": "BOOLEAN_OPERATION",
+                  "box": [
+                    189,
+                    590,
+                    24,
+                    22.15
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#3B1E1E"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "id": "I523:2003;413:587;408:603",
+                      "name": "Polygon 5",
+                      "type": "VECTOR",
+                      "box": [
+                        191.47,
+                        605.55,
+                        7.93,
+                        8.44
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ],
+                      "radius": 0.29
+                    },
+                    {
+                      "id": "I523:2003;413:587;408:605",
+                      "name": "Ellipse 49",
+                      "type": "ELLIPSE",
+                      "box": [
+                        189,
+                        590,
+                        24,
+                        18.91
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2004",
+      "name": "Action Button",
+      "type": "INSTANCE",
+      "box": [
+        264,
+        576,
+        112,
+        50
+      ],
+      "componentId": "413:605",
+      "children": [
+        {
+          "id": "I523:2004;413:604",
+          "name": "Frame 1707483609",
+          "type": "FRAME",
+          "box": [
+            264,
+            576,
+            112,
+            50
+          ],
+          "children": [
+            {
+              "id": "I523:2004;413:533",
+              "name": "Rectangle 34624808",
+              "type": "RECTANGLE",
+              "box": [
+                264,
+                576,
+                111,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 8
+            }
+          ]
+        },
+        {
+          "id": "I523:2004;408:657",
+          "name": "애플로고",
+          "type": "FRAME",
+          "box": [
+            307.39,
+            589,
+            24.22,
+            24
+          ],
+          "children": [
+            {
+              "id": "I523:2004;408:646",
+              "name": "image 2",
+              "type": "RECTANGLE",
+              "box": [
+                310.39,
+                589,
+                19,
+                24
+              ],
+              "fills": [
+                {
+                  "type": "IMAGE",
+                  "image": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2005",
+      "name": "Login Title",
+      "type": "TEXT",
+      "box": [
+        26,
+        144,
+        73,
+        33
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C"
+        }
+      ],
+      "text": "로그인",
+      "fontFamily": "Pretendard",
+      "fontWeight": 800,
+      "fontSize": 28,
+      "lineHeightPx": 33.41,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2006",
+      "name": "Disclaimer Container",
+      "type": "FRAME",
+      "box": [
+        94,
+        770,
+        216,
+        34
+      ],
+      "layoutMode": "VERTICAL",
+      "itemSpacing": 4,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "children": [
+        {
+          "id": "523:2007",
+          "name": "Disclaimer Text",
+          "type": "TEXT",
+          "box": [
+            94,
+            770,
+            216,
+            15
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#74768E"
+            }
+          ],
+          "text": "로그인시 아래 내용에 동의하는 것으로 간주됩니다.",
+          "fontFamily": "Pretendard",
+          "fontWeight": 400,
+          "fontSize": 10,
+          "lineHeightPx": 14.5,
+          "letterSpacing": 0.2,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "HUG"
+        },
+        {
+          "id": "523:2008",
+          "name": "Terms Container",
+          "type": "GROUP",
+          "box": [
+            133.5,
+            789,
+            137,
+            15
+          ],
+          "radius": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "children": [
+            {
+              "id": "523:2009",
+              "name": "Privacy Policy",
+              "type": "TEXT",
+              "box": [
+                133.5,
+                789,
+                74,
+                15
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "개인정보 처리방침",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 10,
+              "lineHeightPx": 14.5,
+              "letterSpacing": 0.2,
+              "textAlignHorizontal": "CENTER"
+            },
+            {
+              "id": "523:2010",
+              "name": "Terms of Service",
+              "type": "TEXT",
+              "box": [
+                234.5,
+                789,
+                36,
+                15
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "이용약관",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 10,
+              "lineHeightPx": 14.5,
+              "letterSpacing": 0.2,
+              "textAlignHorizontal": "CENTER"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2011",
+      "name": "Auto Login",
+      "type": "TEXT",
+      "box": [
+        132,
+        464,
+        52,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "자동로그인",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2012",
+      "name": "Divider",
+      "type": "TEXT",
+      "box": [
+        193,
+        464,
+        5,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "/",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2013",
+      "name": "Find Password",
+      "type": "TEXT",
+      "box": [
+        202,
+        464,
+        66,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "비밀번호 찾기",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2014",
+      "name": "Keyboard",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        532,
+        402,
+        342
+      ],
+      "layoutMode": "VERTICAL",
+      "itemSpacing": 8,
+      "counterAxisAlignItems": "MAX",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "componentId": "413:1836",
+      "children": [
+        {
+          "id": "I523:2014;5517:36198",
+          "name": "Keyboard",
+          "type": "FRAME",
+          "box": [
+            0,
+            532,
+            402,
+            342
+          ],
+          "layoutMode": "VERTICAL",
+          "paddingTop": 12,
+          "paddingBottom": 10,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "I523:2014;5518:11239",
+              "name": "Background",
+              "type": "INSTANCE",
+              "box": [
+                0,
+                532,
+                402,
+                342
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#D4D4D4",
+                  "opacity": 0.74
+                },
+                {
+                  "type": "SOLID",
+                  "color": "#1B1B1B"
+                },
+                {
+                  "type": "SOLID",
+                  "color": "#E6E9ED"
+                }
+              ],
+              "radius": [
+                27,
+                27,
+                62,
+                62
+              ],
+              "effects": [
+                {
+                  "type": "GLASS"
+                }
+              ],
+              "layoutMode": "VERTICAL",
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "413:934"
+            },
+            {
+              "id": "I523:2014;135:64001",
+              "name": "Autocorrection",
+              "type": "INSTANCE",
+              "box": [
+                0,
+                544,
+                402,
+                25
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 20,
+              "paddingLeft": 22,
+              "paddingRight": 22,
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "413:1707",
+              "children": [
+                {
+                  "id": "I523:2014;135:64001;119:56697",
+                  "name": "Autocomplete Suggestion",
+                  "type": "FRAME",
+                  "box": [
+                    22,
+                    544,
+                    89.33,
+                    25
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL",
+                  "children": [
+                    {
+                      "id": "I523:2014;135:64001;119:56698",
+                      "name": "“The”",
+                      "type": "TEXT",
+                      "box": [
+                        22,
+                        544,
+                        89.33,
+                        25
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1A1A1A"
+                        }
+                      ],
+                      "text": "“The”",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": -0.43,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:2014;135:64001;135:64959",
+                  "name": "Separator",
+                  "type": "FRAME",
+                  "box": [
+                    131.33,
+                    544,
+                    5,
+                    25
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "paddingLeft": 2,
+                  "paddingRight": 2,
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "FIXED",
+                  "children": [
+                    {
+                      "id": "I523:2014;135:64001;135:64960",
+                      "name": "Separator",
+                      "type": "RECTANGLE",
+                      "box": [
+                        133.33,
+                        544,
+                        1,
+                        25
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#CCCCCC"
+                        }
+                      ],
+                      "opacity": 0.1,
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FILL"
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:2014;135:64001;119:56703",
+                  "name": "Autocomplete Suggestion",
+                  "type": "FRAME",
+                  "box": [
+                    156.33,
+                    544,
+                    89.33,
+                    25
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL",
+                  "children": [
+                    {
+                      "id": "I523:2014;135:64001;119:56704",
+                      "name": "the",
+                      "type": "TEXT",
+                      "box": [
+                        156.33,
+                        544,
+                        89.33,
+                        25
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1A1A1A"
+                        }
+                      ],
+                      "text": "the",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": -0.43,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:2014;135:64001;135:64957",
+                  "name": "Separator",
+                  "type": "FRAME",
+                  "box": [
+                    265.67,
+                    544,
+                    5,
+                    25
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "paddingLeft": 2,
+                  "paddingRight": 2,
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "FIXED",
+                  "children": [
+                    {
+                      "id": "I523:2014;135:64001;135:64958",
+                      "name": "Separator",
+                      "type": "RECTANGLE",
+                      "box": [
+                        267.67,
+                        544,
+                        1,
+                        25
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#CCCCCC"
+                        }
+                      ],
+                      "opacity": 0.1,
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FILL"
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:2014;135:64001;119:56711",
+                  "name": "Autocomplete Suggestion",
+                  "type": "FRAME",
+                  "box": [
+                    290.67,
+                    544,
+                    89.33,
+                    25
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL",
+                  "children": [
+                    {
+                      "id": "I523:2014;135:64001;119:56712",
+                      "name": "to",
+                      "type": "TEXT",
+                      "box": [
+                        290.67,
+                        544,
+                        89.33,
+                        25
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1A1A1A"
+                        }
+                      ],
+                      "text": "to",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": -0.43,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I523:2014;118:55211",
+              "name": "Keys",
+              "type": "INSTANCE",
+              "box": [
+                0,
+                569,
+                402,
+                225
+              ],
+              "layoutMode": "VERTICAL",
+              "itemSpacing": 11,
+              "paddingLeft": 8.5,
+              "paddingRight": 8.5,
+              "paddingTop": 12,
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG",
+              "componentId": "413:1225",
+              "children": [
+                {
+                  "id": "I523:2014;118:55211;118:54800",
+                  "name": "Row 1",
+                  "type": "FRAME",
+                  "box": [
+                    8.5,
+                    581,
+                    385,
+                    45
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 6,
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I523:2014;118:55211;118:54801",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        8.5,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54801;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            8.5,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "q",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54803",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        47.6,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54803;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            47.6,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "w",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54805",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        86.7,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54805;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            86.7,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "e",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54807",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        125.8,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54807;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            125.8,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "r",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54809",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        164.9,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54809;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            164.9,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "t",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54811",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        204,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54811;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            204,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "y",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54813",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        243.1,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54813;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            243.1,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "u",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54815",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        282.2,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54815;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            282.2,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "i",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54817",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        321.3,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54817;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            321.3,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "o",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54819",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        360.4,
+                        581,
+                        33.1,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54819;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            360.4,
+                            586,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "p",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:2014;118:55211;118:54782",
+                  "name": "Row 2",
+                  "type": "FRAME",
+                  "box": [
+                    8.5,
+                    637,
+                    385,
+                    45
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 6,
+                  "paddingLeft": 20,
+                  "paddingRight": 20,
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I523:2014;118:55211;118:54783",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        28.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54783;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            28.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "a",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54785",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        67.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54785;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            67.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "s",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54787",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        106.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54787;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            106.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "d",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54789",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        145.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54789;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            145.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "f",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54791",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        184.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54791;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            184.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "g",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54793",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        223.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54793;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            223.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "h",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54795",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        262.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54795;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            262.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "j",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54797",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        301.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54797;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            301.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "k",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54799",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        340.5,
+                        637,
+                        33,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1173",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54799;118:60225",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            340.5,
+                            642,
+                            33,
+                            30
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "l",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 25,
+                          "lineHeightPx": 30,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:2014;118:55211;5514:11597",
+                  "name": "Row 3",
+                  "type": "FRAME",
+                  "box": [
+                    8.5,
+                    693,
+                    385,
+                    45
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 14.25,
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I523:2014;118:55211;118:54781",
+                      "name": "Shift Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        8.5,
+                        693,
+                        44.67,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1174",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54781;5511:67109",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            8.5,
+                            701,
+                            45,
+                            28
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "􀆝",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 23,
+                          "lineHeightPx": 28,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54766",
+                      "name": "Row 3",
+                      "type": "FRAME",
+                      "box": [
+                        67.42,
+                        693,
+                        266.83,
+                        45
+                      ],
+                      "layoutMode": "HORIZONTAL",
+                      "itemSpacing": 6,
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54767",
+                          "name": "Key",
+                          "type": "INSTANCE",
+                          "box": [
+                            67.42,
+                            693,
+                            32.98,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF",
+                              "opacity": 0.3
+                            },
+                            {
+                              "type": "SOLID",
+                              "color": "#333333"
+                            }
+                          ],
+                          "radius": 8.5,
+                          "layoutSizingHorizontal": "FILL",
+                          "layoutSizingVertical": "FIXED",
+                          "componentId": "413:1173",
+                          "children": [
+                            {
+                              "id": "I523:2014;118:55211;118:54767;118:60225",
+                              "name": "Glyph",
+                              "type": "TEXT",
+                              "box": [
+                                67.42,
+                                698,
+                                33,
+                                30
+                              ],
+                              "fills": [
+                                {
+                                  "type": "SOLID",
+                                  "color": "#595959"
+                                }
+                              ],
+                              "text": "z",
+                              "fontFamily": "SF Compact",
+                              "fontWeight": 457,
+                              "fontSize": 25,
+                              "lineHeightPx": 30,
+                              "letterSpacing": 0,
+                              "textAlignHorizontal": "CENTER"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "I523:2014;118:55211;118:54769",
+                          "name": "Key",
+                          "type": "INSTANCE",
+                          "box": [
+                            106.39,
+                            693,
+                            32.98,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF",
+                              "opacity": 0.3
+                            },
+                            {
+                              "type": "SOLID",
+                              "color": "#333333"
+                            }
+                          ],
+                          "radius": 8.5,
+                          "layoutSizingHorizontal": "FILL",
+                          "layoutSizingVertical": "FIXED",
+                          "componentId": "413:1173",
+                          "children": [
+                            {
+                              "id": "I523:2014;118:55211;118:54769;118:60225",
+                              "name": "Glyph",
+                              "type": "TEXT",
+                              "box": [
+                                106.39,
+                                698,
+                                33,
+                                30
+                              ],
+                              "fills": [
+                                {
+                                  "type": "SOLID",
+                                  "color": "#595959"
+                                }
+                              ],
+                              "text": "x",
+                              "fontFamily": "SF Compact",
+                              "fontWeight": 457,
+                              "fontSize": 25,
+                              "lineHeightPx": 30,
+                              "letterSpacing": 0,
+                              "textAlignHorizontal": "CENTER"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "I523:2014;118:55211;118:54771",
+                          "name": "Key",
+                          "type": "INSTANCE",
+                          "box": [
+                            145.37,
+                            693,
+                            32.98,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF",
+                              "opacity": 0.3
+                            },
+                            {
+                              "type": "SOLID",
+                              "color": "#333333"
+                            }
+                          ],
+                          "radius": 8.5,
+                          "layoutSizingHorizontal": "FILL",
+                          "layoutSizingVertical": "FIXED",
+                          "componentId": "413:1173",
+                          "children": [
+                            {
+                              "id": "I523:2014;118:55211;118:54771;118:60225",
+                              "name": "Glyph",
+                              "type": "TEXT",
+                              "box": [
+                                145.37,
+                                698,
+                                33,
+                                30
+                              ],
+                              "fills": [
+                                {
+                                  "type": "SOLID",
+                                  "color": "#595959"
+                                }
+                              ],
+                              "text": "c",
+                              "fontFamily": "SF Compact",
+                              "fontWeight": 457,
+                              "fontSize": 25,
+                              "lineHeightPx": 30,
+                              "letterSpacing": 0,
+                              "textAlignHorizontal": "CENTER"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "I523:2014;118:55211;118:54773",
+                          "name": "Key",
+                          "type": "INSTANCE",
+                          "box": [
+                            184.35,
+                            693,
+                            32.98,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF",
+                              "opacity": 0.3
+                            },
+                            {
+                              "type": "SOLID",
+                              "color": "#333333"
+                            }
+                          ],
+                          "radius": 8.5,
+                          "layoutSizingHorizontal": "FILL",
+                          "layoutSizingVertical": "FIXED",
+                          "componentId": "413:1173",
+                          "children": [
+                            {
+                              "id": "I523:2014;118:55211;118:54773;118:60225",
+                              "name": "Glyph",
+                              "type": "TEXT",
+                              "box": [
+                                184.35,
+                                698,
+                                33,
+                                30
+                              ],
+                              "fills": [
+                                {
+                                  "type": "SOLID",
+                                  "color": "#595959"
+                                }
+                              ],
+                              "text": "v",
+                              "fontFamily": "SF Compact",
+                              "fontWeight": 457,
+                              "fontSize": 25,
+                              "lineHeightPx": 30,
+                              "letterSpacing": 0,
+                              "textAlignHorizontal": "CENTER"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "I523:2014;118:55211;118:54775",
+                          "name": "Key",
+                          "type": "INSTANCE",
+                          "box": [
+                            223.32,
+                            693,
+                            32.98,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF",
+                              "opacity": 0.3
+                            },
+                            {
+                              "type": "SOLID",
+                              "color": "#333333"
+                            }
+                          ],
+                          "radius": 8.5,
+                          "layoutSizingHorizontal": "FILL",
+                          "layoutSizingVertical": "FIXED",
+                          "componentId": "413:1173",
+                          "children": [
+                            {
+                              "id": "I523:2014;118:55211;118:54775;118:60225",
+                              "name": "Glyph",
+                              "type": "TEXT",
+                              "box": [
+                                223.32,
+                                698,
+                                33,
+                                30
+                              ],
+                              "fills": [
+                                {
+                                  "type": "SOLID",
+                                  "color": "#595959"
+                                }
+                              ],
+                              "text": "b",
+                              "fontFamily": "SF Compact",
+                              "fontWeight": 457,
+                              "fontSize": 25,
+                              "lineHeightPx": 30,
+                              "letterSpacing": 0,
+                              "textAlignHorizontal": "CENTER"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "I523:2014;118:55211;118:54777",
+                          "name": "Key",
+                          "type": "INSTANCE",
+                          "box": [
+                            262.3,
+                            693,
+                            32.98,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF",
+                              "opacity": 0.3
+                            },
+                            {
+                              "type": "SOLID",
+                              "color": "#333333"
+                            }
+                          ],
+                          "radius": 8.5,
+                          "layoutSizingHorizontal": "FILL",
+                          "layoutSizingVertical": "FIXED",
+                          "componentId": "413:1173",
+                          "children": [
+                            {
+                              "id": "I523:2014;118:55211;118:54777;118:60225",
+                              "name": "Glyph",
+                              "type": "TEXT",
+                              "box": [
+                                262.3,
+                                698,
+                                33,
+                                30
+                              ],
+                              "fills": [
+                                {
+                                  "type": "SOLID",
+                                  "color": "#595959"
+                                }
+                              ],
+                              "text": "n",
+                              "fontFamily": "SF Compact",
+                              "fontWeight": 457,
+                              "fontSize": 25,
+                              "lineHeightPx": 30,
+                              "letterSpacing": 0,
+                              "textAlignHorizontal": "CENTER"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "I523:2014;118:55211;118:54779",
+                          "name": "Key",
+                          "type": "INSTANCE",
+                          "box": [
+                            301.27,
+                            693,
+                            32.98,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF",
+                              "opacity": 0.3
+                            },
+                            {
+                              "type": "SOLID",
+                              "color": "#333333"
+                            }
+                          ],
+                          "radius": 8.5,
+                          "layoutSizingHorizontal": "FILL",
+                          "layoutSizingVertical": "FIXED",
+                          "componentId": "413:1173",
+                          "children": [
+                            {
+                              "id": "I523:2014;118:55211;118:54779;118:60225",
+                              "name": "Glyph",
+                              "type": "TEXT",
+                              "box": [
+                                301.27,
+                                698,
+                                33,
+                                30
+                              ],
+                              "fills": [
+                                {
+                                  "type": "SOLID",
+                                  "color": "#595959"
+                                }
+                              ],
+                              "text": "m",
+                              "fontFamily": "SF Compact",
+                              "fontWeight": 457,
+                              "fontSize": 25,
+                              "lineHeightPx": 30,
+                              "letterSpacing": 0,
+                              "textAlignHorizontal": "CENTER"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54780",
+                      "name": "Delete Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        348.5,
+                        693,
+                        45,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1174",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54780;5511:67109",
+                          "name": "Glyph",
+                          "type": "TEXT",
+                          "box": [
+                            348.5,
+                            701,
+                            45,
+                            28
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "􁂈",
+                          "fontFamily": "SF Compact",
+                          "fontWeight": 457,
+                          "fontSize": 23,
+                          "lineHeightPx": 28,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:2014;118:55211;5514:13640",
+                  "name": "Row 4",
+                  "type": "FRAME",
+                  "box": [
+                    8.5,
+                    749,
+                    385,
+                    45
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 6,
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I523:2014;118:55211;118:54765",
+                      "name": "Keyboard Switch",
+                      "type": "INSTANCE",
+                      "box": [
+                        8.5,
+                        749,
+                        91.67,
+                        45
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF",
+                          "opacity": 0.3
+                        },
+                        {
+                          "type": "SOLID",
+                          "color": "#333333"
+                        }
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1166",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54765;5511:69743",
+                          "name": "ABC",
+                          "type": "TEXT",
+                          "box": [
+                            6.5,
+                            761,
+                            96,
+                            21
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#595959"
+                            }
+                          ],
+                          "text": "ABC",
+                          "fontFamily": "SF Compact Rounded",
+                          "fontWeight": 400,
+                          "fontSize": 18,
+                          "lineHeightPx": 21,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54763",
+                      "name": "Space",
+                      "type": "INSTANCE",
+                      "box": [
+                        106.17,
+                        749,
+                        189.33,
+                        45
+                      ],
+                      "radius": 8.5,
+                      "layoutMode": "HORIZONTAL",
+                      "itemSpacing": 10,
+                      "counterAxisAlignItems": "CENTER",
+                      "layoutSizingHorizontal": "FILL",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1205",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54763;5511:70140",
+                          "name": "Space",
+                          "type": "INSTANCE",
+                          "box": [
+                            106.17,
+                            749,
+                            189.33,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF",
+                              "opacity": 0.3
+                            },
+                            {
+                              "type": "SOLID",
+                              "color": "#333333"
+                            }
+                          ],
+                          "radius": 8.5,
+                          "layoutSizingHorizontal": "FILL",
+                          "layoutSizingVertical": "FIXED",
+                          "componentId": "413:1163"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I523:2014;118:55211;118:54764",
+                      "name": "Return",
+                      "type": "INSTANCE",
+                      "box": [
+                        301.5,
+                        749,
+                        92,
+                        45
+                      ],
+                      "radius": 8.5,
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED",
+                      "componentId": "413:1168",
+                      "children": [
+                        {
+                          "id": "I523:2014;118:55211;118:54764;5513:13501",
+                          "name": "BG",
+                          "type": "RECTANGLE",
+                          "box": [
+                            301.5,
+                            749,
+                            92,
+                            45
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#0088FF"
+                            }
+                          ],
+                          "radius": 8.5
+                        },
+                        {
+                          "id": "I523:2014;118:55211;118:54764;5511:69729",
+                          "name": "􀅇",
+                          "type": "TEXT",
+                          "box": [
+                            301.5,
+                            750,
+                            92,
+                            42
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "text": "􀅇",
+                          "fontFamily": "SF Pro",
+                          "fontWeight": 400,
+                          "fontSize": 19,
+                          "lineHeightPx": 28,
+                          "letterSpacing": 0,
+                          "textAlignHorizontal": "CENTER"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I523:2014;113:73016",
+              "name": "Emoji and Mic",
+              "type": "FRAME",
+              "box": [
+                0,
+                794,
+                402,
+                70
+              ],
+              "layoutMode": "HORIZONTAL",
+              "paddingLeft": 36,
+              "paddingRight": 39,
+              "paddingTop": 27,
+              "paddingBottom": 15,
+              "primaryAxisAlignItems": "SPACE_BETWEEN",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "children": [
+                {
+                  "id": "I523:2014;106:62094",
+                  "name": "Emoji",
+                  "type": "VECTOR",
+                  "box": [
+                    36,
+                    821,
+                    26.92,
+                    26.92
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#222B59",
+                      "opacity": 0.63
+                    }
+                  ],
+                  "layoutSizingHorizontal": "FIXED",
+                  "layoutSizingVertical": "FIXED"
+                },
+                {
+                  "id": "I523:2014;3005:39832",
+                  "name": "Mic",
+                  "type": "VECTOR",
+                  "box": [
+                    344.13,
+                    821,
+                    18.87,
+                    28.21
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#222B59",
+                      "opacity": 0.63
+                    }
+                  ],
+                  "layoutSizingHorizontal": "FIXED",
+                  "layoutSizingVertical": "FIXED"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2015",
+      "name": "visibility",
+      "type": "INSTANCE",
+      "box": [
+        326,
+        331,
+        44,
+        44
+      ],
+      "componentId": "436:2049",
+      "children": [
+        {
+          "id": "I523:2015;436:2045",
+          "name": "visibility_off",
+          "type": "GROUP",
+          "box": [
+            336,
+            341,
+            24,
+            24
+          ],
+          "children": [
+            {
+              "id": "I523:2015;436:2040",
+              "name": "Bounding box",
+              "type": "RECTANGLE",
+              "box": [
+                336,
+                341,
+                24,
+                24
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ]
+            },
+            {
+              "id": "I523:2015;436:2044",
+              "name": "visibility_off",
+              "type": "VECTOR",
+              "box": [
+                337,
+                343.8,
+                22,
+                19.8
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#07091C"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

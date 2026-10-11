@@ -1,0 +1,2682 @@
+{
+  "id": "1461:10323",
+  "name": "경북",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    1295
+  ],
+  "children": [
+    {
+      "id": "1461:10324",
+      "name": "Rectangle 34624873",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        0,
+        402,
+        1295
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "radius": 16
+    },
+    {
+      "id": "1461:10325",
+      "name": "지역선택",
+      "type": "TEXT",
+      "box": [
+        166,
+        39,
+        70,
+        24
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C"
+        }
+      ],
+      "text": "지역선택",
+      "fontFamily": "Pretendard",
+      "fontWeight": 600,
+      "fontSize": 20,
+      "lineHeightPx": 23.87,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "1461:10326",
+      "name": "Rectangle 34624874",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        75,
+        201,
+        1220
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ]
+    },
+    {
+      "id": "1461:10327",
+      "name": "Rectangle 34624875",
+      "type": "RECTANGLE",
+      "box": [
+        201,
+        75,
+        201,
+        1220
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ]
+    },
+    {
+      "id": "1461:10328",
+      "name": "Frame 1739336862",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        153,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10328;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            166,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "경기",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10329",
+      "name": "Frame 1739336863",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        199,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10329;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            212,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "인천",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10330",
+      "name": "Frame 1739336864",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        245,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10330;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            258,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "대전",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10331",
+      "name": "Frame 1739336865",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        291,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10331;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            304,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "세종",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10332",
+      "name": "Frame 1739336866",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        337,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10332;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            350,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "충남",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10333",
+      "name": "Frame 1739336867",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        383,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10333;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            396,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "충북",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10334",
+      "name": "Frame 1739336868",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        429,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10334;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            442,
+            56,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "전남광주",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10335",
+      "name": "Frame 1739336869",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        475,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10335;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            488,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "전북",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10336",
+      "name": "Frame 1739336870",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        521,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10336;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            534,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "대구",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10337",
+      "name": "Frame 1739336871",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        567,
+        180,
+        46
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#E9E9E9"
+        }
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8777",
+      "children": [
+        {
+          "id": "I1461:10337;1439:8778",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            580,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#07091C"
+            }
+          ],
+          "text": "경북",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10338",
+      "name": "Frame 1739336872",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        613,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10338;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            626,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "부산",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10339",
+      "name": "Frame 1739336873",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        659,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10339;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            672,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "울산",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10340",
+      "name": "Frame 1739336874",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        705,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10340;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            718,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "경남",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10341",
+      "name": "Frame 1739336875",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        751,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10341;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            764,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "강원",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10342",
+      "name": "Frame 1739336876",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        797,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10342;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            810,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "제주",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10343",
+      "name": "Frame 1739336877",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        843,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1439:8775",
+      "children": [
+        {
+          "id": "I1461:10343;1439:8744",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            856,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "전국",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1461:10344",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        107,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10344;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            107,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10344;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            121.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10344;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            120,
+            56,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "경북전체",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10345",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        153,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10345;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            153,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10345;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            167.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10345;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            166,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "경산시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10346",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        199,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10346;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            199,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10346;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            213.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10346;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            212,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "경주시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10347",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        245,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10347;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            245,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10347;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            259.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10347;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            258,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "고령군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10348",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        291,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10348;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            291,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10348;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            305.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10348;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            304,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "구미시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10349",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        337,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10349;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            337,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10349;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            351.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10349;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            350,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "김천시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10350",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        383,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10350;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            383,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10350;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            397.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10350;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            396,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "문경시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10351",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        429,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10351;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            429,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10351;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            443.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10351;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            442,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "봉화군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10352",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        475,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10352;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            475,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10352;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            489.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10352;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            488,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "상주시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10353",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        521,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10353;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            521,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10353;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            535.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10353;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            534,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "성주군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10354",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        567,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10354;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            567,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10354;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            581.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10354;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            580,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "안동시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10355",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        613,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10355;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            613,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10355;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            627.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10355;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            626,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "영덕군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10356",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        659,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10356;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            659,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10356;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            673.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10356;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            672,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "영양군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10357",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        705,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10357;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            705,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10357;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            719.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10357;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            718,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "영주시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10358",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        751,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10358;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            751,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10358;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            765.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10358;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            764,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "영천시",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10359",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        797,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10359;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            797,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10359;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            811.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10359;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            810,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "예천군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10360",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        843,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10360;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            843,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10360;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            857.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10360;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            856,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "울릉군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10361",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        889,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10361;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            889,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10361;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            903.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10361;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            902,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "울진군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10439",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        935,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10439;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            935,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10439;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            949.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10439;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            948,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "의성군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10440",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        981,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10440;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            981,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10440;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            995.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10440;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            994,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "청도군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10441",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        1027,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10441;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            1027,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10441;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            1041.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10441;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            1040,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "청송군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10442",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        1073,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10442;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            1073,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10442;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            1087.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10442;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            1086,
+            42,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "칠곡군",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10443",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        1119,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10443;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            1119,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10443;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            1133.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10443;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            1132,
+            74,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "포항시 남구",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10444",
+      "name": "지역세부선택",
+      "type": "INSTANCE",
+      "box": [
+        201,
+        1165,
+        180,
+        46
+      ],
+      "componentId": "1442:8872",
+      "children": [
+        {
+          "id": "I1461:10444;1442:8871",
+          "name": "Rectangle 34624837",
+          "type": "RECTANGLE",
+          "box": [
+            201,
+            1165,
+            180,
+            46
+          ]
+        },
+        {
+          "id": "I1461:10444;1442:8869",
+          "name": "Vector 143",
+          "type": "VECTOR",
+          "box": [
+            219,
+            1179.41,
+            11.31,
+            11.31
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#B5B5B5"
+            }
+          ],
+          "strokeWeight": 2,
+          "radius": 0.5
+        },
+        {
+          "id": "I1461:10444;1442:8870",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            245.14,
+            1178,
+            74,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "포항시 북구",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "1461:10362",
+      "name": "Rectangle 34624876",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        75,
+        402,
+        32
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ]
+    },
+    {
+      "id": "1461:10363",
+      "name": "Vector 141",
+      "type": "VECTOR",
+      "box": [
+        21,
+        75,
+        360,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "1461:10364",
+      "name": "지역선택",
+      "type": "INSTANCE",
+      "box": [
+        21,
+        107,
+        180,
+        46
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 15,
+      "paddingRight": 137,
+      "paddingTop": 13,
+      "paddingBottom": 14,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "1442:8844",
+      "children": [
+        {
+          "id": "I1461:10364;1442:8845",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            36,
+            120,
+            28,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#7B7B7B"
+            }
+          ],
+          "text": "서울",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "1472:12361",
+      "name": "Close",
+      "type": "FRAME",
+      "box": [
+        357,
+        0,
+        45,
+        45
+      ],
+      "children": [
+        {
+          "id": "1472:12362",
+          "name": "Union",
+          "type": "BOOLEAN_OPERATION",
+          "box": [
+            374,
+            17,
+            12.29,
+            12.29
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#07091C"
+            }
+          ],
+          "children": [
+            {
+              "id": "1472:12363",
+              "name": "Vector 142",
+              "type": "VECTOR",
+              "box": [
+                375,
+                18,
+                10.29,
+                10.29
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#000000"
+                }
+              ],
+              "strokeWeight": 2,
+              "radius": 0.5
+            },
+            {
+              "id": "1472:12364",
+              "name": "Vector 143",
+              "type": "VECTOR",
+              "box": [
+                375,
+                18,
+                10.29,
+                10.29
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#000000"
+                }
+              ],
+              "strokeWeight": 2,
+              "radius": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

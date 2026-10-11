@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { FlatList, Linking, Pressable, ScrollView, Text, View } from 'react-native'
+import { FlatList, Linking, Pressable, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Image } from 'expo-image'
@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query'
 import { apiClient } from '@/api/client'
 import { ArrowBackIcon } from '@/assets/icons'
 import EditSvg from '@/assets/icons/edit.svg'
+import { Text } from '@/components/AppText'
 import { Chip } from '@/components/Chip'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'

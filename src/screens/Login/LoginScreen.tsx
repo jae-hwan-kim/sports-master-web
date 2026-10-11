@@ -12,12 +12,12 @@ import {
   Pressable,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { AppleIcon, GoogleIcon, KakaoIcon } from '@/assets/icons'
+import { Text } from '@/components/AppText'
 import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
@@ -293,7 +293,7 @@ export function LoginScreen() {
             name="password"
             render={({ field: { value, onChange } }) => (
               <TextField
-                label="비밀번호(영소문자+숫자 조합 8자 이상)"
+                label="비밀번호 (영소문자+숫자, 8자 이상)"
                 value={value}
                 onChangeText={onChange}
                 onFocus={() => clearErrors('password')}

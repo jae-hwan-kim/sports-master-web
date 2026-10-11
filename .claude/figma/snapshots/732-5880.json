@@ -1,0 +1,2755 @@
+{
+  "id": "732:5880",
+  "name": "진단요청_삭제",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    1081
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#F2F2F2"
+    }
+  ],
+  "children": [
+    {
+      "id": "732:5881",
+      "name": "Rectangle 34624838",
+      "type": "RECTANGLE",
+      "box": [
+        -1,
+        178,
+        402,
+        696
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "radius": 16,
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.05,
+          "offset": [
+            0,
+            -5
+          ],
+          "radius": 5
+        }
+      ]
+    },
+    {
+      "id": "732:5882",
+      "name": "진단요청 고객",
+      "type": "FRAME",
+      "box": [
+        32,
+        202,
+        338,
+        82
+      ],
+      "children": [
+        {
+          "id": "732:5883",
+          "name": "Rectangle 34624839",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            202,
+            338,
+            82
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ],
+          "radius": 8
+        },
+        {
+          "id": "732:5884",
+          "name": "Frame 5306",
+          "type": "FRAME",
+          "box": [
+            120,
+            218,
+            240,
+            52
+          ],
+          "layoutMode": "GRID",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "732:5885",
+              "name": "#NNNNNNNN",
+              "type": "TEXT",
+              "box": [
+                120,
+                218,
+                105,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#B48247"
+                }
+              ],
+              "text": "#NNNNNNNN",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5886",
+              "name": "지역명 최대글자11자",
+              "type": "TEXT",
+              "box": [
+                120,
+                254,
+                120,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "지역명 최대글자11자",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5887",
+              "name": "YYYY. MM. DD",
+              "type": "TEXT",
+              "box": [
+                264,
+                254,
+                96,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "YYYY. MM. DD",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            }
+          ]
+        },
+        {
+          "id": "732:5888",
+          "name": "IMG_1056 1",
+          "type": "RECTANGLE",
+          "box": [
+            48,
+            218,
+            50,
+            50
+          ],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "image": true
+            }
+          ],
+          "radius": 25
+        },
+        {
+          "id": "732:5889",
+          "name": "Frame 5307",
+          "type": "FRAME",
+          "box": [
+            312,
+            218,
+            48,
+            16
+          ],
+          "children": [
+            {
+              "id": "732:5890",
+              "name": "Rectangle 34624845",
+              "type": "RECTANGLE",
+              "box": [
+                332,
+                218,
+                28,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#C6A75E"
+                }
+              ],
+              "radius": 4
+            },
+            {
+              "id": "732:5891",
+              "name": "삭제",
+              "type": "TEXT",
+              "box": [
+                336,
+                220,
+                18,
+                12
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "삭제",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 11.93,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5892",
+      "name": "진단요청 고객",
+      "type": "FRAME",
+      "box": [
+        32,
+        300,
+        338,
+        82
+      ],
+      "children": [
+        {
+          "id": "732:5893",
+          "name": "Rectangle 34624839",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            300,
+            338,
+            82
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ],
+          "radius": 8
+        },
+        {
+          "id": "732:5894",
+          "name": "Frame 5306",
+          "type": "FRAME",
+          "box": [
+            117,
+            316,
+            240,
+            52
+          ],
+          "layoutMode": "GRID",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "732:5895",
+              "name": "#NNNNNNNN",
+              "type": "TEXT",
+              "box": [
+                117,
+                316,
+                105,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#B48247"
+                }
+              ],
+              "text": "#NNNNNNNN",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5896",
+              "name": "지역명 최대글자11자",
+              "type": "TEXT",
+              "box": [
+                117,
+                352,
+                120,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "지역명 최대글자11자",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5897",
+              "name": "YYYY. MM. DD",
+              "type": "TEXT",
+              "box": [
+                261,
+                352,
+                96,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "YYYY. MM. DD",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            }
+          ]
+        },
+        {
+          "id": "732:5898",
+          "name": "IMG_1059 3 1",
+          "type": "RECTANGLE",
+          "box": [
+            48,
+            316,
+            50,
+            50
+          ],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "image": true
+            }
+          ],
+          "radius": 25
+        },
+        {
+          "id": "732:5899",
+          "name": "Frame 5307",
+          "type": "FRAME",
+          "box": [
+            312,
+            316,
+            48,
+            16
+          ],
+          "children": [
+            {
+              "id": "732:5900",
+              "name": "Rectangle 34624845",
+              "type": "RECTANGLE",
+              "box": [
+                332,
+                316,
+                28,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#C6A75E"
+                }
+              ],
+              "radius": 4
+            },
+            {
+              "id": "732:5901",
+              "name": "삭제",
+              "type": "TEXT",
+              "box": [
+                336,
+                318,
+                18,
+                12
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "삭제",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 11.93,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5902",
+      "name": "진단요청 고객",
+      "type": "FRAME",
+      "box": [
+        32,
+        398,
+        338,
+        82
+      ],
+      "children": [
+        {
+          "id": "732:5903",
+          "name": "Rectangle 34624839",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            398,
+            338,
+            82
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ],
+          "radius": 8
+        },
+        {
+          "id": "732:5904",
+          "name": "Frame 5306",
+          "type": "FRAME",
+          "box": [
+            117,
+            414,
+            240,
+            52
+          ],
+          "layoutMode": "GRID",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "732:5905",
+              "name": "#NNNNNNNN",
+              "type": "TEXT",
+              "box": [
+                117,
+                414,
+                105,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#B48247"
+                }
+              ],
+              "text": "#NNNNNNNN",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5906",
+              "name": "지역명 최대글자11자",
+              "type": "TEXT",
+              "box": [
+                117,
+                450,
+                120,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "지역명 최대글자11자",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5907",
+              "name": "YYYY. MM. DD",
+              "type": "TEXT",
+              "box": [
+                261,
+                450,
+                96,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "YYYY. MM. DD",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            }
+          ]
+        },
+        {
+          "id": "732:5908",
+          "name": "IMG_1058 1",
+          "type": "RECTANGLE",
+          "box": [
+            48,
+            414,
+            50,
+            50
+          ],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "image": true
+            }
+          ],
+          "radius": 25
+        },
+        {
+          "id": "732:5909",
+          "name": "Frame 5307",
+          "type": "FRAME",
+          "box": [
+            312,
+            414,
+            48,
+            16
+          ],
+          "children": [
+            {
+              "id": "732:5910",
+              "name": "Rectangle 34624845",
+              "type": "RECTANGLE",
+              "box": [
+                332,
+                414,
+                28,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#C6A75E"
+                }
+              ],
+              "radius": 4
+            },
+            {
+              "id": "732:5911",
+              "name": "삭제",
+              "type": "TEXT",
+              "box": [
+                336,
+                416,
+                18,
+                12
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "삭제",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 11.93,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5912",
+      "name": "진단요청 고객",
+      "type": "FRAME",
+      "box": [
+        32,
+        496,
+        338,
+        82
+      ],
+      "children": [
+        {
+          "id": "732:5913",
+          "name": "Rectangle 34624839",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            496,
+            338,
+            82
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ],
+          "radius": 8
+        },
+        {
+          "id": "732:5914",
+          "name": "Frame 5306",
+          "type": "FRAME",
+          "box": [
+            117,
+            512,
+            240,
+            52
+          ],
+          "layoutMode": "GRID",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "732:5915",
+              "name": "#NNNNNNNN",
+              "type": "TEXT",
+              "box": [
+                117,
+                512,
+                105,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#B48247"
+                }
+              ],
+              "text": "#NNNNNNNN",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5916",
+              "name": "지역명 최대글자11자",
+              "type": "TEXT",
+              "box": [
+                117,
+                548,
+                120,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "지역명 최대글자11자",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5917",
+              "name": "YYYY. MM. DD",
+              "type": "TEXT",
+              "box": [
+                261,
+                548,
+                96,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "YYYY. MM. DD",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            }
+          ]
+        },
+        {
+          "id": "732:5918",
+          "name": "Ellipse 56",
+          "type": "ELLIPSE",
+          "box": [
+            65,
+            525,
+            15,
+            15
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ]
+        },
+        {
+          "id": "732:5919",
+          "name": "Group 1000003552",
+          "type": "GROUP",
+          "box": [
+            48,
+            512,
+            50,
+            50
+          ],
+          "children": [
+            {
+              "id": "732:5920",
+              "name": "Ellipse 59",
+              "type": "ELLIPSE",
+              "box": [
+                48,
+                512,
+                50,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#A2A2A2"
+                }
+              ]
+            },
+            {
+              "id": "732:5921",
+              "name": "Union",
+              "type": "BOOLEAN_OPERATION",
+              "box": [
+                60,
+                524,
+                25.92,
+                25
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "children": [
+                {
+                  "id": "732:5922",
+                  "name": "Subtract",
+                  "type": "BOOLEAN_OPERATION",
+                  "box": [
+                    60,
+                    537,
+                    25.92,
+                    12
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "id": "732:5923",
+                      "name": "Ellipse 57",
+                      "type": "ELLIPSE",
+                      "box": [
+                        59.96,
+                        537,
+                        26,
+                        26
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1F2A43"
+                        }
+                      ],
+                      "opacity": 0.26
+                    },
+                    {
+                      "id": "732:5924",
+                      "name": "Rectangle 34624844",
+                      "type": "RECTANGLE",
+                      "box": [
+                        57.96,
+                        549,
+                        30,
+                        14
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "732:5925",
+                  "name": "Ellipse 58",
+                  "type": "ELLIPSE",
+                  "box": [
+                    66.96,
+                    524,
+                    12,
+                    12
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#07091C"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5926",
+      "name": "진단요청 고객",
+      "type": "FRAME",
+      "box": [
+        32,
+        594,
+        338,
+        82
+      ],
+      "children": [
+        {
+          "id": "732:5927",
+          "name": "Rectangle 34624839",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            594,
+            338,
+            82
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ],
+          "radius": 8
+        },
+        {
+          "id": "732:5928",
+          "name": "Frame 5306",
+          "type": "FRAME",
+          "box": [
+            117,
+            610,
+            240,
+            52
+          ],
+          "layoutMode": "GRID",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "732:5929",
+              "name": "#NNNNNNNN",
+              "type": "TEXT",
+              "box": [
+                117,
+                610,
+                105,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#B48247"
+                }
+              ],
+              "text": "#NNNNNNNN",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5930",
+              "name": "지역명 최대글자11자",
+              "type": "TEXT",
+              "box": [
+                117,
+                646,
+                120,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "지역명 최대글자11자",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5931",
+              "name": "YYYY. MM. DD",
+              "type": "TEXT",
+              "box": [
+                261,
+                646,
+                96,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "YYYY. MM. DD",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            }
+          ]
+        },
+        {
+          "id": "732:5932",
+          "name": "DFF0854D-5F4E-4D21-9B32-B611017340D6 1",
+          "type": "RECTANGLE",
+          "box": [
+            48,
+            610,
+            50,
+            50
+          ],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "image": true
+            }
+          ],
+          "radius": 25
+        }
+      ]
+    },
+    {
+      "id": "732:5933",
+      "name": "진단요청 고객",
+      "type": "FRAME",
+      "box": [
+        32,
+        692,
+        338,
+        82
+      ],
+      "children": [
+        {
+          "id": "732:5934",
+          "name": "Rectangle 34624839",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            692,
+            338,
+            82
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ],
+          "radius": 8
+        },
+        {
+          "id": "732:5935",
+          "name": "Frame 5306",
+          "type": "FRAME",
+          "box": [
+            117,
+            708,
+            240,
+            52
+          ],
+          "layoutMode": "GRID",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "732:5936",
+              "name": "#NNNNNNNN",
+              "type": "TEXT",
+              "box": [
+                117,
+                708,
+                105,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#B48247"
+                }
+              ],
+              "text": "#NNNNNNNN",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5937",
+              "name": "지역명 최대글자11자",
+              "type": "TEXT",
+              "box": [
+                117,
+                744,
+                120,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "지역명 최대글자11자",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5938",
+              "name": "YYYY. MM. DD",
+              "type": "TEXT",
+              "box": [
+                261,
+                744,
+                96,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "YYYY. MM. DD",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            }
+          ]
+        },
+        {
+          "id": "732:5939",
+          "name": "Group 1000003552",
+          "type": "GROUP",
+          "box": [
+            48,
+            708,
+            50,
+            50
+          ],
+          "children": [
+            {
+              "id": "732:5940",
+              "name": "Ellipse 59",
+              "type": "ELLIPSE",
+              "box": [
+                48,
+                708,
+                50,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#A2A2A2"
+                }
+              ]
+            },
+            {
+              "id": "732:5941",
+              "name": "Union",
+              "type": "BOOLEAN_OPERATION",
+              "box": [
+                60,
+                720,
+                25.92,
+                25
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "children": [
+                {
+                  "id": "732:5942",
+                  "name": "Subtract",
+                  "type": "BOOLEAN_OPERATION",
+                  "box": [
+                    60,
+                    733,
+                    25.92,
+                    12
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "id": "732:5943",
+                      "name": "Ellipse 57",
+                      "type": "ELLIPSE",
+                      "box": [
+                        59.96,
+                        733,
+                        26,
+                        26
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1F2A43"
+                        }
+                      ],
+                      "opacity": 0.26
+                    },
+                    {
+                      "id": "732:5944",
+                      "name": "Rectangle 34624844",
+                      "type": "RECTANGLE",
+                      "box": [
+                        57.96,
+                        745,
+                        30,
+                        14
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "732:5945",
+                  "name": "Ellipse 58",
+                  "type": "ELLIPSE",
+                  "box": [
+                    66.96,
+                    720,
+                    12,
+                    12
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#07091C"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5946",
+      "name": "진단요청 고객",
+      "type": "FRAME",
+      "box": [
+        32,
+        790,
+        338,
+        82
+      ],
+      "children": [
+        {
+          "id": "732:5947",
+          "name": "Rectangle 34624839",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            790,
+            338,
+            82
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ],
+          "radius": 8
+        },
+        {
+          "id": "732:5948",
+          "name": "Frame 5306",
+          "type": "FRAME",
+          "box": [
+            117,
+            806,
+            240,
+            52
+          ],
+          "layoutMode": "GRID",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "732:5949",
+              "name": "#NNNNNNNN",
+              "type": "TEXT",
+              "box": [
+                117,
+                806,
+                105,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#B48247"
+                }
+              ],
+              "text": "#NNNNNNNN",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5950",
+              "name": "지역명 최대글자11자",
+              "type": "TEXT",
+              "box": [
+                117,
+                842,
+                120,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "지역명 최대글자11자",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5951",
+              "name": "YYYY. MM. DD",
+              "type": "TEXT",
+              "box": [
+                261,
+                842,
+                96,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "YYYY. MM. DD",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            }
+          ]
+        },
+        {
+          "id": "732:5952",
+          "name": "Group 1000003552",
+          "type": "GROUP",
+          "box": [
+            48,
+            806,
+            50,
+            50
+          ],
+          "children": [
+            {
+              "id": "732:5953",
+              "name": "Ellipse 59",
+              "type": "ELLIPSE",
+              "box": [
+                48,
+                806,
+                50,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#A2A2A2"
+                }
+              ]
+            },
+            {
+              "id": "732:5954",
+              "name": "Union",
+              "type": "BOOLEAN_OPERATION",
+              "box": [
+                60,
+                818,
+                25.92,
+                25
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "children": [
+                {
+                  "id": "732:5955",
+                  "name": "Subtract",
+                  "type": "BOOLEAN_OPERATION",
+                  "box": [
+                    60,
+                    831,
+                    25.92,
+                    12
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "id": "732:5956",
+                      "name": "Ellipse 57",
+                      "type": "ELLIPSE",
+                      "box": [
+                        59.96,
+                        831,
+                        26,
+                        26
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1F2A43"
+                        }
+                      ],
+                      "opacity": 0.26
+                    },
+                    {
+                      "id": "732:5957",
+                      "name": "Rectangle 34624844",
+                      "type": "RECTANGLE",
+                      "box": [
+                        57.96,
+                        843,
+                        30,
+                        14
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "732:5958",
+                  "name": "Ellipse 58",
+                  "type": "ELLIPSE",
+                  "box": [
+                    66.96,
+                    818,
+                    12,
+                    12
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#07091C"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5959",
+      "name": "진단요청 고객",
+      "type": "FRAME",
+      "box": [
+        32,
+        890,
+        338,
+        82
+      ],
+      "children": [
+        {
+          "id": "732:5960",
+          "name": "Rectangle 34624839",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            890,
+            338,
+            82
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ],
+          "radius": 8
+        },
+        {
+          "id": "732:5961",
+          "name": "Frame 5306",
+          "type": "FRAME",
+          "box": [
+            117,
+            906,
+            240,
+            52
+          ],
+          "layoutMode": "GRID",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "732:5962",
+              "name": "#NNNNNNNN",
+              "type": "TEXT",
+              "box": [
+                117,
+                906,
+                105,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#B48247"
+                }
+              ],
+              "text": "#NNNNNNNN",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5963",
+              "name": "지역명 최대글자11자",
+              "type": "TEXT",
+              "box": [
+                117,
+                942,
+                120,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "지역명 최대글자11자",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            },
+            {
+              "id": "732:5964",
+              "name": "YYYY. MM. DD",
+              "type": "TEXT",
+              "box": [
+                261,
+                942,
+                96,
+                16
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "YYYY. MM. DD",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "RIGHT",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FILL"
+            }
+          ]
+        },
+        {
+          "id": "732:5965",
+          "name": "Group 1000003552",
+          "type": "GROUP",
+          "box": [
+            48,
+            906,
+            50,
+            50
+          ],
+          "children": [
+            {
+              "id": "732:5966",
+              "name": "Ellipse 59",
+              "type": "ELLIPSE",
+              "box": [
+                48,
+                906,
+                50,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#A2A2A2"
+                }
+              ]
+            },
+            {
+              "id": "732:5967",
+              "name": "Union",
+              "type": "BOOLEAN_OPERATION",
+              "box": [
+                60,
+                918,
+                25.92,
+                25
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "children": [
+                {
+                  "id": "732:5968",
+                  "name": "Subtract",
+                  "type": "BOOLEAN_OPERATION",
+                  "box": [
+                    60,
+                    931,
+                    25.92,
+                    12
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "id": "732:5969",
+                      "name": "Ellipse 57",
+                      "type": "ELLIPSE",
+                      "box": [
+                        59.96,
+                        931,
+                        26,
+                        26
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1F2A43"
+                        }
+                      ],
+                      "opacity": 0.26
+                    },
+                    {
+                      "id": "732:5970",
+                      "name": "Rectangle 34624844",
+                      "type": "RECTANGLE",
+                      "box": [
+                        57.96,
+                        943,
+                        30,
+                        14
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "732:5971",
+                  "name": "Ellipse 58",
+                  "type": "ELLIPSE",
+                  "box": [
+                    66.96,
+                    918,
+                    12,
+                    12
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#07091C"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5972",
+      "name": "Rectangle 34624842",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        0,
+        402,
+        171
+      ],
+      "fills": [
+        {
+          "type": "GRADIENT_LINEAR",
+          "stops": [
+            "#F2F2F2@0.55",
+            "#F2F2F2@1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5973",
+      "name": "Recent Items Text",
+      "type": "TEXT",
+      "box": [
+        26,
+        120,
+        218,
+        28
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "먼저 요청한 순으로 보여지며, 프로필을 눌러 세부 사항을 확인할 수 있습니다.",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "732:5974",
+      "name": "Login Title",
+      "type": "TEXT",
+      "box": [
+        26,
+        78,
+        97,
+        33
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#000000"
+        }
+      ],
+      "text": "진단요청",
+      "fontFamily": "Pretendard",
+      "fontWeight": 800,
+      "fontSize": 28,
+      "lineHeightPx": 33.41,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "732:5975",
+      "name": "Background",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        0,
+        402,
+        874
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C",
+          "opacity": 0.6
+        }
+      ]
+    },
+    {
+      "id": "732:5976",
+      "name": "하단_명인 탭",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        781,
+        402,
+        93
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C"
+        }
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.05,
+          "offset": [
+            0,
+            -2
+          ],
+          "radius": 20
+        }
+      ],
+      "componentId": "184:1033",
+      "children": [
+        {
+          "id": "I732:5976;184:1034",
+          "name": "Rectangle 34624653",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            781,
+            402,
+            93
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ]
+        },
+        {
+          "id": "I732:5976;184:1035",
+          "name": "Frame 5240",
+          "type": "INSTANCE",
+          "box": [
+            59,
+            781,
+            44,
+            58
+          ],
+          "layoutMode": "VERTICAL",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "componentId": "184:1009",
+          "children": [
+            {
+              "id": "I732:5976;184:1035;802:98",
+              "name": "home",
+              "type": "FRAME",
+              "box": [
+                59,
+                781,
+                44,
+                44
+              ],
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "children": [
+                {
+                  "id": "I732:5976;184:1035;802:99",
+                  "name": "home",
+                  "type": "GROUP",
+                  "box": [
+                    69,
+                    791,
+                    24,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "id": "I732:5976;184:1035;802:100",
+                      "name": "Bounding box",
+                      "type": "RECTANGLE",
+                      "box": [
+                        69,
+                        791,
+                        24,
+                        24
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I732:5976;184:1035;802:101",
+                      "name": "home",
+                      "type": "VECTOR",
+                      "box": [
+                        73,
+                        794,
+                        16,
+                        18
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I732:5976;184:1035;802:45",
+              "name": "홈",
+              "type": "TEXT",
+              "box": [
+                59,
+                825,
+                44,
+                14
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ],
+              "text": "홈",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I732:5976;184:1036",
+          "name": "Frame 5241",
+          "type": "INSTANCE",
+          "box": [
+            179,
+            781,
+            44,
+            58
+          ],
+          "layoutMode": "VERTICAL",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "componentId": "184:1015",
+          "children": [
+            {
+              "id": "I732:5976;184:1036;802:106",
+              "name": "search_trainner",
+              "type": "FRAME",
+              "box": [
+                179,
+                781,
+                44,
+                44
+              ],
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "children": [
+                {
+                  "id": "I732:5976;184:1036;802:107",
+                  "name": "person_search",
+                  "type": "GROUP",
+                  "box": [
+                    189,
+                    791,
+                    24,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "id": "I732:5976;184:1036;802:108",
+                      "name": "Bounding box",
+                      "type": "RECTANGLE",
+                      "box": [
+                        189,
+                        791,
+                        24,
+                        24
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I732:5976;184:1036;802:109",
+                      "name": "person_search",
+                      "type": "VECTOR",
+                      "box": [
+                        192,
+                        795,
+                        20.5,
+                        19.5
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1F2A43"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I732:5976;184:1036;802:47",
+              "name": "진단요청",
+              "type": "TEXT",
+              "box": [
+                179,
+                825,
+                44,
+                14
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "text": "진단요청",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I732:5976;184:1037",
+          "name": "Frame 5242",
+          "type": "INSTANCE",
+          "box": [
+            299,
+            781,
+            44,
+            58
+          ],
+          "layoutMode": "VERTICAL",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "componentId": "184:1021",
+          "children": [
+            {
+              "id": "I732:5976;184:1037;802:102",
+              "name": "my page",
+              "type": "FRAME",
+              "box": [
+                299,
+                781,
+                44,
+                44
+              ],
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "children": [
+                {
+                  "id": "I732:5976;184:1037;802:103",
+                  "name": "person",
+                  "type": "GROUP",
+                  "box": [
+                    309,
+                    791,
+                    24,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "id": "I732:5976;184:1037;802:104",
+                      "name": "Bounding box",
+                      "type": "RECTANGLE",
+                      "box": [
+                        309,
+                        791,
+                        24,
+                        24
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I732:5976;184:1037;802:105",
+                      "name": "person",
+                      "type": "VECTOR",
+                      "box": [
+                        313,
+                        795,
+                        16,
+                        16
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I732:5976;184:1037;802:49",
+              "name": "프로필",
+              "type": "TEXT",
+              "box": [
+                299,
+                825,
+                44,
+                14
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ],
+              "text": "프로필",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5977",
+      "name": "여백",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "componentId": "523:4129",
+      "children": [
+        {
+          "id": "I732:5977;523:4115",
+          "name": "Rectangle 34624651",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ]
+        },
+        {
+          "id": "I732:5977;523:4116",
+          "name": "Status Bar - iPhone",
+          "type": "INSTANCE",
+          "box": [
+            17,
+            2,
+            367,
+            50
+          ],
+          "layoutMode": "VERTICAL",
+          "itemSpacing": -31,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "50:506",
+          "children": [
+            {
+              "id": "I732:5977;523:4116;759:11360",
+              "name": "Frame",
+              "type": "FRAME",
+              "box": [
+                17,
+                16,
+                367,
+                22
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 134,
+              "primaryAxisAlignItems": "SPACE_BETWEEN",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "I732:5977;523:4116;759:11361",
+                  "name": "Time",
+                  "type": "FRAME",
+                  "box": [
+                    17,
+                    16,
+                    121.5,
+                    22
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 10,
+                  "paddingLeft": 20,
+                  "paddingRight": 6,
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I732:5977;523:4116;759:11362",
+                      "name": "Time",
+                      "type": "TEXT",
+                      "box": [
+                        37,
+                        16,
+                        37,
+                        22
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "text": "9:41",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 590,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER",
+                      "layoutSizingHorizontal": "HUG",
+                      "layoutSizingVertical": "HUG"
+                    }
+                  ]
+                },
+                {
+                  "id": "I732:5977;523:4116;759:11363",
+                  "name": "Dynamic Island spacer",
+                  "type": "FRAME",
+                  "box": [
+                    138.5,
+                    22,
+                    124,
+                    10
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FIXED",
+                  "layoutSizingVertical": "FIXED"
+                },
+                {
+                  "id": "I732:5977;523:4116;759:11364",
+                  "name": "Levels",
+                  "type": "FRAME",
+                  "box": [
+                    262.5,
+                    20.5,
+                    121.5,
+                    13
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 7,
+                  "paddingLeft": 6,
+                  "paddingRight": 20,
+                  "primaryAxisAlignItems": "MAX",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I732:5977;523:4116;759:11365",
+                      "name": "Cellular Connection",
+                      "type": "VECTOR",
+                      "box": [
+                        286.33,
+                        20.89,
+                        19.2,
+                        12.23
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED"
+                    },
+                    {
+                      "id": "I732:5977;523:4116;759:11366",
+                      "name": "Wifi",
+                      "type": "VECTOR",
+                      "box": [
+                        312.53,
+                        20.84,
+                        17.14,
+                        12.33
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED"
+                    },
+                    {
+                      "id": "I732:5977;523:4116;759:11367",
+                      "name": "Battery",
+                      "type": "GROUP",
+                      "box": [
+                        336.67,
+                        20.5,
+                        27.33,
+                        13
+                      ],
+                      "radius": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED",
+                      "children": [
+                        {
+                          "id": "I732:5977;523:4116;759:11368",
+                          "name": "Border",
+                          "type": "RECTANGLE",
+                          "box": [
+                            336.67,
+                            20.5,
+                            25,
+                            13
+                          ],
+                          "strokes": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "strokeWeight": 1,
+                          "radius": 4.3,
+                          "opacity": 0.35
+                        },
+                        {
+                          "id": "I732:5977;523:4116;759:11369",
+                          "name": "Cap",
+                          "type": "VECTOR",
+                          "box": [
+                            362.67,
+                            25.28,
+                            1.33,
+                            4.08
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "opacity": 0.4
+                        },
+                        {
+                          "id": "I732:5977;523:4116;759:11370",
+                          "name": "Capacity",
+                          "type": "RECTANGLE",
+                          "box": [
+                            338.67,
+                            22.5,
+                            21,
+                            9
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "radius": 2.5
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "732:5978",
+      "name": "Popup",
+      "type": "INSTANCE",
+      "box": [
+        32,
+        324,
+        340,
+        230
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.1,
+          "offset": [
+            0,
+            0
+          ],
+          "radius": 12.7
+        }
+      ],
+      "componentId": "426:1859",
+      "children": [
+        {
+          "id": "I732:5978;426:1825",
+          "name": "Rectangle 34624682",
+          "type": "RECTANGLE",
+          "box": [
+            32,
+            324,
+            340,
+            230
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 16
+        },
+        {
+          "id": "I732:5978;426:1826",
+          "name": "Frame 1739336827",
+          "type": "FRAME",
+          "box": [
+            63,
+            412,
+            276,
+            19
+          ],
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "I732:5978;426:1827",
+              "name": "업로드 전까지 이용에 제한이 있습니다.",
+              "type": "TEXT",
+              "box": [
+                71,
+                412,
+                260,
+                19
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "삭제 항목 복구는 불가합니다",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 16,
+              "lineHeightPx": 19.09,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I732:5978;426:1829",
+          "name": "Frame 1739336828",
+          "type": "FRAME",
+          "box": [
+            52,
+            368,
+            300,
+            28
+          ],
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 16,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "primaryAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "children": [
+            {
+              "id": "I732:5978;426:1830",
+              "name": "나중에 업로드 하시겠습니까?",
+              "type": "TEXT",
+              "box": [
+                64,
+                368,
+                276,
+                29
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#000000"
+                }
+              ],
+              "text": "요청을 삭제할까요?",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 24,
+              "lineHeightPx": 28.64,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I732:5978;426:1832",
+          "name": "Select_1",
+          "type": "INSTANCE",
+          "box": [
+            52,
+            480,
+            145,
+            50
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#C6A75E"
+            }
+          ],
+          "radius": 8,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "paddingTop": 16,
+          "paddingBottom": 16,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:831",
+          "children": [
+            {
+              "id": "I732:5978;426:1832;179:346",
+              "name": "로그인",
+              "type": "TEXT",
+              "box": [
+                95,
+                495,
+                59,
+                20
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "삭제하기",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 17,
+              "lineHeightPx": 20.29,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I732:5978;426:1833",
+          "name": "Select_2",
+          "type": "INSTANCE",
+          "box": [
+            205,
+            480,
+            145,
+            50
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#102343"
+            }
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#4A5198"
+            }
+          ],
+          "strokeWeight": 1,
+          "radius": 8,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 10,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "paddingTop": 16,
+          "paddingBottom": 16,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:832",
+          "children": [
+            {
+              "id": "I732:5978;426:1833;179:347",
+              "name": "회원가입",
+              "type": "TEXT",
+              "box": [
+                262.5,
+                495,
+                30,
+                20
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "취소",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 17,
+              "lineHeightPx": 20.29,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

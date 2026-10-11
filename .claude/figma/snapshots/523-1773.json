@@ -1,0 +1,329 @@
+{
+  "id": "523:1773",
+  "name": "온보딩",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    874
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#FFFFFF"
+    }
+  ],
+  "children": [
+    {
+      "id": "523:1774",
+      "name": "배경사진",
+      "type": "FRAME",
+      "box": [
+        0,
+        0,
+        403,
+        874
+      ],
+      "children": [
+        {
+          "id": "523:1775",
+          "name": "IMG_0934 2 1",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            874
+          ],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "image": true
+            }
+          ]
+        },
+        {
+          "id": "523:1776",
+          "name": "Background",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            403,
+            874
+          ],
+          "fills": [
+            {
+              "type": "GRADIENT_LINEAR",
+              "stops": [
+                "#07091C@0",
+                "#07091C@0.51",
+                "#07091C@1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:1777",
+      "name": "Vector 88",
+      "type": "VECTOR",
+      "box": [
+        47,
+        352,
+        0,
+        190
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#FFFFFF",
+          "opacity": 0.4
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "523:1778",
+      "name": "상단여백",
+      "type": "FRAME",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "children": [
+        {
+          "id": "523:1779",
+          "name": "Background",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#07091C"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:1780",
+      "name": "로고",
+      "type": "FRAME",
+      "box": [
+        27,
+        100,
+        169,
+        215
+      ],
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
+      "paddingBottom": 10,
+      "primaryAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG",
+      "children": [
+        {
+          "id": "523:1781",
+          "name": "아트보드 4 2",
+          "type": "RECTANGLE",
+          "box": [
+            37,
+            110,
+            149,
+            195
+          ],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "image": true
+            }
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        }
+      ]
+    },
+    {
+      "id": "523:1782",
+      "name": "Log in",
+      "type": "INSTANCE",
+      "box": [
+        43,
+        709.75,
+        145,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#C6A75E"
+        }
+      ],
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:831",
+      "children": [
+        {
+          "id": "I523:1782;179:346",
+          "name": "로그인",
+          "type": "TEXT",
+          "box": [
+            93,
+            724.75,
+            45,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "로그인",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 17,
+          "lineHeightPx": 20.29,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "523:1783",
+      "name": "Sign up",
+      "type": "INSTANCE",
+      "box": [
+        214,
+        709.75,
+        145,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#102343"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#4A5198"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:832",
+      "children": [
+        {
+          "id": "I523:1783;179:347",
+          "name": "회원가입",
+          "type": "TEXT",
+          "box": [
+            257,
+            724.75,
+            59,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "회원가입",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 17,
+          "lineHeightPx": 20.29,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "523:1784",
+      "name": "Tagline",
+      "type": "TEXT",
+      "box": [
+        43,
+        557,
+        316,
+        68
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "text": "급이 다른 자격,\n품격 있는 운동의 시작",
+      "fontFamily": "Pretendard",
+      "fontWeight": 800,
+      "fontSize": 28,
+      "lineHeightPx": 34,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:1785",
+      "name": "Subtagline",
+      "type": "TEXT",
+      "box": [
+        43,
+        640,
+        316,
+        44
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "물리치료사, 건강운동관리사 자격을 갖춘\n트레이닝 전문가와 기관을 탐색합니다",
+      "fontFamily": "Pretendard",
+      "fontWeight": 400,
+      "fontSize": 17,
+      "lineHeightPx": 22,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    }
+  ]
+}

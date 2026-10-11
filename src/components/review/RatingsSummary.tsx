@@ -1,5 +1,6 @@
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 
+import { Text } from '@/components/AppText'
 import { StarRating } from '@/components/StarRating'
 
 type Props = {

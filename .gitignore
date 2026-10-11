@@ -40,3 +40,8 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# figma-sync 임시 diff 결과
+.claude/figma/.pending.json
+# device-check 스크린샷 결과
+.claude/device-check/

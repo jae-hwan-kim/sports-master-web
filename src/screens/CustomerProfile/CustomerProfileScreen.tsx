@@ -2,10 +2,11 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { Pressable, ScrollView, Text, View } from 'react-native'
+import { Pressable, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowNextIcon, ProfilePersonIcon } from '@/assets/icons'
+import { Text } from '@/components/AppText'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 // ---------------------------------------------------------------------------

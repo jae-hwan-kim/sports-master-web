@@ -2,13 +2,14 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useState } from 'react'
-import { Linking, Platform, Pressable, ScrollView, Text, View } from 'react-native'
+import { Linking, Platform, Pressable, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
 
 import { AddCircleIcon } from '@/assets/icons'
+import { Text } from '@/components/AppText'
 import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'

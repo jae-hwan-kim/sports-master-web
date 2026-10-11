@@ -2,15 +2,15 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { moderateScale } from 'react-native-size-matters'
 
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import bgImage from '@/assets/icons/background.png'
 import logoImage from '@/assets/icons/logo.png'
+import { Text } from '@/components/AppText'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 export function OnboardingScreen() {
@@ -33,29 +33,29 @@ export function OnboardingScreen() {
 
       <View
         className="flex-1 px-[44px]"
-        style={{ paddingTop: insets.top + 56, paddingBottom: insets.bottom + 114 }}
+        style={{ paddingTop: insets.top + 56, paddingBottom: insets.bottom + 16 }}
       >
         <Image
           source={logoImage}
           accessibilityLabel="스포츠마스터 로고"
-          style={{ width: moderateScale(149), height: moderateScale(195) }}
+          style={{ width: 149, height: 195 }}
         />
 
         <View
-          className="mb-[15px] mt-[37px] h-[190px] w-px bg-gray2"
+          className="mb-[8px] mt-[20px] h-[190px] w-px bg-gray2"
           accessible={false}
           importantForAccessibility="no-hide-descendants"
         />
 
         <Text
           className="font-pretendard-extrabold leading-[34px] text-white"
-          style={{ fontSize: moderateScale(28) }}
+          style={{ fontSize: 28 }}
         >
           급이 다른 자격,{'\n'}품격 있는 운동의 시작
         </Text>
         <Text
           className="mt-3 font-pretendard-regular leading-[22px] text-gray2"
-          style={{ fontSize: moderateScale(17) }}
+          style={{ fontSize: 17 }}
         >
           물리치료사, 건강운동관리사 자격을 갖춘{'\n'}트레이닝 전문가와 기관을 탐색합니다
         </Text>
@@ -68,10 +68,7 @@ export function OnboardingScreen() {
             accessibilityLabel="로그인"
             className="flex-1 items-center justify-center rounded-lg bg-primary"
           >
-            <Text
-              className="font-pretendard-medium text-white"
-              style={{ fontSize: moderateScale(17) }}
-            >
+            <Text className="font-pretendard-medium text-white" style={{ fontSize: 17 }}>
               로그인
             </Text>
           </Pressable>
@@ -82,10 +79,7 @@ export function OnboardingScreen() {
             accessibilityLabel="회원가입"
             className="ml-[26px] flex-1 items-center justify-center rounded-lg border border-[#4A5198] bg-[#102343]"
           >
-            <Text
-              className="font-pretendard-medium text-white"
-              style={{ fontSize: moderateScale(17) }}
-            >
+            <Text className="font-pretendard-medium text-white" style={{ fontSize: 17 }}>
               회원가입
             </Text>
           </Pressable>

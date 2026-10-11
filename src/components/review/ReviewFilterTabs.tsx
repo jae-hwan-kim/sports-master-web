@@ -1,6 +1,7 @@
-import { Pressable, Text, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 
 import PhotoSvg from '@/assets/icons/photo.svg'
+import { Text } from '@/components/AppText'
 
 export type ReviewSort = 'latest' | 'best' | 'photo'
 

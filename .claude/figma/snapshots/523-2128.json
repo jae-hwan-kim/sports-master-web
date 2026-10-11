@@ -1,0 +1,1209 @@
+{
+  "id": "523:2128",
+  "name": "회원가입_텍스트 오류",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    874
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#F2F2F2"
+    }
+  ],
+  "children": [
+    {
+      "id": "523:2129",
+      "name": "상단여백",
+      "type": "FRAME",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "children": [
+        {
+          "id": "523:2130",
+          "name": "Background",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2131",
+      "name": "Navigation Bar",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        54,
+        402,
+        56
+      ],
+      "componentId": "224:507",
+      "children": [
+        {
+          "id": "I523:2131;194:565",
+          "name": "Rectangle 34624783",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            54,
+            402,
+            56
+          ]
+        },
+        {
+          "id": "I523:2131;224:371",
+          "name": "back",
+          "type": "INSTANCE",
+          "box": [
+            16,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:653",
+          "children": [
+            {
+              "id": "I523:2131;224:371;179:543",
+              "name": "arrow_back_ios",
+              "type": "GROUP",
+              "box": [
+                26,
+                70,
+                24,
+                24
+              ],
+              "children": [
+                {
+                  "id": "I523:2131;224:371;179:538",
+                  "name": "Bounding box",
+                  "type": "RECTANGLE",
+                  "box": [
+                    26,
+                    70,
+                    24,
+                    24
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#D9D9D9"
+                    }
+                  ]
+                },
+                {
+                  "id": "I523:2131;224:371;179:542",
+                  "name": "arrow_back_ios",
+                  "type": "VECTOR",
+                  "box": [
+                    26,
+                    72,
+                    11.78,
+                    20
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#07091C"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I523:2131;224:376",
+          "name": "setting",
+          "type": "INSTANCE",
+          "box": [
+            341,
+            60,
+            44,
+            44
+          ],
+          "componentId": "179:656"
+        }
+      ]
+    },
+    {
+      "id": "523:2132",
+      "name": "Select Input",
+      "type": "INSTANCE",
+      "box": [
+        27,
+        520,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+      "paddingTop": 16,
+      "paddingBottom": 16,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:834",
+      "children": [
+        {
+          "id": "I523:2132;179:356",
+          "name": "다시선택",
+          "type": "TEXT",
+          "box": [
+            172.5,
+            535,
+            59,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "회원가입",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 17,
+          "lineHeightPx": 20.29,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "523:2133",
+      "name": "Vector 95",
+      "type": "VECTOR",
+      "box": [
+        27,
+        598,
+        94,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 1
+    },
+    {
+      "id": "523:2134",
+      "name": "Vector 96",
+      "type": "VECTOR",
+      "box": [
+        283,
+        598,
+        94,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 1
+    },
+    {
+      "id": "523:2135",
+      "name": "Alternative Sign Up Text",
+      "type": "TEXT",
+      "box": [
+        135,
+        590,
+        124,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "or 아래 계정으로 회원가입",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2136",
+      "name": "Vector 97",
+      "type": "VECTOR",
+      "box": [
+        27,
+        704,
+        87,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 1
+    },
+    {
+      "id": "523:2137",
+      "name": "Vector 98",
+      "type": "VECTOR",
+      "box": [
+        289,
+        704,
+        88,
+        0
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 1
+    },
+    {
+      "id": "523:2138",
+      "name": "Sign Up Description",
+      "type": "TEXT",
+      "box": [
+        26,
+        186,
+        232,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "이메일, 소셜 계정 중 선택해 앱에 회원가입 합니다",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2139",
+      "name": "txtfield",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        262,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#EA4335"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 14,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:930",
+      "children": [
+        {
+          "id": "I523:2139;181:931",
+          "name": "글 작성하는 곳",
+          "type": "TEXT",
+          "box": [
+            42,
+            277,
+            320,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#07091C"
+            }
+          ],
+          "text": "띄어쓰기 하고 8자 이상",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        }
+      ]
+    },
+    {
+      "id": "523:2140",
+      "name": "txtfield",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        348,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#EA4335"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 14,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:930",
+      "children": [
+        {
+          "id": "I523:2140;181:931",
+          "name": "글 작성하는 곳",
+          "type": "TEXT",
+          "box": [
+            42,
+            363,
+            320,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#07091C"
+            }
+          ],
+          "text": "yourid@exampl",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        }
+      ]
+    },
+    {
+      "id": "523:2141",
+      "name": "txtfield",
+      "type": "INSTANCE",
+      "box": [
+        26,
+        434,
+        350,
+        50
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#EA4335"
+        }
+      ],
+      "strokeWeight": 1,
+      "radius": 8,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 14,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "181:930",
+      "children": [
+        {
+          "id": "I523:2141;181:931",
+          "name": "글 작성하는 곳",
+          "type": "TEXT",
+          "box": [
+            42,
+            449,
+            320,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#07091C"
+            }
+          ],
+          "text": "Password~",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        }
+      ]
+    },
+    {
+      "id": "523:2142",
+      "name": "Action Button",
+      "type": "INSTANCE",
+      "box": [
+        27,
+        626,
+        112,
+        50
+      ],
+      "componentId": "413:567",
+      "children": [
+        {
+          "id": "I523:2142;413:566",
+          "name": "Frame 1707483606",
+          "type": "FRAME",
+          "box": [
+            27,
+            626,
+            112,
+            50
+          ],
+          "children": [
+            {
+              "id": "I523:2142;413:532",
+              "name": "Rectangle 34624807",
+              "type": "RECTANGLE",
+              "box": [
+                27,
+                626,
+                111,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 8
+            }
+          ]
+        },
+        {
+          "id": "I523:2142;413:537",
+          "name": "Icons/Icon/Google",
+          "type": "INSTANCE",
+          "box": [
+            70.39,
+            639,
+            24.22,
+            24
+          ],
+          "componentId": "408:522",
+          "children": [
+            {
+              "id": "I523:2142;413:537;345:38242",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                82.5,
+                648.82,
+                11.62,
+                11.27
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#4285F4"
+                }
+              ]
+            },
+            {
+              "id": "I523:2142;413:537;345:38243",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                71.68,
+                653.28,
+                18.83,
+                9.72
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#34A853"
+                }
+              ]
+            },
+            {
+              "id": "I523:2142;413:537;345:38244",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                70.39,
+                645.61,
+                5.33,
+                10.78
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FBBC05"
+                }
+              ]
+            },
+            {
+              "id": "I523:2142;413:537;345:38245",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                71.68,
+                639,
+                18.92,
+                9.72
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#EA4335"
+                }
+              ]
+            },
+            {
+              "id": "I523:2142;413:537;345:38246",
+              "name": "Shape",
+              "type": "VECTOR",
+              "box": [
+                70.39,
+                639,
+                24.22,
+                24
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2143",
+      "name": "Action Button",
+      "type": "INSTANCE",
+      "box": [
+        147,
+        626,
+        110,
+        50
+      ],
+      "componentId": "413:588",
+      "children": [
+        {
+          "id": "I523:2143;413:586",
+          "name": "Frame 1707483608",
+          "type": "FRAME",
+          "box": [
+            147,
+            626,
+            110,
+            50
+          ],
+          "children": [
+            {
+              "id": "I523:2143;413:568",
+              "name": "Frame 1707483607",
+              "type": "FRAME",
+              "box": [
+                147,
+                626,
+                110,
+                50
+              ],
+              "children": [
+                {
+                  "id": "I523:2143;413:535",
+                  "name": "Rectangle 34624809",
+                  "type": "RECTANGLE",
+                  "box": [
+                    147,
+                    626,
+                    110,
+                    50
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "strokes": [
+                    {
+                      "type": "SOLID",
+                      "color": "#D9D9D9"
+                    }
+                  ],
+                  "strokeWeight": 1,
+                  "radius": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I523:2143;413:587",
+          "name": "카카오로고",
+          "type": "INSTANCE",
+          "box": [
+            190,
+            639,
+            24,
+            24
+          ],
+          "componentId": "408:624",
+          "children": [
+            {
+              "id": "I523:2143;413:587;408:620",
+              "name": "Group 40",
+              "type": "GROUP",
+              "box": [
+                190,
+                640,
+                24,
+                22.15
+              ],
+              "children": [
+                {
+                  "id": "I523:2143;413:587;408:606",
+                  "name": "Union",
+                  "type": "BOOLEAN_OPERATION",
+                  "box": [
+                    190,
+                    640,
+                    24,
+                    22.15
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#3B1E1E"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "id": "I523:2143;413:587;408:603",
+                      "name": "Polygon 5",
+                      "type": "VECTOR",
+                      "box": [
+                        192.47,
+                        655.55,
+                        7.93,
+                        8.44
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ],
+                      "radius": 0.29
+                    },
+                    {
+                      "id": "I523:2143;413:587;408:605",
+                      "name": "Ellipse 49",
+                      "type": "ELLIPSE",
+                      "box": [
+                        190,
+                        640,
+                        24,
+                        18.91
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2144",
+      "name": "Action Button",
+      "type": "INSTANCE",
+      "box": [
+        265,
+        626,
+        112,
+        50
+      ],
+      "componentId": "413:605",
+      "children": [
+        {
+          "id": "I523:2144;413:604",
+          "name": "Frame 1707483609",
+          "type": "FRAME",
+          "box": [
+            265,
+            626,
+            112,
+            50
+          ],
+          "children": [
+            {
+              "id": "I523:2144;413:533",
+              "name": "Rectangle 34624808",
+              "type": "RECTANGLE",
+              "box": [
+                265,
+                626,
+                111,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 8
+            }
+          ]
+        },
+        {
+          "id": "I523:2144;408:657",
+          "name": "애플로고",
+          "type": "FRAME",
+          "box": [
+            308.39,
+            639,
+            24.22,
+            24
+          ],
+          "children": [
+            {
+              "id": "I523:2144;408:646",
+              "name": "image 2",
+              "type": "RECTANGLE",
+              "box": [
+                311.39,
+                639,
+                19,
+                24
+              ],
+              "fills": [
+                {
+                  "type": "IMAGE",
+                  "image": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2145",
+      "name": "Sign Up",
+      "type": "TEXT",
+      "box": [
+        26,
+        144,
+        97,
+        33
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C"
+        }
+      ],
+      "text": "회원가입",
+      "fontFamily": "Pretendard",
+      "fontWeight": 800,
+      "fontSize": 28,
+      "lineHeightPx": 33.41,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2146",
+      "name": "Disclaimer Container",
+      "type": "FRAME",
+      "box": [
+        94,
+        770,
+        216,
+        34
+      ],
+      "layoutMode": "VERTICAL",
+      "itemSpacing": 4,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "children": [
+        {
+          "id": "523:2147",
+          "name": "Disclaimer Text",
+          "type": "TEXT",
+          "box": [
+            94,
+            770,
+            216,
+            15
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#74768E"
+            }
+          ],
+          "text": "회원가입시 아래 내용에 동의하는 것으로 간주됩니다.",
+          "fontFamily": "Pretendard",
+          "fontWeight": 400,
+          "fontSize": 10,
+          "lineHeightPx": 14.5,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "HUG"
+        },
+        {
+          "id": "523:2148",
+          "name": "Terms Container",
+          "type": "GROUP",
+          "box": [
+            134,
+            789,
+            136,
+            15
+          ],
+          "radius": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "children": [
+            {
+              "id": "523:2149",
+              "name": "Privacy Policy",
+              "type": "TEXT",
+              "box": [
+                134,
+                789,
+                72,
+                15
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "개인정보 처리방침",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 10,
+              "lineHeightPx": 14.5,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER"
+            },
+            {
+              "id": "523:2150",
+              "name": "Terms of Service",
+              "type": "TEXT",
+              "box": [
+                235,
+                789,
+                35,
+                15
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "text": "이용약관",
+              "fontFamily": "Pretendard",
+              "fontWeight": 400,
+              "fontSize": 10,
+              "lineHeightPx": 14.5,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "523:2151",
+      "name": "Have Account Question",
+      "type": "TEXT",
+      "box": [
+        128,
+        696,
+        92,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#74768E"
+        }
+      ],
+      "text": "계정이 있으신가요? ",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2152",
+      "name": "Login Title",
+      "type": "TEXT",
+      "box": [
+        237,
+        696,
+        34,
+        16
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "text": "로그인",
+      "fontFamily": "Pretendard",
+      "fontWeight": 600,
+      "fontSize": 13,
+      "lineHeightPx": 15.51,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "RIGHT"
+    },
+    {
+      "id": "523:2153",
+      "name": "Username Error Message",
+      "type": "TEXT",
+      "box": [
+        42,
+        316,
+        192,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#EA4335"
+        }
+      ],
+      "text": "띄어쓰기 없이 한글, 영문 8자 이내입니다",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2154",
+      "name": "Email Error Message",
+      "type": "TEXT",
+      "box": [
+        42,
+        402,
+        154,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#EA4335"
+        }
+      ],
+      "text": "올바르지 않은 이메일 형식입니다",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2155",
+      "name": "Password Error Message",
+      "type": "TEXT",
+      "box": [
+        42,
+        488,
+        233,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#EA4335"
+        }
+      ],
+      "text": "비밀번호는 소문자, 숫자를 포함한 8자 이내입니다",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "523:2156",
+      "name": "visibility",
+      "type": "INSTANCE",
+      "box": [
+        326,
+        437,
+        44,
+        44
+      ],
+      "componentId": "436:2047",
+      "children": [
+        {
+          "id": "I523:2156;436:2039",
+          "name": "visibility",
+          "type": "GROUP",
+          "box": [
+            336,
+            447,
+            24,
+            24
+          ],
+          "children": [
+            {
+              "id": "I523:2156;436:2034",
+              "name": "Bounding box",
+              "type": "RECTANGLE",
+              "box": [
+                336,
+                447,
+                24,
+                24
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ]
+            },
+            {
+              "id": "I523:2156;436:2038",
+              "name": "visibility",
+              "type": "VECTOR",
+              "box": [
+                337,
+                451,
+                22,
+                15
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#07091C"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

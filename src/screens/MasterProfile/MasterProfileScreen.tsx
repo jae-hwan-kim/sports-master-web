@@ -1,11 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 
-import { ActivityIndicator, Image, Platform, Pressable, Text, View } from 'react-native'
+import { ActivityIndicator, Image, Platform, Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import PersonSvg from '@/assets/icons/person.svg'
+import { Text } from '@/components/AppText'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
 import type { components } from '@/types/schema'
