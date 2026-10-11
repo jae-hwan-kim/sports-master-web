@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useState } from 'react'
-import { FlatList, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
+import { FlatList, KeyboardAvoidingView, Platform, Pressable, ScrollView, Switch, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowBackIcon, EditIcon, ProfilePersonIcon } from '@/assets/icons'
@@ -11,7 +11,10 @@ import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { TextField } from '@/components/TextField'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { RegionSelector } from '@/components/profile/RegionSelector'
+import { useRootNavigation } from '@/hooks/useRootNavigation'
+import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { RootStackParamList } from '@/navigation/RootNavigator'
+import { useAuthStore } from '@/store/authStore'
 
 type Mode = 'view' | 'edit'
 
@@ -39,7 +42,22 @@ const PRESET_KEYWORDS = [
 
 export function CustomerSettingsScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+  const rootNav = useRootNavigation()
   const insets = useSafeAreaInsets()
+  const setModeSelected = useAuthStore((s) => s.setModeSelected)
+  const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
+
+  const handleSwitchToMaster = useCallback(() => {
+    switchMode(
+      { mode: 'expert' },
+      {
+        onSuccess: () => {
+          setModeSelected('expert')
+          rootNav?.reset({ index: 0, routes: [{ name: 'MasterHome' }] })
+        },
+      }
+    )
+  }, [switchMode, setModeSelected, rootNav])
 
   // 저장된 실제 상태
   const [region, setRegion] = useState('')
@@ -387,6 +405,27 @@ export function CustomerSettingsScreen() {
           )}
         </View>
       </ScrollView>
+
+      {/* 명인 모드 전환 — VIEW 모드에서만 표시 */}
+      {mode === 'view' && (
+        <View className="mx-6 mb-6 flex-row items-center justify-between rounded-xl bg-white px-4 py-4">
+          <View>
+            <Text className="text-[15px] text-[#07091C]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+              명인 모드
+            </Text>
+            <Text className="mt-0.5 text-[12px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
+              전문가로 전환합니다
+            </Text>
+          </View>
+          <Switch
+            value={false}
+            onValueChange={handleSwitchToMaster}
+            disabled={isSwitching}
+            trackColor={{ false: '#D9D9D9', true: '#1F2A43' }}
+            thumbColor="#FFFFFF"
+          />
+        </View>
+      )}
 
       {/* 저장 확인 다이얼로그 */}
       <ConfirmDialog
