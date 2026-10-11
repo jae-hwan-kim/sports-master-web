@@ -155,12 +155,12 @@ export function MasterDetailProfileScreen() {
         contentContainerStyle={{ paddingBottom: 40 }}
       >
         {/* 타이틀 영역 */}
-        <View className="px-[26px] pb-6 pt-[22px]">
+        <View className="px-[26px] pb-5 pt-[12px]">
           <Text className="text-title text-black" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
             상세프로필
           </Text>
           <Text
-            className="mt-[14px] text-small1 text-gray2"
+            className="mt-[8px] text-small1 text-gray2"
             style={{ fontFamily: 'Pretendard-Medium' }}
           >
             {'전문성을 나타낼 수 있는 정보를 업로드하고,\n내 정보를 수정할 수 있습니다.'}
@@ -169,13 +169,13 @@ export function MasterDetailProfileScreen() {
 
         {/* ProfileCard */}
         {profile && (
-          <View className="mx-[26px] mb-8">
+          <View className="mx-[26px] mb-[40px]">
             <ProfileCard profile={profile} />
           </View>
         )}
 
         {/* ── 섹션들 ── */}
-        <View className="gap-y-8 px-[26px]">
+        <View className="gap-y-6 px-[26px]">
           {/* 지역 */}
           <View>
             <SectionLabel label="지역" />
@@ -317,7 +317,7 @@ export function MasterDetailProfileScreen() {
                 data={certFileUrls}
                 scrollEnabled={false}
                 keyExtractor={(item, index) => `cert-${index}`}
-                ItemSeparatorComponent={() => <View className="h-3" />}
+                ItemSeparatorComponent={() => <View className="h-2" />}
                 renderItem={({ item }) => <CertFileRow url={item} />}
               />
             ) : (

@@ -109,7 +109,7 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
               width: 60,
               height: 60,
               borderRadius: 30,
-              backgroundColor: '#D9D9D9',
+              backgroundColor: '#FFFFFF',
               borderWidth: 5,
               borderColor: '#FFFFFF',
             }}

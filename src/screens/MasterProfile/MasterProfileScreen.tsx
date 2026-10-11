@@ -174,12 +174,12 @@ export function MasterProfileScreen() {
       />
 
       {/* 헤더 */}
-      <View className="px-[26px]" style={{ marginTop: 24 }}>
+      <View className="px-[26px]" style={{ marginTop: 28 }}>
         <Text className="text-[28px] text-black" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
           프로필
         </Text>
         <Text
-          className="mt-[10px] text-[13px] text-[#74768E]"
+          className="mt-[8px] text-[13px] text-[#74768E]"
           style={{ fontFamily: 'Pretendard-Medium' }}
         >
           전문성을 강조할 자료로 능력을 보여주세요
@@ -187,7 +187,7 @@ export function MasterProfileScreen() {
       </View>
 
       {/* 카드 영역 */}
-      <View className="px-[26px]" style={{ marginTop: 36, flex: 1 }}>
+      <View className="px-[26px]" style={{ marginTop: 34, flex: 1 }}>
         {isLoading ? (
           <View className="flex-1 items-center justify-center">
             <ActivityIndicator size="large" color="#74768E" />

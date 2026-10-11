@@ -43,7 +43,7 @@ export function DiagnosisRequestCard({ item, onPress, onDelete }: Props) {
             contentFit="cover"
           />
         ) : (
-          <View className="h-[50px] w-[50px] rounded-full bg-[#B0B0B0]" />
+          <View className="h-[50px] w-[50px] rounded-full bg-[#FFFFFF]" />
         )}
 
         {/* 텍스트 영역 — marginLeft:22 (Figma: 88-50-16=22), gap:20 (Figma gap-y:20) */}

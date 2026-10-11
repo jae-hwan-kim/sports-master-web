@@ -30,7 +30,7 @@ const TAB_LABELS: Record<keyof CustomerTabParamList, string> = {
 }
 
 const ACTIVE_COLOR = '#1F2A43'
-const INACTIVE_COLOR = '#A2A2A2'
+const INACTIVE_COLOR = '#D9D9D9'
 
 const TAB_CONTENT_HEIGHT = 59
 
@@ -43,9 +43,16 @@ function CustomTabBar({
 
   return (
     <View
-      className="flex-row items-start border-t border-gray1 bg-white"
-      // Figma: 탭 콘텐츠 영역 59 (아이콘 44 + 라벨 14, 상단 정렬) + 시스템 하단 inset
-      style={{ paddingBottom: insets.bottom, minHeight: TAB_CONTENT_HEIGHT + insets.bottom }}
+      className="flex-row items-start bg-white"
+      style={{
+        paddingBottom: insets.bottom,
+        minHeight: TAB_CONTENT_HEIGHT + insets.bottom,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 10,
+        elevation: 4,
+      }}
     >
       {state.routes.map((route, index) => {
         const isFocused = state.index === index
