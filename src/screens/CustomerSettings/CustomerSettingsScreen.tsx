@@ -20,31 +20,22 @@ type Mode = 'view' | 'edit'
 
 const GENDER_OPTIONS: string[] = ['여성', '남성']
 const AGE_OPTIONS: string[] = ['10대', '20대', '30대', '40대', '50대', '60대 이상']
-
-// KeywordChipInput의 PRESET_KEYWORDS와 동일 — VIEW 모드 표시용
-const PRESET_KEYWORDS = [
-  '컨디셔닝',
-  '재활운동',
-  '체형교정',
-  '기능성운동',
-  '선수트레이닝',
-  '아동발달',
-  '방문재활',
-  '1:1 지도',
-  '필라테스',
-  '특수치료',
-  '체형분석',
-  '식단관리',
-  '시니어운동',
-  '수술재활',
-  '원장직강',
-]
+const INPUT_BOX_SHADOW = Platform.select({
+  ios: {
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.11,
+    shadowRadius: 2.9,
+  },
+  android: { elevation: 2 },
+})
 
 export function CustomerSettingsScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const rootNav = useRootNavigation()
   const insets = useSafeAreaInsets()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
+  const clearAuth = useAuthStore((s) => s.clear)
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
 
   const handleSwitchToMaster = useCallback(() => {
@@ -121,27 +112,16 @@ export function CustomerSettingsScreen() {
     []
   )
 
-  // VIEW 모드 — 키워드 칩 렌더 (선택: 진남색, 미선택: 회색)
+  // VIEW 모드 — 선택된 키워드 칩 렌더 (horizontal)
   const renderViewKeyword = useCallback(
-    ({ item }: { item: string }) => {
-      const selected = keywords.includes(item)
-      return (
-        <View
-          className={`m-1 h-[34px] flex-1 items-center justify-center rounded-[82px] border px-2 ${
-            selected ? 'border-[#1F2A43] bg-[#1F2A43]' : 'border-[#74768E] bg-[#F2F2F2]'
-          }`}
-        >
-          <Text
-            className={`text-[13px] ${selected ? 'text-[#F2F2F2]' : 'text-[#07091C]'}`}
-            style={{ fontFamily: 'Pretendard-Medium' }}
-            numberOfLines={1}
-          >
-            {item}
-          </Text>
-        </View>
-      )
-    },
-    [keywords]
+    ({ item }: { item: string }) => (
+      <View className="mr-2 h-[34px] items-center justify-center rounded-[82px] bg-[#1F2A43] px-3">
+        <Text className="text-[13px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
+          {item}
+        </Text>
+      </View>
+    ),
+    []
   )
 
   // EDIT 모드 — 성별 토글 칩
@@ -203,7 +183,7 @@ export function CustomerSettingsScreen() {
     >
       {/* 헤더 */}
       <View
-        className="h-14 flex-row items-center justify-between px-4"
+        className="h-[60px] flex-row items-center justify-between px-4"
         style={{ marginTop: insets.top }}
       >
         <Pressable
@@ -217,7 +197,7 @@ export function CustomerSettingsScreen() {
 
         {mode === 'view' ? (
           <Pressable
-            hitSlop={8}
+            hitSlop={10}
             onPress={enterEditMode}
             accessibilityRole="button"
             accessibilityLabel="편집"
@@ -252,7 +232,7 @@ export function CustomerSettingsScreen() {
         {mode === 'view' && (
           <View className="px-6 pb-2 pt-4">
             <Text
-              className="text-[28px] text-[#07091C]"
+              className="text-[28px] text-[#1F2A43]"
               style={{ fontFamily: 'Pretendard-ExtraBold' }}
             >
               계정설정
@@ -261,7 +241,7 @@ export function CustomerSettingsScreen() {
               className="mt-1 text-[13px] text-[#74768E]"
               style={{ fontFamily: 'Pretendard-Medium' }}
             >
-              전문가에게 보여질 내 정보를 수정합니다
+              전문가에게 보여질 내 정보를 저장하고 수정합니다
             </Text>
           </View>
         )}
@@ -272,12 +252,15 @@ export function CustomerSettingsScreen() {
             <ProfilePersonIcon size={54} />
           </View>
           <Text
-            className="mt-2 text-[17px] text-[#07091C]"
+            className="mt-2 text-[20px] text-[#1F2A43]"
             style={{ fontFamily: 'Pretendard-SemiBold' }}
           >
             닉네임
           </Text>
-          <Text className="text-[13px] text-[#C6A75E]" style={{ fontFamily: 'Pretendard-Medium' }}>
+          <Text
+            className="text-[13px] text-[#B48247]"
+            style={{ fontFamily: 'Pretendard-Medium', textDecorationLine: 'underline' }}
+          >
             #USER00001
           </Text>
         </View>
@@ -285,19 +268,22 @@ export function CustomerSettingsScreen() {
         {/* 지역 */}
         <View className="px-6 pb-6">
           <Text
-            className="mb-3 text-[17px] text-[#07091C]"
-            style={{ fontFamily: 'Pretendard-Bold' }}
+            className="mb-3 text-[16px] text-[#1F2A43]"
+            style={{ fontFamily: 'Pretendard-SemiBold' }}
           >
             지역
           </Text>
           {mode === 'view' ? (
-            <View className="h-[50px] flex-row items-center justify-between rounded-lg border border-[#D9D9D9] bg-[#FFFFFF] px-4">
+            <View
+              className="h-[46px] flex-row items-center justify-between rounded-[4px] bg-[#F2F2F2] px-4"
+              style={INPUT_BOX_SHADOW}
+            >
               <Text
                 className={`flex-1 text-[13px] ${region ? 'text-[#1F2A43]' : 'text-[#74768E]'}`}
                 style={{ fontFamily: 'Pretendard-Medium' }}
                 numberOfLines={1}
               >
-                {region || '거주지 or 이동가능지역'}
+                {region || '거주지 or 이동가능지역을 알려주세요'}
               </Text>
               <Text className="text-[13px] text-[#74768E]">{'>'}</Text>
             </View>
@@ -306,33 +292,36 @@ export function CustomerSettingsScreen() {
           )}
         </View>
 
-        {/* 대표운동 */}
+        {/* 내 증상 */}
         <View className="px-6 pb-6">
           <Text
-            className="mb-3 text-[17px] text-[#07091C]"
-            style={{ fontFamily: 'Pretendard-Bold' }}
+            className="mb-3 text-[16px] text-[#1F2A43]"
+            style={{ fontFamily: 'Pretendard-SemiBold' }}
           >
-            대표운동
+            내 증상
           </Text>
           {mode === 'view' ? (
-            <View className="h-[50px] flex-row items-center rounded-lg border border-[#D9D9D9] bg-[#FFFFFF] px-4">
+            <View
+              className="h-[46px] flex-row items-center rounded-[4px] bg-[#F2F2F2] px-4"
+              style={INPUT_BOX_SHADOW}
+            >
               <Text
                 className={`text-[13px] ${sport ? 'text-[#1F2A43]' : 'text-[#74768E]'}`}
                 style={{ fontFamily: 'Pretendard-Medium' }}
               >
-                {sport || '내가 즐기는 스포츠'}
+                {sport || '입력된 정보가 없습니다'}
               </Text>
             </View>
           ) : (
-            <TextField value={draftSport} onChangeText={setDraftSport} label="내가 즐기는 스포츠" />
+            <TextField value={draftSport} onChangeText={setDraftSport} label="입력된 정보가 없습니다" />
           )}
         </View>
 
         {/* 성별/연령 */}
         <View className="px-6 pb-6">
           <Text
-            className="mb-3 text-[17px] text-[#07091C]"
-            style={{ fontFamily: 'Pretendard-Bold' }}
+            className="mb-3 text-[16px] text-[#1F2A43]"
+            style={{ fontFamily: 'Pretendard-SemiBold' }}
           >
             성별/연령
           </Text>
@@ -350,7 +339,7 @@ export function CustomerSettingsScreen() {
                 className="text-[13px] text-[#74768E]"
                 style={{ fontFamily: 'Pretendard-Medium' }}
               >
-                미설정
+                {'• 선택된 정보가 없습니다'}
               </Text>
             )
           ) : (
@@ -379,7 +368,7 @@ export function CustomerSettingsScreen() {
         {/* 탐색키워드 */}
         <View className="px-6 pb-6">
           <View className="mb-3 flex-row items-center gap-2">
-            <Text className="text-[17px] text-[#07091C]" style={{ fontFamily: 'Pretendard-Bold' }}>
+            <Text className="text-[16px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
               탐색키워드
             </Text>
             {mode === 'edit' && (
@@ -392,38 +381,76 @@ export function CustomerSettingsScreen() {
             )}
           </View>
           {mode === 'view' ? (
-            // VIEW: 전체 프리셋 표시, 선택된 것만 진남색 강조
-            <FlatList
-              data={PRESET_KEYWORDS}
-              keyExtractor={(item) => item}
-              numColumns={3}
-              scrollEnabled={false}
-              renderItem={renderViewKeyword}
-            />
+            keywords.length > 0 ? (
+              <FlatList
+                horizontal
+                scrollEnabled={false}
+                data={keywords}
+                keyExtractor={(item) => item}
+                renderItem={renderViewKeyword}
+              />
+            ) : (
+              <Text
+                className="text-[13px] text-[#74768E]"
+                style={{ fontFamily: 'Pretendard-Medium' }}
+              >
+                {'• 선택된 키워드가 없습니다'}
+              </Text>
+            )
           ) : (
             <KeywordChipInput keywords={draftKeywords} onChange={setDraftKeywords} />
           )}
         </View>
       </ScrollView>
 
-      {/* 명인 모드 전환 — VIEW 모드에서만 표시 */}
+      {/* 명인 모드 전환 + 로그아웃/탈퇴 — VIEW 모드에서만 표시 */}
       {mode === 'view' && (
-        <View className="mx-6 mb-6 flex-row items-center justify-between rounded-xl bg-white px-4 py-4">
-          <View>
-            <Text className="text-[15px] text-[#07091C]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
-              명인 모드
-            </Text>
-            <Text className="mt-0.5 text-[12px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
-              전문가로 전환합니다
-            </Text>
+        <View className="mx-6 mb-6 gap-3">
+          <View className="flex-row items-center justify-between rounded-xl bg-white px-4 py-4">
+            <View>
+              <Text className="text-[15px] text-[#07091C]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+                명인 모드
+              </Text>
+              <Text className="mt-0.5 text-[12px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
+                전문가로 전환합니다
+              </Text>
+            </View>
+            <Switch
+              value={false}
+              onValueChange={handleSwitchToMaster}
+              disabled={isSwitching}
+              trackColor={{ false: '#D9D9D9', true: '#1F2A43' }}
+              thumbColor="#FFFFFF"
+            />
           </View>
-          <Switch
-            value={false}
-            onValueChange={handleSwitchToMaster}
-            disabled={isSwitching}
-            trackColor={{ false: '#D9D9D9', true: '#1F2A43' }}
-            thumbColor="#FFFFFF"
-          />
+
+          <View className="flex-row justify-between rounded-xl bg-white px-4 py-3">
+            <Pressable
+              hitSlop={8}
+              onPress={() => {
+                clearAuth()
+                rootNav?.reset({ index: 0, routes: [{ name: 'Onboarding' }] })
+              }}
+              accessibilityRole="button"
+              accessibilityLabel="로그아웃"
+            >
+              <Text className="text-[14px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-Medium' }}>
+                로그아웃
+              </Text>
+            </Pressable>
+            <Pressable
+              hitSlop={8}
+              onPress={() => {
+                // TODO: 탈퇴 API 연동
+              }}
+              accessibilityRole="button"
+              accessibilityLabel="탈퇴하기"
+            >
+              <Text className="text-[14px] text-[#E74C3C]" style={{ fontFamily: 'Pretendard-Medium' }}>
+                탈퇴하기
+              </Text>
+            </Pressable>
+          </View>
         </View>
       )}
 

@@ -11,6 +11,7 @@ import GoogleSvg from './google.svg'
 import HomeSvg from './home.svg'
 import KakaoSvg from './kakao.svg'
 import LinkSvg from './link.svg'
+import LocationOnSvg from './location-on.svg'
 import MasterSvg from './master.svg'
 import PersonSvg from './person.svg'
 import ProfilePersonSvg from './profile-person.svg'
@@ -109,6 +110,11 @@ export function StarMedalIcon({ size = 100, ...rest }: IconProps) {
 // edit.svg는 자체 여백 없는 24x24 글리프
 export function EditIcon({ size = 24, ...rest }: IconProps) {
   return <EditSvg width={size} height={size} {...rest} />
+}
+
+// location-on.svg — Material Design map pin 글리프 (24x24 viewBox, size prop으로 렌더 크기 조절)
+export function LocationOnIcon({ size = 12, ...rest }: IconProps) {
+  return <LocationOnSvg width={size} height={size} {...rest} />
 }
 
 // profile-person.svg는 프로필 아바타용 실루엣 아이콘 (원본 88×104, 비율 유지)

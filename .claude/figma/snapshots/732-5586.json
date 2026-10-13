@@ -2485,9 +2485,9 @@
           "type": "RECTANGLE",
           "box": [
             62,
-            384,
+            419,
             276,
-            190
+            154
           ],
           "fills": [
             {
@@ -2503,7 +2503,7 @@
           "type": "TEXT",
           "box": [
             129,
-            590,
+            589,
             140,
             28
           ],
@@ -2520,390 +2520,6 @@
           "lineHeightPx": 14.32,
           "letterSpacing": 0,
           "textAlignHorizontal": "CENTER"
-        },
-        {
-          "id": "732:5684",
-          "name": "Chip/Variant3",
-          "type": "INSTANCE",
-          "box": [
-            73,
-            306,
-            70,
-            26
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "strokes": [
-            {
-              "type": "SOLID",
-              "color": "#74768E"
-            }
-          ],
-          "strokeWeight": 1,
-          "radius": 82,
-          "layoutMode": "HORIZONTAL",
-          "itemSpacing": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
-          "paddingTop": 7,
-          "paddingBottom": 7,
-          "primaryAxisAlignItems": "CENTER",
-          "counterAxisAlignItems": "CENTER",
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED",
-          "componentId": "732:3316",
-          "children": [
-            {
-              "id": "I732:5684;732:3317",
-              "name": "40대 남성",
-              "type": "TEXT",
-              "box": [
-                83,
-                308,
-                50,
-                22
-              ],
-              "fills": [
-                {
-                  "type": "SOLID",
-                  "color": "#F2F2F2"
-                }
-              ],
-              "text": "연령/성별",
-              "fontFamily": "Pretendard",
-              "fontWeight": 500,
-              "fontSize": 13,
-              "lineHeightPx": 22,
-              "letterSpacing": 0,
-              "textAlignHorizontal": "LEFT",
-              "layoutSizingHorizontal": "HUG",
-              "layoutSizingVertical": "HUG"
-            }
-          ]
-        },
-        {
-          "id": "732:5685",
-          "name": "Chip/Variant3",
-          "type": "INSTANCE",
-          "box": [
-            155,
-            306,
-            90,
-            26
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "strokes": [
-            {
-              "type": "SOLID",
-              "color": "#74768E"
-            }
-          ],
-          "strokeWeight": 1,
-          "radius": 82,
-          "layoutMode": "HORIZONTAL",
-          "itemSpacing": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
-          "paddingTop": 7,
-          "paddingBottom": 7,
-          "primaryAxisAlignItems": "CENTER",
-          "counterAxisAlignItems": "CENTER",
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED",
-          "componentId": "732:3316",
-          "children": [
-            {
-              "id": "I732:5685;732:3317",
-              "name": "40대 남성",
-              "type": "TEXT",
-              "box": [
-                167.5,
-                308,
-                65,
-                22
-              ],
-              "fills": [
-                {
-                  "type": "SOLID",
-                  "color": "#F2F2F2"
-                }
-              ],
-              "text": "지역이름6자",
-              "fontFamily": "Pretendard",
-              "fontWeight": 500,
-              "fontSize": 13,
-              "lineHeightPx": 22,
-              "letterSpacing": 0,
-              "textAlignHorizontal": "LEFT",
-              "layoutSizingHorizontal": "HUG",
-              "layoutSizingVertical": "HUG"
-            }
-          ]
-        },
-        {
-          "id": "732:5686",
-          "name": "Chip/Variant3",
-          "type": "INSTANCE",
-          "box": [
-            257,
-            306,
-            70,
-            26
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "strokes": [
-            {
-              "type": "SOLID",
-              "color": "#74768E"
-            }
-          ],
-          "strokeWeight": 1,
-          "radius": 82,
-          "layoutMode": "HORIZONTAL",
-          "itemSpacing": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
-          "paddingTop": 7,
-          "paddingBottom": 7,
-          "primaryAxisAlignItems": "CENTER",
-          "counterAxisAlignItems": "CENTER",
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED",
-          "componentId": "732:3316",
-          "children": [
-            {
-              "id": "I732:5686;732:3317",
-              "name": "40대 남성",
-              "type": "TEXT",
-              "box": [
-                269.5,
-                308,
-                45,
-                22
-              ],
-              "fills": [
-                {
-                  "type": "SOLID",
-                  "color": "#F2F2F2"
-                }
-              ],
-              "text": "대표운동",
-              "fontFamily": "Pretendard",
-              "fontWeight": 500,
-              "fontSize": 13,
-              "lineHeightPx": 22,
-              "letterSpacing": 0,
-              "textAlignHorizontal": "LEFT",
-              "layoutSizingHorizontal": "HUG",
-              "layoutSizingVertical": "HUG"
-            }
-          ]
-        },
-        {
-          "id": "732:5687",
-          "name": "Chip/Variant3",
-          "type": "INSTANCE",
-          "box": [
-            73,
-            342,
-            60,
-            26
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "strokes": [
-            {
-              "type": "SOLID",
-              "color": "#74768E"
-            }
-          ],
-          "strokeWeight": 1,
-          "radius": 82,
-          "layoutMode": "HORIZONTAL",
-          "itemSpacing": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
-          "paddingTop": 7,
-          "paddingBottom": 7,
-          "primaryAxisAlignItems": "CENTER",
-          "counterAxisAlignItems": "CENTER",
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED",
-          "componentId": "732:3316",
-          "children": [
-            {
-              "id": "I732:5687;732:3317",
-              "name": "40대 남성",
-              "type": "TEXT",
-              "box": [
-                86,
-                344,
-                34,
-                22
-              ],
-              "fills": [
-                {
-                  "type": "SOLID",
-                  "color": "#F2F2F2"
-                }
-              ],
-              "text": "키워드",
-              "fontFamily": "Pretendard",
-              "fontWeight": 500,
-              "fontSize": 13,
-              "lineHeightPx": 22,
-              "letterSpacing": 0,
-              "textAlignHorizontal": "LEFT",
-              "layoutSizingHorizontal": "HUG",
-              "layoutSizingVertical": "HUG"
-            }
-          ]
-        },
-        {
-          "id": "732:5688",
-          "name": "Chip/Variant3",
-          "type": "INSTANCE",
-          "box": [
-            145,
-            342,
-            60,
-            26
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "strokes": [
-            {
-              "type": "SOLID",
-              "color": "#74768E"
-            }
-          ],
-          "strokeWeight": 1,
-          "radius": 82,
-          "layoutMode": "HORIZONTAL",
-          "itemSpacing": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
-          "paddingTop": 7,
-          "paddingBottom": 7,
-          "primaryAxisAlignItems": "CENTER",
-          "counterAxisAlignItems": "CENTER",
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED",
-          "componentId": "732:3316",
-          "children": [
-            {
-              "id": "I732:5688;732:3317",
-              "name": "40대 남성",
-              "type": "TEXT",
-              "box": [
-                158,
-                344,
-                34,
-                22
-              ],
-              "fills": [
-                {
-                  "type": "SOLID",
-                  "color": "#F2F2F2"
-                }
-              ],
-              "text": "키워드",
-              "fontFamily": "Pretendard",
-              "fontWeight": 500,
-              "fontSize": 13,
-              "lineHeightPx": 22,
-              "letterSpacing": 0,
-              "textAlignHorizontal": "LEFT",
-              "layoutSizingHorizontal": "HUG",
-              "layoutSizingVertical": "HUG"
-            }
-          ]
-        },
-        {
-          "id": "732:5689",
-          "name": "Chip/Variant3",
-          "type": "INSTANCE",
-          "box": [
-            217,
-            342,
-            60,
-            26
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "strokes": [
-            {
-              "type": "SOLID",
-              "color": "#74768E"
-            }
-          ],
-          "strokeWeight": 1,
-          "radius": 82,
-          "layoutMode": "HORIZONTAL",
-          "itemSpacing": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
-          "paddingTop": 7,
-          "paddingBottom": 7,
-          "primaryAxisAlignItems": "CENTER",
-          "counterAxisAlignItems": "CENTER",
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED",
-          "componentId": "732:3316",
-          "children": [
-            {
-              "id": "I732:5689;732:3317",
-              "name": "40대 남성",
-              "type": "TEXT",
-              "box": [
-                230,
-                344,
-                34,
-                22
-              ],
-              "fills": [
-                {
-                  "type": "SOLID",
-                  "color": "#F2F2F2"
-                }
-              ],
-              "text": "키워드",
-              "fontFamily": "Pretendard",
-              "fontWeight": 500,
-              "fontSize": 13,
-              "lineHeightPx": 22,
-              "letterSpacing": 0,
-              "textAlignHorizontal": "LEFT",
-              "layoutSizingHorizontal": "HUG",
-              "layoutSizingVertical": "HUG"
-            }
-          ]
         },
         {
           "id": "732:5690",
@@ -2978,8 +2594,8 @@
           "name": "고객이 마이페이지에 작성한 내용이 보이는 구간",
           "type": "TEXT",
           "box": [
-            84,
-            399,
+            85,
+            436,
             230,
             120
           ],
@@ -3014,6 +2630,566 @@
             }
           ],
           "radius": 30
+        },
+        {
+          "id": "2311:7498",
+          "name": "칩버튼",
+          "type": "TEXT",
+          "box": [
+            42,
+            191,
+            29,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "지역1",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
+        },
+        {
+          "id": "2311:7456",
+          "name": "Frame 1739336882",
+          "type": "FRAME",
+          "box": [
+            62,
+            305,
+            276,
+            94
+          ],
+          "children": [
+            {
+              "id": "2311:7455",
+              "name": "Rectangle 34624893",
+              "type": "RECTANGLE",
+              "box": [
+                62,
+                305,
+                276,
+                60
+              ]
+            },
+            {
+              "id": "732:5687",
+              "name": "Chip/Variant3",
+              "type": "INSTANCE",
+              "box": [
+                98,
+                339,
+                60,
+                26
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 82,
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 10,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 7,
+              "paddingBottom": 7,
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "732:3316",
+              "children": [
+                {
+                  "id": "I732:5687;732:3317",
+                  "name": "40대 남성",
+                  "type": "TEXT",
+                  "box": [
+                    111,
+                    341,
+                    34,
+                    22
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "text": "키워드",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 13,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "HUG"
+                }
+              ]
+            },
+            {
+              "id": "732:5688",
+              "name": "Chip/Variant3",
+              "type": "INSTANCE",
+              "box": [
+                170,
+                339,
+                60,
+                26
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 82,
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 10,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 7,
+              "paddingBottom": 7,
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "732:3316",
+              "children": [
+                {
+                  "id": "I732:5688;732:3317",
+                  "name": "40대 남성",
+                  "type": "TEXT",
+                  "box": [
+                    183,
+                    341,
+                    34,
+                    22
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "text": "키워드",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 13,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "HUG"
+                }
+              ]
+            },
+            {
+              "id": "732:5689",
+              "name": "Chip/Variant3",
+              "type": "INSTANCE",
+              "box": [
+                242,
+                339,
+                60,
+                26
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 82,
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 10,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 7,
+              "paddingBottom": 7,
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "732:3316",
+              "children": [
+                {
+                  "id": "I732:5689;732:3317",
+                  "name": "40대 남성",
+                  "type": "TEXT",
+                  "box": [
+                    255,
+                    341,
+                    34,
+                    22
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "text": "키워드",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 13,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "HUG"
+                }
+              ]
+            },
+            {
+              "id": "2311:7492",
+              "name": "Chip",
+              "type": "INSTANCE",
+              "box": [
+                98,
+                305,
+                58,
+                26
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 82,
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 10,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 7,
+              "paddingBottom": 7,
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "224:538",
+              "children": [
+                {
+                  "id": "I2311:7492;224:539",
+                  "name": "칩버튼",
+                  "type": "TEXT",
+                  "box": [
+                    110,
+                    307,
+                    34,
+                    22
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "text": "연령대",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 13,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "HUG"
+                }
+              ]
+            },
+            {
+              "id": "2311:7495",
+              "name": "Chip",
+              "type": "INSTANCE",
+              "box": [
+                170,
+                305,
+                47,
+                26
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 82,
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 10,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 7,
+              "paddingBottom": 7,
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "224:538",
+              "children": [
+                {
+                  "id": "I2311:7495;224:539",
+                  "name": "칩버튼",
+                  "type": "TEXT",
+                  "box": [
+                    182,
+                    307,
+                    23,
+                    22
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "text": "성별",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 13,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "HUG"
+                }
+              ]
+            },
+            {
+              "id": "2303:7447",
+              "name": "Chip",
+              "type": "INSTANCE",
+              "box": [
+                98,
+                373,
+                53,
+                26
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 82,
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 10,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 7,
+              "paddingBottom": 7,
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "224:538",
+              "children": [
+                {
+                  "id": "I2303:7447;224:539",
+                  "name": "칩버튼",
+                  "type": "TEXT",
+                  "box": [
+                    110,
+                    375,
+                    29,
+                    22
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "text": "지역1",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 13,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "HUG"
+                }
+              ]
+            },
+            {
+              "id": "2311:7500",
+              "name": "Chip",
+              "type": "INSTANCE",
+              "box": [
+                170,
+                373,
+                55,
+                26
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 82,
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 10,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 7,
+              "paddingBottom": 7,
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "224:538",
+              "children": [
+                {
+                  "id": "I2311:7500;224:539",
+                  "name": "칩버튼",
+                  "type": "TEXT",
+                  "box": [
+                    182,
+                    375,
+                    31,
+                    22
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "text": "지역2",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 13,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "HUG"
+                }
+              ]
+            },
+            {
+              "id": "2311:7503",
+              "name": "Chip",
+              "type": "INSTANCE",
+              "box": [
+                242,
+                373,
+                55,
+                26
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 82,
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 10,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 7,
+              "paddingBottom": 7,
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "224:538",
+              "children": [
+                {
+                  "id": "I2311:7503;224:539",
+                  "name": "칩버튼",
+                  "type": "TEXT",
+                  "box": [
+                    254,
+                    375,
+                    31,
+                    22
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#F2F2F2"
+                    }
+                  ],
+                  "text": "지역3",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 13,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "HUG"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

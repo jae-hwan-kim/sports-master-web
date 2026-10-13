@@ -1,0 +1,63 @@
+{
+  "id": "2187:11779",
+  "name": "Frame 1739336864",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    338,
+    40
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#D9D9D9"
+    }
+  ],
+  "strokes": [
+    {
+      "type": "SOLID",
+      "color": "#74768E",
+      "opacity": 0.3
+    }
+  ],
+  "strokeWeight": 1,
+  "radius": 8,
+  "layoutMode": "HORIZONTAL",
+  "itemSpacing": 10,
+  "paddingLeft": 20,
+  "paddingRight": 20,
+  "paddingTop": 12,
+  "paddingBottom": 12,
+  "counterAxisAlignItems": "CENTER",
+  "layoutSizingHorizontal": "FIXED",
+  "layoutSizingVertical": "FIXED",
+  "children": [
+    {
+      "id": "2187:11780",
+      "name": "명인 리뷰 작성하러가기",
+      "type": "TEXT",
+      "box": [
+        20,
+        13,
+        110,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "text": "명인 리뷰 작성하러가기",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG"
+    }
+  ]
+}

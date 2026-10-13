@@ -24,5 +24,8 @@ export function useUpdateExpertProfile() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expertProfile', 'me'] })
     },
+    onError: (error: unknown) => {
+      console.error('[useUpdateExpertProfile]', error)
+    },
   })
 }

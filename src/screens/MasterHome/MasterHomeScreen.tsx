@@ -12,7 +12,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
-import { ArrowNextIcon, LinkIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
+import { ArrowNextIcon, LinkIcon, ProfilePersonIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
@@ -58,16 +58,13 @@ function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?
         height: 20,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#1C236E',
-        backgroundColor: '#07091C',
+        borderColor: '#74768e',
+        backgroundColor: '#74768e',
         overflow: 'hidden',
         justifyContent: 'center',
       }}
     >
-      <LinearGradient
-        colors={['rgb(24,30,93)', 'rgb(32,40,127)']}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 1, y: 0 }}
+      <View
         style={{
           position: 'absolute',
           top: 2,
@@ -75,11 +72,12 @@ function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?
           bottom: 2,
           width: 36,
           borderRadius: 8,
+          backgroundColor: '#F2F2F2',
         }}
       />
       <Text
         style={{
-          color: '#F2F2F2',
+          color: '#1F2A43',
           fontSize: 7,
           fontFamily: 'Pretendard-Medium',
           paddingLeft: 8,
@@ -107,7 +105,7 @@ function StatBox({ value, label }: { value: string; label: string }) {
       <Text
         style={{
           color: '#F2F2F2',
-          fontSize: 13,
+          fontSize: 12,
           fontFamily: 'Pretendard-Medium',
           textAlign: 'center',
         }}
@@ -123,7 +121,7 @@ function StatDivider() {
     <View
       style={{
         width: 1,
-        height: 38,
+        height: 38.5,
         backgroundColor: 'rgba(255,255,255,0.4)',
         alignSelf: 'center',
         marginHorizontal: 20,
@@ -246,6 +244,7 @@ export function MasterHomeScreen() {
   })
 
   const hasProfile = expertProfile !== undefined && !expertProfileError
+  const nickname = expertProfile?.centerName ?? '-'
   const gradeLabel = expertProfile?.expertGrade
     ? (GRADE_LABEL[expertProfile.expertGrade] ?? expertProfile.expertGrade)
     : '-'
@@ -311,20 +310,34 @@ export function MasterHomeScreen() {
             height: 56,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
             paddingHorizontal: 16,
-            gap: 8,
           }}
         >
-          <MasterModeBadge onPress={handleModeSwitch} disabled={isSwitching} />
-          <Pressable
-            hitSlop={8}
-            onPress={() => rootNav?.navigate('MasterSettings')}
-            accessibilityRole="button"
-            accessibilityLabel="설정"
-          >
-            <SettingsIcon size={44} color="#F2F2F2" />
-          </Pressable>
+          {/* 좌측: 아바타 + 인사말 */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            <ProfilePersonIcon size={36} color="#1F2A43" />
+            <View>
+              <Text style={{ fontSize: 10, color: '#1F2A43', fontFamily: 'Pretendard-Medium' }}>
+                반갑습니다 👋
+              </Text>
+              <Text style={{ fontSize: 12, color: '#07091C', fontFamily: 'Pretendard-SemiBold' }}>
+                {nickname} 님
+              </Text>
+            </View>
+          </View>
+          {/* 우측: 모드 배지 + 설정 */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            <MasterModeBadge onPress={handleModeSwitch} disabled={isSwitching} />
+            <Pressable
+              hitSlop={8}
+              onPress={() => rootNav?.navigate('MasterSettings')}
+              accessibilityRole="button"
+              accessibilityLabel="설정"
+            >
+              <SettingsIcon size={44} color="#F2F2F2" />
+            </Pressable>
+          </View>
         </View>
 
         {/* 리뷰 링크 배너 */}
@@ -332,7 +345,7 @@ export function MasterHomeScreen() {
           hitSlop={8}
           onPress={handleReviewLink}
           style={{
-            height: 54,
+            height: 44,
             marginHorizontal: 16,
             borderRadius: 8,
             backgroundColor: 'rgba(7,9,28,0.6)',
@@ -343,14 +356,14 @@ export function MasterHomeScreen() {
         >
           <LinkIcon size={44} color="#FFFFFF" />
           <Text
-            style={{ flex: 1, color: '#F2F2F2', fontSize: 13, fontFamily: 'Pretendard-Medium' }}
+            style={{ flex: 1, color: '#F2F2F2', fontSize: 12, fontFamily: 'Pretendard-Medium' }}
           >
             내 고객이라면 누구나 리뷰 작성 가능
           </Text>
           <Text
             style={{
               color: '#D9D9D9',
-              fontSize: 13,
+              fontSize: 12,
               fontFamily: 'Pretendard-Medium',
               paddingRight: 12,
             }}
@@ -395,7 +408,7 @@ export function MasterHomeScreen() {
               <Text
                 style={{
                   color: '#D9D9D9',
-                  fontSize: 13,
+                  fontSize: 12,
                   fontFamily: 'Pretendard-Medium',
                   marginTop: 7,
                 }}
@@ -431,8 +444,8 @@ export function MasterHomeScreen() {
           borderTopRightRadius: 16,
           shadowColor: '#000',
           shadowOffset: { width: 0, height: -5 },
-          shadowOpacity: 0.1,
-          shadowRadius: 8,
+          shadowOpacity: 0.05,
+          shadowRadius: 5,
           elevation: 5,
           paddingTop: 23,
         }}
@@ -457,9 +470,9 @@ export function MasterHomeScreen() {
             <Text
               style={{
                 color: '#74768E',
-                fontSize: 13,
+                fontSize: 12,
                 fontFamily: 'Pretendard-Medium',
-                marginTop: 6,
+                marginTop: 3,
               }}
             >
               나를 찾는 고객 프로필 전부 확인하기
@@ -476,7 +489,7 @@ export function MasterHomeScreen() {
           contentContainerStyle={{ paddingHorizontal: 32 }}
           ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
           renderItem={({ item }) => (
-            <DiagnosisRequestCard item={item} onPress={() => tabNav.navigate('DiagnosisTab')} />
+            <DiagnosisRequestCard item={item} onPress={() => tabNav.navigate('DiagnosisTab')} cardBg="#F2F2F2" />
           )}
           ListEmptyComponent={hasProfile ? <EmptyHasTip /> : <EmptyNoProfile />}
           ListFooterComponent={

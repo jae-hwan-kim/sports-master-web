@@ -1,0 +1,5243 @@
+{
+  "id": "2311:7506",
+  "name": "명인탐색_검색",
+  "type": "FRAME",
+  "box": [
+    0,
+    0,
+    402,
+    874
+  ],
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#F2F2F2"
+    }
+  ],
+  "children": [
+    {
+      "id": "2311:7507",
+      "name": "여백",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        0,
+        402,
+        54
+      ],
+      "componentId": "523:4129",
+      "children": [
+        {
+          "id": "I2311:7507;523:4115",
+          "name": "Rectangle 34624651",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            0,
+            402,
+            54
+          ]
+        },
+        {
+          "id": "I2311:7507;523:4116",
+          "name": "Status Bar - iPhone",
+          "type": "INSTANCE",
+          "box": [
+            17,
+            2,
+            367,
+            50
+          ],
+          "layoutMode": "VERTICAL",
+          "itemSpacing": -31,
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "50:506",
+          "children": [
+            {
+              "id": "I2311:7507;523:4116;759:11360",
+              "name": "Frame",
+              "type": "FRAME",
+              "box": [
+                17,
+                16,
+                367,
+                22
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 134,
+              "primaryAxisAlignItems": "SPACE_BETWEEN",
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "I2311:7507;523:4116;759:11361",
+                  "name": "Time",
+                  "type": "FRAME",
+                  "box": [
+                    17,
+                    16,
+                    121.5,
+                    22
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 10,
+                  "paddingLeft": 20,
+                  "paddingRight": 6,
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I2311:7507;523:4116;759:11362",
+                      "name": "Time",
+                      "type": "TEXT",
+                      "box": [
+                        37,
+                        16,
+                        37,
+                        22
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "text": "9:41",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 590,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER",
+                      "layoutSizingHorizontal": "HUG",
+                      "layoutSizingVertical": "HUG"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2311:7507;523:4116;759:11363",
+                  "name": "Dynamic Island spacer",
+                  "type": "FRAME",
+                  "box": [
+                    138.5,
+                    22,
+                    124,
+                    10
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FIXED",
+                  "layoutSizingVertical": "FIXED"
+                },
+                {
+                  "id": "I2311:7507;523:4116;759:11364",
+                  "name": "Levels",
+                  "type": "FRAME",
+                  "box": [
+                    262.5,
+                    20.5,
+                    121.5,
+                    13
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "itemSpacing": 7,
+                  "paddingLeft": 6,
+                  "paddingRight": 20,
+                  "primaryAxisAlignItems": "MAX",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "HUG",
+                  "children": [
+                    {
+                      "id": "I2311:7507;523:4116;759:11365",
+                      "name": "Cellular Connection",
+                      "type": "VECTOR",
+                      "box": [
+                        286.33,
+                        20.89,
+                        19.2,
+                        12.23
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED"
+                    },
+                    {
+                      "id": "I2311:7507;523:4116;759:11366",
+                      "name": "Wifi",
+                      "type": "VECTOR",
+                      "box": [
+                        312.53,
+                        20.84,
+                        17.14,
+                        12.33
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED"
+                    },
+                    {
+                      "id": "I2311:7507;523:4116;759:11367",
+                      "name": "Battery",
+                      "type": "GROUP",
+                      "box": [
+                        336.67,
+                        20.5,
+                        27.33,
+                        13
+                      ],
+                      "radius": [
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FIXED",
+                      "children": [
+                        {
+                          "id": "I2311:7507;523:4116;759:11368",
+                          "name": "Border",
+                          "type": "RECTANGLE",
+                          "box": [
+                            336.67,
+                            20.5,
+                            25,
+                            13
+                          ],
+                          "strokes": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "strokeWeight": 1,
+                          "radius": 4.3,
+                          "opacity": 0.35
+                        },
+                        {
+                          "id": "I2311:7507;523:4116;759:11369",
+                          "name": "Cap",
+                          "type": "VECTOR",
+                          "box": [
+                            362.67,
+                            25.28,
+                            1.33,
+                            4.08
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "opacity": 0.4
+                        },
+                        {
+                          "id": "I2311:7507;523:4116;759:11370",
+                          "name": "Capacity",
+                          "type": "RECTANGLE",
+                          "box": [
+                            338.67,
+                            22.5,
+                            21,
+                            9
+                          ],
+                          "fills": [
+                            {
+                              "type": "SOLID",
+                              "color": "#FFFFFF"
+                            }
+                          ],
+                          "radius": 2.5
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7508",
+      "name": "Filter Chip",
+      "type": "INSTANCE",
+      "box": [
+        229,
+        131,
+        63.49,
+        36
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "radius": 18,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 8,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG",
+      "componentId": "181:911",
+      "children": [
+        {
+          "id": "I2311:7508;181:727",
+          "name": "지역",
+          "type": "TEXT",
+          "box": [
+            241,
+            138,
+            23,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "text": "지역",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        },
+        {
+          "id": "I2311:7508;181:728",
+          "name": "Vector 9",
+          "type": "VECTOR",
+          "box": [
+            272,
+            144.76,
+            8.49,
+            8.49
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#74768E"
+            }
+          ],
+          "strokeWeight": 1,
+          "radius": 1,
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        }
+      ]
+    },
+    {
+      "id": "2311:7509",
+      "name": "Filter Chip_4점이상",
+      "type": "INSTANCE",
+      "box": [
+        300,
+        131,
+        70,
+        36
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "radius": 18,
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 8,
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 7,
+      "paddingBottom": 7,
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG",
+      "componentId": "224:821",
+      "children": [
+        {
+          "id": "I2311:7509;181:757",
+          "name": "4점 이상",
+          "type": "TEXT",
+          "box": [
+            312,
+            138,
+            46,
+            22
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "text": "4점 이상",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 13,
+          "lineHeightPx": 22,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
+        }
+      ]
+    },
+    {
+      "id": "2311:7510",
+      "name": "Rectangle 34624891",
+      "type": "RECTANGLE",
+      "box": [
+        26,
+        131,
+        195,
+        36
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "radius": 8
+    },
+    {
+      "id": "2311:7514",
+      "name": "location_on",
+      "type": "GROUP",
+      "box": [
+        48.44,
+        383.95,
+        12.11,
+        12.11
+      ],
+      "children": [
+        {
+          "id": "2311:7515",
+          "name": "Bounding box",
+          "type": "RECTANGLE",
+          "box": [
+            48.44,
+            383.95,
+            12.11,
+            12.11
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ]
+        },
+        {
+          "id": "2311:7516",
+          "name": "location_on",
+          "type": "VECTOR",
+          "box": [
+            50.46,
+            466.73,
+            8.07,
+            11.41
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#C6A75E"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7517",
+      "name": "Group 1000003584",
+      "type": "GROUP",
+      "box": [
+        26,
+        195,
+        344,
+        136
+      ],
+      "radius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "children": [
+        {
+          "id": "2311:7518",
+          "name": "Rectangle 34624841",
+          "type": "RECTANGLE",
+          "box": [
+            26,
+            195,
+            344,
+            136
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 8,
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#8B8B8B",
+              "opacity": 0.25,
+              "offset": [
+                1,
+                1
+              ],
+              "radius": 12
+            }
+          ]
+        },
+        {
+          "id": "2311:7519",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            197.49,
+            296,
+            61.84,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7519;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                210.37,
+                297,
+                35,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "컨디셔닝",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7520",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            112.25,
+            296,
+            79.14,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7520;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                125.13,
+                297,
+                52,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "선수트레이닝",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7521",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            42.28,
+            296,
+            61.84,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7521;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                55.16,
+                297,
+                35,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "방문재활",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7522",
+          "name": "진단요청 고객",
+          "type": "FRAME",
+          "box": [
+            26,
+            195,
+            344,
+            82
+          ],
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#8B8B8B",
+              "opacity": 0.15,
+              "offset": [
+                0,
+                1
+              ],
+              "radius": 8
+            }
+          ],
+          "children": [
+            {
+              "id": "2311:7523",
+              "name": "Rectangle 34624839",
+              "type": "RECTANGLE",
+              "box": [
+                26,
+                195,
+                344,
+                82
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "radius": 8
+            },
+            {
+              "id": "2311:7524",
+              "name": "Frame 5306",
+              "type": "FRAME",
+              "box": [
+                112,
+                216,
+                240,
+                43
+              ],
+              "layoutMode": "GRID",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "2311:7525",
+                  "name": "명인닉네임 | 지역",
+                  "type": "TEXT",
+                  "box": [
+                    112,
+                    216,
+                    240,
+                    17
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#B48247"
+                    }
+                  ],
+                  "text": "명인닉네임 | 지역",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 600,
+                  "fontSize": 14,
+                  "lineHeightPx": 16.71,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL"
+                },
+                {
+                  "id": "2311:7526",
+                  "name": "소개글 50자 이내 보이고 긴거는 말줄임표로 보이는",
+                  "type": "TEXT",
+                  "box": [
+                    112,
+                    245,
+                    240,
+                    14
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ],
+                  "text": "소개글 50자 이내 보이고 긴거는 말줄임표로 보이는",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 12,
+                  "lineHeightPx": 14.32,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL"
+                }
+              ]
+            },
+            {
+              "id": "2311:7527",
+              "name": "IMG_1059 3 1",
+              "type": "RECTANGLE",
+              "box": [
+                42,
+                211,
+                50,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "IMAGE",
+                  "image": true
+                }
+              ],
+              "radius": 25
+            }
+          ]
+        },
+        {
+          "id": "2311:7528",
+          "name": "Star",
+          "type": "INSTANCE",
+          "box": [
+            326,
+            284,
+            44,
+            44
+          ],
+          "radius": 20,
+          "componentId": "181:893",
+          "children": [
+            {
+              "id": "I2311:7528;181:869",
+              "name": "Star 17",
+              "type": "STAR",
+              "box": [
+                336,
+                294,
+                24,
+                24
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7529",
+      "name": "Group 1000003585",
+      "type": "GROUP",
+      "box": [
+        26,
+        351,
+        344,
+        136
+      ],
+      "radius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "children": [
+        {
+          "id": "2311:7530",
+          "name": "Rectangle 34624841",
+          "type": "RECTANGLE",
+          "box": [
+            26,
+            351,
+            344,
+            136
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 8,
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#8B8B8B",
+              "opacity": 0.25,
+              "offset": [
+                1,
+                1
+              ],
+              "radius": 12
+            }
+          ]
+        },
+        {
+          "id": "2311:7531",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            197.49,
+            452,
+            61.84,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7531;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                210.37,
+                453,
+                35,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "컨디셔닝",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7532",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            112.25,
+            452,
+            79.14,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7532;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                125.13,
+                453,
+                52,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "선수트레이닝",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7533",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            42.28,
+            452,
+            61.84,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7533;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                55.16,
+                453,
+                35,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "방문재활",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7534",
+          "name": "진단요청 고객",
+          "type": "FRAME",
+          "box": [
+            26,
+            351,
+            344,
+            82
+          ],
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#8B8B8B",
+              "opacity": 0.15,
+              "offset": [
+                0,
+                1
+              ],
+              "radius": 8
+            }
+          ],
+          "children": [
+            {
+              "id": "2311:7535",
+              "name": "Rectangle 34624839",
+              "type": "RECTANGLE",
+              "box": [
+                26,
+                351,
+                344,
+                82
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "radius": 8
+            },
+            {
+              "id": "2311:7536",
+              "name": "Frame 5306",
+              "type": "FRAME",
+              "box": [
+                112,
+                372,
+                240,
+                43
+              ],
+              "layoutMode": "GRID",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "2311:7537",
+                  "name": "명인닉네임 | 지역",
+                  "type": "TEXT",
+                  "box": [
+                    112,
+                    372,
+                    240,
+                    17
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#B48247"
+                    }
+                  ],
+                  "text": "명인닉네임 | 지역",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 600,
+                  "fontSize": 14,
+                  "lineHeightPx": 16.71,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL"
+                },
+                {
+                  "id": "2311:7538",
+                  "name": "소개글 50자 이내 보이고 긴거는 말줄임표로 보이는",
+                  "type": "TEXT",
+                  "box": [
+                    112,
+                    401,
+                    240,
+                    14
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ],
+                  "text": "소개글 50자 이내 보이고 긴거는 말줄임표로 보이는",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 12,
+                  "lineHeightPx": 14.32,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL"
+                }
+              ]
+            },
+            {
+              "id": "2311:7539",
+              "name": "IMG_1059 3 1",
+              "type": "RECTANGLE",
+              "box": [
+                42,
+                367,
+                50,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "IMAGE",
+                  "image": true
+                }
+              ],
+              "radius": 25
+            }
+          ]
+        },
+        {
+          "id": "2311:7540",
+          "name": "Star",
+          "type": "INSTANCE",
+          "box": [
+            326,
+            440,
+            44,
+            44
+          ],
+          "radius": 20,
+          "componentId": "181:893",
+          "children": [
+            {
+              "id": "I2311:7540;181:869",
+              "name": "Star 17",
+              "type": "STAR",
+              "box": [
+                336,
+                450,
+                24,
+                24
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7541",
+      "name": "location_on",
+      "type": "GROUP",
+      "box": [
+        48.44,
+        695.95,
+        12.11,
+        12.11
+      ],
+      "children": [
+        {
+          "id": "2311:7542",
+          "name": "Bounding box",
+          "type": "RECTANGLE",
+          "box": [
+            48.44,
+            695.95,
+            12.11,
+            12.11
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#D9D9D9"
+            }
+          ]
+        },
+        {
+          "id": "2311:7543",
+          "name": "location_on",
+          "type": "VECTOR",
+          "box": [
+            50.46,
+            778.73,
+            8.07,
+            11.41
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#C6A75E"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7544",
+      "name": "Group 1000003586",
+      "type": "GROUP",
+      "box": [
+        26,
+        507,
+        344,
+        136
+      ],
+      "radius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "children": [
+        {
+          "id": "2311:7545",
+          "name": "Rectangle 34624841",
+          "type": "RECTANGLE",
+          "box": [
+            26,
+            507,
+            344,
+            136
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 8,
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#8B8B8B",
+              "opacity": 0.25,
+              "offset": [
+                1,
+                1
+              ],
+              "radius": 12
+            }
+          ]
+        },
+        {
+          "id": "2311:7546",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            197.49,
+            608,
+            61.84,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7546;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                210.37,
+                609,
+                35,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "컨디셔닝",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7547",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            112.25,
+            608,
+            79.14,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7547;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                125.13,
+                609,
+                52,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "선수트레이닝",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7548",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            42.28,
+            608,
+            61.84,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7548;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                55.16,
+                609,
+                35,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "방문재활",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7549",
+          "name": "진단요청 고객",
+          "type": "FRAME",
+          "box": [
+            26,
+            507,
+            344,
+            82
+          ],
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#8B8B8B",
+              "opacity": 0.15,
+              "offset": [
+                0,
+                1
+              ],
+              "radius": 8
+            }
+          ],
+          "children": [
+            {
+              "id": "2311:7550",
+              "name": "Rectangle 34624839",
+              "type": "RECTANGLE",
+              "box": [
+                26,
+                507,
+                344,
+                82
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "radius": 8
+            },
+            {
+              "id": "2311:7551",
+              "name": "Frame 5306",
+              "type": "FRAME",
+              "box": [
+                112,
+                528,
+                240,
+                43
+              ],
+              "layoutMode": "GRID",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "2311:7552",
+                  "name": "명인닉네임 | 지역",
+                  "type": "TEXT",
+                  "box": [
+                    112,
+                    528,
+                    240,
+                    17
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#B48247"
+                    }
+                  ],
+                  "text": "명인닉네임 | 지역",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 600,
+                  "fontSize": 14,
+                  "lineHeightPx": 16.71,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL"
+                },
+                {
+                  "id": "2311:7553",
+                  "name": "소개글 50자 이내 보이고 긴거는 말줄임표로 보이는",
+                  "type": "TEXT",
+                  "box": [
+                    112,
+                    557,
+                    240,
+                    14
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ],
+                  "text": "소개글 50자 이내 보이고 긴거는 말줄임표로 보이는",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 12,
+                  "lineHeightPx": 14.32,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL"
+                }
+              ]
+            },
+            {
+              "id": "2311:7554",
+              "name": "IMG_1059 3 1",
+              "type": "RECTANGLE",
+              "box": [
+                42,
+                523,
+                50,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "IMAGE",
+                  "image": true
+                }
+              ],
+              "radius": 25
+            }
+          ]
+        },
+        {
+          "id": "2311:7555",
+          "name": "Star",
+          "type": "INSTANCE",
+          "box": [
+            326,
+            596,
+            44,
+            44
+          ],
+          "radius": 20,
+          "componentId": "181:893",
+          "children": [
+            {
+              "id": "I2311:7555;181:869",
+              "name": "Star 17",
+              "type": "STAR",
+              "box": [
+                336,
+                606,
+                24,
+                24
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7556",
+      "name": "Group 1000003587",
+      "type": "GROUP",
+      "box": [
+        26,
+        663,
+        344,
+        136
+      ],
+      "radius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "children": [
+        {
+          "id": "2311:7557",
+          "name": "Rectangle 34624841",
+          "type": "RECTANGLE",
+          "box": [
+            26,
+            663,
+            344,
+            136
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 8,
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#8B8B8B",
+              "opacity": 0.25,
+              "offset": [
+                1,
+                1
+              ],
+              "radius": 12
+            }
+          ]
+        },
+        {
+          "id": "2311:7558",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            197.49,
+            764,
+            61.84,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7558;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                210.37,
+                765,
+                35,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "컨디셔닝",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7559",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            112.25,
+            764,
+            79.14,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7559;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                125.13,
+                765,
+                52,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "선수트레이닝",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7560",
+          "name": "Filter Chip_선택된거",
+          "type": "INSTANCE",
+          "box": [
+            42.28,
+            764,
+            61.84,
+            20
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "radius": 14.49,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 6.439393997192383,
+          "paddingLeft": 12.878787994384766,
+          "paddingRight": 12.878787994384766,
+          "paddingTop": 6.439393997192383,
+          "paddingBottom": 6.439393997192383,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "181:914",
+          "children": [
+            {
+              "id": "I2311:7560;181:761",
+              "name": "김포시 외 2",
+              "type": "TEXT",
+              "box": [
+                55.16,
+                765,
+                35,
+                18
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "방문재활",
+              "fontFamily": "Pretendard",
+              "fontWeight": 500,
+              "fontSize": 10,
+              "lineHeightPx": 17.71,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT",
+              "layoutSizingHorizontal": "HUG",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "2311:7561",
+          "name": "진단요청 고객",
+          "type": "FRAME",
+          "box": [
+            26,
+            663,
+            344,
+            82
+          ],
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#8B8B8B",
+              "opacity": 0.15,
+              "offset": [
+                0,
+                1
+              ],
+              "radius": 8
+            }
+          ],
+          "children": [
+            {
+              "id": "2311:7562",
+              "name": "Rectangle 34624839",
+              "type": "RECTANGLE",
+              "box": [
+                26,
+                663,
+                344,
+                82
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "radius": 8
+            },
+            {
+              "id": "2311:7563",
+              "name": "Frame 5306",
+              "type": "FRAME",
+              "box": [
+                112,
+                684,
+                240,
+                43
+              ],
+              "layoutMode": "GRID",
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "2311:7564",
+                  "name": "명인닉네임 | 지역",
+                  "type": "TEXT",
+                  "box": [
+                    112,
+                    684,
+                    240,
+                    17
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#B48247"
+                    }
+                  ],
+                  "text": "명인닉네임 | 지역",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 600,
+                  "fontSize": 14,
+                  "lineHeightPx": 16.71,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL"
+                },
+                {
+                  "id": "2311:7565",
+                  "name": "소개글 50자 이내 보이고 긴거는 말줄임표로 보이는",
+                  "type": "TEXT",
+                  "box": [
+                    112,
+                    713,
+                    240,
+                    14
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ],
+                  "text": "소개글 50자 이내 보이고 긴거는 말줄임표로 보이는",
+                  "fontFamily": "Pretendard",
+                  "fontWeight": 500,
+                  "fontSize": 12,
+                  "lineHeightPx": 14.32,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL"
+                }
+              ]
+            },
+            {
+              "id": "2311:7566",
+              "name": "IMG_1059 3 1",
+              "type": "RECTANGLE",
+              "box": [
+                42,
+                679,
+                50,
+                50
+              ],
+              "fills": [
+                {
+                  "type": "IMAGE",
+                  "image": true
+                }
+              ],
+              "radius": 25
+            }
+          ]
+        },
+        {
+          "id": "2311:7567",
+          "name": "Star",
+          "type": "INSTANCE",
+          "box": [
+            326,
+            752,
+            44,
+            44
+          ],
+          "radius": 20,
+          "componentId": "181:893",
+          "children": [
+            {
+              "id": "I2311:7567;181:869",
+              "name": "Star 17",
+              "type": "STAR",
+              "box": [
+                336,
+                762,
+                24,
+                24
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "strokeWeight": 1,
+              "radius": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7568",
+      "name": "하단_고객 탭",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        781,
+        402,
+        93
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C"
+        }
+      ],
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#000000",
+          "opacity": 0.05,
+          "offset": [
+            0,
+            -2
+          ],
+          "radius": 20
+        }
+      ],
+      "componentId": "184:1096",
+      "children": [
+        {
+          "id": "I2311:7568;184:1097",
+          "name": "Rectangle 34624653",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            781,
+            402,
+            93
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ]
+        },
+        {
+          "id": "I2311:7568;184:1098",
+          "name": "Frame 5240",
+          "type": "INSTANCE",
+          "box": [
+            59,
+            781,
+            44,
+            58
+          ],
+          "layoutMode": "VERTICAL",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "componentId": "184:1009",
+          "children": [
+            {
+              "id": "I2311:7568;184:1098;802:98",
+              "name": "home",
+              "type": "FRAME",
+              "box": [
+                59,
+                781,
+                44,
+                44
+              ],
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "children": [
+                {
+                  "id": "I2311:7568;184:1098;802:99",
+                  "name": "home",
+                  "type": "GROUP",
+                  "box": [
+                    69,
+                    791,
+                    24,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "id": "I2311:7568;184:1098;802:100",
+                      "name": "Bounding box",
+                      "type": "RECTANGLE",
+                      "box": [
+                        69,
+                        791,
+                        24,
+                        24
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I2311:7568;184:1098;802:101",
+                      "name": "home",
+                      "type": "VECTOR",
+                      "box": [
+                        73,
+                        794,
+                        16,
+                        18
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I2311:7568;184:1098;802:45",
+              "name": "홈",
+              "type": "TEXT",
+              "box": [
+                59,
+                825,
+                44,
+                14
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ],
+              "text": "홈",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I2311:7568;184:1099",
+          "name": "Frame 5241",
+          "type": "INSTANCE",
+          "box": [
+            179,
+            781,
+            44,
+            58
+          ],
+          "layoutMode": "VERTICAL",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "componentId": "184:1015",
+          "children": [
+            {
+              "id": "I2311:7568;184:1099;802:106",
+              "name": "search_trainner",
+              "type": "FRAME",
+              "box": [
+                179,
+                781,
+                44,
+                44
+              ],
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "children": [
+                {
+                  "id": "I2311:7568;184:1099;802:107",
+                  "name": "person_search",
+                  "type": "GROUP",
+                  "box": [
+                    189,
+                    791,
+                    24,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "id": "I2311:7568;184:1099;802:108",
+                      "name": "Bounding box",
+                      "type": "RECTANGLE",
+                      "box": [
+                        189,
+                        791,
+                        24,
+                        24
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I2311:7568;184:1099;802:109",
+                      "name": "person_search",
+                      "type": "VECTOR",
+                      "box": [
+                        192,
+                        795,
+                        20.5,
+                        19.5
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#1F2A43"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I2311:7568;184:1099;802:47",
+              "name": "진단요청",
+              "type": "TEXT",
+              "box": [
+                179,
+                825,
+                44,
+                14
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "text": "명인탐색",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        },
+        {
+          "id": "I2311:7568;184:1100",
+          "name": "Frame 5242",
+          "type": "INSTANCE",
+          "box": [
+            299,
+            781,
+            44,
+            58
+          ],
+          "layoutMode": "VERTICAL",
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "componentId": "184:1021",
+          "children": [
+            {
+              "id": "I2311:7568;184:1100;802:102",
+              "name": "my page",
+              "type": "FRAME",
+              "box": [
+                299,
+                781,
+                44,
+                44
+              ],
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "children": [
+                {
+                  "id": "I2311:7568;184:1100;802:103",
+                  "name": "person",
+                  "type": "GROUP",
+                  "box": [
+                    309,
+                    791,
+                    24,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "id": "I2311:7568;184:1100;802:104",
+                      "name": "Bounding box",
+                      "type": "RECTANGLE",
+                      "box": [
+                        309,
+                        791,
+                        24,
+                        24
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "I2311:7568;184:1100;802:105",
+                      "name": "person",
+                      "type": "VECTOR",
+                      "box": [
+                        313,
+                        795,
+                        16,
+                        16
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#D9D9D9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I2311:7568;184:1100;802:49",
+              "name": "프로필",
+              "type": "TEXT",
+              "box": [
+                299,
+                825,
+                44,
+                14
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#D9D9D9"
+                }
+              ],
+              "text": "프로필",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "HUG"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7569",
+      "name": "작성시 이렇게",
+      "type": "TEXT",
+      "box": [
+        42,
+        141,
+        71,
+        16
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "text": "작성시 이렇게",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 13,
+      "lineHeightPx": 15.51,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "2317:8509",
+      "name": "Keyboard - iPhone",
+      "type": "INSTANCE",
+      "box": [
+        0,
+        538,
+        402,
+        336
+      ],
+      "layoutMode": "VERTICAL",
+      "paddingTop": 3,
+      "primaryAxisAlignItems": "MAX",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "componentId": "2317:8278",
+      "children": [
+        {
+          "id": "I2317:8509;537:155368",
+          "name": "Background",
+          "type": "INSTANCE",
+          "box": [
+            0,
+            538,
+            402,
+            336
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#555555",
+              "opacity": 0.9
+            },
+            {
+              "type": "SOLID",
+              "color": "#56585C",
+              "opacity": 0.87
+            },
+            {
+              "type": "SOLID",
+              "color": "#939393"
+            }
+          ],
+          "effects": [
+            {
+              "type": "BACKGROUND_BLUR",
+              "radius": 150
+            }
+          ],
+          "layoutMode": "VERTICAL",
+          "itemSpacing": 58,
+          "paddingTop": 6,
+          "counterAxisAlignItems": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "HUG",
+          "componentId": "2317:7871"
+        },
+        {
+          "id": "I2317:8509;135:63469",
+          "name": "Accessory Bar",
+          "type": "FRAME",
+          "box": [
+            0,
+            541,
+            402,
+            43
+          ],
+          "layoutMode": "HORIZONTAL",
+          "paddingTop": 2,
+          "paddingBottom": 2,
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "HUG",
+          "children": [
+            {
+              "id": "I2317:8509;135:64001",
+              "name": "Autocorrection",
+              "type": "INSTANCE",
+              "box": [
+                0,
+                543,
+                402,
+                39
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 2,
+              "paddingLeft": 1,
+              "paddingRight": 1,
+              "counterAxisAlignItems": "CENTER",
+              "layoutSizingHorizontal": "FILL",
+              "layoutSizingVertical": "FIXED",
+              "componentId": "2317:8229",
+              "children": [
+                {
+                  "id": "I2317:8509;135:64001;119:56629",
+                  "name": "Autocomplete Suggestion",
+                  "type": "FRAME",
+                  "box": [
+                    1,
+                    543,
+                    127.33,
+                    39
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#EBEDF0"
+                    }
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL",
+                  "children": [
+                    {
+                      "id": "I2317:8509;135:64001;119:56630",
+                      "name": "“The”",
+                      "type": "TEXT",
+                      "box": [
+                        1,
+                        543,
+                        127.33,
+                        39
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "“The”",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": -0.43,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;135:64001;135:64717",
+                  "name": "Separator (Clear)",
+                  "type": "FRAME",
+                  "box": [
+                    130.33,
+                    550,
+                    5,
+                    25
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "paddingLeft": 2,
+                  "paddingRight": 2,
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "FIXED",
+                  "children": [
+                    {
+                      "id": "I2317:8509;135:64001;135:64718",
+                      "name": "Separator",
+                      "type": "RECTANGLE",
+                      "box": [
+                        132.33,
+                        550,
+                        1,
+                        25
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "opacity": 0,
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FILL"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;135:64001;119:56595",
+                  "name": "Autocomplete Suggestion",
+                  "type": "FRAME",
+                  "box": [
+                    137.33,
+                    543,
+                    127.33,
+                    39
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL",
+                  "children": [
+                    {
+                      "id": "I2317:8509;135:64001;119:56596",
+                      "name": "the",
+                      "type": "TEXT",
+                      "box": [
+                        137.33,
+                        543,
+                        127.33,
+                        39
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "the",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": -0.43,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;135:64001;135:64443",
+                  "name": "Separator",
+                  "type": "FRAME",
+                  "box": [
+                    266.67,
+                    550,
+                    5,
+                    25
+                  ],
+                  "layoutMode": "HORIZONTAL",
+                  "paddingLeft": 2,
+                  "paddingRight": 2,
+                  "primaryAxisAlignItems": "CENTER",
+                  "counterAxisAlignItems": "CENTER",
+                  "layoutSizingHorizontal": "HUG",
+                  "layoutSizingVertical": "FIXED",
+                  "children": [
+                    {
+                      "id": "I2317:8509;135:64001;135:64444",
+                      "name": "Separator",
+                      "type": "RECTANGLE",
+                      "box": [
+                        268.67,
+                        550,
+                        1,
+                        25
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "opacity": 0.1,
+                      "layoutSizingHorizontal": "FIXED",
+                      "layoutSizingVertical": "FILL"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;135:64001;119:56663",
+                  "name": "Autocomplete Suggestion",
+                  "type": "FRAME",
+                  "box": [
+                    273.67,
+                    543,
+                    127.33,
+                    39
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FILL",
+                  "children": [
+                    {
+                      "id": "I2317:8509;135:64001;119:56664",
+                      "name": "to",
+                      "type": "TEXT",
+                      "box": [
+                        273.67,
+                        543,
+                        127.33,
+                        39
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "to",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 17,
+                      "lineHeightPx": 22,
+                      "letterSpacing": -0.43,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I2317:8509;117:76299",
+          "name": "Spacer",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            584,
+            402,
+            5
+          ],
+          "opacity": 0.6,
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "FIXED"
+        },
+        {
+          "id": "I2317:8509;118:55211",
+          "name": "Keyboard Layouts",
+          "type": "INSTANCE",
+          "box": [
+            0,
+            589,
+            402,
+            204
+          ],
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "2317:8032",
+          "children": [
+            {
+              "id": "I2317:8509;118:55211;118:54762",
+              "name": "Row 4",
+              "type": "FRAME",
+              "box": [
+                103.31,
+                751,
+                195.37,
+                42
+              ],
+              "children": [
+                {
+                  "id": "I2317:8509;118:55211;118:54763",
+                  "name": "Space",
+                  "type": "INSTANCE",
+                  "box": [
+                    103.31,
+                    751,
+                    195.37,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "componentId": "2317:7963",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54763;536:125289",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        103.31,
+                        751,
+                        195,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54763;208:52903",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        103.31,
+                        751,
+                        195,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "space",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 16,
+                      "lineHeightPx": 21,
+                      "letterSpacing": -0.31,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I2317:8509;118:55211;118:54764",
+              "name": "Return",
+              "type": "INSTANCE",
+              "box": [
+                304.82,
+                751,
+                94.11,
+                42
+              ],
+              "radius": 4.6,
+              "componentId": "2317:7985",
+              "children": [
+                {
+                  "id": "I2317:8509;118:55211;118:54764;536:125575",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    304.82,
+                    751,
+                    94,
+                    42
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#8F8F8F"
+                    }
+                  ],
+                  "radius": 4.6,
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "color": "#000000",
+                      "opacity": 0.35,
+                      "offset": [
+                        0,
+                        1
+                      ],
+                      "radius": 0
+                    }
+                  ],
+                  "componentId": "2317:7958"
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54764;118:62484",
+                  "name": "Q",
+                  "type": "TEXT",
+                  "box": [
+                    304.82,
+                    751,
+                    94,
+                    42
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#000000"
+                    }
+                  ],
+                  "text": "return",
+                  "fontFamily": "SF Pro",
+                  "fontWeight": 400,
+                  "fontSize": 16,
+                  "lineHeightPx": 21,
+                  "letterSpacing": -0.31,
+                  "textAlignHorizontal": "CENTER"
+                }
+              ]
+            },
+            {
+              "id": "I2317:8509;118:55211;118:54765",
+              "name": "Keyboard Switch",
+              "type": "INSTANCE",
+              "box": [
+                3.07,
+                751,
+                94.11,
+                42
+              ],
+              "radius": 4.6,
+              "componentId": "2317:7998",
+              "children": [
+                {
+                  "id": "I2317:8509;118:55211;118:54765;536:126105",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    3.07,
+                    751,
+                    94,
+                    42
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#8F8F8F"
+                    }
+                  ],
+                  "radius": 4.6,
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "color": "#000000",
+                      "opacity": 0.35,
+                      "offset": [
+                        0,
+                        1
+                      ],
+                      "radius": 0
+                    }
+                  ],
+                  "componentId": "2317:7958"
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54765;107:59928",
+                  "name": "ABC",
+                  "type": "TEXT",
+                  "box": [
+                    3.07,
+                    751,
+                    94,
+                    42
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#000000"
+                    }
+                  ],
+                  "text": "ABC",
+                  "fontFamily": "SF Pro",
+                  "fontWeight": 400,
+                  "fontSize": 16,
+                  "lineHeightPx": 21,
+                  "letterSpacing": -0.31,
+                  "textAlignHorizontal": "CENTER"
+                }
+              ]
+            },
+            {
+              "id": "I2317:8509;118:55211;118:54766",
+              "name": "Row 3",
+              "type": "FRAME",
+              "box": [
+                63.42,
+                697,
+                275.16,
+                42
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 6,
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "I2317:8509;118:55211;118:54767",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    63.42,
+                    697,
+                    34.17,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54767;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        63.42,
+                        697,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54767;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        74.42,
+                        701,
+                        12,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "z",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54769",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    103.59,
+                    697,
+                    34.17,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54769;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        103.59,
+                        697,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54769;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        114.59,
+                        701,
+                        12,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "x",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54771",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    143.75,
+                    697,
+                    34.17,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54771;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        143.75,
+                        697,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54771;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        154.75,
+                        701,
+                        13,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "c",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54773",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    183.92,
+                    697,
+                    34.17,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54773;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        183.92,
+                        697,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54773;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        194.92,
+                        701,
+                        13,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "v",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54775",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    224.08,
+                    697,
+                    34.17,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54775;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        224.08,
+                        697,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54775;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        234.08,
+                        701,
+                        15,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "b",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54777",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    264.25,
+                    697,
+                    34.17,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54777;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        264.25,
+                        697,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54777;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        274.25,
+                        701,
+                        14,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "n",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54779",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    304.41,
+                    697,
+                    34.17,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54779;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        304.41,
+                        697,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54779;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        311.41,
+                        701,
+                        21,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "m",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I2317:8509;118:55211;118:54780",
+              "name": "Delete Key",
+              "type": "INSTANCE",
+              "box": [
+                353.92,
+                697,
+                45.01,
+                42
+              ],
+              "radius": 4.6,
+              "componentId": "2317:7997",
+              "children": [
+                {
+                  "id": "I2317:8509;118:55211;118:54780;536:126174",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    353.92,
+                    697,
+                    45,
+                    42
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#8F8F8F"
+                    }
+                  ],
+                  "radius": 4.6,
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "color": "#000000",
+                      "opacity": 0.35,
+                      "offset": [
+                        0,
+                        1
+                      ],
+                      "radius": 0
+                    }
+                  ],
+                  "componentId": "2317:7958"
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54780;118:62363",
+                  "name": "Delete",
+                  "type": "TEXT",
+                  "box": [
+                    363.92,
+                    704,
+                    26,
+                    28
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#000000"
+                    }
+                  ],
+                  "text": "􀆛",
+                  "fontFamily": "SF Pro",
+                  "fontWeight": 400,
+                  "fontSize": 20,
+                  "lineHeightPx": 28,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "CENTER"
+                }
+              ]
+            },
+            {
+              "id": "I2317:8509;118:55211;118:54781",
+              "name": "Shift Key",
+              "type": "INSTANCE",
+              "box": [
+                3.07,
+                697,
+                45.01,
+                42
+              ],
+              "radius": 4.6,
+              "componentId": "2317:7994",
+              "children": [
+                {
+                  "id": "I2317:8509;118:55211;118:54781;536:126177",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    3.07,
+                    697,
+                    45,
+                    42
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#8F8F8F"
+                    }
+                  ],
+                  "radius": 4.6,
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "color": "#000000",
+                      "opacity": 0.35,
+                      "offset": [
+                        0,
+                        1
+                      ],
+                      "radius": 0
+                    }
+                  ],
+                  "componentId": "2317:7958"
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54781;118:62408",
+                  "name": "􀆝",
+                  "type": "TEXT",
+                  "box": [
+                    14.07,
+                    704,
+                    25,
+                    28
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#000000"
+                    }
+                  ],
+                  "text": "􀆝",
+                  "fontFamily": "SF Pro",
+                  "fontWeight": 400,
+                  "fontSize": 20,
+                  "lineHeightPx": 28,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "CENTER"
+                }
+              ]
+            },
+            {
+              "id": "I2317:8509;118:55211;118:54782",
+              "name": "Row 2",
+              "type": "FRAME",
+              "box": [
+                23.53,
+                643,
+                354.95,
+                42
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 6,
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "I2317:8509;118:55211;118:54783",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    23.53,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54783;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        23.53,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54783;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        34.53,
+                        647,
+                        13,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "a",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54785",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    63.63,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54785;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        63.63,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54785;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        74.63,
+                        647,
+                        12,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "s",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54787",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    103.74,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54787;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        103.74,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54787;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        113.74,
+                        647,
+                        15,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "d",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54789",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    143.84,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54789;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        143.84,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54789;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        156.84,
+                        647,
+                        8,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "f",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54791",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    183.95,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54791;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        183.95,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54791;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        193.95,
+                        647,
+                        14,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "g",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54793",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    224.05,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54793;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        224.05,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54793;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        234.05,
+                        647,
+                        14,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "h",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54795",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    264.16,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54795;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        264.16,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54795;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        278.16,
+                        647,
+                        6,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "j",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54797",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    304.26,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54797;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        304.26,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54797;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        315.26,
+                        647,
+                        13,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "k",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54799",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    344.37,
+                    643,
+                    34.11,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54799;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        344.37,
+                        643,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54799;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        358.37,
+                        647,
+                        6,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "l",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I2317:8509;118:55211;118:54800",
+              "name": "Row 1",
+              "type": "FRAME",
+              "box": [
+                3.07,
+                589,
+                395.86,
+                42
+              ],
+              "layoutMode": "HORIZONTAL",
+              "itemSpacing": 6,
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "HUG",
+              "children": [
+                {
+                  "id": "I2317:8509;118:55211;118:54801",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    3.07,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54801;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        3.07,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54801;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        13.07,
+                        593,
+                        14,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "q",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54803",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    43.25,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54803;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        43.25,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54803;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        51.25,
+                        593,
+                        19,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "w",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54805",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    83.44,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54805;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        83.44,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54805;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        93.44,
+                        593,
+                        14,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "e",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54807",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    123.63,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54807;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        123.63,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54807;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        136.63,
+                        593,
+                        8,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "r",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54809",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    163.81,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54809;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        163.81,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54809;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        176.81,
+                        593,
+                        8,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "t",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54811",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    204,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54811;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        204,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54811;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        215,
+                        593,
+                        13,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "y",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54813",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    244.19,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54813;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        244.19,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54813;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        254.19,
+                        593,
+                        14,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "u",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54815",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    284.37,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54815;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        284.37,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54815;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        298.37,
+                        593,
+                        6,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "i",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54817",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    324.56,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54817;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        324.56,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54817;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        334.56,
+                        593,
+                        14,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "o",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2317:8509;118:55211;118:54819",
+                  "name": "Key",
+                  "type": "INSTANCE",
+                  "box": [
+                    364.75,
+                    589,
+                    34.19,
+                    42
+                  ],
+                  "radius": 4.6,
+                  "layoutSizingHorizontal": "FILL",
+                  "layoutSizingVertical": "FIXED",
+                  "componentId": "2317:8019",
+                  "children": [
+                    {
+                      "id": "I2317:8509;118:55211;118:54819;536:126445",
+                      "name": "Key",
+                      "type": "INSTANCE",
+                      "box": [
+                        364.75,
+                        589,
+                        34,
+                        42
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#FFFFFF"
+                        }
+                      ],
+                      "radius": 4.6,
+                      "effects": [
+                        {
+                          "type": "DROP_SHADOW",
+                          "color": "#000000",
+                          "opacity": 0.35,
+                          "offset": [
+                            0,
+                            1
+                          ],
+                          "radius": 0
+                        }
+                      ],
+                      "componentId": "2317:7957"
+                    },
+                    {
+                      "id": "I2317:8509;118:55211;118:54819;118:60225",
+                      "name": "Q",
+                      "type": "TEXT",
+                      "box": [
+                        374.75,
+                        593,
+                        14,
+                        28
+                      ],
+                      "fills": [
+                        {
+                          "type": "SOLID",
+                          "color": "#000000"
+                        }
+                      ],
+                      "text": "p",
+                      "fontFamily": "SF Pro",
+                      "fontWeight": 400,
+                      "fontSize": 25,
+                      "lineHeightPx": 28,
+                      "letterSpacing": 0,
+                      "textAlignHorizontal": "CENTER"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I2317:8509;113:73016",
+          "name": "Emoji and Mic",
+          "type": "FRAME",
+          "box": [
+            0,
+            793,
+            402,
+            55
+          ],
+          "layoutMode": "HORIZONTAL",
+          "paddingLeft": 20,
+          "paddingRight": 24,
+          "paddingTop": 27,
+          "primaryAxisAlignItems": "SPACE_BETWEEN",
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "FIXED",
+          "children": [
+            {
+              "id": "I2317:8509;106:62094",
+              "name": "Emoji",
+              "type": "VECTOR",
+              "box": [
+                20,
+                820,
+                26.92,
+                26.92
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1B1F26",
+                  "opacity": 0.72
+                }
+              ],
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FIXED"
+            },
+            {
+              "id": "I2317:8509;3005:39832",
+              "name": "Mic",
+              "type": "VECTOR",
+              "box": [
+                359.13,
+                820,
+                18.87,
+                28.21
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1B1F26",
+                  "opacity": 0.72
+                }
+              ],
+              "layoutSizingHorizontal": "FIXED",
+              "layoutSizingVertical": "FIXED"
+            }
+          ]
+        },
+        {
+          "id": "I2317:8509;106:60044",
+          "name": "Home Indicator",
+          "type": "INSTANCE",
+          "box": [
+            0,
+            848,
+            402,
+            26
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "componentId": "2317:8173",
+          "children": [
+            {
+              "id": "I2317:8509;106:60044;106:60028",
+              "name": "Home Indicator",
+              "type": "RECTANGLE",
+              "box": [
+                129,
+                861,
+                144,
+                5
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#000000"
+                }
+              ],
+              "radius": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2321:10603",
+      "name": "Frame 1739336883",
+      "type": "FRAME",
+      "box": [
+        177,
+        127,
+        44,
+        44
+      ],
+      "children": [
+        {
+          "id": "2321:10604",
+          "name": "Union",
+          "type": "BOOLEAN_OPERATION",
+          "box": [
+            191,
+            141,
+            15.76,
+            15.72
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#74768E"
+            }
+          ],
+          "children": [
+            {
+              "id": "2321:10605",
+              "name": "Ellipse 31",
+              "type": "ELLIPSE",
+              "box": [
+                188.38,
+                138.45,
+                17.93,
+                17.43
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#4D4D4D"
+                }
+              ],
+              "strokeWeight": 1
+            },
+            {
+              "id": "2321:10606",
+              "name": "Vector 40",
+              "type": "VECTOR",
+              "box": [
+                201.32,
+                151.44,
+                5.08,
+                4.94
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#4D4D4D"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2311:7570",
+      "name": "Login Title",
+      "type": "TEXT",
+      "box": [
+        26,
+        78,
+        97,
+        33
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#1F2A43"
+        }
+      ],
+      "text": "명인탐색",
+      "fontFamily": "Pretendard",
+      "fontWeight": 800,
+      "fontSize": 28,
+      "lineHeightPx": 33.41,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    }
+  ]
+}

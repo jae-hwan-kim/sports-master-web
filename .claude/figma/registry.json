@@ -4,8 +4,8 @@
   "pages": [
     "321:458"
   ],
-  "version": "2407018480101126355",
-  "syncedAt": "2026-10-10T14:49:08.518Z",
+  "version": "2409469836949225240",
+  "syncedAt": "2026-10-13T15:41:19.354Z",
   "handledComments": [
     "1925628224",
     "1854023859",
@@ -17,7 +17,10 @@
     "1839416155",
     "1899461292",
     "1899454434",
-    "1942384531"
+    "1942384531",
+    "1961969964",
+    "1961988134",
+    "1961976481"
   ],
   "frames": {
     "791:4157": {
@@ -81,14 +84,7 @@
       "page": "완료화면 전체 정리공간",
       "screen": "CustomerProfile",
       "ignore": false,
-      "hash": "b6a2ccc922a3"
-    },
-    "1934:11329": {
-      "name": "계정설정",
-      "page": "완료화면 전체 정리공간",
-      "screen": "CustomerSettings",
-      "ignore": false,
-      "hash": "3f6ce6808614"
+      "hash": "d9cf3b85ed18"
     },
     "523:1773": {
       "name": "온보딩",
@@ -410,7 +406,7 @@
       "page": "완료화면 전체 정리공간 / 명인 / 홈",
       "screen": "MasterHome",
       "ignore": false,
-      "hash": "17c2e7abd93b"
+      "hash": "af89635c873e"
     },
     "732:5979": {
       "name": "진단요청_empty",
@@ -424,7 +420,7 @@
       "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
       "screen": "MasterDiagnosis",
       "ignore": false,
-      "hash": "4c616dcdd24f"
+      "hash": "e0df76e2a78d"
     },
     "732:5880": {
       "name": "진단요청_삭제",
@@ -459,7 +455,7 @@
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterProfile",
       "ignore": false,
-      "hash": "ffed7bd4d6c3"
+      "hash": "b317473bf588"
     },
     "1376:10189": {
       "name": "상세페이지_Full",
@@ -676,42 +672,42 @@
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfile",
       "ignore": false,
-      "hash": "a61b37dae0db"
+      "hash": "b14b49c7d34a"
     },
     "1376:10681": {
       "name": "상세페이지_Default_자격증 존재",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfile",
       "ignore": false,
-      "hash": "34cc1d6de554"
+      "hash": "9b221a82ac07"
     },
     "1376:10751": {
       "name": "상세페이지_수정하기 Default",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "5f107984aa45"
+      "hash": "0620a925ed5f"
     },
     "1376:10866": {
       "name": "상세페이지_수정하기_이미지,증명서 업로드",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "eda79f83c3a5"
+      "hash": "93850b97e223"
     },
     "1376:10981": {
       "name": "상세페이지_수정완료_프로필저장",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "c564b30970ca"
+      "hash": "0a73d36547ab"
     },
     "1376:11098": {
       "name": "상세페이지_수정취소",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "50973a5fe4ad"
+      "hash": "b787e758b863"
     },
     "1376:11225": {
       "name": "상세페이지_자격증이미지확인",
@@ -758,9 +754,9 @@
     "2187:11603": {
       "name": "고객홈",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
-      "screen": "CustomerHome",
-      "ignore": false,
-      "hash": "0463f413c527"
+      "screen": null,
+      "ignore": true,
+      "hash": "281762fc7170"
     },
     "2187:11788": {
       "name": "명인빠른추천",
@@ -781,18 +777,16 @@
     "2187:11812": {
       "name": "Q1",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
-      "screen": null,
+      "screen": "RegionSelectQ1",
       "ignore": false,
-      "hash": "6d23a9abe8c2",
-      "todo": true
+      "hash": "6d23a9abe8c2"
     },
     "2187:12425": {
       "name": "Q1-3_선택완료",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
-      "screen": null,
+      "screen": "RegionSelectQ1",
       "ignore": false,
-      "hash": "5383686d9f9f",
-      "todo": true
+      "hash": "761a04e8a4a9"
     },
     "2187:11827": {
       "name": "Q1-2_지역선택",
@@ -813,40 +807,37 @@
     "2187:11841": {
       "name": "Q3",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
-      "screen": null,
+      "screen": "SurveyKeywordSelect",
       "ignore": false,
-      "hash": "7ff6f08c5738",
-      "todo": true
+      "hash": "d435c92d44d8"
     },
     "2187:11867": {
       "name": "Q2",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
-      "screen": null,
+      "screen": "OnboardingQ2GenderAge",
       "ignore": false,
-      "hash": "90dbdffe035a",
-      "todo": true
+      "hash": "4638b64f7f7f"
     },
     "2187:11886": {
       "name": "추천3인",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
-      "screen": null,
+      "screen": "RecommendedMasters",
       "ignore": false,
-      "hash": "00447561b497",
-      "todo": true
+      "hash": "a716a2a92f62"
     },
     "1822:11265": {
       "name": "계정설정_Default",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "CustomerSettings",
       "ignore": false,
-      "hash": "d93f93893789"
+      "hash": "a4fa29b47e9b"
     },
     "1934:11360": {
       "name": "정보수정",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "CustomerSettings",
       "ignore": false,
-      "hash": "2bb4ab358ad2"
+      "hash": "32f3384aff43"
     },
     "1934:11854": {
       "name": "수정완료",
@@ -861,6 +852,111 @@
       "screen": "CustomerSettings",
       "ignore": false,
       "hash": "5c3b5d637aa6"
+    },
+    "2187:11779": {
+      "name": "Frame 1739336864",
+      "page": "완료화면 전체 정리공간 / 고객",
+      "screen": null,
+      "ignore": true,
+      "hash": "3106bf082f90"
+    },
+    "2321:9033": {
+      "name": "고객홈",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": "CustomerHome",
+      "ignore": false,
+      "hash": "0625e2bfaeab"
+    },
+    "2321:8871": {
+      "name": "종료팝업",
+      "page": "완료화면 전체 정리공간 / 고객 / 홈",
+      "screen": "CustomerHome",
+      "ignore": false,
+      "hash": "0c0331310a9a"
+    },
+    "2272:12405": {
+      "name": "명인탐색",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "dd901720f133"
+    },
+    "2311:7506": {
+      "name": "명인탐색_검색",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "a88c61f0a6d7"
+    },
+    "2321:9656": {
+      "name": "명인탐색_지역선택중",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "8cda006dccd5"
+    },
+    "2321:10064": {
+      "name": "명인탐색_지역선택중",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "6bdaa7bb11d7"
+    },
+    "2311:7635": {
+      "name": "명인탐색_지역선택",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "5eda87e85cca"
+    },
+    "2321:10613": {
+      "name": "명인탐색_지역선택",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "8533bbd4fdd7"
+    },
+    "2321:10745": {
+      "name": "이미지크게보기",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "ee0f8766031d"
+    },
+    "2321:9373": {
+      "name": "진단요청팝업",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "b8ab59339665"
+    },
+    "2321:9507": {
+      "name": "센터URL이동",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerExplore",
+      "ignore": false,
+      "hash": "8af561648e1c"
+    },
+    "2272:12607": {
+      "name": "명인자세히보기",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerMasterDetail",
+      "ignore": false,
+      "hash": "23e4bc649065"
+    },
+    "2321:10883": {
+      "name": "명인자세히보기",
+      "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
+      "screen": "CustomerMasterDetail",
+      "ignore": false,
+      "hash": "78bab66dbf57"
+    },
+    "2321:11810": {
+      "name": "계정설정",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "CustomerSettings",
+      "ignore": false,
+      "hash": "0f0e007b9326"
     }
   }
 }

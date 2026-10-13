@@ -1,13 +1,489 @@
 // src/screens/CustomerExplore/CustomerExploreScreen.tsx
-import { View } from 'react-native'
+import { useCallback, useState } from 'react'
+import {
+  FlatList,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Pressable,
+  ScrollView,
+  View,
+} from 'react-native'
 
-import { Text } from '@/components/AppText'
+import { useNavigation } from '@react-navigation/native'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { Image } from 'expo-image'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-// TODO: 명인탐색 화면 구현 전 임시 placeholder
-export function CustomerExploreScreen() {
+import { SearchTabIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
+import { Text, TextInput } from '@/components/AppText'
+import type { RootStackParamList } from '@/navigation/RootNavigator'
+
+// ─── 데이터 ──────────────────────────────────────────────────────────────────
+
+const PROVINCES = [
+  '서울',
+  '경기',
+  '인천',
+  '대전',
+  '세종',
+  '충남',
+  '충북',
+  '전남광주',
+  '전북',
+  '대구',
+  '경북',
+  '부산',
+  '울산',
+  '경남',
+  '강원',
+  '제주',
+  '전국',
+]
+
+const DISTRICTS: Record<string, string[]> = {
+  서울: [
+    '서울전체',
+    '강남구',
+    '강동구',
+    '강북구',
+    '강서구',
+    '관악구',
+    '광진구',
+    '구로구',
+    '금천구',
+    '노원구',
+    '도봉구',
+    '동대문구',
+    '동작구',
+    '마포구',
+    '서대문구',
+    '서초구',
+    '성동구',
+    '성북구',
+    '송파구',
+    '양천구',
+    '영등포구',
+    '용산구',
+    '은평구',
+    '종로구',
+    '중구',
+    '중랑구',
+  ],
+  경기: ['경기전체'],
+  인천: ['인천전체'],
+  대전: ['대전전체'],
+  세종: ['세종전체'],
+  충남: ['충남전체'],
+  충북: ['충북전체'],
+  전남광주: ['전남광주전체'],
+  전북: ['전북전체'],
+  대구: ['대구전체'],
+  경북: ['경북전체'],
+  부산: ['부산전체'],
+  울산: ['울산전체'],
+  경남: ['경남전체'],
+  강원: ['강원전체'],
+  제주: ['제주전체'],
+  전국: ['전국'],
+}
+
+type MasterItem = {
+  id: number
+  nickname: string
+  region: string
+  bio: string
+  specialties: string[]
+  profileImageUrl?: string
+  isFavorite: boolean
+}
+
+const MOCK_MASTERS: MasterItem[] = Array.from({ length: 5 }, (_, i) => ({
+  id: i + 1,
+  nickname: '명인닉네임',
+  region: '지역',
+  bio: '소개글 50자 이내 보이고 긴거는 말줄임표로 보이는',
+  specialties: ['방문재활', '선수트레이닝', '컨디셔닝'],
+  isFavorite: false,
+}))
+
+const CARD_SHADOW = Platform.select({
+  ios: {
+    shadowColor: '#8B8B8B',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+  },
+  android: { elevation: 2 },
+})
+
+const CARD_TOP_SECTION_SHADOW = Platform.select({
+  ios: {
+    shadowColor: '#8B8B8B',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+  },
+  android: { elevation: 1 },
+})
+
+// ─── 서브 컴포넌트 ─────────────────────────────────────────────────────────────
+
+function SpecialtyChip({ label }: { label: string }) {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-[20px] font-semibold text-black">명인탐색</Text>
+    <View className="h-[20px] items-center justify-center rounded-[18px] bg-gray3 px-3">
+      <Text className="font-pretendard-medium text-[8px] text-white">{label}</Text>
     </View>
+  )
+}
+
+type MasterCardProps = {
+  item: MasterItem
+  onPress: () => void
+  onFavoritePress: () => void
+}
+
+function MasterCard({ item, onPress, onFavoritePress }: MasterCardProps) {
+  return (
+    <Pressable hitSlop={8} onPress={onPress} className="rounded-lg bg-white" style={CARD_SHADOW}>
+      {/* 상단: 아바타 + 텍스트 */}
+      <View
+        className="h-[82px] flex-row items-center px-4"
+        style={CARD_TOP_SECTION_SHADOW}
+      >
+        {item.profileImageUrl ? (
+          <Image
+            source={{ uri: item.profileImageUrl }}
+            style={{ width: 50, height: 50, borderRadius: 25 }}
+            contentFit="cover"
+          />
+        ) : (
+          <View className="h-[50px] w-[50px] rounded-full bg-gray1" />
+        )}
+        <View className="ml-5 flex-1 justify-center gap-2">
+          <Text className="font-pretendard-semibold text-[14px] text-secondary" numberOfLines={1}>
+            {item.nickname} | {item.region}
+          </Text>
+          <Text className="font-pretendard-medium text-small2 text-[#A2A2A2]" numberOfLines={1}>
+            {item.bio}
+          </Text>
+        </View>
+      </View>
+
+      {/* 하단: 전문분야 칩 + 즐겨찾기 */}
+      <View className="h-[54px] flex-row items-center pl-4">
+        <View className="flex-1 flex-row flex-wrap gap-1">
+          {item.specialties.map((s) => (
+            <SpecialtyChip key={s} label={s} />
+          ))}
+        </View>
+        <Pressable
+          hitSlop={8}
+          onPress={onFavoritePress}
+          className="h-[44px] w-[44px] items-center justify-center"
+        >
+          {item.isFavorite ? <StarFillIcon size={24} /> : <StarNoneIcon size={24} />}
+        </Pressable>
+      </View>
+    </Pressable>
+  )
+}
+
+// ─── 지역 선택 모달 ────────────────────────────────────────────────────────────
+
+type RegionPickerProps = {
+  visible: boolean
+  province: string
+  district: string
+  onProvinceChange: (p: string) => void
+  onDistrictChange: (d: string) => void
+  onConfirm: () => void
+  onClose: () => void
+}
+
+function RegionPicker({
+  visible,
+  province,
+  district,
+  onProvinceChange,
+  onDistrictChange,
+  onConfirm,
+  onClose,
+}: RegionPickerProps) {
+  const insets = useSafeAreaInsets()
+  const districts = DISTRICTS[province] ?? []
+
+  return (
+    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
+      <View className="flex-1 bg-[rgba(7,9,28,0.6)]">
+        {/* 바깥 영역 탭 → 닫기 */}
+        <Pressable className="flex-1" onPress={onClose} />
+
+        {/* 패널 */}
+        <View className="rounded-t-2xl bg-white" style={{ paddingBottom: insets.bottom }}>
+          {/* 헤더 */}
+          <View className="relative h-[75px] items-center justify-center">
+            <Text className="font-pretendard-semibold text-[20px] text-black">지역선택</Text>
+            <Pressable
+              hitSlop={8}
+              onPress={onClose}
+              className="absolute right-0 top-0 h-[45px] w-[45px] items-center justify-center"
+            >
+              <Text className="font-pretendard-medium text-[24px] text-gray3">×</Text>
+            </Pressable>
+          </View>
+
+          {/* 구분선 */}
+          <View className="mx-[21px] h-px bg-gray1" />
+
+          {/* 2열 지역 선택기 */}
+          <View className="flex-row" style={{ height: 370 }}>
+            {/* 좌: 시/도 목록 */}
+            <ScrollView className="flex-1 bg-white" showsVerticalScrollIndicator={false}>
+              <View className="py-2">
+                {PROVINCES.map((p) => (
+                  <Pressable
+                    key={p}
+                    hitSlop={8}
+                    onPress={() => onProvinceChange(p)}
+                    className={`mx-[21px] h-[46px] justify-center rounded-lg pl-[15px] ${
+                      p === province ? 'bg-[#E9E9E9]' : ''
+                    }`}
+                  >
+                    <Text
+                      className={`font-pretendard-medium text-[16px] ${
+                        p === province ? 'text-black' : 'text-[#7B7B7B]'
+                      }`}
+                    >
+                      {p}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            </ScrollView>
+
+            {/* 우: 구/군 목록 */}
+            <ScrollView className="flex-1 bg-white" showsVerticalScrollIndicator={false}>
+              <View className="py-2">
+                {districts.map((d) => (
+                  <Pressable
+                    key={d}
+                    hitSlop={8}
+                    onPress={() => onDistrictChange(d)}
+                    className="h-[46px] flex-row items-center pl-[24px]"
+                  >
+                    {/* 선택 체크마크 */}
+                    <View className="mr-1 w-[18px]">
+                      {d === district ? (
+                        <View
+                          style={{
+                            width: 14,
+                            height: 8,
+                            borderLeftWidth: 1.5,
+                            borderBottomWidth: 1.5,
+                            borderColor: '#7B7B7B',
+                            transform: [{ rotate: '-45deg' }],
+                          }}
+                        />
+                      ) : null}
+                    </View>
+                    <Text
+                      className={`font-pretendard-medium text-[16px] ${
+                        d === district ? 'text-black' : 'text-[#7B7B7B]'
+                      }`}
+                    >
+                      {d}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
+
+          {/* 선택 완료 버튼 */}
+          <View
+            className="px-[26px] py-[20px]"
+            style={Platform.select({
+              ios: {
+                shadowColor: '#8B8B8B',
+                shadowOffset: { width: 0, height: -1 },
+                shadowOpacity: 0.16,
+                shadowRadius: 8,
+              },
+              android: { elevation: 4 },
+            })}
+          >
+            <Pressable
+              hitSlop={8}
+              onPress={onConfirm}
+              className="h-[50px] items-center justify-center rounded-lg bg-primary"
+            >
+              <Text className="font-pretendard-semibold text-[17px] text-white">선택완료</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  )
+}
+
+// ─── 메인 화면 ────────────────────────────────────────────────────────────────
+
+export function CustomerExploreScreen() {
+  const insets = useSafeAreaInsets()
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+
+  const [searchText, setSearchText] = useState('')
+  const [masters, setMasters] = useState<MasterItem[]>(MOCK_MASTERS)
+  const [regionPickerVisible, setRegionPickerVisible] = useState(false)
+  const [selectedProvince, setSelectedProvince] = useState('서울')
+  const [selectedDistrict, setSelectedDistrict] = useState('서울전체')
+  const [pendingProvince, setPendingProvince] = useState('서울')
+  const [pendingDistrict, setPendingDistrict] = useState('서울전체')
+  const [filterRegion, setFilterRegion] = useState<string | null>(null)
+  const [filterRating, setFilterRating] = useState(false)
+
+  const openRegionPicker = useCallback(() => {
+    setPendingProvince(selectedProvince)
+    setPendingDistrict(selectedDistrict)
+    setRegionPickerVisible(true)
+  }, [selectedProvince, selectedDistrict])
+
+  const handleRegionConfirm = useCallback(() => {
+    setSelectedProvince(pendingProvince)
+    setSelectedDistrict(pendingDistrict)
+    const isWholeRegion =
+      pendingDistrict === '전국' || pendingDistrict === `${pendingProvince}전체`
+    const label = isWholeRegion ? pendingProvince : `${pendingProvince} ${pendingDistrict}`
+    setFilterRegion(label)
+    setRegionPickerVisible(false)
+  }, [pendingProvince, pendingDistrict])
+
+  const handleProvinceChange = useCallback((p: string) => {
+    setPendingProvince(p)
+    const first = DISTRICTS[p]?.[0] ?? ''
+    setPendingDistrict(first)
+  }, [])
+
+  const toggleFavorite = useCallback((id: number) => {
+    setMasters((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, isFavorite: !m.isFavorite } : m))
+    )
+  }, [])
+
+  const renderMasterCard = useCallback(
+    ({ item }: { item: MasterItem }) => (
+      <MasterCard
+        item={item}
+        onPress={() => navigation.navigate('CustomerMasterDetail', { expertProfileId: item.id })}
+        onFavoritePress={() => toggleFavorite(item.id)}
+      />
+    ),
+    [navigation, toggleFavorite]
+  )
+
+  const regionChipLabel = filterRegion ?? '지역'
+  const isRegionActive = filterRegion !== null
+
+  return (
+    <KeyboardAvoidingView
+      className="flex-1 bg-white"
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      {/* 제목 */}
+      <View style={{ paddingTop: insets.top + 24 }} className="px-[26px]">
+        <Text className="font-pretendard-extrabold text-title text-gray3">명인탐색</Text>
+      </View>
+
+      {/* 검색바 + 필터 칩 */}
+      <View className="mt-5 flex-row items-center gap-2 px-[26px]">
+        {/* 검색창 */}
+        <View className="h-[36px] flex-1 flex-row items-center overflow-hidden rounded-lg border border-[#C6A75E] bg-gray1 pl-3">
+          <TextInput
+            value={searchText}
+            onChangeText={setSearchText}
+            placeholder="명인 직접검색"
+            placeholderTextColor="#A2A2A2"
+            returnKeyType="search"
+            className="flex-1 font-pretendard-medium text-[13px] text-gray3"
+          />
+          <Pressable hitSlop={8} className="items-center justify-center">
+            <SearchTabIcon size={44} />
+          </Pressable>
+        </View>
+
+        {/* 지역 필터 칩 */}
+        <Pressable
+          hitSlop={8}
+          onPress={openRegionPicker}
+          className={`h-[28px] flex-row items-center gap-1 rounded-full px-3 ${
+            isRegionActive ? 'bg-[#1F2A43]' : 'bg-transparent border border-gray2'
+          }`}
+        >
+          <Text
+            className={`font-pretendard-medium text-[13px] ${
+              isRegionActive ? 'text-white' : 'text-gray3'
+            }`}
+          >
+            {regionChipLabel}
+          </Text>
+          {/* 드롭다운 화살표 */}
+          <View
+            style={{
+              width: 7,
+              height: 7,
+              borderRightWidth: 1.5,
+              borderBottomWidth: 1.5,
+              borderColor: isRegionActive ? '#F2F2F2' : '#1F2A43',
+              transform: [{ rotate: '45deg' }],
+              marginBottom: 3,
+            }}
+          />
+        </Pressable>
+
+        {/* 4점 이상 필터 칩 */}
+        <Pressable
+          hitSlop={8}
+          onPress={() => setFilterRating((v) => !v)}
+          className={`h-[28px] items-center justify-center rounded-full px-3 ${
+            filterRating ? 'bg-[#1F2A43]' : 'bg-transparent border border-gray2'
+          }`}
+        >
+          <Text
+            className={`font-pretendard-medium text-[13px] ${
+              filterRating ? 'text-white' : 'text-gray3'
+            }`}
+          >
+            4점 이상
+          </Text>
+        </Pressable>
+      </View>
+
+      {/* 명인 목록 */}
+      <FlatList
+        data={masters}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={renderMasterCard}
+        contentContainerStyle={{
+          paddingHorizontal: 26,
+          paddingTop: 28,
+          paddingBottom: 24,
+        }}
+        ItemSeparatorComponent={() => <View className="h-[20px]" />}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      />
+
+      {/* 지역 선택 모달 */}
+      <RegionPicker
+        visible={regionPickerVisible}
+        province={pendingProvince}
+        district={pendingDistrict}
+        onProvinceChange={handleProvinceChange}
+        onDistrictChange={setPendingDistrict}
+        onConfirm={handleRegionConfirm}
+        onClose={() => setRegionPickerVisible(false)}
+      />
+    </KeyboardAvoidingView>
   )
 }

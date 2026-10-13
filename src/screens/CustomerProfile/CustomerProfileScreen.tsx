@@ -2,7 +2,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { Pressable, ScrollView, View } from 'react-native'
+import { Platform, Pressable, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowNextIcon, ProfilePersonIcon } from '@/assets/icons'
@@ -31,10 +31,10 @@ function Avatar() {
   return (
     <View
       className="items-center justify-center overflow-hidden rounded-full"
-      style={{ width: 60, height: 60, backgroundColor: '#C6A75E' }}
+      style={{ width: 80, height: 80, backgroundColor: '#C6A75E' }}
     >
-      {/* size=36 → 높이는 비율 유지(≈43) — 원은 overflow-hidden이 잘라줌 */}
-      <ProfilePersonIcon size={36} />
+      {/* size=46 → 원 대비 비율 유지 — overflow-hidden이 잘라줌 */}
+      <ProfilePersonIcon size={46} />
     </View>
   )
 }
@@ -53,9 +53,22 @@ function MenuRow({ label, onPress, showTopDivider = false }: MenuRowProps) {
         hitSlop={8}
         onPress={onPress}
         className="flex-row items-center justify-between px-4"
-        style={{ height: 50, backgroundColor: '#FFFFFF', borderRadius: 8 }}
+        style={{
+          height: 46,
+          backgroundColor: '#F2F2F2',
+          borderRadius: 4,
+          ...Platform.select({
+            ios: {
+              shadowColor: '#000',
+              shadowOffset: { width: 2, height: 2 },
+              shadowOpacity: 0.11,
+              shadowRadius: 2.9,
+            },
+            android: { elevation: 2 },
+          }),
+        }}
       >
-        <Text className="text-[14px]" style={{ fontFamily: 'Pretendard-Medium', color: '#1F2A43' }}>
+        <Text className="text-[12px]" style={{ fontFamily: 'Pretendard-Medium', color: '#1F2A43' }}>
           {label}
         </Text>
         <ArrowNextIcon size={20} color="#1F2A43" />
@@ -71,7 +84,7 @@ type SectionProps = {
 
 function Section({ title, children }: SectionProps) {
   return (
-    <View className="mx-4 mt-6">
+    <View className="mx-[26px] mt-6">
       <Text
         className="mb-2 text-[16px]"
         style={{ fontFamily: 'Pretendard-SemiBold', color: '#1F2A43' }}
@@ -97,15 +110,15 @@ export function CustomerProfileScreen() {
   }
 
   const handleFavoriteExperts = () => {
-    // TODO: 찜한 명인 목록 화면으로 이동
+    navigation.navigate('FavoriteExperts')
   }
 
   const handleWriteReview = () => {
-    // TODO: 리뷰 작성 화면으로 이동
+    // ReviewWrite는 명인 상세에서 진입하는 것이 일반적 — 여기선 미연결
   }
 
   const handleMyReviews = () => {
-    // TODO: 내가 쓴 리뷰 목록 화면으로 이동
+    navigation.navigate('MyReviews')
   }
 
   return (
@@ -118,12 +131,12 @@ export function CustomerProfileScreen() {
         <View className="mt-6 px-[26px]">
           <Text
             className="text-[28px]"
-            style={{ fontFamily: 'Pretendard-ExtraBold', color: '#07091C' }}
+            style={{ fontFamily: 'Pretendard-ExtraBold', color: '#1F2A43' }}
           >
             프로필
           </Text>
           <Text
-            className="mt-[10px] text-[13px]"
+            className="mt-[10px] text-[12px]"
             style={{ fontFamily: 'Pretendard-Medium', color: '#74768E' }}
           >
             내 정보와 리뷰를 관리합니다
@@ -133,23 +146,38 @@ export function CustomerProfileScreen() {
         {/* Profile Card */}
         {profile && (
           <View
-            className="mx-4 mt-6 flex-row items-center rounded-[12px] p-4"
-            style={{ backgroundColor: '#FFFFFF' }}
+            className="mx-[26px] mt-6 flex-row items-center rounded-[12px] px-[20px] py-[20px]"
+            style={{
+              backgroundColor: '#FFFFFF',
+              ...Platform.select({
+                ios: {
+                  shadowColor: '#000',
+                  shadowOffset: { width: 1, height: 1 },
+                  shadowOpacity: 0.18,
+                  shadowRadius: 6,
+                },
+                android: { elevation: 3 },
+              }),
+            }}
           >
             {/* Avatar */}
             <Avatar />
 
             {/* Nickname + Tag */}
-            <View className="ml-3 flex-1 justify-center">
+            <View className="ml-[20px] flex-1 justify-center">
               <Text
-                className="text-[16px]"
-                style={{ fontFamily: 'Pretendard-SemiBold', color: '#1F2A43' }}
+                className="text-[20px]"
+                style={{ fontFamily: 'Pretendard-SemiBold', color: '#07091C' }}
               >
                 {profile.nickname}
               </Text>
               <Text
-                className="mt-[2px] text-[12px]"
-                style={{ fontFamily: 'Pretendard-Medium', color: '#C6A75E' }}
+                className="mt-[2px] text-[14px]"
+                style={{
+                  fontFamily: 'Pretendard-Medium',
+                  color: '#B48247',
+                  textDecorationLine: 'underline',
+                }}
               >
                 {profile.userTag}
               </Text>
@@ -159,12 +187,11 @@ export function CustomerProfileScreen() {
             <Pressable
               hitSlop={8}
               onPress={handleAccountSettings}
-              className="items-center justify-center rounded-full px-3"
-              style={{ height: 32, backgroundColor: '#C6A75E' }}
+              className="h-[24px] items-center justify-center rounded-full bg-[#B48247] px-3"
             >
               <Text
                 className="text-[12px]"
-                style={{ fontFamily: 'Pretendard-SemiBold', color: '#FFFFFF' }}
+                style={{ fontFamily: 'Pretendard-Medium', color: '#F2F2F2' }}
               >
                 계정설정
               </Text>

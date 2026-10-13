@@ -6,7 +6,7 @@
     0,
     0,
     402,
-    1172
+    1298
   ],
   "fills": [
     {
@@ -545,9 +545,9 @@
               "type": "VECTOR",
               "box": [
                 56,
-                417.1,
+                461.94,
                 8,
-                10.25
+                11.35
               ],
               "fills": [
                 {
@@ -1326,9 +1326,9 @@
               "type": "VECTOR",
               "box": [
                 56,
-                729.47,
+                807.9,
                 8,
-                10.25
+                11.35
               ],
               "fills": [
                 {
@@ -2107,9 +2107,9 @@
               "type": "VECTOR",
               "box": [
                 56,
-                1041.88,
+                1153.89,
                 8,
-                10.25
+                11.35
               ],
               "fills": [
                 {
@@ -2383,147 +2383,6 @@
       ]
     },
     {
-      "id": "2187:11990",
-      "name": "phone.circle.fill",
-      "type": "TEXT",
-      "box": [
-        325,
-        504,
-        29,
-        29
-      ],
-      "fills": [
-        {
-          "type": "GRADIENT_LINEAR",
-          "stops": [
-            "#4D8AFA@0.02",
-            "#013BD0@0.79",
-            "#0C337B@1"
-          ]
-        }
-      ],
-      "strokes": [
-        {
-          "type": "SOLID",
-          "color": "#FFFFFF"
-        }
-      ],
-      "strokeWeight": 0.5,
-      "effects": [
-        {
-          "type": "DROP_SHADOW",
-          "color": "#121342",
-          "opacity": 0.24,
-          "offset": [
-            2,
-            2
-          ],
-          "radius": 4
-        }
-      ],
-      "text": "􀒦",
-      "fontFamily": "SF Pro",
-      "fontWeight": 400,
-      "fontSize": 24,
-      "lineHeightPx": 28.64,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "CENTER"
-    },
-    {
-      "id": "2187:11991",
-      "name": "phone.circle.fill",
-      "type": "TEXT",
-      "box": [
-        325,
-        809,
-        29,
-        29
-      ],
-      "fills": [
-        {
-          "type": "GRADIENT_LINEAR",
-          "stops": [
-            "#4D8AFA@0.02",
-            "#013BD0@0.79",
-            "#0C337B@1"
-          ]
-        }
-      ],
-      "strokes": [
-        {
-          "type": "SOLID",
-          "color": "#FFFFFF"
-        }
-      ],
-      "strokeWeight": 0.5,
-      "effects": [
-        {
-          "type": "DROP_SHADOW",
-          "color": "#121342",
-          "opacity": 0.24,
-          "offset": [
-            2,
-            2
-          ],
-          "radius": 4
-        }
-      ],
-      "text": "􀒦",
-      "fontFamily": "SF Pro",
-      "fontWeight": 400,
-      "fontSize": 24,
-      "lineHeightPx": 28.64,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "CENTER"
-    },
-    {
-      "id": "2187:11992",
-      "name": "phone.circle.fill",
-      "type": "TEXT",
-      "box": [
-        325,
-        198,
-        29,
-        29
-      ],
-      "fills": [
-        {
-          "type": "GRADIENT_LINEAR",
-          "stops": [
-            "#4D8AFA@0.02",
-            "#013BD0@0.79",
-            "#0C337B@1"
-          ]
-        }
-      ],
-      "strokes": [
-        {
-          "type": "SOLID",
-          "color": "#FFFFFF"
-        }
-      ],
-      "strokeWeight": 0.5,
-      "effects": [
-        {
-          "type": "DROP_SHADOW",
-          "color": "#121342",
-          "opacity": 0.24,
-          "offset": [
-            2,
-            2
-          ],
-          "radius": 4
-        }
-      ],
-      "text": "􀒦",
-      "fontFamily": "SF Pro",
-      "fontWeight": 400,
-      "fontSize": 24,
-      "lineHeightPx": 28.64,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "CENTER"
-    },
-    {
       "id": "2187:11993",
       "name": "location_on",
       "type": "GROUP",
@@ -2557,9 +2416,9 @@
           "type": "VECTOR",
           "box": [
             56,
-            378,
+            418.64,
             8,
-            10
+            11.08
           ],
           "fills": [
             {
@@ -2604,9 +2463,9 @@
           "type": "VECTOR",
           "box": [
             56,
-            683,
+            756.43,
             8,
-            10
+            11.08
           ],
           "fills": [
             {
@@ -2651,9 +2510,9 @@
           "type": "VECTOR",
           "box": [
             56,
-            984,
+            1089.79,
             8,
-            10
+            11.08
           ],
           "fills": [
             {
@@ -2665,12 +2524,33 @@
       ]
     },
     {
+      "id": "2321:8862",
+      "name": "Rectangle 34624887",
+      "type": "RECTANGLE",
+      "box": [
+        0,
+        635,
+        402,
+        239
+      ],
+      "fills": [
+        {
+          "type": "GRADIENT_LINEAR",
+          "stops": [
+            "#00134B@0",
+            "#1A4B8E@0.65",
+            "#429EF4@1"
+          ]
+        }
+      ]
+    },
+    {
       "id": "2187:12002",
       "name": "Rectangle 34624890",
       "type": "RECTANGLE",
       "box": [
-        -4,
-        2,
+        0,
+        0,
         406,
         93
       ],
@@ -2940,6 +2820,79 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "2321:8868",
+      "name": "Frame 1739336865",
+      "type": "FRAME",
+      "box": [
+        16,
+        739,
+        370,
+        69
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#10336F",
+          "opacity": 0.41
+        }
+      ],
+      "radius": 16,
+      "effects": [
+        {
+          "type": "GLASS"
+        },
+        {
+          "type": "DROP_SHADOW",
+          "color": "#062246",
+          "opacity": 0.25,
+          "offset": [
+            4,
+            4
+          ],
+          "radius": 10
+        }
+      ],
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 10,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "paddingTop": 24,
+      "paddingBottom": 24,
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "children": [
+        {
+          "id": "2321:8869",
+          "name": "종료하기",
+          "type": "TEXT",
+          "box": [
+            173,
+            764,
+            56,
+            19
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2",
+              "opacity": 0.85
+            }
+          ],
+          "text": "종료하기",
+          "fontFamily": "Pretendard",
+          "fontWeight": 400,
+          "fontSize": 16,
+          "lineHeightPx": 19.09,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG"
         }
       ]
     }

@@ -85,7 +85,7 @@ function EmptyProfileCard() {
               style={{ fontFamily: 'Pretendard-Medium' }}
             >
               {
-                '여기에는 고객들에게 보여지는 한줄 소개가\n나타나는 곳으로 띄어쓰기 포함 30자 내로 작성합니다.'
+                '여기에는 고객들에게 보여지는 한줄 소개가\n나타나는 곳으로 띄어쓰기 포함 50자 내로 작성합니다.'
               }
             </Text>
           </View>

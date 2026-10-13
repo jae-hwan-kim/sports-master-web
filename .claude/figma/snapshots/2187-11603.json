@@ -16,191 +16,6 @@
   ],
   "children": [
     {
-      "id": "2187:11604",
-      "name": "Navigation bar_home",
-      "type": "INSTANCE",
-      "box": [
-        0,
-        61,
-        402,
-        56
-      ],
-      "componentId": "224:459",
-      "children": [
-        {
-          "id": "I2187:11604;224:382",
-          "name": "Rectangle 34624783",
-          "type": "RECTANGLE",
-          "box": [
-            0,
-            61,
-            402,
-            56
-          ]
-        },
-        {
-          "id": "I2187:11604;224:384",
-          "name": "setting",
-          "type": "INSTANCE",
-          "box": [
-            341,
-            67,
-            44,
-            44
-          ],
-          "componentId": "179:656",
-          "children": [
-            {
-              "id": "I2187:11604;224:384;179:586",
-              "name": "settings",
-              "type": "GROUP",
-              "box": [
-                351,
-                77,
-                24,
-                24
-              ],
-              "children": [
-                {
-                  "id": "I2187:11604;224:384;179:581",
-                  "name": "Bounding box",
-                  "type": "RECTANGLE",
-                  "box": [
-                    351,
-                    77,
-                    24,
-                    24
-                  ],
-                  "fills": [
-                    {
-                      "type": "SOLID",
-                      "color": "#D9D9D9"
-                    }
-                  ]
-                },
-                {
-                  "id": "I2187:11604;224:384;179:585",
-                  "name": "settings",
-                  "type": "VECTOR",
-                  "box": [
-                    352.95,
-                    79,
-                    20.1,
-                    20
-                  ],
-                  "fills": [
-                    {
-                      "type": "SOLID",
-                      "color": "#07091C"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "2187:11605",
-      "name": "모드전환",
-      "type": "INSTANCE",
-      "box": [
-        257,
-        79,
-        80,
-        20
-      ],
-      "layoutMode": "HORIZONTAL",
-      "itemSpacing": 5.55555534362793,
-      "primaryAxisAlignItems": "MAX",
-      "counterAxisAlignItems": "CENTER",
-      "layoutSizingHorizontal": "FIXED",
-      "layoutSizingVertical": "FIXED",
-      "componentId": "224:417",
-      "children": [
-        {
-          "id": "I2187:11605;224:418",
-          "name": "Frame 5302",
-          "type": "FRAME",
-          "box": [
-            256.44,
-            79,
-            80.56,
-            20
-          ],
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED",
-          "children": [
-            {
-              "id": "I2187:11605;224:419",
-              "name": "Rectangle 34624788",
-              "type": "RECTANGLE",
-              "box": [
-                256.44,
-                79,
-                80.56,
-                20
-              ],
-              "fills": [
-                {
-                  "type": "SOLID",
-                  "color": "#1F2A43"
-                }
-              ],
-              "radius": 10
-            }
-          ]
-        },
-        {
-          "id": "I2187:11605;224:420",
-          "name": "Rectangle 34624789",
-          "type": "RECTANGLE",
-          "box": [
-            297.28,
-            81.22,
-            36.97,
-            15.56
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#F2F2F2"
-            }
-          ],
-          "radius": 10,
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED"
-        },
-        {
-          "id": "I2187:11605;224:421",
-          "name": "고객모드",
-          "type": "TEXT",
-          "box": [
-            303,
-            85,
-            26,
-            8
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#74768E"
-            }
-          ],
-          "text": "고객모드",
-          "fontFamily": "Pretendard",
-          "fontWeight": 600,
-          "fontSize": 6.67,
-          "lineHeightPx": 7.96,
-          "letterSpacing": 0,
-          "textAlignHorizontal": "CENTER",
-          "layoutSizingHorizontal": "FIXED",
-          "layoutSizingVertical": "FIXED"
-        }
-      ]
-    },
-    {
       "id": "2187:11606",
       "name": "Rectangle 34624838",
       "type": "RECTANGLE",
@@ -235,29 +50,41 @@
       "name": "Group 1000003549",
       "type": "GROUP",
       "box": [
-        32,
+        16,
         176,
-        338,
+        370,
         176
       ],
       "radius": 16,
+      "effects": [
+        {
+          "type": "INNER_SHADOW",
+          "color": "#164C83",
+          "opacity": 1,
+          "offset": [
+            -5,
+            -8
+          ],
+          "radius": 8.1
+        }
+      ],
       "children": [
         {
           "id": "2187:11612",
           "name": "Rectangle 34624833",
           "type": "RECTANGLE",
           "box": [
-            32,
+            16,
             176,
-            338,
+            370,
             176
           ],
           "fills": [
             {
               "type": "GRADIENT_LINEAR",
               "stops": [
-                "#0043B2@0",
-                "#87B3FF@1"
+                "#07091C@0",
+                "#2A69B5@1"
               ]
             }
           ],
@@ -981,7 +808,7 @@
         },
         {
           "id": "2187:11637",
-          "name": "소개글 30자 이내 보이는 곳",
+          "name": "소개글 50자 이내 보이는 곳",
           "type": "TEXT",
           "box": [
             48,
@@ -995,7 +822,7 @@
               "color": "#FBBC05"
             }
           ],
-          "text": "소개글 30자 이내 보이는 곳",
+          "text": "소개글 50자 이내 보이는 곳",
           "fontFamily": "Pretendard",
           "fontWeight": 600,
           "fontSize": 12,
@@ -1292,7 +1119,7 @@
               "fills": [
                 {
                   "type": "SOLID",
-                  "color": "#4285F4"
+                  "color": "#B48247"
                 }
               ],
               "radius": 4,
@@ -2073,7 +1900,7 @@
               "fills": [
                 {
                   "type": "SOLID",
-                  "color": "#4285F4"
+                  "color": "#B48247"
                 }
               ],
               "radius": 4,
@@ -2901,7 +2728,7 @@
               "fills": [
                 {
                   "type": "SOLID",
-                  "color": "#4285F4"
+                  "color": "#B48247"
                 }
               ],
               "radius": 4,
@@ -3729,7 +3556,7 @@
               "fills": [
                 {
                   "type": "SOLID",
-                  "color": "#4285F4"
+                  "color": "#B48247"
                 }
               ],
               "radius": 4,
@@ -3878,147 +3705,6 @@
       ]
     },
     {
-      "id": "2187:11763",
-      "name": "phone.circle.fill",
-      "type": "TEXT",
-      "box": [
-        325,
-        740,
-        29,
-        29
-      ],
-      "fills": [
-        {
-          "type": "GRADIENT_LINEAR",
-          "stops": [
-            "#4D8AFA@0.02",
-            "#013BD0@0.79",
-            "#0C337B@1"
-          ]
-        }
-      ],
-      "strokes": [
-        {
-          "type": "SOLID",
-          "color": "#FFFFFF"
-        }
-      ],
-      "strokeWeight": 0.5,
-      "effects": [
-        {
-          "type": "DROP_SHADOW",
-          "color": "#121342",
-          "opacity": 0.24,
-          "offset": [
-            2,
-            2
-          ],
-          "radius": 4
-        }
-      ],
-      "text": "􀒦",
-      "fontFamily": "SF Pro",
-      "fontWeight": 400,
-      "fontSize": 24,
-      "lineHeightPx": 28.64,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "CENTER"
-    },
-    {
-      "id": "2187:11764",
-      "name": "phone.circle.fill",
-      "type": "TEXT",
-      "box": [
-        325,
-        1042,
-        29,
-        29
-      ],
-      "fills": [
-        {
-          "type": "GRADIENT_LINEAR",
-          "stops": [
-            "#4D8AFA@0.02",
-            "#013BD0@0.79",
-            "#0C337B@1"
-          ]
-        }
-      ],
-      "strokes": [
-        {
-          "type": "SOLID",
-          "color": "#FFFFFF"
-        }
-      ],
-      "strokeWeight": 0.5,
-      "effects": [
-        {
-          "type": "DROP_SHADOW",
-          "color": "#121342",
-          "opacity": 0.24,
-          "offset": [
-            2,
-            2
-          ],
-          "radius": 4
-        }
-      ],
-      "text": "􀒦",
-      "fontFamily": "SF Pro",
-      "fontWeight": 400,
-      "fontSize": 24,
-      "lineHeightPx": 28.64,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "CENTER"
-    },
-    {
-      "id": "2187:11765",
-      "name": "phone.circle.fill",
-      "type": "TEXT",
-      "box": [
-        325,
-        1351,
-        29,
-        29
-      ],
-      "fills": [
-        {
-          "type": "GRADIENT_LINEAR",
-          "stops": [
-            "#4D8AFA@0.02",
-            "#013BD0@0.79",
-            "#0C337B@1"
-          ]
-        }
-      ],
-      "strokes": [
-        {
-          "type": "SOLID",
-          "color": "#FFFFFF"
-        }
-      ],
-      "strokeWeight": 0.5,
-      "effects": [
-        {
-          "type": "DROP_SHADOW",
-          "color": "#121342",
-          "opacity": 0.24,
-          "offset": [
-            2,
-            2
-          ],
-          "radius": 4
-        }
-      ],
-      "text": "􀒦",
-      "fontFamily": "SF Pro",
-      "fontWeight": 400,
-      "fontSize": 24,
-      "lineHeightPx": 28.64,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "CENTER"
-    },
-    {
       "id": "2187:11766",
       "name": "location_on",
       "type": "GROUP",
@@ -4066,70 +3752,215 @@
       ]
     },
     {
-      "id": "2187:11769",
-      "name": "phone.circle.fill",
-      "type": "TEXT",
+      "id": "2311:7831",
+      "name": "Navigation bar_home",
+      "type": "INSTANCE",
       "box": [
-        325,
-        438,
-        29,
-        29
+        0,
+        60,
+        402,
+        56
       ],
-      "fills": [
+      "componentId": "224:459",
+      "children": [
         {
-          "type": "GRADIENT_LINEAR",
-          "stops": [
-            "#4D8AFA@0.02",
-            "#013BD0@0.79",
-            "#0C337B@1"
+          "id": "I2311:7831;224:382",
+          "name": "Rectangle 34624783",
+          "type": "RECTANGLE",
+          "box": [
+            0,
+            60,
+            402,
+            56
+          ]
+        },
+        {
+          "id": "I2311:7831;224:384",
+          "name": "setting",
+          "type": "INSTANCE",
+          "box": [
+            341,
+            66,
+            44,
+            44
+          ],
+          "componentId": "179:656",
+          "children": [
+            {
+              "id": "I2311:7831;224:384;179:586",
+              "name": "settings",
+              "type": "GROUP",
+              "box": [
+                351,
+                76,
+                24,
+                24
+              ],
+              "children": [
+                {
+                  "id": "I2311:7831;224:384;179:581",
+                  "name": "Bounding box",
+                  "type": "RECTANGLE",
+                  "box": [
+                    351,
+                    76,
+                    24,
+                    24
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#D9D9D9"
+                    }
+                  ]
+                },
+                {
+                  "id": "I2311:7831;224:384;179:585",
+                  "name": "settings",
+                  "type": "VECTOR",
+                  "box": [
+                    352.95,
+                    78,
+                    20.1,
+                    20
+                  ],
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": "#1F2A43"
+                    }
+                  ]
+                }
+              ]
+            }
           ]
         }
-      ],
-      "strokes": [
-        {
-          "type": "SOLID",
-          "color": "#FFFFFF"
-        }
-      ],
-      "strokeWeight": 0.5,
-      "effects": [
-        {
-          "type": "DROP_SHADOW",
-          "color": "#121342",
-          "opacity": 0.24,
-          "offset": [
-            2,
-            2
-          ],
-          "radius": 4
-        }
-      ],
-      "text": "􀒦",
-      "fontFamily": "SF Pro",
-      "fontWeight": 400,
-      "fontSize": 24,
-      "lineHeightPx": 28.64,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "CENTER"
+      ]
     },
     {
-      "id": "2187:11770",
+      "id": "2311:7832",
+      "name": "모드전환",
+      "type": "INSTANCE",
+      "box": [
+        261,
+        78,
+        80,
+        20
+      ],
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": 5.55555534362793,
+      "primaryAxisAlignItems": "MAX",
+      "counterAxisAlignItems": "CENTER",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "componentId": "224:417",
+      "children": [
+        {
+          "id": "I2311:7832;224:418",
+          "name": "Frame 5302",
+          "type": "FRAME",
+          "box": [
+            260.44,
+            78,
+            80.56,
+            20
+          ],
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "children": [
+            {
+              "id": "I2311:7832;224:419",
+              "name": "Rectangle 34624788",
+              "type": "RECTANGLE",
+              "box": [
+                260.44,
+                78,
+                80.56,
+                20
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#74768E"
+                }
+              ],
+              "strokeWeight": 0.56,
+              "radius": 10
+            }
+          ]
+        },
+        {
+          "id": "I2311:7832;224:420",
+          "name": "Rectangle 34624789",
+          "type": "RECTANGLE",
+          "box": [
+            301.28,
+            80.22,
+            36.97,
+            15.56
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "radius": 10,
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        },
+        {
+          "id": "I2311:7832;224:421",
+          "name": "고객모드",
+          "type": "TEXT",
+          "box": [
+            307,
+            84,
+            26,
+            8
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#1F2A43"
+            }
+          ],
+          "text": "고객모드",
+          "fontFamily": "Pretendard",
+          "fontWeight": 600,
+          "fontSize": 6.67,
+          "lineHeightPx": 7.96,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "CENTER",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED"
+        }
+      ]
+    },
+    {
+      "id": "2311:7833",
       "name": "Group 1000003581",
       "type": "GROUP",
       "box": [
         32,
-        70,
+        64,
         36,
         36
       ],
       "children": [
         {
-          "id": "2187:11771",
+          "id": "2311:7834",
           "name": "Ellipse 71",
           "type": "ELLIPSE",
           "box": [
             32,
-            70,
+            64,
             36,
             36
           ],
@@ -4141,12 +3972,12 @@
           ]
         },
         {
-          "id": "2187:11772",
+          "id": "2311:7835",
           "name": "Intersect",
           "type": "BOOLEAN_OPERATION",
           "box": [
             39,
-            77,
+            71,
             22,
             29
           ],
@@ -4158,12 +3989,12 @@
           ],
           "children": [
             {
-              "id": "2187:11773",
+              "id": "2311:7836",
               "name": "Ellipse 72",
               "type": "ELLIPSE",
               "box": [
                 32,
-                70,
+                64,
                 36,
                 36
               ],
@@ -4175,12 +4006,12 @@
               ]
             },
             {
-              "id": "2187:11774",
+              "id": "2311:7837",
               "name": "Union",
               "type": "BOOLEAN_OPERATION",
               "box": [
                 39,
-                77,
+                71,
                 22,
                 30.23
               ],
@@ -4192,12 +4023,12 @@
               ],
               "children": [
                 {
-                  "id": "2187:11775",
+                  "id": "2311:7838",
                   "name": "Union",
                   "type": "BOOLEAN_OPERATION",
                   "box": [
                     39,
-                    90.25,
+                    84.25,
                     22,
                     16.98
                   ],
@@ -4209,12 +4040,12 @@
                   ],
                   "children": [
                     {
-                      "id": "2187:11776",
+                      "id": "2311:7839",
                       "name": "Rectangle 34624852",
                       "type": "RECTANGLE",
                       "box": [
                         39,
-                        96.23,
+                        90.23,
                         22,
                         11
                       ],
@@ -4226,12 +4057,12 @@
                       ]
                     },
                     {
-                      "id": "2187:11777",
+                      "id": "2311:7840",
                       "name": "Rectangle 34624853",
                       "type": "RECTANGLE",
                       "box": [
                         39,
-                        90.25,
+                        84.25,
                         22,
                         11.43
                       ],
@@ -4246,12 +4077,12 @@
                   ]
                 },
                 {
-                  "id": "2187:11778",
+                  "id": "2311:7841",
                   "name": "Ellipse 63",
                   "type": "ELLIPSE",
                   "box": [
                     44.25,
-                    77,
+                    71,
                     11.5,
                     11.5
                   ],
@@ -4269,75 +4100,12 @@
       ]
     },
     {
-      "id": "2187:11779",
-      "name": "Frame 1739336864",
-      "type": "FRAME",
-      "box": [
-        32,
-        128,
-        338,
-        40
-      ],
-      "fills": [
-        {
-          "type": "SOLID",
-          "color": "#D9D9D9"
-        }
-      ],
-      "strokes": [
-        {
-          "type": "SOLID",
-          "color": "#74768E",
-          "opacity": 0.3
-        }
-      ],
-      "strokeWeight": 1,
-      "radius": 8,
-      "layoutMode": "HORIZONTAL",
-      "itemSpacing": 10,
-      "paddingLeft": 20,
-      "paddingRight": 20,
-      "paddingTop": 12,
-      "paddingBottom": 12,
-      "counterAxisAlignItems": "CENTER",
-      "layoutSizingHorizontal": "FIXED",
-      "layoutSizingVertical": "FIXED",
-      "children": [
-        {
-          "id": "2187:11780",
-          "name": "명인 리뷰 작성하러가기",
-          "type": "TEXT",
-          "box": [
-            52,
-            141,
-            110,
-            14
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "text": "명인 리뷰 작성하러가기",
-          "fontFamily": "Pretendard",
-          "fontWeight": 500,
-          "fontSize": 12,
-          "lineHeightPx": 14.32,
-          "letterSpacing": 0,
-          "textAlignHorizontal": "LEFT",
-          "layoutSizingHorizontal": "HUG",
-          "layoutSizingVertical": "HUG"
-        }
-      ]
-    },
-    {
-      "id": "2187:11781",
+      "id": "2311:7842",
       "name": "Frame 1739336863",
       "type": "FRAME",
       "box": [
         68,
-        72,
+        66,
         120,
         32
       ],
@@ -4352,12 +4120,12 @@
       "layoutSizingVertical": "FIXED",
       "children": [
         {
-          "id": "2187:11782",
+          "id": "2311:7843",
           "name": "반갑습니다 👋",
           "type": "TEXT",
           "box": [
             76,
-            72.5,
+            66.5,
             104,
             12
           ],
@@ -4378,12 +4146,12 @@
           "layoutSizingVertical": "HUG"
         },
         {
-          "id": "2187:11783",
+          "id": "2311:7844",
           "name": "고객닉네임 님",
           "type": "TEXT",
           "box": [
             76,
-            89.5,
+            83.5,
             104,
             14
           ],
@@ -4406,14 +4174,62 @@
       ]
     },
     {
+      "id": "2311:7860",
+      "name": "Rectangle 34624832",
+      "type": "RECTANGLE",
+      "box": [
+        16,
+        120,
+        370,
+        44
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#07091C",
+          "opacity": 0.6
+        }
+      ],
+      "radius": 8,
+      "effects": [
+        {
+          "type": "GLASS"
+        }
+      ]
+    },
+    {
+      "id": "2311:7861",
+      "name": "리뷰를 작성해 내가 만난 명인에대해 알려주세요!",
+      "type": "TEXT",
+      "box": [
+        32,
+        135,
+        226,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#D9D9D9"
+        }
+      ],
+      "text": "리뷰를 작성해 내가 만난 명인에대해 알려주세요!              ",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
       "id": "2187:11784",
       "name": "Subtract",
       "type": "BOOLEAN_OPERATION",
       "box": [
-        296,
-        104.03,
-        73.88,
-        63.97
+        299,
+        98,
+        76.19,
+        65.97
       ],
       "fills": [
         {
@@ -4427,10 +4243,10 @@
           "name": "image 4",
           "type": "RECTANGLE",
           "box": [
-            296,
-            104.03,
-            73.88,
-            75.27
+            299,
+            98,
+            76.19,
+            77.62
           ],
           "fills": [
             {
@@ -4444,10 +4260,10 @@
           "name": "Rectangle 34624833",
           "type": "RECTANGLE",
           "box": [
-            296.85,
-            168,
-            71.46,
-            16.67
+            299.88,
+            163.97,
+            73.7,
+            17.2
           ],
           "fills": [
             {
@@ -4461,6 +4277,263 @@
               "type": "GLASS"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "2321:8846",
+      "name": "맞춤 명인탐색",
+      "type": "TEXT",
+      "box": [
+        32,
+        199,
+        152,
+        36
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "text": "맞춤 명인탐색",
+      "fontFamily": "Pretendard",
+      "fontWeight": 800,
+      "fontSize": 28,
+      "lineHeightPx": 36,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "2321:8847",
+      "name": "Description",
+      "type": "TEXT",
+      "box": [
+        32,
+        239,
+        199,
+        14
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#F2F2F2"
+        }
+      ],
+      "text": "3가지 질문으로 딱 맞는 명인을 발견합니다",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 12,
+      "lineHeightPx": 14.32,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "LEFT"
+    },
+    {
+      "id": "2321:8853",
+      "name": "Mask group",
+      "type": "GROUP",
+      "box": [
+        16,
+        176,
+        370,
+        176
+      ],
+      "radius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "children": [
+        {
+          "id": "2321:8854",
+          "name": "Group 1000003574",
+          "type": "GROUP",
+          "box": [
+            16,
+            176,
+            370,
+            176
+          ],
+          "radius": 16,
+          "children": [
+            {
+              "id": "2321:8855",
+              "name": "Rectangle 34624833",
+              "type": "RECTANGLE",
+              "box": [
+                16,
+                176,
+                370,
+                176
+              ],
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "opacity": 0.6,
+                  "stops": [
+                    "#07091C@0",
+                    "#57677D@1"
+                  ]
+                }
+              ],
+              "radius": 16,
+              "effects": [
+                {
+                  "type": "GLASS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "2321:8856",
+          "name": "Polygon 6",
+          "type": "REGULAR_POLYGON",
+          "box": [
+            249,
+            97.55,
+            179.34,
+            223.4
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0091D4",
+              "opacity": 0.2
+            }
+          ],
+          "effects": [
+            {
+              "type": "LAYER_BLUR",
+              "radius": 16.8
+            }
+          ]
+        },
+        {
+          "id": "2321:8857",
+          "name": "Polygon 7",
+          "type": "REGULAR_POLYGON",
+          "box": [
+            219,
+            112.64,
+            175.38,
+            157.45
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0091D4",
+              "opacity": 0.2
+            }
+          ],
+          "effects": [
+            {
+              "type": "LAYER_BLUR",
+              "radius": 16.8
+            }
+          ]
+        },
+        {
+          "id": "2321:8858",
+          "name": "Polygon 8",
+          "type": "REGULAR_POLYGON",
+          "box": [
+            207,
+            121.69,
+            157.47,
+            95.56
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0091D4",
+              "opacity": 0.2
+            }
+          ],
+          "effects": [
+            {
+              "type": "LAYER_BLUR",
+              "radius": 16.8
+            }
+          ]
+        },
+        {
+          "id": "2321:8859",
+          "name": "Polygon 9",
+          "type": "REGULAR_POLYGON",
+          "box": [
+            314,
+            126.72,
+            115.33,
+            201.68
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0091D4",
+              "opacity": 0.2
+            }
+          ],
+          "effects": [
+            {
+              "type": "LAYER_BLUR",
+              "radius": 16.8
+            }
+          ]
+        },
+        {
+          "id": "2321:8860",
+          "name": "Polygon 10",
+          "type": "REGULAR_POLYGON",
+          "box": [
+            370,
+            158.55,
+            46.69,
+            172.71
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0091D4",
+              "opacity": 0.2
+            }
+          ],
+          "effects": [
+            {
+              "type": "LAYER_BLUR",
+              "radius": 16.8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2321:8844",
+      "name": "아트보드 4 4",
+      "type": "RECTANGLE",
+      "box": [
+        274,
+        240,
+        101.27,
+        102
+      ],
+      "fills": [
+        {
+          "type": "IMAGE",
+          "image": true
+        }
+      ],
+      "effects": [
+        {
+          "type": "INNER_SHADOW",
+          "color": "#172D51",
+          "opacity": 0.41,
+          "offset": [
+            -0.93,
+            2.78
+          ],
+          "radius": 3.2
         }
       ]
     },

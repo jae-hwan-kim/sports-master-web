@@ -1343,12 +1343,36 @@
       ]
     },
     {
+      "id": "2187:11865",
+      "name": "Q3",
+      "type": "TEXT",
+      "box": [
+        178,
+        311,
+        49,
+        36
+      ],
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#C6A75E"
+        }
+      ],
+      "text": "Q3",
+      "fontFamily": "Pretendard",
+      "fontWeight": 500,
+      "fontSize": 36,
+      "lineHeightPx": 36,
+      "letterSpacing": 0,
+      "textAlignHorizontal": "CENTER"
+    },
+    {
       "id": "2187:11863",
       "name": "Frame 1739336865",
       "type": "FRAME",
       "box": [
-        14,
-        740,
+        16,
+        739,
         370,
         69
       ],
@@ -1391,8 +1415,8 @@
           "name": "선택완료",
           "type": "TEXT",
           "box": [
-            171,
-            765,
+            173,
+            764,
             56,
             19
           ],
@@ -1414,30 +1438,6 @@
           "layoutSizingVertical": "HUG"
         }
       ]
-    },
-    {
-      "id": "2187:11865",
-      "name": "Q3",
-      "type": "TEXT",
-      "box": [
-        178,
-        311,
-        49,
-        36
-      ],
-      "fills": [
-        {
-          "type": "SOLID",
-          "color": "#C6A75E"
-        }
-      ],
-      "text": "Q3",
-      "fontFamily": "Pretendard",
-      "fontWeight": 500,
-      "fontSize": 36,
-      "lineHeightPx": 36,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "CENTER"
     },
     {
       "id": "2187:11866",

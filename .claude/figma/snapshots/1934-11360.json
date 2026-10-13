@@ -598,12 +598,12 @@
     },
     {
       "id": "1934:11376",
-      "name": "참여 스포츠",
+      "name": "내 증상",
       "type": "TEXT",
       "box": [
         26,
         373,
-        73,
+        46,
         19
       ],
       "fills": [
@@ -612,7 +612,7 @@
           "color": "#1F2A43"
         }
       ],
-      "text": "참여 스포츠",
+      "text": "내 증상",
       "fontFamily": "Pretendard",
       "fontWeight": 600,
       "fontSize": 16,
@@ -661,7 +661,7 @@
       "children": [
         {
           "id": "1934:11378",
-          "name": "내가 즐기는 스포츠",
+          "name": "러닝하고나면 자꾸 발목이 아픔.",
           "type": "TEXT",
           "box": [
             39,
@@ -675,7 +675,7 @@
               "color": "#1F2A43"
             }
           ],
-          "text": "내가 즐기는 스포츠",
+          "text": "러닝하고나면 자꾸 발목이 아픔.",
           "fontFamily": "Pretendard",
           "fontWeight": 500,
           "fontSize": 12,
@@ -2264,93 +2264,6 @@
       ]
     },
     {
-      "id": "1934:11407",
-      "name": "Frame 1739336860",
-      "type": "FRAME",
-      "box": [
-        335,
-        403,
-        40,
-        40
-      ],
-      "children": [
-        {
-          "id": "1934:11408",
-          "name": "Vector 41",
-          "type": "VECTOR",
-          "box": [
-            349,
-            417,
-            11.31,
-            11.31
-          ],
-          "strokes": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "strokeWeight": 1.55,
-          "radius": 0.93
-        }
-      ]
-    },
-    {
-      "id": "1934:11565",
-      "name": "Frame 1739336858",
-      "type": "FRAME",
-      "box": [
-        307,
-        70,
-        56,
-        24
-      ],
-      "children": [
-        {
-          "id": "1934:11566",
-          "name": "Rectangle 34624872",
-          "type": "RECTANGLE",
-          "box": [
-            307,
-            70,
-            56,
-            24
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#1F2A43"
-            }
-          ],
-          "radius": 4
-        },
-        {
-          "id": "1934:11567",
-          "name": "수정완료",
-          "type": "TEXT",
-          "box": [
-            314,
-            75,
-            42,
-            14
-          ],
-          "fills": [
-            {
-              "type": "SOLID",
-              "color": "#F2F2F2"
-            }
-          ],
-          "text": "수정완료",
-          "fontFamily": "Pretendard",
-          "fontWeight": 600,
-          "fontSize": 12,
-          "lineHeightPx": 14.32,
-          "letterSpacing": 0,
-          "textAlignHorizontal": "LEFT"
-        }
-      ]
-    },
-    {
       "id": "1934:11409",
       "name": "하단_고객 탭",
       "type": "INSTANCE",
@@ -2810,18 +2723,61 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "1934:11565",
+          "name": "Frame 1739336858",
+          "type": "FRAME",
+          "box": [
+            307,
+            70,
+            56,
+            24
+          ],
+          "children": [
+            {
+              "id": "1934:11566",
+              "name": "Rectangle 34624872",
+              "type": "RECTANGLE",
+              "box": [
+                307,
+                70,
+                56,
+                24
+              ],
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#1F2A43"
+                }
+              ],
+              "radius": 4
             },
             {
-              "id": "I1934:11411;224:376",
-              "name": "setting",
-              "type": "INSTANCE",
+              "id": "1934:11567",
+              "name": "수정완료",
+              "type": "TEXT",
               "box": [
-                341,
-                60,
-                44,
-                44
+                314,
+                75,
+                42,
+                14
               ],
-              "componentId": "179:656"
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#F2F2F2"
+                }
+              ],
+              "text": "수정완료",
+              "fontFamily": "Pretendard",
+              "fontWeight": 600,
+              "fontSize": 12,
+              "lineHeightPx": 14.32,
+              "letterSpacing": 0,
+              "textAlignHorizontal": "LEFT"
             }
           ]
         }

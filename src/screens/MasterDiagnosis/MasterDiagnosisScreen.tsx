@@ -76,7 +76,7 @@ export function MasterDiagnosisScreen() {
         <Text
           style={{
             color: '#74768E',
-            fontSize: 13,
+            fontSize: 12,
             fontFamily: 'Pretendard-Medium',
             marginTop: 4,
             lineHeight: 20,
@@ -111,7 +111,7 @@ export function MasterDiagnosisScreen() {
             style={{ flex: 1 }}
             contentContainerStyle={{
               paddingHorizontal: 32,
-              paddingTop: 16,
+              paddingTop: 24,
               paddingBottom: insets.bottom + 16,
               flexGrow: 1,
             }}

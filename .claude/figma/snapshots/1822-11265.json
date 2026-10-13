@@ -646,12 +646,12 @@
     },
     {
       "id": "1822:11283",
-      "name": "대표운동",
+      "name": "내 증상",
       "type": "TEXT",
       "box": [
         26,
         474,
-        56,
+        46,
         19
       ],
       "fills": [
@@ -660,7 +660,7 @@
           "color": "#1F2A43"
         }
       ],
-      "text": "대표운동",
+      "text": "내 증상",
       "fontFamily": "Pretendard",
       "fontWeight": 600,
       "fontSize": 16,

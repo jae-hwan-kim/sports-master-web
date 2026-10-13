@@ -1115,58 +1115,72 @@
       ]
     },
     {
-      "id": "1934:11318",
-      "name": "Rectangle 34624878",
-      "type": "RECTANGLE",
+      "id": "2321:11809",
+      "name": "Group 1000003590",
+      "type": "GROUP",
       "box": [
         291,
         192,
         64,
         24
       ],
-      "fills": [
-        {
-          "type": "SOLID",
-          "color": "#B48247"
-        }
-      ],
       "radius": 12,
-      "effects": [
+      "children": [
         {
-          "type": "DROP_SHADOW",
-          "color": "#000000",
-          "opacity": 0.11,
-          "offset": [
-            2,
-            2
+          "id": "1934:11318",
+          "name": "Rectangle 34624878",
+          "type": "RECTANGLE",
+          "box": [
+            291,
+            192,
+            64,
+            24
           ],
-          "radius": 3
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#B48247"
+            }
+          ],
+          "radius": 12,
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "color": "#000000",
+              "opacity": 0.11,
+              "offset": [
+                2,
+                2
+              ],
+              "radius": 3
+            }
+          ]
+        },
+        {
+          "id": "1934:11319",
+          "name": "계정설정",
+          "type": "TEXT",
+          "box": [
+            302,
+            197,
+            42,
+            14
+          ],
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#F2F2F2"
+            }
+          ],
+          "text": "계정설정",
+          "fontFamily": "Pretendard",
+          "fontWeight": 500,
+          "fontSize": 12,
+          "lineHeightPx": 14.32,
+          "letterSpacing": 0,
+          "textAlignHorizontal": "LEFT"
         }
       ]
-    },
-    {
-      "id": "1934:11319",
-      "name": "계정설정",
-      "type": "TEXT",
-      "box": [
-        300,
-        196,
-        42,
-        14
-      ],
-      "fills": [
-        {
-          "type": "SOLID",
-          "color": "#F2F2F2"
-        }
-      ],
-      "text": "계정설정",
-      "fontFamily": "Pretendard",
-      "fontWeight": 500,
-      "fontSize": 12,
-      "lineHeightPx": 14.32,
-      "letterSpacing": 0,
-      "textAlignHorizontal": "LEFT"
     },
     {
       "id": "1934:11320",
