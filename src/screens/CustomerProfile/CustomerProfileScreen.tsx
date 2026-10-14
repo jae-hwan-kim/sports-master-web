@@ -7,21 +7,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowNextIcon, ProfilePersonIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
+import { useCustomerProfile } from '@/hooks/useCustomerProfile'
 import { RootStackParamList } from '@/navigation/RootNavigator'
-
-// ---------------------------------------------------------------------------
-// Mock (DEV only)
-// ---------------------------------------------------------------------------
-type CustomerProfile = {
-  nickname: string
-  userTag: string
-  avatarUri?: string
-}
-
-const MOCK_CUSTOMER_PROFILE: CustomerProfile = {
-  nickname: '닉네임',
-  userTag: '#USER00001',
-}
 
 // ---------------------------------------------------------------------------
 // Sub-components
@@ -103,7 +90,7 @@ function Section({ title, children }: SectionProps) {
 export function CustomerProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useSafeAreaInsets()
-  const profile = __DEV__ ? MOCK_CUSTOMER_PROFILE : null
+  const { data: profile } = useCustomerProfile()
 
   const handleAccountSettings = () => {
     navigation.navigate('CustomerSettings')
@@ -169,7 +156,7 @@ export function CustomerProfileScreen() {
                 className="text-[20px]"
                 style={{ fontFamily: 'Pretendard-SemiBold', color: '#07091C' }}
               >
-                {profile.nickname}
+                {profile?.nickname ?? '닉네임'}
               </Text>
               <Text
                 className="mt-[2px] text-[14px]"
@@ -179,7 +166,7 @@ export function CustomerProfileScreen() {
                   textDecorationLine: 'underline',
                 }}
               >
-                {profile.userTag}
+                {`#USER${String(profile?.userId ?? 0).padStart(5, '0')}`}
               </Text>
             </View>
 

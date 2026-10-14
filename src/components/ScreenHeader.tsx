@@ -5,11 +5,12 @@ import { ArrowBackIcon } from '@/assets/icons'
 
 type ScreenHeaderProps = {
   onBack: () => void
+  rightIcon?: React.ReactNode
 }
 
 // 뒤로가기(+옵션 설정) 아이콘이 있는 화면 상단 네비게이션 바 — Login/SignUp 등 여러 화면에서
 // 각자 복붙하던 걸 공용화. 여백 계산(insets.top 등)을 한 곳에서만 관리해 화면 간 불일치를 막는다.
-export function ScreenHeader({ onBack }: ScreenHeaderProps) {
+export function ScreenHeader({ onBack, rightIcon }: ScreenHeaderProps) {
   const insets = useSafeAreaInsets()
 
   return (
@@ -24,6 +25,8 @@ export function ScreenHeader({ onBack }: ScreenHeaderProps) {
       >
         <ArrowBackIcon />
       </Pressable>
+      <View className="flex-1" />
+      {rightIcon}
     </View>
   )
 }

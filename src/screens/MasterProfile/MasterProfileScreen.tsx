@@ -5,7 +5,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
-import PersonSvg from '@/assets/icons/person.svg'
+import { StarMedalIcon } from '@/assets/icons'
+import ArrowNextSvg from '@/assets/icons/arrow-next.svg'
+import ProfilePersonSvg from '@/assets/icons/profile-person.svg'
 import { Text } from '@/components/AppText'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
@@ -55,7 +57,7 @@ function EmptyProfileCard() {
         <View className="overflow-hidden rounded-xl" style={{ height: 470 }}>
           {/* 플레이스홀더 배경 + 실루엣 */}
           <View className="flex-1 items-center justify-center bg-[#D9D9D9]">
-            <PersonSvg width={136} height={160} />
+            <ProfilePersonSvg width={88} height={104} />
           </View>
 
           {/* Logo badge — top-right */}
@@ -63,7 +65,7 @@ function EmptyProfileCard() {
             // eslint-disable-next-line @typescript-eslint/no-require-imports
             source={require('@/assets/icons/logo.png')}
             className="absolute right-3 top-3"
-            style={{ width: 52, height: 52 }}
+            style={{ width: 37, height: 48 }}
             resizeMode="contain"
           />
 
@@ -77,11 +79,14 @@ function EmptyProfileCard() {
 
           {/* 이름 / 소개 */}
           <View className="absolute bottom-[96px] left-6 right-6">
-            <Text className="text-[20px] text-black" style={{ fontFamily: 'Pretendard-SemiBold' }}>
-              이름최대8글자
-            </Text>
+            <View className="flex-row items-center gap-1">
+              <Text className="text-[20px] text-black" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+                이름최대8글자
+              </Text>
+              <StarMedalIcon size={24} />
+            </View>
             <Text
-              className="mt-1 text-[13px] leading-5 text-gray3"
+              className="mt-[12px] text-[12px] leading-5 text-gray3"
               style={{ fontFamily: 'Pretendard-Medium' }}
             >
               {
@@ -102,7 +107,7 @@ function EmptyProfileCard() {
               >
                 0
               </Text>
-              <Text className="text-[13px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text className="text-[12px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 리뷰
               </Text>
             </View>
@@ -114,7 +119,7 @@ function EmptyProfileCard() {
               >
                 0.0
               </Text>
-              <Text className="text-[13px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text className="text-[12px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 평점
               </Text>
             </View>
@@ -126,7 +131,7 @@ function EmptyProfileCard() {
               >
                 100%
               </Text>
-              <Text className="text-[13px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text className="text-[12px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 상위
               </Text>
             </View>
@@ -175,11 +180,11 @@ export function MasterProfileScreen() {
 
       {/* 헤더 */}
       <View className="px-[26px]" style={{ marginTop: 28 }}>
-        <Text className="text-[28px] text-black" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
+        <Text className="text-[28px] text-[#07091C]" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
           프로필
         </Text>
         <Text
-          className="mt-[8px] text-[13px] text-[#74768E]"
+          className="mt-[8px] text-[12px] text-[#74768E]"
           style={{ fontFamily: 'Pretendard-Medium' }}
         >
           전문성을 강조할 자료로 능력을 보여주세요
@@ -213,15 +218,12 @@ export function MasterProfileScreen() {
           className="flex-row items-center justify-center"
           style={{ backgroundColor: '#74768E', height: 36, width: 156, borderRadius: 76 }}
         >
-          <Text className="text-[13px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
+          <Text className="text-[12px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
             상세프로필로 이동
           </Text>
-          <Text
-            className="ml-[6px] text-[13px] text-[#F2F2F2]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
-            {'>'}
-          </Text>
+          <View className="ml-[6px]">
+            <ArrowNextSvg width={15} height={15} />
+          </View>
         </Pressable>
       </View>
     </View>

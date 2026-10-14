@@ -65,7 +65,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
             </>
           ) : (
             <View className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center bg-gray1">
-              <ProfilePersonSvg width={108} height={128} />
+              <ProfilePersonSvg width={88} height={104} />
             </View>
           )}
 
@@ -74,7 +74,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
             // eslint-disable-next-line @typescript-eslint/no-require-imports
             source={require('@/assets/icons/logo.png')}
             className="absolute right-3 top-3"
-            style={{ width: 52, height: 52 }}
+            style={{ width: 37, height: 48 }}
             resizeMode="contain"
           />
 
@@ -88,10 +88,10 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
               >
                 {displayName}
               </Text>
-              <StarMedalIcon size={20} />
+              <StarMedalIcon size={24} />
             </View>
             <Text
-              className="mt-[12px] text-small1 text-gray3"
+              className="mt-[12px] text-[12px] text-gray3"
               style={{ fontFamily: 'Pretendard-Medium' }}
               numberOfLines={2}
             >
@@ -118,7 +118,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
                     : String(totalReviewCount)
                   : '-'}
               </Text>
-              <Text className="text-small1 text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text className="text-[12px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 리뷰
               </Text>
             </View>
@@ -134,7 +134,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
               >
                 {averageRating != null ? averageRating.toFixed(1) : '-'}
               </Text>
-              <Text className="text-small1 text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text className="text-[12px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 평점
               </Text>
             </View>
@@ -150,7 +150,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
               >
                 {topPercentile != null ? `${topPercentile}%` : '-'}
               </Text>
-              <Text className="text-small1 text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text className="text-[12px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 상위
               </Text>
             </View>

@@ -1,6 +1,9 @@
-import { Image, Modal, Pressable, ScrollView, View } from 'react-native'
+import { Modal, Pressable, ScrollView, View } from 'react-native'
+
+import { Image } from 'expo-image'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
+import CloseSvg from '@/assets/icons/close.svg'
 import { Text } from '@/components/AppText'
 import { formatDateTime } from '@/utils/date'
 
@@ -99,9 +102,8 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
               width: 60,
               height: 60,
               borderRadius: 30,
-              borderWidth: 5,
-              borderColor: '#FFFFFF',
             }}
+            contentFit="cover"
           />
         ) : (
           <View
@@ -110,8 +112,6 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
               height: 60,
               borderRadius: 30,
               backgroundColor: '#FFFFFF',
-              borderWidth: 5,
-              borderColor: '#FFFFFF',
             }}
           />
         )}
@@ -133,7 +133,7 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
         accessibilityRole="button"
         accessibilityLabel="닫기"
       >
-        <Text style={{ fontSize: 18, color: '#74768E', fontFamily: 'Pretendard-Medium' }}>✕</Text>
+        <CloseSvg width={20} height={20} color="#74768E" />
       </Pressable>
 
       {/*
@@ -188,13 +188,13 @@ function DialogCard({ item, onClose }: { item: DiagnosisIncomingItem; onClose: (
           </View>
         )}
 
-        {/* 소개글 — Figma: top:195, left:32, w:276, h:190, bg:#D9D9D9, rounded:8 */}
+        {/* 소개글 — Figma: top:195, left:32, w:276, h:154, bg:#D9D9D9, rounded:8 */}
         {/* 내부 텍스트: left:54(카드 기준) = 32+22 → paddingHorizontal:22, top:210=195+15 → paddingTop:15 */}
         <View
           style={{
             backgroundColor: '#D9D9D9',
             borderRadius: 8,
-            height: 190,
+            height: 154,
             paddingHorizontal: 22,
             paddingTop: 15,
             paddingBottom: 16,

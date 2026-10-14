@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
-import { ArrowNextIcon } from '@/assets/icons'
+import { ArrowNextIcon, SettingsIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
@@ -24,10 +24,9 @@ async function fetchMe(): Promise<UserResponseDto> {
   return data.data
 }
 
-type BlockedField = 'name' | 'phone' | 'email' | 'password' | null
+type BlockedField = 'phone' | 'email' | 'password' | null
 
 const BLOCKED_DIALOG: Record<NonNullable<BlockedField>, { title: string; description: string }> = {
-  name: { title: '닉네임 변경 불가', description: '소셜 로그인은 닉네임 변경 불가합니다' },
   phone: { title: '전화번호 변경 불가', description: '소셜 로그인은 전화번호 변경 불가합니다' },
   email: { title: '이메일 변경 불가', description: '소셜 로그인은 메일 주소 변경 불가합니다' },
   password: { title: '비밀번호 변경 불가', description: '소셜 로그인은 비밀번호 변경 불가합니다' },
@@ -72,25 +71,22 @@ export function MasterProfileEditScreen() {
 
   return (
     <View className="flex-1 bg-[#F2F2F2]">
-      <ScreenHeader onBack={() => navigation.goBack()} />
+      <ScreenHeader
+        onBack={() => navigation.goBack()}
+        rightIcon={<SettingsIcon size={44} />}
+      />
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {/* 타이틀 */}
-        <View className="px-6 pt-[34px]">
+        <View className="px-6 pt-[20px]">
           <Text className="text-[28px] font-extrabold text-black">개인 정보 관리</Text>
-          <Text className="mt-[14px] text-[13px] font-medium text-gray2">
+          <Text className="mt-[14px] text-[12px] font-medium text-gray2">
             개인정보는 상대방에게 노출되지 않습니다
           </Text>
         </View>
 
         {/* 필드 목록 */}
-        <View className="mt-[27px]">
-          <ProfileField
-            label="닉네임"
-            value={me?.name ?? '-'}
-            onPress={() => handleFieldPress('name')}
-          />
-          <View style={{ height: 4 }} />
+        <View className="mt-[28px]">
           <ProfileField
             label="휴대전화 번호"
             value={me?.phone ?? '-'}
@@ -117,7 +113,7 @@ export function MasterProfileEditScreen() {
         onPress={() => setAllDeviceLogoutVisible(true)}
         style={{ paddingBottom: insets.bottom + 16, paddingTop: 16, alignItems: 'center' }}
       >
-        <Text className="text-[13px] font-medium text-gray2">모든 기기에서 로그아웃</Text>
+        <Text className="text-[12px] font-medium text-gray2">모든 기기에서 로그아웃</Text>
       </Pressable>
 
       {/* 소셜 변경 불가 다이얼로그 */}
@@ -163,7 +159,7 @@ function ProfileField({
     <Pressable
       hitSlop={8}
       onPress={onPress}
-      className="flex-row items-center justify-between px-6"
+      className="flex-row items-center justify-between pl-6 pr-1"
       style={{
         height: 84,
         backgroundColor: '#F2F2F2',

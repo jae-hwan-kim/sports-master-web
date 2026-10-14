@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Platform, Pressable, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 
 import { Image } from 'expo-image'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
+import ProfilePersonSvg from '@/assets/icons/profile-person.svg'
 import { Text } from '@/components/AppText'
 import { formatDate } from '@/utils/date'
 
@@ -13,9 +14,10 @@ type Props = {
   item: DiagnosisIncomingItem
   onPress: () => void
   onDelete?: () => void
+  cardBg?: string
 }
 
-export function DiagnosisRequestCard({ item, onPress, onDelete }: Props) {
+export function DiagnosisRequestCard({ item, onPress, onDelete, cardBg = '#D9D9D9' }: Props) {
   const { customerProfile, createdAt, isViewed } = item
   const [deleteVisible, setDeleteVisible] = useState(false)
 
@@ -24,16 +26,8 @@ export function DiagnosisRequestCard({ item, onPress, onDelete }: Props) {
       <Pressable
         hitSlop={8}
         onPress={onPress}
-        className="h-[82px] flex-row items-center rounded-lg bg-white px-4"
-        style={Platform.select({
-          ios: {
-            shadowColor: '#8B8B8B',
-            shadowOffset: { width: 1, height: 1 },
-            shadowOpacity: 0.25,
-            shadowRadius: 6,
-          },
-          android: { elevation: 2 },
-        })}
+        className="h-[82px] flex-row items-center rounded-lg px-4"
+        style={{ backgroundColor: cardBg }}
       >
         {/* 프로필 이미지 — left:16, size:50, top:16 (Figma) */}
         {customerProfile.profileImageUrl ? (
@@ -43,7 +37,9 @@ export function DiagnosisRequestCard({ item, onPress, onDelete }: Props) {
             contentFit="cover"
           />
         ) : (
-          <View className="h-[50px] w-[50px] rounded-full bg-[#FFFFFF]" />
+          <View className="h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-full">
+            <ProfilePersonSvg width={50} height={50} />
+          </View>
         )}
 
         {/* 텍스트 영역 — marginLeft:22 (Figma: 88-50-16=22), gap:20 (Figma gap-y:20) */}

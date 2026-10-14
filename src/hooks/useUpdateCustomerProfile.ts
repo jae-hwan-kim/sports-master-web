@@ -3,10 +3,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { apiClient } from '@/api/client'
 
 export type UpdateCustomerProfilePayload = {
+  nickname?: string
   gender?: 'male' | 'female' | 'other'
   ageGroup?: '10s' | '20s' | '30s' | '40s' | '50s' | '60s_plus'
   age?: number
   region?: string
+  sports?: string[]
   symptoms?: string[]
   keywords?: string[]
 }

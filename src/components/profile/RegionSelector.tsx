@@ -313,12 +313,12 @@ export function RegionSelector({ value, onChange }: Props) {
       <Pressable
         hitSlop={8}
         onPress={openModal}
-        className="h-[50px] flex-row items-center justify-between rounded-lg border border-[#D9D9D9] bg-white px-4"
+        className="h-[46px] flex-row items-center justify-between rounded-lg border border-[#D9D9D9] bg-[#F2F2F2] px-4"
         accessibilityRole="button"
         accessibilityLabel="지역 선택"
       >
         <Text
-          className={`flex-1 text-[13px] ${value ? 'text-[#1F2A43]' : 'text-[#74768E]'}`}
+          className={`flex-1 text-[12px] ${value ? 'text-[#1F2A43]' : 'text-[#74768E]'}`}
           style={{ fontFamily: 'Pretendard-Medium' }}
           numberOfLines={1}
         >

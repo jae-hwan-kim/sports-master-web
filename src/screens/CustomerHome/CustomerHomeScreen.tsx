@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { LocationOnIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
+import { useCustomerProfile } from '@/hooks/useCustomerProfile'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { useAuthStore } from '@/store/authStore'
@@ -225,6 +226,7 @@ export function CustomerHomeScreen() {
   const rootNav = useRootNavigation()
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
+  const { data: profile } = useCustomerProfile()
 
   const [switchModeVisible, setSwitchModeVisible] = useState(false)
   // 종료팝업 상태 (Figma: 2321:8871) — 맞춤 명인탐색 완료 후 종료 확인
@@ -287,7 +289,7 @@ export function CustomerHomeScreen() {
                 className="font-pretendard-semibold text-black"
                 style={{ fontSize: 12 }}
               >
-                고객닉네임 님
+                {profile?.nickname ?? '고객닉네임'} 님
               </Text>
             </View>
           </View>

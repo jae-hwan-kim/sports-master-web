@@ -32,14 +32,14 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
   return (
     <View className="w-full">
       <View
-        className={`h-[50px] flex-row items-center rounded-lg border bg-gray1 px-4 ${
+        className={`h-[46px] flex-row items-center rounded-lg border bg-[#F2F2F2] px-4 ${
           hasError ? 'border-[#ea4335]' : isFocused ? 'border-primary' : 'border-transparent'
         }`}
       >
         <TextInput
           ref={ref}
           className="flex-1 font-medium text-black"
-          style={{ fontSize: 16, paddingVertical: 0, textAlignVertical: 'center' }}
+          style={{ fontSize: 13, paddingVertical: 0, textAlignVertical: 'center' }}
           numberOfLines={1}
           placeholderTextColor="rgba(0,0,0,0.2)"
           placeholder={label}

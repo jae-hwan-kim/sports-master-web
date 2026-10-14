@@ -131,7 +131,7 @@ export function MasterDetailProfileEditScreen() {
   )
 
   return (
-    <View className="flex-1 bg-[#F2F2F2]">
+    <View className="flex-1 bg-gray1">
       {/* 헤더 */}
       <View style={{ paddingTop: insets.top }}>
         <View className="h-14 flex-row items-center justify-between px-4">
@@ -175,11 +175,11 @@ export function MasterDetailProfileEditScreen() {
         >
           {/* 타이틀 */}
           <View className="px-6 pb-4 pt-2">
-            <Text className="text-[28px] text-black" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
+            <Text className="text-[28px] text-[#07091C]" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
               상세프로필
             </Text>
             <Text
-              className="mt-1 text-[13px] text-[#74768E]"
+              className="mt-1 text-[12px] text-[#74768E]"
               style={{ fontFamily: 'Pretendard-Medium' }}
             >
               {'전문성을 나타낼 수 있는 정보를 업로드하고,\n내 정보를 수정할 수 있습니다.'}
@@ -257,7 +257,7 @@ export function MasterDetailProfileEditScreen() {
             <Pressable
               hitSlop={8}
               onPress={handlePickPdf}
-              className="flex-row items-center rounded-[4px] bg-white px-[13px] py-[15px]"
+              className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]"
               accessibilityRole="button"
               accessibilityLabel="PDF 선택"
             >
@@ -274,7 +274,7 @@ export function MasterDetailProfileEditScreen() {
           {/* 학력 및 경력사항 */}
           <SectionLabel label="학력 및 경력사항" />
           <View className="mx-6">
-            <View className="rounded-[4px] bg-white px-[13px] py-[15px]" style={{ minHeight: 164 }}>
+            <View className="rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]" style={{ minHeight: 164 }}>
               <TextInput
                 value={careerText}
                 onChangeText={setCareerText}
@@ -307,7 +307,7 @@ export function MasterDetailProfileEditScreen() {
                   <Pressable
                     hitSlop={8}
                     onPress={handleAddCertification}
-                    className="flex-row items-center rounded-[4px] bg-white px-[13px] py-[15px]"
+                    className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]"
                     accessibilityRole="button"
                     accessibilityLabel="자격증 이미지 추가"
                   >
@@ -424,7 +424,7 @@ export function MasterDetailProfileEditScreen() {
 function SectionLabel({ label, count, max }: { label: string; count?: number; max?: number }) {
   return (
     <View className="mx-6 mb-2 mt-6 flex-row items-center gap-2">
-      <Text className="text-[20px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+      <Text className="text-[16px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-Medium' }}>
         {label}
       </Text>
       {count !== undefined && max !== undefined && (
@@ -438,7 +438,7 @@ function SectionLabel({ label, count, max }: { label: string; count?: number; ma
 
 function CertificationRow({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (
-    <View className="flex-row items-center rounded-[4px] bg-white px-[13px] py-[15px]">
+    <View className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]">
       <Text
         className="flex-1 text-[13px] text-[#1F2A43]"
         style={{ fontFamily: 'Pretendard-Medium' }}

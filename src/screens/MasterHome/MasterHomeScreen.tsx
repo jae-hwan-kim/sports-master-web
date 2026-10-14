@@ -2,7 +2,7 @@ import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { useNavigation } from '@react-navigation/native'
 
 import { useState } from 'react'
-import { Alert, FlatList, ImageBackground, Pressable, View } from 'react-native'
+import { Alert, FlatList, ImageBackground, Platform, Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import * as Clipboard from 'expo-clipboard'
@@ -21,7 +21,6 @@ import { useSwitchMode } from '@/hooks/useSwitchMode'
 import type { MasterTabParamList } from '@/navigation/MasterTabNavigator'
 import { useAuthStore } from '@/store/authStore'
 import type { components } from '@/types/schema'
-import { formatDate } from '@/utils/date'
 
 import masterBg from '../../assets/icons/master-background.png'
 
@@ -53,18 +52,13 @@ function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?
       hitSlop={8}
       onPress={onPress}
       disabled={disabled}
-      style={{
-        width: 80,
-        height: 20,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#74768e',
-        backgroundColor: '#74768e',
-        overflow: 'hidden',
-        justifyContent: 'center',
-      }}
+      className="w-20 h-5 rounded-[10px] border border-[#1C236E] bg-black overflow-hidden justify-center"
     >
-      <View
+      {/* 네이비 그라디언트 pill — Figma: LinearGradient -11.3deg #181E5D→#20287F */}
+      <LinearGradient
+        colors={['#181E5D', '#20287F']}
+        start={{ x: 0.4, y: 1 }}
+        end={{ x: 0.6, y: 0 }}
         style={{
           position: 'absolute',
           top: 2,
@@ -72,46 +66,18 @@ function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?
           bottom: 2,
           width: 36,
           borderRadius: 8,
-          backgroundColor: '#F2F2F2',
         }}
       />
-      <Text
-        style={{
-          color: '#1F2A43',
-          fontSize: 7,
-          fontFamily: 'Pretendard-Medium',
-          paddingLeft: 8,
-        }}
-      >
-        명인모드
-      </Text>
+      <Text className="text-[7px] text-white font-pretendard-semibold text-center">명인모드</Text>
     </Pressable>
   )
 }
 
 function StatBox({ value, label }: { value: string; label: string }) {
   return (
-    <View style={{ width: 56, alignItems: 'center', gap: 8 }}>
-      <Text
-        style={{
-          color: '#F2F2F2',
-          fontSize: 18,
-          fontFamily: 'Pretendard-ExtraBold',
-          textAlign: 'center',
-        }}
-      >
-        {value}
-      </Text>
-      <Text
-        style={{
-          color: '#F2F2F2',
-          fontSize: 12,
-          fontFamily: 'Pretendard-Medium',
-          textAlign: 'center',
-        }}
-      >
-        {label}
-      </Text>
+    <View className="w-14 items-center gap-2">
+      <Text className="text-lg font-pretendard-extrabold text-white text-center">{value}</Text>
+      <Text className="text-small2 font-pretendard-medium text-white text-center">{label}</Text>
     </View>
   )
 }
@@ -119,66 +85,27 @@ function StatBox({ value, label }: { value: string; label: string }) {
 function StatDivider() {
   return (
     <View
-      style={{
-        width: 1,
-        height: 38.5,
-        backgroundColor: 'rgba(255,255,255,0.4)',
-        alignSelf: 'center',
-        marginHorizontal: 20,
-      }}
+      className="w-px h-[38.5px] self-center mx-5"
+      style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}
     />
   )
 }
 
 function EmptyNoProfile() {
   return (
-    <View
-      style={{
-        borderRadius: 8,
-        backgroundColor: '#D9D9D9',
-        height: 278,
-        width: 338,
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 8,
-      }}
-    >
-      <Text
-        style={{
-          color: '#74768E',
-          fontSize: 18,
-          fontFamily: 'Pretendard-ExtraBold',
-          textAlign: 'center',
-        }}
-      >
+    <View className="rounded-lg bg-gray1 h-[278px] w-[338px] items-center justify-center gap-2">
+      <Text className="text-gray2 text-lg font-pretendard-extrabold text-center">
         아직 요청 고객이 없습니다
       </Text>
-      <Text
-        style={{
-          color: '#74768E',
-          fontSize: 13,
-          fontFamily: 'Pretendard-Medium',
-          textAlign: 'center',
-        }}
-      >
+      <Text className="text-gray2 text-small2 font-pretendard-medium text-center">
         프로필을 작성해 전문성을 보여주세요!
       </Text>
       <Pressable
         hitSlop={8}
         onPress={() => Alert.alert('준비 중', '프로필 작성 기능을 준비 중입니다.')}
-        style={{
-          marginTop: 12,
-          backgroundColor: '#C6A75E',
-          borderRadius: 8,
-          height: 50,
-          width: 145,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        className="mt-3 bg-primary rounded-lg h-[50px] w-[145px] items-center justify-center"
       >
-        <Text style={{ color: '#F2F2F2', fontSize: 17, fontFamily: 'Pretendard-Medium' }}>
-          프로필 작성하기
-        </Text>
+        <Text className="text-white text-main font-pretendard-medium">프로필 작성하기</Text>
       </Pressable>
     </View>
   )
@@ -186,39 +113,10 @@ function EmptyNoProfile() {
 
 function EmptyHasTip() {
   return (
-    <View
-      style={{
-        borderRadius: 8,
-        backgroundColor: '#F0F0F0',
-        padding: 24,
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: 180,
-        gap: 8,
-      }}
-    >
-      <Text
-        style={{
-          color: '#74768E',
-          fontSize: 14,
-          fontFamily: 'Pretendard-Medium',
-          textAlign: 'center',
-        }}
-      >
-        Tip.
-      </Text>
-      <Text
-        style={{
-          color: '#74768E',
-          fontSize: 13,
-          fontFamily: 'Pretendard-Regular',
-          textAlign: 'center',
-          lineHeight: 20,
-        }}
-      >
-        {
-          '링크를 통해 외부 고객도 리뷰 작성이 가능합니다\n리뷰 점수를 높여 고객요청 확률을 높여봅시다!'
-        }
+    <View className="rounded-lg bg-[#F0F0F0] p-6 items-center justify-center min-h-[180px] gap-2">
+      <Text className="text-gray2 text-sm font-pretendard-medium text-center">Tip.</Text>
+      <Text className="text-gray2 text-small1 font-pretendard-regular text-center leading-5">
+        {'링크를 통해 외부 고객도 리뷰 작성이 가능합니다\n리뷰 점수를 높여 고객요청 확률을 높여봅시다!'}
       </Text>
     </View>
   )
@@ -276,21 +174,13 @@ export function MasterHomeScreen() {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#1E2A3A' }}>
+    <View className="flex-1 bg-[#1E2A3A]">
       {/* 상단 배경 사진 영역 */}
       <ImageBackground source={masterBg} resizeMode="cover" style={{ paddingTop: insets.top }}>
         {/* 전체 dark 오버레이 */}
-        <View
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(7,9,28,0.5)',
-          }}
-        />
-        {/* 상단 흰색 그라디언트 오버레이 */}
+        <View className="absolute inset-0" style={{ backgroundColor: 'rgba(7,9,28,0.5)' }} />
+
+        {/* 상단 흰색 그라디언트 오버레이 — height:364 (StatusBar+NavBar+Banner+카드+margin) */}
         <LinearGradient
           colors={['#F2F2F2', 'rgba(242,242,242,0)']}
           locations={[0, 1]}
@@ -299,35 +189,23 @@ export function MasterHomeScreen() {
             top: 0,
             left: 0,
             right: 0,
-            height: 120,
+            height: 364,
             pointerEvents: 'none',
           }}
         />
 
         {/* 내비게이션 바 */}
-        <View
-          style={{
-            height: 56,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingHorizontal: 16,
-          }}
-        >
+        <View className="h-14 flex-row items-center justify-between px-4">
           {/* 좌측: 아바타 + 인사말 */}
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <View className="flex-row items-center gap-2">
             <ProfilePersonIcon size={36} color="#1F2A43" />
             <View>
-              <Text style={{ fontSize: 10, color: '#1F2A43', fontFamily: 'Pretendard-Medium' }}>
-                반갑습니다 👋
-              </Text>
-              <Text style={{ fontSize: 12, color: '#07091C', fontFamily: 'Pretendard-SemiBold' }}>
-                {nickname} 님
-              </Text>
+              <Text className="text-[10px] text-gray3 font-pretendard-medium">반갑습니다 👋</Text>
+              <Text className="text-small2 text-black font-pretendard-semibold">{nickname} 님</Text>
             </View>
           </View>
           {/* 우측: 모드 배지 + 설정 */}
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <View className="flex-row items-center gap-2">
             <MasterModeBadge onPress={handleModeSwitch} disabled={isSwitching} />
             <Pressable
               hitSlop={8}
@@ -340,91 +218,40 @@ export function MasterHomeScreen() {
           </View>
         </View>
 
-        {/* 리뷰 링크 배너 */}
+        {/* 리뷰 링크 배너 — height:54 */}
         <Pressable
           hitSlop={8}
           onPress={handleReviewLink}
-          style={{
-            height: 44,
-            marginHorizontal: 16,
-            borderRadius: 8,
-            backgroundColor: 'rgba(7,9,28,0.6)',
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 3,
-          }}
+          className="h-[54px] mx-4 rounded-lg flex-row items-center px-[3px]"
+          style={{ backgroundColor: 'rgba(7,9,28,0.6)' }}
         >
           <LinkIcon size={44} color="#FFFFFF" />
-          <Text
-            style={{ flex: 1, color: '#F2F2F2', fontSize: 12, fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="flex-1 text-white text-small2 font-pretendard-medium">
             내 고객이라면 누구나 리뷰 작성 가능
           </Text>
-          <Text
-            style={{
-              color: '#D9D9D9',
-              fontSize: 12,
-              fontFamily: 'Pretendard-Medium',
-              paddingRight: 12,
-            }}
-          >
-            링크 보내기
-          </Text>
+          <Text className="text-gray1 text-small2 font-pretendard-medium pr-3">링크 보내기</Text>
         </Pressable>
 
         {/* 명인 등급 카드 */}
-        <View
-          style={{
-            height: 175,
-            marginHorizontal: 16,
-            marginTop: 12,
-            marginBottom: 13,
-            borderRadius: 16,
-            overflow: 'hidden',
-          }}
-        >
+        <View className="h-[175px] mx-4 mt-3 mb-[13px] rounded-2xl overflow-hidden">
           <LinearGradient
             colors={['rgba(7,9,28,0.6)', 'rgba(87,103,125,0.6)']}
             style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
           />
 
-          <View style={{ position: 'absolute', right: 0, top: 0 }}>
+          <View className="absolute right-0 top-0">
             <StarMedalIcon size={100} />
           </View>
 
-          <View
-            style={{
-              flex: 1,
-              paddingLeft: 16,
-              paddingTop: 18,
-              justifyContent: 'space-between',
-              paddingBottom: 24,
-            }}
-          >
+          <View className="flex-1 pl-4 pt-[18px] justify-between pb-6">
             <View>
-              <Text style={{ color: '#F2F2F2', fontSize: 18, fontFamily: 'Pretendard-ExtraBold' }}>
-                명인 등급
-              </Text>
-              <Text
-                style={{
-                  color: '#D9D9D9',
-                  fontSize: 12,
-                  fontFamily: 'Pretendard-Medium',
-                  marginTop: 7,
-                }}
-              >
-                현재 명인 등급 <Text style={{ color: '#FBBC05' }}>{gradeLabel}</Text> 입니다
+              <Text className="text-white text-lg font-pretendard-extrabold">명인 등급</Text>
+              <Text className="text-gray1 text-small2 font-pretendard-medium mt-[7px]">
+                현재 명인 등급 <Text className="text-[#FBBC05]">{gradeLabel}</Text> 입니다
               </Text>
             </View>
 
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                alignSelf: 'flex-start',
-                marginLeft: 16,
-              }}
-            >
+            <View className="flex-row items-center self-start ml-4">
               <StatBox value={reviewCount} label="리뷰" />
               <StatDivider />
               <StatBox value={avgRating} label="평점" />
@@ -437,44 +264,21 @@ export function MasterHomeScreen() {
 
       {/* 하단 진단요청 고객 섹션 */}
       <View
-        style={{
-          flex: 1,
-          backgroundColor: '#F2F2F2',
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: -5 },
-          shadowOpacity: 0.05,
-          shadowRadius: 5,
-          elevation: 5,
-          paddingTop: 23,
-        }}
+        className="flex-1 bg-white rounded-t-2xl pt-[23px]"
+        style={Platform.select({
+          ios: { shadowColor: '#000', shadowOffset: { width: 0, height: -5 }, shadowOpacity: 0.05, shadowRadius: 5 },
+          android: { elevation: 5 },
+        })}
       >
         {/* 섹션 헤더 — paddingLeft:32, paddingRight:25 → Figma 화살표 좌:333 우:25 여백 */}
         <Pressable
           hitSlop={8}
           onPress={() => tabNav.navigate('DiagnosisTab')}
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingLeft: 32,
-            paddingRight: 25,
-            marginBottom: 16,
-          }}
+          className="flex-row items-center justify-between pl-8 pr-[25px] mb-4"
         >
           <View>
-            <Text style={{ color: '#1F2A43', fontSize: 18, fontFamily: 'Pretendard-ExtraBold' }}>
-              진단요청 고객
-            </Text>
-            <Text
-              style={{
-                color: '#74768E',
-                fontSize: 12,
-                fontFamily: 'Pretendard-Medium',
-                marginTop: 3,
-              }}
-            >
+            <Text className="text-gray3 text-lg font-pretendard-extrabold">진단요청 고객</Text>
+            <Text className="text-gray2 text-small2 font-pretendard-medium mt-[3px]">
               나를 찾는 고객 프로필 전부 확인하기
             </Text>
           </View>
@@ -487,22 +291,20 @@ export function MasterHomeScreen() {
           keyExtractor={(item) => String(item.id)}
           scrollEnabled={false}
           contentContainerStyle={{ paddingHorizontal: 32 }}
-          ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+          ItemSeparatorComponent={() => <View className="h-4" />}
           renderItem={({ item }) => (
-            <DiagnosisRequestCard item={item} onPress={() => tabNav.navigate('DiagnosisTab')} cardBg="#F2F2F2" />
+            <DiagnosisRequestCard
+              item={item}
+              onPress={() => tabNav.navigate('DiagnosisTab')}
+              cardBg="#F2F2F2"
+            />
           )}
           ListEmptyComponent={hasProfile ? <EmptyHasTip /> : <EmptyNoProfile />}
           ListFooterComponent={
             diagnosisItems.length > 0 ? (
               <Text
-                style={{
-                  color: 'rgba(116,118,142,0.5)',
-                  fontSize: 10,
-                  fontFamily: 'Pretendard-Medium',
-                  textAlign: 'right',
-                  marginTop: 16,
-                  paddingBottom: 16,
-                }}
+                className="text-[10px] font-pretendard-medium text-right mt-4 pb-4"
+                style={{ color: 'rgba(116,118,142,0.5)' }}
               >
                 가장 먼저 요청한 3인이 보여집니다
               </Text>

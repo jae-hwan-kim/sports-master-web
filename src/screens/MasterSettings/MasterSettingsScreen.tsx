@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useState } from 'react'
 import { FlatList, Pressable, View } from 'react-native'
 
-import { ArrowNextIcon } from '@/assets/icons'
+import { ArrowNextIcon, SettingsIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
@@ -18,7 +18,6 @@ type SettingItem = {
   id: string
   label: string
   onPress: () => void
-  danger?: boolean
 }
 
 export function MasterSettingsScreen() {
@@ -40,14 +39,14 @@ export function MasterSettingsScreen() {
       onPress: () => navigation.navigate('MasterMessageGuide'),
     },
     { id: 'logout', label: '로그아웃', onPress: () => setLogoutVisible(true) },
-    { id: 'withdraw', label: '계정탈퇴', onPress: () => setWithdrawVisible(true), danger: true },
+    { id: 'withdraw', label: '계정탈퇴', onPress: () => setWithdrawVisible(true) },
   ]
 
   return (
     <View className="flex-1 bg-[#F2F2F2]">
-      <ScreenHeader onBack={() => navigation.goBack()} />
+      <ScreenHeader onBack={() => navigation.goBack()} rightIcon={<SettingsIcon size={44} />} />
 
-      <Text className="px-6 pb-[27px] pt-[34px] text-[28px] font-extrabold text-black">설정</Text>
+      <Text className="pl-[26px] pb-[29px] pt-[20px] text-[28px] font-extrabold text-[#07091C]">설정</Text>
 
       <FlatList
         data={SETTINGS_ITEMS}
@@ -57,7 +56,7 @@ export function MasterSettingsScreen() {
           <Pressable
             hitSlop={8}
             onPress={item.onPress}
-            className="flex-row items-center justify-between bg-[#F2F2F2] px-6"
+            className="flex-row items-center justify-between bg-[#F2F2F2] pl-6 pr-[4px]"
             style={{
               height: 72,
               shadowColor: '#000',
@@ -67,11 +66,7 @@ export function MasterSettingsScreen() {
               elevation: 2,
             }}
           >
-            <Text
-              className={`text-[16px] font-semibold ${item.danger ? 'text-[#EA4335]' : 'text-[#07091C]'}`}
-            >
-              {item.label}
-            </Text>
+            <Text className="text-[16px] font-semibold text-[#07091C]">{item.label}</Text>
             <ArrowNextIcon size={44} />
           </Pressable>
         )}
@@ -83,7 +78,7 @@ export function MasterSettingsScreen() {
         style={{
           position: 'absolute',
           left: 200,
-          bottom: 36,
+          top: 560,
           width: 276,
           height: 278,
           overflow: 'hidden',
