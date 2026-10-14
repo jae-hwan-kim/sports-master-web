@@ -4,7 +4,6 @@ import { FlatList, Pressable, View } from 'react-native'
 import { Image } from 'expo-image'
 
 import { Text } from '@/components/AppText'
-import { Checkbox } from '@/components/Checkbox'
 import { StarRating } from '@/components/StarRating'
 
 export type ReviewData = {

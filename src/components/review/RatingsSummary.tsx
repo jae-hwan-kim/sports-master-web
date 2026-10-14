@@ -25,7 +25,7 @@ function StarIcon({ filled }: { filled: boolean }) {
   )
 }
 
-export function RatingsSummary({ avg, distribution, totalCount }: Props) {
+export function RatingsSummary({ avg, distribution, totalCount: _totalCount }: Props) {
   const maxCount = Math.max(...distribution, 1)
 
   return (
@@ -67,7 +67,7 @@ export function RatingsSummary({ avg, distribution, totalCount }: Props) {
             return (
               <View className="flex-row items-center">
                 <Text
-                  className={`w-7 text-small2 ${i === 0 ? 'text-[#C6A75E]' : 'text-[#A2A2A2]'}`}
+                  className="w-7 text-small2 text-[#A2A2A2]"
                   style={{ fontFamily: 'Pretendard-SemiBold' }}
                 >
                   {label}

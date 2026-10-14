@@ -99,7 +99,11 @@ export function MasterReviewScreen() {
   const handleSelectChange = useCallback((id: number, selected: boolean) => {
     setSelectedIds((prev) => {
       const next = new Set(prev)
-      selected ? next.add(id) : next.delete(id)
+      if (selected) {
+        next.add(id)
+      } else {
+        next.delete(id)
+      }
       return next
     })
   }, [])
@@ -153,7 +157,7 @@ export function MasterReviewScreen() {
   const ListHeader = (
     <>
       {/* 제목 + 부제목 */}
-      <View style={{ paddingHorizontal: 26, paddingTop: 16, paddingBottom: 12 }}>
+      <View style={{ paddingHorizontal: 26, paddingTop: 12, paddingBottom: 12 }}>
         <Text
           style={{
             fontFamily: 'Pretendard-ExtraBold',
@@ -167,7 +171,7 @@ export function MasterReviewScreen() {
         <Text
           style={{
             fontFamily: 'Pretendard-Medium',
-            fontSize: 13,
+            fontSize: 12,
             color: '#74768E',
             marginTop: 4,
             lineHeight: 20,
@@ -220,7 +224,7 @@ export function MasterReviewScreen() {
       }}
     >
       {/* 배경 로고 — 우측 하단 */}
-      <LogoSvg width={220} height={220} style={{ position: 'absolute', right: -20, bottom: -20 }} />
+      <LogoSvg width={276} height={278} style={{ position: 'absolute', right: 0, bottom: 0 }} />
 
       <Text
         style={{
@@ -235,7 +239,7 @@ export function MasterReviewScreen() {
       <Text
         style={{
           fontFamily: 'Pretendard-Medium',
-          fontSize: 13,
+          fontSize: 12,
           color: '#74768E',
           textAlign: 'center',
         }}
@@ -261,7 +265,7 @@ export function MasterReviewScreen() {
         <Text
           style={{
             fontFamily: 'Pretendard-Medium',
-            fontSize: 13,
+            fontSize: 12,
             color: '#F2F2F2',
             paddingRight: 12,
           }}

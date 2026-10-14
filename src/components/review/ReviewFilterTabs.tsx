@@ -28,19 +28,19 @@ export function ReviewFilterTabs({
 }: Props) {
   return (
     <View className="flex-row items-center" style={{ height: 36 }}>
-      {TABS.map((tab, index) => {
+      {TABS.map((tab, _index) => {
         const isActive = activeSort === tab.key
         return (
           <View key={tab.key} className="flex-row items-center">
             {/* Vertical divider (between tabs) */}
-            {index > 0 && <View className="mx-2 bg-gray2" style={{ width: 1, height: 10 }} />}
+            {tab.key === 'photo' && <View className="mx-2 bg-gray2" style={{ width: 1, height: 10 }} />}
             <Pressable
               hitSlop={8}
               onPress={() => onSortChange(tab.key)}
               className="flex-row items-center gap-1 px-1"
               style={{ height: 30, justifyContent: 'center' }}
             >
-              {tab.key === 'photo' ? <PhotoSvg width={14} height={14} /> : null}
+              {tab.key === 'photo' ? <PhotoSvg width={15} height={11} /> : null}
               <Text
                 className={`text-small2 ${isActive ? 'text-primary' : 'text-gray2'}`}
                 style={{ fontFamily: 'Pretendard-SemiBold' }}

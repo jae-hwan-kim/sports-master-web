@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { FlatList, KeyboardAvoidingView, Platform, Pressable, ScrollView, Switch, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -11,8 +11,10 @@ import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { TextField } from '@/components/TextField'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { RegionSelector } from '@/components/profile/RegionSelector'
+import { useCustomerProfile } from '@/hooks/useCustomerProfile'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
+import { useUpdateCustomerProfile } from '@/hooks/useUpdateCustomerProfile'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 
@@ -20,6 +22,20 @@ type Mode = 'view' | 'edit'
 
 const GENDER_OPTIONS: string[] = ['여성', '남성']
 const AGE_OPTIONS: string[] = ['10대', '20대', '30대', '40대', '50대', '60대 이상']
+
+const GENDER_TO_KO: Record<string, '여성' | '남성'> = { female: '여성', male: '남성' }
+const GENDER_TO_API: Record<string, 'male' | 'female' | 'other'> = {
+  '여성': 'female',
+  '남성': 'male',
+}
+const AGE_TO_KO: Record<string, string> = {
+  '10s': '10대', '20s': '20대', '30s': '30대',
+  '40s': '40대', '50s': '50대', '60s_plus': '60대 이상',
+}
+const AGE_TO_API: Record<string, '10s' | '20s' | '30s' | '40s' | '50s' | '60s_plus'> = {
+  '10대': '10s', '20대': '20s', '30대': '30s',
+  '40대': '40s', '50대': '50s', '60대 이상': '60s_plus',
+}
 const INPUT_BOX_SHADOW = Platform.select({
   ios: {
     shadowColor: 'rgba(0,0,0,1)',
@@ -38,6 +54,9 @@ export function CustomerSettingsScreen() {
   const clearAuth = useAuthStore((s) => s.clear)
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
 
+  const { data: profile } = useCustomerProfile()
+  const { mutate: updateProfile, isPending: isSaving } = useUpdateCustomerProfile()
+
   const handleSwitchToMaster = useCallback(() => {
     switchMode(
       { mode: 'expert' },
@@ -50,12 +69,12 @@ export function CustomerSettingsScreen() {
     )
   }, [switchMode, setModeSelected, rootNav])
 
-  // 저장된 실제 상태
-  const [region, setRegion] = useState('')
-  const [sport, setSport] = useState('')
-  const [gender, setGender] = useState<'여성' | '남성' | null>(null)
-  const [ageGroup, setAgeGroup] = useState<string | null>(null)
-  const [keywords, setKeywords] = useState<string[]>([])
+  // 저장된 실제 상태 — API 데이터 기반
+  const region = profile?.region ?? ''
+  const sport = profile?.mainSport ?? ''
+  const gender = profile?.gender ? (GENDER_TO_KO[profile.gender] ?? null) : null
+  const ageGroup = profile?.ageGroup ? (AGE_TO_KO[profile.ageGroup] ?? null) : null
+  const keywords = useMemo(() => profile?.keywordTags ?? [], [profile?.keywordTags])
 
   // 편집 모드 초안 상태
   const [draftRegion, setDraftRegion] = useState('')
@@ -86,14 +105,22 @@ export function CustomerSettingsScreen() {
   }, [mode, navigation])
 
   const handleSaveConfirm = useCallback(() => {
-    setRegion(draftRegion)
-    setSport(draftSport)
-    setGender(draftGender)
-    setAgeGroup(draftAgeGroup)
-    setKeywords([...draftKeywords])
-    setSaveDialogVisible(false)
-    setMode('view')
-  }, [draftRegion, draftSport, draftGender, draftAgeGroup, draftKeywords])
+    updateProfile(
+      {
+        region: draftRegion || undefined,
+        sports: draftSport ? [draftSport] : undefined,
+        gender: draftGender ? GENDER_TO_API[draftGender] : undefined,
+        ageGroup: draftAgeGroup ? AGE_TO_API[draftAgeGroup] : undefined,
+        keywords: draftKeywords.length > 0 ? draftKeywords : undefined,
+      },
+      {
+        onSuccess: () => {
+          setSaveDialogVisible(false)
+          setMode('view')
+        },
+      }
+    )
+  }, [draftRegion, draftSport, draftGender, draftAgeGroup, draftKeywords, updateProfile])
 
   const handleExitConfirm = useCallback(() => {
     setExitDialogVisible(false)
@@ -208,6 +235,7 @@ export function CustomerSettingsScreen() {
           <Pressable
             hitSlop={8}
             onPress={() => setSaveDialogVisible(true)}
+            disabled={isSaving}
             className="h-[24px] w-[56px] items-center justify-center rounded-[4px] bg-[#1F2A43]"
             accessibilityRole="button"
             accessibilityLabel="수정완료"
@@ -216,7 +244,7 @@ export function CustomerSettingsScreen() {
               className="text-[11px] text-[#F2F2F2]"
               style={{ fontFamily: 'Pretendard-Medium' }}
             >
-              수정완료
+              {isSaving ? '저장중' : '수정완료'}
             </Text>
           </Pressable>
         )}
@@ -255,13 +283,13 @@ export function CustomerSettingsScreen() {
             className="mt-2 text-[20px] text-[#1F2A43]"
             style={{ fontFamily: 'Pretendard-SemiBold' }}
           >
-            닉네임
+            {profile?.nickname ?? '닉네임'}
           </Text>
           <Text
             className="text-[13px] text-[#B48247]"
             style={{ fontFamily: 'Pretendard-Medium', textDecorationLine: 'underline' }}
           >
-            #USER00001
+            {`#USER${String(profile?.userId ?? 0).padStart(5, '0')}`}
           </Text>
         </View>
 
