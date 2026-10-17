@@ -1,9 +1,8 @@
-import { Pressable, View } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 
-import PhotoSvg from '@/assets/icons/photo.svg'
 import { Text } from '@/components/AppText'
 
-export type ReviewSort = 'latest' | 'best' | 'photo'
+export type ReviewSort = 'latest' | 'best'
 
 type Props = {
   activeSort: ReviewSort
@@ -17,7 +16,6 @@ type TabItem = { key: ReviewSort; label: string }
 const TABS: TabItem[] = [
   { key: 'latest', label: '최신순' },
   { key: 'best', label: '베스트순' },
-  { key: 'photo', label: '사진리뷰' },
 ]
 
 export function ReviewFilterTabs({
@@ -28,29 +26,32 @@ export function ReviewFilterTabs({
 }: Props) {
   return (
     <View className="flex-row items-center" style={{ height: 36 }}>
-      {TABS.map((tab, _index) => {
-        const isActive = activeSort === tab.key
-        return (
-          <View key={tab.key} className="flex-row items-center">
-            {/* Vertical divider (between tabs) */}
-            {tab.key === 'photo' && <View className="mx-2 bg-gray2" style={{ width: 1, height: 10 }} />}
-            <Pressable
-              hitSlop={8}
-              onPress={() => onSortChange(tab.key)}
-              className="flex-row items-center gap-1 px-1"
-              style={{ height: 30, justifyContent: 'center' }}
-            >
-              {tab.key === 'photo' ? <PhotoSvg width={15} height={11} /> : null}
-              <Text
-                className={`text-small2 ${isActive ? 'text-primary' : 'text-gray2'}`}
-                style={{ fontFamily: 'Pretendard-SemiBold' }}
+      <FlatList
+        horizontal
+        scrollEnabled={false}
+        data={TABS}
+        keyExtractor={(tab) => tab.key}
+        renderItem={({ item: tab }) => {
+          const isActive = activeSort === tab.key
+          return (
+            <View className="flex-row items-center">
+              <Pressable
+                hitSlop={8}
+                onPress={() => onSortChange(tab.key)}
+                className="flex-row items-center gap-1 px-1"
+                style={{ height: 30, justifyContent: 'center' }}
               >
-                {tab.label}
-              </Text>
-            </Pressable>
-          </View>
-        )
-      })}
+                <Text
+                  className={`text-small2 ${isActive ? 'text-primary' : 'text-gray2'}`}
+                  style={{ fontFamily: 'Pretendard-SemiBold' }}
+                >
+                  {tab.label}
+                </Text>
+              </Pressable>
+            </View>
+          )
+        }}
+      />
 
       {/* Spacer */}
       <View className="flex-1" />

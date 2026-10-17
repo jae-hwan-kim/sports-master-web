@@ -2,7 +2,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { Platform, Pressable, ScrollView, View } from 'react-native'
+import { ActivityIndicator, Platform, Pressable, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowNextIcon, ProfilePersonIcon } from '@/assets/icons'
@@ -90,7 +90,7 @@ function Section({ title, children }: SectionProps) {
 export function CustomerProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useSafeAreaInsets()
-  const { data: profile } = useCustomerProfile()
+  const { data: profile, isLoading, isError } = useCustomerProfile()
 
   const handleAccountSettings = () => {
     navigation.navigate('CustomerSettings')
@@ -101,7 +101,7 @@ export function CustomerProfileScreen() {
   }
 
   const handleWriteReview = () => {
-    // ReviewWrite는 명인 상세에서 진입하는 것이 일반적 — 여기선 미연결
+    navigation.navigate('ReviewWrite')
   }
 
   const handleMyReviews = () => {
@@ -131,7 +131,48 @@ export function CustomerProfileScreen() {
         </View>
 
         {/* Profile Card */}
-        {profile && (
+        {isLoading ? (
+          <View
+            className="mx-[26px] mt-6 items-center justify-center rounded-[12px] py-[36px]"
+            style={{
+              backgroundColor: '#FFFFFF',
+              ...Platform.select({
+                ios: {
+                  shadowColor: '#000',
+                  shadowOffset: { width: 1, height: 1 },
+                  shadowOpacity: 0.18,
+                  shadowRadius: 6,
+                },
+                android: { elevation: 3 },
+              }),
+            }}
+          >
+            <ActivityIndicator size="small" color="#B48247" />
+          </View>
+        ) : isError ? (
+          <View
+            className="mx-[26px] mt-6 items-center justify-center rounded-[12px] py-[36px]"
+            style={{
+              backgroundColor: '#FFFFFF',
+              ...Platform.select({
+                ios: {
+                  shadowColor: '#000',
+                  shadowOffset: { width: 1, height: 1 },
+                  shadowOpacity: 0.18,
+                  shadowRadius: 6,
+                },
+                android: { elevation: 3 },
+              }),
+            }}
+          >
+            <Text
+              className="text-[14px]"
+              style={{ fontFamily: 'Pretendard-Medium', color: '#74768E' }}
+            >
+              프로필 정보를 불러오지 못했습니다
+            </Text>
+          </View>
+        ) : profile ? (
           <View
             className="mx-[26px] mt-6 flex-row items-center rounded-[12px] px-[20px] py-[20px]"
             style={{
@@ -156,7 +197,7 @@ export function CustomerProfileScreen() {
                 className="text-[20px]"
                 style={{ fontFamily: 'Pretendard-SemiBold', color: '#07091C' }}
               >
-                {profile?.nickname ?? '닉네임'}
+                {profile.nickname}
               </Text>
               <Text
                 className="mt-[2px] text-[14px]"
@@ -166,7 +207,7 @@ export function CustomerProfileScreen() {
                   textDecorationLine: 'underline',
                 }}
               >
-                {`#USER${String(profile?.userId ?? 0).padStart(5, '0')}`}
+                {`#USER${String(profile.userId).padStart(5, '0')}`}
               </Text>
             </View>
 
@@ -184,17 +225,17 @@ export function CustomerProfileScreen() {
               </Text>
             </Pressable>
           </View>
-        )}
+        ) : null}
 
         {/* 관심명인 section */}
         <Section title="관심명인">
-          <MenuRow label="내가 찜한 명인 보러가기" onPress={handleFavoriteExperts} />
+          <MenuRow label="내가 저장한 명인 보러가기" onPress={handleFavoriteExperts} />
         </Section>
 
         {/* 리뷰관리 section */}
         <Section title="리뷰관리">
           <MenuRow label="리뷰 작성하기" onPress={handleWriteReview} />
-          <MenuRow label="내가 쓴 리뷰 보기" onPress={handleMyReviews} />
+          <MenuRow label="내가 작성한 리뷰 보기" onPress={handleMyReviews} />
         </Section>
       </ScrollView>
     </View>

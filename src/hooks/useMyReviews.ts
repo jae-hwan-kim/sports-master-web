@@ -19,28 +19,25 @@ type ReviewsPage = {
 
 type UseMyReviewsParams = {
   sort?: string
-  photoOnly?: boolean
 }
 
 async function fetchMyReviews({
   pageParam,
   sort,
-  photoOnly,
 }: {
   pageParam: number
   sort?: string
-  photoOnly?: boolean
 }): Promise<ReviewsPage> {
   const { data } = await apiClient.get<{ data: ReviewsPage }>('/reviews/me', {
-    params: { sort, photoOnly, page: pageParam, limit: 20 },
+    params: { sort, page: pageParam, limit: 20 },
   })
   return data.data
 }
 
-export function useMyReviews({ sort, photoOnly }: UseMyReviewsParams = {}) {
+export function useMyReviews({ sort }: UseMyReviewsParams = {}) {
   return useInfiniteQuery({
-    queryKey: ['reviews', 'me', sort, photoOnly],
-    queryFn: ({ pageParam }) => fetchMyReviews({ pageParam: pageParam as number, sort, photoOnly }),
+    queryKey: ['reviews', 'me', sort],
+    queryFn: ({ pageParam }) => fetchMyReviews({ pageParam: pageParam as number, sort }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const fetched = allPages.flatMap((p) => p.data).length

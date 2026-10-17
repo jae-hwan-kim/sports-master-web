@@ -9,7 +9,6 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 import {
   ArrowBackIcon,
-  SettingsIcon,
   StarFillIcon,
   StarMedalIcon,
   StarNoneIcon,
@@ -135,13 +134,7 @@ export function CustomerMasterDetailScreen() {
         >
           <ArrowBackIcon />
         </Pressable>
-        <Pressable
-          hitSlop={8}
-          accessibilityRole="button"
-          accessibilityLabel="더보기"
-        >
-          <SettingsIcon />
-        </Pressable>
+        <StarMedalIcon size={44} />
       </View>
 
       <ScrollView
@@ -233,7 +226,13 @@ export function CustomerMasterDetailScreen() {
                 {profile?.introduction ?? ''}
               </Text>
               <View className="flex-row items-center justify-around py-4">
-                <View className="flex-1 items-center gap-2">
+                <Pressable
+                  hitSlop={8}
+                  accessibilityRole="button"
+                  accessibilityLabel="리뷰 보기"
+                  className="flex-1 items-center gap-2"
+                  onPress={() => navigation.navigate('MasterReview', { expertProfileId })}
+                >
                   <Text
                     className="text-[18px] text-[#1F2A43]"
                     style={{ fontFamily: 'Pretendard-ExtraBold' }}
@@ -246,7 +245,7 @@ export function CustomerMasterDetailScreen() {
                   >
                     리뷰
                   </Text>
-                </View>
+                </Pressable>
                 <View className="h-[38px] w-[1px] bg-[#1F2A43]" />
                 <View className="flex-1 items-center gap-2">
                   <Text

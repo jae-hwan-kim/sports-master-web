@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
+import { useCallback } from 'react'
+
 import { FlatList, Platform, Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -34,6 +36,8 @@ function ExpertRow({
     <Pressable
       hitSlop={8}
       onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${item.name} 명인 상세보기`}
       className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-4"
       style={{ height: 72, ...CARD_SHADOW }}
     >
@@ -74,7 +78,17 @@ function ExpertRow({
 export function FavoriteExpertsScreen() {
   const navigation = useNavigation<NavProp>()
   const insets = useSafeAreaInsets()
-  const { data: experts, isLoading } = useFavoriteExperts()
+  const { data: experts, isLoading, isError } = useFavoriteExperts()
+
+  const renderItem = useCallback(
+    ({ item }: { item: FavoriteExpertItem }) => (
+      <ExpertRow
+        item={item}
+        onPress={() => navigation.navigate('CustomerMasterDetail', { expertProfileId: item.id })}
+      />
+    ),
+    [navigation]
+  )
 
   return (
     <View className="flex-1 bg-[#F2F2F2]" style={{ paddingTop: insets.top }}>
@@ -92,7 +106,7 @@ export function FavoriteExpertsScreen() {
           className="ml-3 text-[20px] text-[#1F2A43]"
           style={{ fontFamily: 'Pretendard-ExtraBold' }}
         >
-          찜한 명인
+          저장한 명인
         </Text>
       </View>
 
@@ -102,11 +116,17 @@ export function FavoriteExpertsScreen() {
             불러오는 중...
           </Text>
         </View>
+      ) : isError ? (
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-[14px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
+            목록을 불러올 수 없습니다
+          </Text>
+        </View>
       ) : (
         <FlatList
           data={experts ?? []}
           keyExtractor={(item) => String(item.id)}
-          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: insets.bottom + 24 }}
+          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: insets.bottom + 24, flexGrow: 1 }}
           ItemSeparatorComponent={() => <View className="h-2" />}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center pt-20">
@@ -118,12 +138,7 @@ export function FavoriteExpertsScreen() {
               </Text>
             </View>
           }
-          renderItem={({ item }) => (
-            <ExpertRow
-              item={item}
-              onPress={() => navigation.navigate('CustomerMasterDetail', { expertProfileId: item.id })}
-            />
-          )}
+          renderItem={renderItem}
         />
       )}
     </View>

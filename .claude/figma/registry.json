@@ -4,8 +4,8 @@
   "pages": [
     "321:458"
   ],
-  "version": "2409469836949225240",
-  "syncedAt": "2026-10-13T15:41:19.354Z",
+  "version": "2411226840444579745",
+  "syncedAt": "2026-10-17T13:30:05.781Z",
   "handledComments": [
     "1925628224",
     "1854023859",
@@ -20,7 +20,8 @@
     "1942384531",
     "1961969964",
     "1961988134",
-    "1961976481"
+    "1961976481",
+    "1970438816"
   ],
   "frames": {
     "791:4157": {
@@ -84,7 +85,7 @@
       "page": "완료화면 전체 정리공간",
       "screen": "CustomerProfile",
       "ignore": false,
-      "hash": "d9cf3b85ed18"
+      "hash": "fec7ac15d867"
     },
     "523:1773": {
       "name": "온보딩",
@@ -721,14 +722,14 @@
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterReview",
       "ignore": false,
-      "hash": "49ff823fa925"
+      "hash": "8d719780c6fe"
     },
     "1308:9049": {
       "name": "리뷰_삭제요청(체크)",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterReview",
       "ignore": false,
-      "hash": "c9162011b5f4"
+      "hash": "e77a829c9bd9"
     },
     "1308:9174": {
       "name": "리뷰_삭제요청 진행",
@@ -742,14 +743,7 @@
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterReview",
       "ignore": false,
-      "hash": "e6c2187b8fd1"
-    },
-    "1308:9424": {
-      "name": "리뷰_사진리뷰",
-      "page": "완료화면 전체 정리공간 / 명인 / 프로필",
-      "screen": "MasterReview",
-      "ignore": false,
-      "hash": "6e23a9f1bf47"
+      "hash": "cd642d77c4f7"
     },
     "2187:11603": {
       "name": "고객홈",
@@ -957,6 +951,174 @@
       "screen": "CustomerSettings",
       "ignore": false,
       "hash": "0f0e007b9326"
+    },
+    "2379:8419": {
+      "name": "저장한 명인",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "FavoriteExperts",
+      "ignore": false,
+      "hash": "1388d41f1b57"
+    },
+    "2452:16441": {
+      "name": "저장한명인_Default",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "FavoriteExperts",
+      "ignore": false,
+      "hash": "7fbaa44fd196"
+    },
+    "2449:13835": {
+      "name": "저장한명인_자세히보기",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "CustomerMasterDetail",
+      "ignore": false,
+      "hash": "34b7e9274529"
+    },
+    "2449:13953": {
+      "name": "리뷰작성",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "ReviewWrite",
+      "ignore": false,
+      "hash": "62bbc09e6214"
+    },
+    "2452:16571": {
+      "name": "리뷰작성_Default",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "ReviewWrite",
+      "ignore": false,
+      "hash": "55d010bf87c7"
+    },
+    "2449:15238": {
+      "name": "리뷰작성_완료",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "ReviewWrite",
+      "ignore": false,
+      "hash": "8d149d67e070"
+    },
+    "2449:14084": {
+      "name": "리뷰작성_작성페이지",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "ReviewWrite",
+      "ignore": false,
+      "hash": "6da0971b04a1"
+    },
+    "2449:15145": {
+      "name": "리뷰작성_작성완료확인",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "ReviewWrite",
+      "ignore": false,
+      "hash": "169f3ae7da2a"
+    },
+    "2449:15328": {
+      "name": "리뷰작성_작성종료",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "ReviewWrite",
+      "ignore": false,
+      "hash": "2fca9a49cef0"
+    },
+    "2452:15444": {
+      "name": "내가 작성한 리뷰",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviews",
+      "ignore": false,
+      "hash": "18859ffae9eb"
+    },
+    "2452:16658": {
+      "name": "내가 작성한 리뷰_Default",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviews",
+      "ignore": false,
+      "hash": "b111ac995c9e"
+    },
+    "2452:16217": {
+      "name": "내가 작성한 리뷰2",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviews",
+      "ignore": false,
+      "hash": "2dd51dac8a53"
+    },
+    "2452:15530": {
+      "name": "내가작성한리뷰확인",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviews",
+      "ignore": false,
+      "hash": "e105c8faf70e"
+    },
+    "2452:15634": {
+      "name": "내가작성한리뷰_수정",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviewEdit",
+      "ignore": false,
+      "hash": "fd2e7cafae2e"
+    },
+    "2452:16312": {
+      "name": "내가작성한리뷰_종료",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviewEdit",
+      "ignore": false,
+      "hash": "a731c49e207b"
+    },
+    "2452:15724": {
+      "name": "내가작성한리뷰_삭제",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviews",
+      "ignore": false,
+      "hash": "9090bd32191f"
+    },
+    "2452:16097": {
+      "name": "내가작성한리뷰_삭제완료",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviews",
+      "ignore": false,
+      "hash": "a6a5c7cc7cb3"
+    },
+    "2452:15755": {
+      "name": "내가작성한리뷰_수정완료",
+      "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
+      "screen": "MyReviewEdit",
+      "ignore": false,
+      "hash": "2a660937e184"
+    },
+    "2449:13794": {
+      "name": "명인인증_사진 선택",
+      "page": "완료화면 전체 정리공간 / 회원가입",
+      "screen": "MasterVerification",
+      "ignore": false,
+      "hash": "dddb09107602"
+    },
+    "2449:14305": {
+      "name": "리뷰_최신순",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "fd5a8f8cd5b8"
+    },
+    "2449:14429": {
+      "name": "리뷰_삭제요청(체크)",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "60f831d5eb24"
+    },
+    "2449:14554": {
+      "name": "리뷰_삭제요청 진행",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "8364f7f30173"
+    },
+    "2449:14680": {
+      "name": "리뷰_베스트순",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "2c553ba59514"
+    },
+    "2449:14804": {
+      "name": "리뷰_사진리뷰",
+      "page": "완료화면 전체 정리공간",
+      "screen": null,
+      "ignore": true,
+      "hash": "976243cbdeb3"
     }
   }
 }

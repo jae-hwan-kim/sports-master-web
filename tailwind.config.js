@@ -34,6 +34,9 @@ module.exports = {
       boxShadow: {
         card: '0 0 12.7px rgba(0, 0, 0, 0.1)',
       },
+      opacity: {
+        45: '0.45',
+      },
     },
   },
   plugins: [],

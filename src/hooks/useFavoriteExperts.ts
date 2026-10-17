@@ -20,5 +20,6 @@ export function useFavoriteExperts() {
   return useQuery({
     queryKey: ['favorite-experts', 'me'],
     queryFn: fetchFavoriteExperts,
+    staleTime: 1000 * 60 * 5,
   })
 }

@@ -834,7 +834,7 @@
       "children": [
         {
           "id": "1934:11306",
-          "name": "내가 찜한 명인 보러가기",
+          "name": "내가 저장한 명인 보러가기",
           "type": "TEXT",
           "box": [
             39,
@@ -848,7 +848,7 @@
               "color": "#1F2A43"
             }
           ],
-          "text": "내가 찜한 명인 보러가기",
+          "text": "내가 저장한 명인 보러가기",
           "fontFamily": "Pretendard",
           "fontWeight": 500,
           "fontSize": 12,
@@ -1056,7 +1056,7 @@
       "children": [
         {
           "id": "1934:11315",
-          "name": "내가 쓴 리뷰 보기",
+          "name": "내가 작성한 리뷰 보기",
           "type": "TEXT",
           "box": [
             39,
@@ -1070,7 +1070,7 @@
               "color": "#1F2A43"
             }
           ],
-          "text": "내가 쓴 리뷰 보기",
+          "text": "내가 작성한 리뷰 보기",
           "fontFamily": "Pretendard",
           "fontWeight": 500,
           "fontSize": 12,

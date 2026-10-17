@@ -50,8 +50,7 @@ export function MasterReviewScreen() {
   const [deleteDialogVisible, setDeleteDialogVisible] = useState(false)
   const [infoModalVisible, setInfoModalVisible] = useState(false)
 
-  const sortParam = activeSort === 'latest' ? 'latest' : activeSort === 'best' ? 'best' : undefined
-  const photoOnly = activeSort === 'photo' ? true : undefined
+  const sortParam = activeSort === 'best' ? 'best' : 'latest'
 
   const { data: summary } = useReviewSummary()
 
@@ -62,7 +61,6 @@ export function MasterReviewScreen() {
     isFetchingNextPage,
   } = useMyReviews({
     sort: sortParam,
-    photoOnly,
   })
 
   const { mutate: deleteReviewRequest, isPending: isDeleting } = useDeleteReviewRequest()

@@ -4,6 +4,8 @@ import { CustomerTabNavigator } from '@/navigation/CustomerTabNavigator'
 import { MasterTabNavigator } from '@/navigation/MasterTabNavigator'
 import { CustomerSettingsScreen } from '@/screens/CustomerSettings/CustomerSettingsScreen'
 import { FavoriteExpertsScreen } from '@/screens/FavoriteExperts/FavoriteExpertsScreen'
+import { MasterReviewScreen } from '@/screens/MasterReview/MasterReviewScreen'
+import { MyReviewEditScreen } from '@/screens/MyReviewEdit/MyReviewEditScreen'
 import { MyReviewsScreen } from '@/screens/MyReviews/MyReviewsScreen'
 import { ReviewWriteScreen } from '@/screens/ReviewWrite/ReviewWriteScreen'
 import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
@@ -46,8 +48,15 @@ export type RootStackParamList = {
   SurveyKeywordSelect: undefined
   RecommendedMasters: undefined
   FavoriteExperts: undefined
+  MasterReview: { expertProfileId: number }
   MyReviews: undefined
-  ReviewWrite: { expertProfileId: number; expertName?: string }
+  MyReviewEdit: {
+    reviewId: number
+    expertName?: string
+    initialRating: number
+    initialContent?: string
+  }
+  ReviewWrite: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -76,7 +85,9 @@ export function RootNavigator() {
       <Stack.Screen name="SurveyKeywordSelect" component={SurveyKeywordSelectScreen} />
       <Stack.Screen name="RecommendedMasters" component={RecommendedMastersScreen} />
       <Stack.Screen name="FavoriteExperts" component={FavoriteExpertsScreen} />
+      <Stack.Screen name="MasterReview" component={MasterReviewScreen} />
       <Stack.Screen name="MyReviews" component={MyReviewsScreen} />
+      <Stack.Screen name="MyReviewEdit" component={MyReviewEditScreen} />
       <Stack.Screen name="ReviewWrite" component={ReviewWriteScreen} />
     </Stack.Navigator>
   )
