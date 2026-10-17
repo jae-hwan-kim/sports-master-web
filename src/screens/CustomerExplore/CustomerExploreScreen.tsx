@@ -1,6 +1,7 @@
 // src/screens/CustomerExplore/CustomerExploreScreen.tsx
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import {
+  ActivityIndicator,
   FlatList,
   KeyboardAvoidingView,
   Modal,
@@ -12,11 +13,14 @@ import {
 
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useMutation } from '@tanstack/react-query'
 import { Image } from 'expo-image'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { SearchTabIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text, TextInput } from '@/components/AppText'
+import { apiClient } from '@/api/client'
+import { useRecommendedMasters } from '@/hooks/useRecommendedMasters'
 import type { RootStackParamList } from '@/navigation/RootNavigator'
 
 // ─── 데이터 ──────────────────────────────────────────────────────────────────
@@ -97,15 +101,6 @@ type MasterItem = {
   profileImageUrl?: string
   isFavorite: boolean
 }
-
-const MOCK_MASTERS: MasterItem[] = Array.from({ length: 5 }, (_, i) => ({
-  id: i + 1,
-  nickname: '명인닉네임',
-  region: '지역',
-  bio: '소개글 50자 이내 보이고 긴거는 말줄임표로 보이는',
-  specialties: ['방문재활', '선수트레이닝', '컨디셔닝'],
-  isFavorite: false,
-}))
 
 const CARD_SHADOW = Platform.select({
   ios: {
@@ -333,8 +328,28 @@ export function CustomerExploreScreen() {
   const insets = useSafeAreaInsets()
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
+  const { data: recommendedData, isLoading } = useRecommendedMasters()
+  const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set())
+
+  const { mutate: toggleFavoriteAPI } = useMutation({
+    mutationFn: (id: number) => apiClient.post(`/favorite-experts/${id}`),
+  })
+
+  const masters = useMemo<MasterItem[]>(
+    () =>
+      recommendedData?.recommendedExperts.map((e) => ({
+        id: e.id,
+        nickname: e.name,
+        region: e.region,
+        bio: e.representativeService,
+        specialties: e.keywordTags ?? [],
+        profileImageUrl: e.avatarUrl ?? undefined,
+        isFavorite: favoriteIds.has(e.id),
+      })) ?? [],
+    [recommendedData, favoriteIds]
+  )
+
   const [searchText, setSearchText] = useState('')
-  const [masters, setMasters] = useState<MasterItem[]>(MOCK_MASTERS)
   const [regionPickerVisible, setRegionPickerVisible] = useState(false)
   const [selectedProvince, setSelectedProvince] = useState('서울')
   const [selectedDistrict, setSelectedDistrict] = useState('서울전체')
@@ -366,10 +381,14 @@ export function CustomerExploreScreen() {
   }, [])
 
   const toggleFavorite = useCallback((id: number) => {
-    setMasters((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, isFavorite: !m.isFavorite } : m))
-    )
-  }, [])
+    setFavoriteIds((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+    toggleFavoriteAPI(id)
+  }, [toggleFavoriteAPI])
 
   const renderMasterCard = useCallback(
     ({ item }: { item: MasterItem }) => (
@@ -460,19 +479,32 @@ export function CustomerExploreScreen() {
       </View>
 
       {/* 명인 목록 */}
-      <FlatList
-        data={masters}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={renderMasterCard}
-        contentContainerStyle={{
-          paddingHorizontal: 26,
-          paddingTop: 28,
-          paddingBottom: 24,
-        }}
-        ItemSeparatorComponent={() => <View className="h-[20px]" />}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-      />
+      {isLoading ? (
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator color="#C6A75E" />
+        </View>
+      ) : (
+        <FlatList
+          data={masters}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={renderMasterCard}
+          contentContainerStyle={{
+            paddingHorizontal: 26,
+            paddingTop: 28,
+            paddingBottom: 24,
+          }}
+          ItemSeparatorComponent={() => <View className="h-[20px]" />}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          ListEmptyComponent={
+            <View className="items-center pt-20">
+              <Text className="font-pretendard-medium text-[14px] text-[#74768E]">
+                추천 명인이 없습니다
+              </Text>
+            </View>
+          }
+        />
+      )}
 
       {/* 지역 선택 모달 */}
       <RegionPicker

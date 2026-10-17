@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useMemo, useState } from 'react'
-import { ActivityIndicator, FlatList, Pressable, View } from 'react-native'
+import { Alert, ActivityIndicator, FlatList, Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowBackIcon, LinkIcon } from '@/assets/icons'
@@ -18,7 +18,7 @@ import { useDeleteReviewRequest } from '@/hooks/useDeleteReviewRequest'
 import { ReviewItem as ReviewItemHook, useMyReviews } from '@/hooks/useMyReviews'
 import { useRequestReviewLink } from '@/hooks/useRequestReviewLink'
 import { useReviewSummary } from '@/hooks/useReviewSummary'
-import type { RootStackParamList } from '@/navigation/RootNavigator'
+import type { MasterProfileStackParamList } from '@/navigation/MasterProfileStackNavigator'
 import type { components } from '@/types/schema'
 
 type CreateReviewTokenDto = components['schemas']['CreateReviewTokenDto']
@@ -42,7 +42,7 @@ function toReviewData(item: ReviewItemHook): ReviewData {
 
 export function MasterReviewScreen() {
   const insets = useSafeAreaInsets()
-  const nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+  const nav = useNavigation<NativeStackNavigationProp<MasterProfileStackParamList>>()
 
   const [activeSort, setActiveSort] = useState<ReviewSort>('latest')
   const [isDeleteMode, setIsDeleteMode] = useState(false)
@@ -120,9 +120,7 @@ export function MasterReviewScreen() {
     ).then((results) => {
       const failed = results.filter((r) => r.status === 'rejected')
       if (failed.length > 0) {
-        // 일부 실패 — 상태 초기화는 하되 실패 사실을 로그로만 남김
-        // (toast/alert 연동은 알림 컴포넌트 구현 후 추가)
-        console.warn(`삭제 요청 실패 항목: ${failed.length}건`)
+        Alert.alert('삭제 요청 일부 실패', `${failed.length}건의 삭제 요청에 실패했습니다.`)
       }
     })
     setDeleteDialogVisible(false)

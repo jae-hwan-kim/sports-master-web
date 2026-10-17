@@ -109,7 +109,7 @@ export function SurveyKeywordSelectScreen() {
         </Pressable>
         <Pressable
           className="h-11 w-11 items-center justify-center"
-          onPress={() => {}}
+          onPress={() => Alert.alert('준비 중', '설정 기능을 준비 중입니다.')}
           accessibilityRole="button"
           accessibilityLabel="설정"
         >

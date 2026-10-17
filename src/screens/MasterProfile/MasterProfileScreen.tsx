@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { ActivityIndicator, Image, Platform, Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -6,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { StarMedalIcon } from '@/assets/icons'
+import type { MasterProfileStackParamList } from '@/navigation/MasterProfileStackNavigator'
 import ArrowNextSvg from '@/assets/icons/arrow-next.svg'
 import ProfilePersonSvg from '@/assets/icons/profile-person.svg'
 import { Text } from '@/components/AppText'
@@ -144,8 +146,7 @@ function EmptyProfileCard() {
 
 export function MasterProfileScreen() {
   const insets = useSafeAreaInsets()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const navigation = useNavigation<any>()
+  const navigation = useNavigation<NativeStackNavigationProp<MasterProfileStackParamList>>()
 
   const { data: profile, isLoading } = useMyExpertProfile()
 

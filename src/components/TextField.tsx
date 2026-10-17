@@ -32,7 +32,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
   return (
     <View className="w-full">
       <View
-        className={`h-[46px] flex-row items-center rounded-lg border bg-[#F2F2F2] px-4 ${
+        className={`h-[46px] flex-row items-center rounded-lg border bg-[#D9D9D9] px-4 ${
           hasError ? 'border-[#ea4335]' : isFocused ? 'border-primary' : 'border-transparent'
         }`}
       >

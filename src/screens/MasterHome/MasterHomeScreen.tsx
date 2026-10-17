@@ -1,11 +1,9 @@
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { useNavigation } from '@react-navigation/native'
 
-import { useState } from 'react'
 import { Alert, FlatList, ImageBackground, Platform, Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import * as Clipboard from 'expo-clipboard'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { useQuery } from '@tanstack/react-query'
@@ -14,7 +12,6 @@ import { apiClient } from '@/api/client'
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
 import { ArrowNextIcon, LinkIcon, ProfilePersonIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
-import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
@@ -128,8 +125,6 @@ export function MasterHomeScreen() {
   const tabNav = useNavigation<BottomTabNavigationProp<MasterTabParamList>>()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
-  const [linkCopyVisible, setLinkCopyVisible] = useState(false)
-
   const { data: expertProfile, isError: expertProfileError } = useQuery({
     queryKey: ['expertGrade'],
     queryFn: fetchExpertGrade,
@@ -165,12 +160,8 @@ export function MasterHomeScreen() {
     )
   }
 
-  const handleReviewLink = async () => {
-    // TODO: 실제 리뷰 링크는 chatRoomId 기반으로 교체 예정 — 채팅 기능 개발 시
-    const expertId = expertProfile?.id ?? ''
-    const reviewLink = `https://sportsmaster.app/review/${expertId}`
-    await Clipboard.setStringAsync(reviewLink)
-    setLinkCopyVisible(true)
+  const handleReviewLink = () => {
+    Alert.alert('안내', '채팅방에서 고객에게 리뷰 링크를 보낼 수 있습니다.')
   }
 
   return (
@@ -313,14 +304,6 @@ export function MasterHomeScreen() {
         />
       </View>
 
-      {/* 링크 복사 확인 다이얼로그 */}
-      <ConfirmDialog
-        visible={linkCopyVisible}
-        title="링크 복사 완료"
-        description="복사한 링크로 리뷰 요청이 가능합니다"
-        confirmLabel="확인"
-        onConfirm={() => setLinkCopyVisible(false)}
-      />
     </View>
   )
 }

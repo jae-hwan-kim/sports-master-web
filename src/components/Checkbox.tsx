@@ -10,7 +10,14 @@ type CheckboxProps = {
 
 export function Checkbox({ label, checked, onToggle }: CheckboxProps) {
   return (
-    <Pressable hitSlop={8} onPress={onToggle} className="min-h-11 flex-row items-center gap-2">
+    <Pressable
+      hitSlop={8}
+      onPress={onToggle}
+      accessibilityRole="checkbox"
+      accessibilityLabel={label}
+      accessibilityState={{ checked }}
+      className="min-h-11 flex-row items-center gap-2"
+    >
       <View
         className={`items-center justify-center rounded border ${
           checked ? 'border-primary bg-primary' : 'border-gray1 bg-transparent'

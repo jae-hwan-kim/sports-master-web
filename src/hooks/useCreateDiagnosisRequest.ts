@@ -1,4 +1,6 @@
-import { useMutation } from '@tanstack/react-query'
+import * as Sentry from '@sentry/react-native'
+
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import type { components } from '@/types/schema'
@@ -13,7 +15,15 @@ async function createDiagnosisRequest(expertProfileId: number): Promise<Diagnosi
 }
 
 export function useCreateDiagnosisRequest() {
+  const queryClient = useQueryClient()
+
   return useMutation({
     mutationFn: (expertProfileId: number) => createDiagnosisRequest(expertProfileId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['diagnosisPreview'] })
+    },
+    onError: (error) => {
+      Sentry.captureException(error, { tags: { flow: 'createDiagnosisRequest' } })
+    },
   })
 }

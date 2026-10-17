@@ -1,6 +1,10 @@
+import * as SecureStore from 'expo-secure-store'
+
 import { create } from 'zustand'
 
 import type { components } from '@/types/schema'
+
+export const SECURE_SESSION_KEY = 'auth.session'
 
 type CurrentMode = components['schemas']['AuthUserDto']['currentMode']
 type SocialProvider = components['schemas']['AuthUserDto']['socialProvider']
@@ -11,8 +15,6 @@ type AuthUserInfo = {
   socialProvider: SocialProvider
 }
 
-// TODO: 자동로그인 영속화를 위해 expo-secure-store 설치 후 persist 미들웨어 연동 필요
-// (현재는 앱 재시작 시 토큰이 사라짐 — AuthController_refresh 연동은 SecureStore 도입 이후 진행)
 type AuthState = {
   accessToken: string | null
   refreshToken: string | null
@@ -28,24 +30,50 @@ type AuthState = {
   clear: () => void
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   accessToken: null,
   refreshToken: null,
   currentMode: null,
   hasSelectedMode: false,
   socialProvider: null,
   autoLogin: false,
-  setAuthSession: (accessToken, refreshToken, user) =>
+  setAuthSession: (accessToken, refreshToken, user) => {
+    if (get().autoLogin) {
+      SecureStore.setItemAsync(
+        SECURE_SESSION_KEY,
+        JSON.stringify({
+          refreshToken,
+          currentMode: user.currentMode,
+          hasSelectedMode: user.hasSelectedMode,
+          socialProvider: user.socialProvider,
+        })
+      ).catch(() => {})
+    }
     set({
       accessToken,
       refreshToken,
       currentMode: user.currentMode,
       hasSelectedMode: user.hasSelectedMode,
       socialProvider: user.socialProvider,
-    }),
+    })
+  },
   setModeSelected: (currentMode) => set({ currentMode, hasSelectedMode: true }),
-  setAutoLogin: (autoLogin) => set({ autoLogin }),
-  clear: () =>
+  setAutoLogin: (autoLogin) => {
+    set({ autoLogin })
+    if (autoLogin) {
+      const { refreshToken, currentMode, hasSelectedMode, socialProvider } = get()
+      if (refreshToken) {
+        SecureStore.setItemAsync(
+          SECURE_SESSION_KEY,
+          JSON.stringify({ refreshToken, currentMode, hasSelectedMode, socialProvider })
+        ).catch(() => {})
+      }
+    } else {
+      SecureStore.deleteItemAsync(SECURE_SESSION_KEY).catch(() => {})
+    }
+  },
+  clear: () => {
+    SecureStore.deleteItemAsync(SECURE_SESSION_KEY).catch(() => {})
     set({
       accessToken: null,
       refreshToken: null,
@@ -53,5 +81,6 @@ export const useAuthStore = create<AuthState>((set) => ({
       hasSelectedMode: false,
       socialProvider: null,
       autoLogin: false,
-    }),
+    })
+  },
 }))

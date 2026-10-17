@@ -15,6 +15,9 @@ export function Chip({ label, selected = false, onPress, variant = 'primary' }: 
       <Pressable
         hitSlop={8}
         onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={label}
+        accessibilityState={{ selected }}
         className={`h-[26px] items-center justify-center rounded-full border px-3 ${
           selected ? 'border-primary bg-primary' : 'border-gray2 bg-gray2'
         }`}
@@ -35,6 +38,9 @@ export function Chip({ label, selected = false, onPress, variant = 'primary' }: 
     <Pressable
       hitSlop={8}
       onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityState={{ selected }}
       className={`h-[24px] items-center justify-center rounded-full border px-4 ${
         selected ? selectedBg : 'border-gray1 bg-white'
       }`}

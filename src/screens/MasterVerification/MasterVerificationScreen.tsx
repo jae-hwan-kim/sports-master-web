@@ -169,7 +169,7 @@ export function MasterVerificationScreen() {
             {certificateImageUri ? (
               <Image
                 source={{ uri: certificateImageUri }}
-                className="h-[120px] w-[120px] rounded-xl"
+                style={{ width: 120, height: 120, borderRadius: 12 }}
                 contentFit="cover"
               />
             ) : (

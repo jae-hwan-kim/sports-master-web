@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/react-native'
+
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
@@ -13,6 +15,9 @@ export function useDeleteReviewRequest() {
     mutationFn: deleteReviewRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reviews', 'me'] })
+    },
+    onError: (error) => {
+      Sentry.captureException(error, { tags: { flow: 'deleteReviewRequest' } })
     },
   })
 }

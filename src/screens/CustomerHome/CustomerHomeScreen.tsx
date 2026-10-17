@@ -317,9 +317,7 @@ export function CustomerHomeScreen() {
       <View className="bg-transparent px-[16px] pb-[4px]">
         <Pressable
           hitSlop={8}
-          onPress={() => {
-            // TODO: 리뷰 작성 화면 연결
-          }}
+          onPress={() => rootNav?.navigate('MyReviews')}
           // Figma node 2321:9208 — rgba(7,9,28,0.6) 어두운 반투명
           className="h-[44px] justify-center rounded-[8px] bg-[rgba(7,9,28,0.6)] px-[16px]"
         >

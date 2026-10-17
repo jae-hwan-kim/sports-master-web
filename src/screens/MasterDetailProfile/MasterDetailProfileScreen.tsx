@@ -109,10 +109,10 @@ export function MasterDetailProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useSafeAreaInsets()
 
-  const { data: profileData } = useMyExpertProfile()
+  const { data: profileData, isError: isProfileError } = useMyExpertProfile()
   const profile = profileData ?? (__DEV__ ? MOCK_PROFILE : undefined)
 
-  const { data: certifications } = useQuery({
+  const { data: certifications, isError: isCertError } = useQuery({
     queryKey: ['certifications', 'me'],
     queryFn: fetchMyCertifications,
   })
@@ -122,6 +122,27 @@ export function MasterDetailProfileScreen() {
 
   // 증명서 파일 URL 목록 (flatten)
   const certFileUrls: string[] = (certifications ?? []).flatMap((c) => c.fileUrls)
+
+  if (isProfileError || isCertError) {
+    return (
+      <View className="flex-1 items-center justify-center bg-gray1">
+        <Text className="text-small1 text-gray2" style={{ fontFamily: 'Pretendard-Medium' }}>
+          데이터를 불러오지 못했습니다
+        </Text>
+        <Pressable
+          hitSlop={8}
+          onPress={() => navigation.goBack()}
+          className="mt-4"
+          accessibilityRole="button"
+          accessibilityLabel="돌아가기"
+        >
+          <Text className="text-small1 text-primary" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+            돌아가기
+          </Text>
+        </Pressable>
+      </View>
+    )
+  }
 
   return (
     <View className="flex-1 bg-gray1">

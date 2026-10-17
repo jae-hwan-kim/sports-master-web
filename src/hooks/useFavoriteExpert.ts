@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/react-native'
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
@@ -31,8 +33,22 @@ export function useFavoriteExpert(expertProfileId: number) {
 
   const toggleMutation = useMutation({
     mutationFn: () => toggleFavorite(expertProfileId),
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey })
+      const previous = queryClient.getQueryData<FavoriteStatusDto>(queryKey)
+      queryClient.setQueryData(queryKey, (old: FavoriteStatusDto | undefined) =>
+        old ? { ...old, isFavorited: !old.isFavorited } : old
+      )
+      return { previous }
+    },
     onSuccess: (data) => {
       queryClient.setQueryData(queryKey, data)
+    },
+    onError: (error, _, context) => {
+      if (context?.previous !== undefined) {
+        queryClient.setQueryData(queryKey, context.previous)
+      }
+      Sentry.captureException(error, { tags: { flow: 'toggleFavoriteExpert' } })
     },
   })
 

@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useState } from 'react'
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useQuery } from '@tanstack/react-query'
@@ -28,10 +28,14 @@ export function MasterPhoneChangeScreen() {
   const insets = useSafeAreaInsets()
   const logout = useLogout()
 
-  const { data: me } = useQuery({ queryKey: ['me'], queryFn: fetchMe })
+  const { data: me, isError } = useQuery({ queryKey: ['me'], queryFn: fetchMe })
 
   const [newPhone, setNewPhone] = useState('')
   const [logoutVisible, setLogoutVisible] = useState(false)
+
+  useEffect(() => {
+    if (isError) Alert.alert('오류', '사용자 정보를 불러오지 못했습니다.')
+  }, [isError])
 
   const handleVerify = () => {
     // TODO: BE 미지원 — 번호 인증 API 연동 필요
@@ -87,12 +91,21 @@ export function MasterPhoneChangeScreen() {
               <Pressable
                 hitSlop={8}
                 onPress={handleVerify}
-                className="h-[32px] items-center justify-center rounded-[4px] bg-[#C6A75E] px-3"
+                disabled
+                className="h-[32px] items-center justify-center rounded-[4px] bg-[#D9D9D9] px-3"
+                accessibilityRole="button"
+                accessibilityLabel="번호 인증하기 (서비스 준비 중)"
               >
-                <Text className="text-[13px] font-semibold text-white">번호 인증하기</Text>
+                <Text className="text-[13px] font-semibold text-[#A2A2A2]">번호 인증하기</Text>
               </Pressable>
             }
           />
+          <Text
+            className="mt-2 text-[11px] text-[#A2A2A2]"
+            style={{ fontFamily: 'Pretendard-Medium' }}
+          >
+            번호 인증 서비스를 준비 중입니다
+          </Text>
         </View>
       </ScrollView>
 

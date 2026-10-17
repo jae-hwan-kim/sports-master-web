@@ -63,7 +63,7 @@ export function RoleCard({
 
 function RoleIcon({ variant }: { variant: RoleCardVariant }) {
   // Figma: 명인 아이콘(훈장)은 우하단(right-0), 고객 아이콘(픽토그램)은 좌하단(left-0)에 위치
-  const positionClass = variant === 'master' ? 'bottom-0 right-0' : 'bottom-0 left-0'
+  const positionClass = variant === 'master' ? 'bottom-[8px] right-[8px]' : 'bottom-[8px] left-[8px]'
   const Icon = variant === 'master' ? MasterIcon : CustomerIcon
 
   return (

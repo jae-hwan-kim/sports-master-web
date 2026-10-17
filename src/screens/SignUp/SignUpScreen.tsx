@@ -402,7 +402,6 @@ export function SignUpScreen() {
                 onFocus={() => clearErrors('nickname')}
                 errorMessage={errors.nickname?.message}
                 autoCapitalize="none"
-                maxLength={8}
                 rightButton={
                   <CheckButton onPress={handleCheckNickname} loading={isCheckingNickname} />
                 }
@@ -482,7 +481,7 @@ export function SignUpScreen() {
 
           <View className="flex-row items-center gap-3">
             <View className="h-px flex-1 bg-gray1" />
-            <View className="flex-row items-center gap-1">
+            <View className="flex-row items-center gap-[17px]">
               <Text className="text-[13px] font-medium text-gray2">계정이 있으신가요?</Text>
               <Pressable
                 hitSlop={8}

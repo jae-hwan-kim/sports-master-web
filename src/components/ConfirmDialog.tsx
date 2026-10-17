@@ -48,6 +48,8 @@ export function ConfirmDialog({
               hitSlop={8}
               onPress={onConfirm}
               disabled={confirmLoading}
+              accessibilityRole="button"
+              accessibilityLabel={confirmLabel}
               className={`h-[50px] items-center justify-center rounded-lg bg-primary ${
                 singleButton ? 'w-[145px]' : 'flex-1'
               } ${confirmLoading ? 'opacity-70' : 'opacity-100'}`}
@@ -63,6 +65,8 @@ export function ConfirmDialog({
                 hitSlop={8}
                 onPress={onCancel}
                 disabled={confirmLoading}
+                accessibilityRole="button"
+                accessibilityLabel={cancelLabel}
                 className={`h-[50px] flex-1 items-center justify-center rounded-lg border border-dialogBorder bg-dialogBg ${
                   confirmLoading ? 'opacity-50' : 'opacity-100'
                 }`}

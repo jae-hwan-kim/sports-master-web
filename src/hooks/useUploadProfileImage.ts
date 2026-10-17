@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/react-native'
+
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
@@ -21,6 +23,9 @@ export function useUploadProfileImage() {
     mutationFn: uploadProfileImage,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expertProfile', 'me'] })
+    },
+    onError: (error) => {
+      Sentry.captureException(error, { tags: { flow: 'uploadProfileImage' } })
     },
   })
 }

@@ -28,7 +28,14 @@ export function StarRating({ value, max = 5, onChange, size = 24, renderStar }: 
         }
 
         return (
-          <Pressable key={star} hitSlop={8} onPress={() => onChange(star)}>
+          <Pressable
+            key={star}
+            hitSlop={8}
+            onPress={() => onChange(star)}
+            accessibilityRole="button"
+            accessibilityLabel={`${star}점`}
+            accessibilityState={{ selected: filled }}
+          >
             {content}
           </Pressable>
         )

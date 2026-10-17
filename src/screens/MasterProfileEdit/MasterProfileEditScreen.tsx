@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useState } from 'react'
-import { Pressable, ScrollView, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Alert, Pressable, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useQuery } from '@tanstack/react-query'
@@ -39,7 +39,11 @@ export function MasterProfileEditScreen() {
   const isSocial = socialProvider !== null && socialProvider !== 'local'
   const logout = useLogout()
 
-  const { data: me } = useQuery({ queryKey: ['me'], queryFn: fetchMe })
+  const { data: me, isError } = useQuery({ queryKey: ['me'], queryFn: fetchMe })
+
+  useEffect(() => {
+    if (isError) Alert.alert('오류', '사용자 정보를 불러오지 못했습니다.')
+  }, [isError])
 
   const [blockedField, setBlockedField] = useState<BlockedField>(null)
   const [allDeviceLogoutVisible, setAllDeviceLogoutVisible] = useState(false)

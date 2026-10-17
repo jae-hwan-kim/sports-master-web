@@ -26,6 +26,8 @@ export function DiagnosisRequestCard({ item, onPress, onDelete, cardBg = '#D9D9D
       <Pressable
         hitSlop={8}
         onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel="진단 요청 상세 보기"
         className="h-[82px] flex-row items-center rounded-lg px-4"
         style={{ backgroundColor: cardBg }}
       >
@@ -53,6 +55,8 @@ export function DiagnosisRequestCard({ item, onPress, onDelete, cardBg = '#D9D9D
               <Pressable
                 hitSlop={8}
                 onPress={() => setDeleteVisible(true)}
+                accessibilityRole="button"
+                accessibilityLabel="진단 요청 삭제"
                 className="rounded bg-primary px-2 py-0.5"
               >
                 <Text className="font-pretendard-semibold text-[11px] text-[#FFFFFF]">삭제</Text>

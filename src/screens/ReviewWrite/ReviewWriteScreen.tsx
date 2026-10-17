@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -28,9 +28,8 @@ export function ReviewWriteScreen() {
 
   const handleSubmit = useCallback(() => {
     if (!canSubmit) return
-    // TODO: POST /reviews API 연동 확정 후 구현
-    navigation.goBack()
-  }, [canSubmit, navigation])
+    Alert.alert('준비 중', '리뷰 등록 기능을 현재 준비 중입니다.\n곧 업데이트될 예정입니다.')
+  }, [canSubmit])
 
   return (
     <KeyboardAvoidingView

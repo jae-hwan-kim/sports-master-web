@@ -1,7 +1,7 @@
-import { NavigationContainer } from '@react-navigation/native'
+import { createNavigationContainerRef, NavigationContainer } from '@react-navigation/native'
 import * as Sentry from '@sentry/react-native'
 
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { useFonts } from 'expo-font'
@@ -15,8 +15,10 @@ import PretendardExtraBold from '@/assets/fonts/Pretendard-ExtraBold.otf'
 import PretendardMedium from '@/assets/fonts/Pretendard-Medium.otf'
 import PretendardRegular from '@/assets/fonts/Pretendard-Regular.otf'
 import PretendardSemiBold from '@/assets/fonts/Pretendard-SemiBold.otf'
+import type { RootStackParamList } from '@/navigation/RootNavigator'
 import { RootNavigator } from '@/navigation/RootNavigator'
 import { devLinking } from '@/navigation/devLinking'
+import { type RestoredSession, restoreAutoLoginSession } from '@/utils/autoLogin'
 
 import './global.css'
 
@@ -29,6 +31,7 @@ Sentry.init({
 SplashScreen.preventAutoHideAsync()
 
 const queryClient = new QueryClient()
+const navRef = createNavigationContainerRef<RootStackParamList>()
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -38,21 +41,38 @@ export default function App() {
     'Pretendard-Bold': PretendardBold,
     'Pretendard-ExtraBold': PretendardExtraBold,
   })
+  const [authReady, setAuthReady] = useState(false)
+  const restoredSession = useRef<RestoredSession | null>(null)
 
   useEffect(() => {
-    if (fontsLoaded) {
+    restoreAutoLoginSession().then((session) => {
+      restoredSession.current = session
+      setAuthReady(true)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (fontsLoaded && authReady) {
       SplashScreen.hideAsync()
     }
-  }, [fontsLoaded])
+  }, [fontsLoaded, authReady])
 
-  if (!fontsLoaded) {
-    return null
+  if (!fontsLoaded || !authReady) return null
+
+  const handleNavReady = () => {
+    const session = restoredSession.current
+    if (!session) return
+    if (!session.hasSelectedMode) {
+      navRef.navigate('SignUpRoleSelect')
+      return
+    }
+    navRef.navigate(session.currentMode === 'expert' ? 'MasterHome' : 'CustomerHome')
   }
 
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
-        <NavigationContainer linking={devLinking}>
+        <NavigationContainer ref={navRef} linking={devLinking} onReady={handleNavReady}>
           <RootNavigator />
         </NavigationContainer>
         <StatusBar style="dark" />
