@@ -519,7 +519,7 @@ export function CustomerSettingsScreen() {
         cancelLabel="취소"
         onConfirm={() => {
           setWithdrawDialogVisible(false)
-          if (socialProvider !== null) {
+          if (socialProvider !== null && socialProvider !== 'local') {
             withdraw({})
           } else {
             setWithdrawPasswordVisible(true)

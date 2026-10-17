@@ -165,35 +165,39 @@ export function MasterVerificationScreen() {
             android: { elevation: 4 },
           })}
         >
-          <View className="absolute left-[25px] top-[25px] h-[150px] w-[250px] items-center justify-center rounded-xl border border-[#C6A75E] px-4">
+          <View className="absolute left-[25px] top-[25px] h-[150px] w-[250px] overflow-hidden rounded-xl border border-[#C6A75E]">
             {certificateImageUri ? (
-              <Image
-                source={{ uri: certificateImageUri }}
-                style={{ width: 120, height: 120, borderRadius: 12 }}
-                contentFit="cover"
-              />
+              <Pressable
+                onPress={handlePickImage}
+                accessibilityRole="button"
+                accessibilityLabel="자격증 이미지 다시 첨부"
+                className="flex-1"
+              >
+                <Image
+                  source={{ uri: certificateImageUri }}
+                  style={{ width: 250, height: 150 }}
+                  contentFit="cover"
+                />
+              </Pressable>
             ) : (
-              <>
+              <View className="flex-1 items-center justify-center px-4">
                 <Text className="text-center text-[20px] font-semibold text-black">
                   이미지 업로드
                 </Text>
                 <Text className="mt-2 text-center text-[13px] font-medium text-gray2">
                   식별 가능한 물리치료사 or 건강운동관리사{'\n'}자격증 이미지를 첨부해 주세요
                 </Text>
-              </>
+                <Pressable
+                  hitSlop={8}
+                  accessibilityRole="button"
+                  accessibilityLabel="자격증 이미지 첨부"
+                  onPress={handlePickImage}
+                  className="mt-4 h-[44px] w-[44px] items-center justify-center"
+                >
+                  <AddCircleIcon />
+                </Pressable>
+              </View>
             )}
-
-            <Pressable
-              hitSlop={8}
-              accessibilityRole="button"
-              accessibilityLabel={
-                certificateImageUri ? '자격증 이미지 다시 첨부' : '자격증 이미지 첨부'
-              }
-              onPress={handlePickImage}
-              className="mt-4 h-[44px] w-[44px] items-center justify-center"
-            >
-              <AddCircleIcon />
-            </Pressable>
           </View>
         </View>
 

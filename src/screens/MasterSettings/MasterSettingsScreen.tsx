@@ -113,7 +113,7 @@ export function MasterSettingsScreen() {
         cancelLabel="취소"
         onConfirm={() => {
           setWithdrawVisible(false)
-          if (socialProvider !== null) {
+          if (socialProvider !== null && socialProvider !== 'local') {
             withdraw({})
           } else {
             setWithdrawPasswordVisible(true)
