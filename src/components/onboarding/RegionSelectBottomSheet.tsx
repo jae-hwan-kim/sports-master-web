@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { FlatList, Modal, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Text } from '@/components/AppText'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 
 // 서버에서 지역 목록을 받기 전까지 사용하는 임시 목록 — GET /regions 연동 시 props로 주입
 const MOCK_REGIONS = [
@@ -43,7 +43,9 @@ function CheckCircle({ selected }: { selected: boolean }) {
       }`}
     >
       {selected && (
-        <Text style={{ fontSize: 10, lineHeight: 13, color: '#07091C', fontFamily: 'Pretendard-Bold' }}>
+        <Text
+          style={{ fontSize: 10, lineHeight: 13, color: '#07091C', fontFamily: 'Pretendard-Bold' }}
+        >
           ✓
         </Text>
       )}
@@ -64,7 +66,7 @@ export function RegionSelectBottomSheet({
   onConfirm,
 }: Props) {
   // insets.bottom은 런타임에만 알 수 있는 동적 값 — style 사용 의도적 예외
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   const renderItem = useCallback(
     ({ item }: { item: string }) => {
@@ -158,9 +160,7 @@ export function RegionSelectBottomSheet({
               accessibilityRole="button"
               accessibilityLabel="선택 완료"
             >
-              <Text
-                style={{ fontFamily: 'Pretendard-SemiBold', fontSize: 17, color: '#07091C' }}
-              >
+              <Text style={{ fontFamily: 'Pretendard-SemiBold', fontSize: 17, color: '#07091C' }}>
                 선택 완료
               </Text>
             </Pressable>

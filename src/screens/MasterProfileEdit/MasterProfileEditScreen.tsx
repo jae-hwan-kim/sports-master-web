@@ -3,7 +3,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useEffect, useState } from 'react'
 import { Alert, Pressable, ScrollView, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -13,6 +12,7 @@ import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { useLogout } from '@/hooks/useLogout'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 import type { components } from '@/types/schema'
@@ -34,7 +34,7 @@ const BLOCKED_DIALOG: Record<NonNullable<BlockedField>, { title: string; descrip
 
 export function MasterProfileEditScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const socialProvider = useAuthStore((s) => s.socialProvider)
   const isSocial = socialProvider !== null && socialProvider !== 'local'
   const logout = useLogout()
@@ -75,10 +75,7 @@ export function MasterProfileEditScreen() {
 
   return (
     <View className="flex-1 bg-[#F2F2F2]">
-      <ScreenHeader
-        onBack={() => navigation.goBack()}
-        rightIcon={<SettingsIcon size={44} />}
-      />
+      <ScreenHeader onBack={() => navigation.goBack()} rightIcon={<SettingsIcon size={44} />} />
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {/* 타이틀 */}

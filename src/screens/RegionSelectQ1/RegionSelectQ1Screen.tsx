@@ -1,16 +1,17 @@
-import { useCallback, useState } from 'react'
-import { Alert, Platform, Pressable, StyleSheet, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { LinearGradient } from 'expo-linear-gradient'
+
+import { useCallback, useState } from 'react'
+import { Alert, Platform, Pressable, StyleSheet, View } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
+
+import { LinearGradient } from 'expo-linear-gradient'
 
 import { ArrowBackIcon, SettingsIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { RegionSelectBottomSheet } from '@/components/onboarding/RegionSelectBottomSheet'
 import { useRegions } from '@/hooks/useRegions'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useOnboardingStore } from '@/store/onboardingStore'
 
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
 export function RegionSelectQ1Screen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   // insets.top/bottom은 런타임 동적 값 — style 사용 의도적 예외
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const [isOpen, setIsOpen] = useState(false)
   const { data: regions } = useRegions()
 
@@ -216,10 +217,7 @@ export function RegionSelectQ1Screen() {
       />
 
       {/* 다음으로 버튼 */}
-      <View
-        className="px-[14px]"
-        style={{ paddingBottom: insets.bottom + 16 }}
-      >
+      <View className="px-[14px]" style={{ paddingBottom: insets.bottom + 16 }}>
         <Pressable
           hitSlop={0}
           onPress={handleNext}

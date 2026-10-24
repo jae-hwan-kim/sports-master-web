@@ -12,7 +12,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { AppleIcon, GoogleIcon, KakaoIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
@@ -28,6 +27,7 @@ import { useGoogleAuth } from '@/hooks/useGoogleAuth'
 import { useGoogleLogin } from '@/hooks/useGoogleLogin'
 import { useKakaoAuth } from '@/hooks/useKakaoAuth'
 import { useKakaoLogin } from '@/hooks/useKakaoLogin'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 import { useSignUpDraftStore } from '@/store/signupDraftStore'
@@ -97,7 +97,7 @@ export function SignUpScreen() {
   const { promptGoogle } = useGoogleAuth()
   const { mutate: kakaoLogin, isPending: isKakaoLoginPending } = useKakaoLogin()
   const { promptKakao } = useKakaoAuth()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   // insets는 런타임 계산 값이라 className으로 표현할 수 없어 style로 최소 사용
   // 네비바(ScreenHeader) 높이는 54(고정 mt) + 56 — KeyboardAvoidingView 오프셋 계산에 사용
   const NAV_BAR_HEIGHT = 54 + 56

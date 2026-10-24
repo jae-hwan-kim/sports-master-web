@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { FlatList, Linking, Pressable, ScrollView, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Image } from 'expo-image'
 
@@ -15,6 +14,7 @@ import { Text } from '@/components/AppText'
 import { Chip } from '@/components/Chip'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import type { components } from '@/types/schema'
 
@@ -107,7 +107,7 @@ function CertFileRow({ url }: { url: string }) {
 
 export function MasterDetailProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   const { data: profileData, isError: isProfileError } = useMyExpertProfile()
   const profile = profileData ?? (__DEV__ ? MOCK_PROFILE : undefined)

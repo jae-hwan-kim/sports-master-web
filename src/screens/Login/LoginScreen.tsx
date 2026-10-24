@@ -14,7 +14,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { AppleIcon, GoogleIcon, KakaoIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
@@ -29,6 +28,7 @@ import { useGoogleLogin } from '@/hooks/useGoogleLogin'
 import { useKakaoAuth } from '@/hooks/useKakaoAuth'
 import { useKakaoLogin } from '@/hooks/useKakaoLogin'
 import { useLogin } from '@/hooks/useLogin'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
 import {
@@ -55,7 +55,7 @@ export function LoginScreen() {
   const [autoLoginDialogVisible, setAutoLoginDialogVisible] = useState(false)
   const [socialError, setSocialError] = useState<string | null>(null)
   const [formError, setFormError] = useState<string | null>(null)
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   // insets는 런타임 계산 값이라 className으로 표현할 수 없어 style로 최소 사용
   const styles = useMemo(
     () =>

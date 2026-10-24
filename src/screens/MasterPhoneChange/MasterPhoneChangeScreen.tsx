@@ -3,7 +3,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useEffect, useState } from 'react'
 import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -13,6 +12,7 @@ import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
 import { useLogout } from '@/hooks/useLogout'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import type { components } from '@/types/schema'
 
@@ -25,7 +25,7 @@ async function fetchMe(): Promise<UserResponseDto> {
 
 export function MasterPhoneChangeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const logout = useLogout()
 
   const { data: me, isError } = useQuery({ queryKey: ['me'], queryFn: fetchMe })

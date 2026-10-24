@@ -1,22 +1,16 @@
-import { useCallback, useState } from 'react'
-
-import { Alert, Platform, Pressable, StatusBar, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import Svg, {
-  Defs,
-  LinearGradient as SvgLinearGradient,
-  Rect,
-  Stop,
-} from 'react-native-svg'
-
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { useCallback, useState } from 'react'
+import { Alert, Platform, Pressable, StatusBar, View } from 'react-native'
+import Svg, { Defs, Rect, Stop, LinearGradient as SvgLinearGradient } from 'react-native-svg'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { ArrowBackIcon, SettingsIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { SurveyKeywordChip } from '@/components/SurveyKeywordChip'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useUpdateCustomerProfile } from '@/hooks/useUpdateCustomerProfile'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useOnboardingStore } from '@/store/onboardingStore'
@@ -45,7 +39,7 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 
 export function SurveyKeywordSelectScreen() {
   const navigation = useNavigation<NavigationProp>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([])
 
   const selectedRegions = useOnboardingStore((s) => s.selectedRegions)
@@ -57,8 +51,8 @@ export function SurveyKeywordSelectScreen() {
   const { mutate, isPending } = useUpdateCustomerProfile()
 
   const handleChipPress = useCallback((keyword: string) => {
-    setSelectedKeywords(prev => {
-      if (prev.includes(keyword)) return prev.filter(k => k !== keyword)
+    setSelectedKeywords((prev) => {
+      if (prev.includes(keyword)) return prev.filter((k) => k !== keyword)
       if (prev.length >= MAX_SELECTION) return prev
       return [...prev, keyword]
     })
@@ -142,7 +136,7 @@ export function SurveyKeywordSelectScreen() {
         {/* gap-x-2(8px)/gap-y-[34px] require NativeWind v4 rowGap/columnGap support */}
         <View className="flex-row flex-wrap gap-x-2 gap-y-2 px-7">
           {/* static keyword list — FlatList excluded: flex-wrap layout, 15 static items */}
-          {KEYWORDS.map(keyword => (
+          {KEYWORDS.map((keyword) => (
             <SurveyKeywordChip
               key={keyword}
               label={keyword}

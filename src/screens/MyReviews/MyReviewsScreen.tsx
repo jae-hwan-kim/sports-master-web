@@ -1,15 +1,14 @@
-import { useCallback } from 'react'
-
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
+import { useCallback } from 'react'
 import { FlatList, Platform, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowBackIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { StarRating } from '@/components/StarRating'
 import { type WrittenReviewItem, useMyWrittenReviews } from '@/hooks/useMyWrittenReviews'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>
@@ -25,7 +24,6 @@ const CARD_SHADOW = Platform.select({
   },
   android: { elevation: 2 },
 })
-
 
 function ReviewCard({ item }: { item: WrittenReviewItem }) {
   const navigation = useNavigation<NavProp>()
@@ -45,10 +43,7 @@ function ReviewCard({ item }: { item: WrittenReviewItem }) {
   }
 
   return (
-    <View
-      className="rounded-[4px] bg-[#F2F2F2] px-4 py-4"
-      style={CARD_SHADOW}
-    >
+    <View className="rounded-[4px] bg-[#F2F2F2] px-4 py-4" style={CARD_SHADOW}>
       <View className="flex-row items-center justify-between">
         <StarRating
           value={item.rating}
@@ -58,10 +53,7 @@ function ReviewCard({ item }: { item: WrittenReviewItem }) {
           }
         />
         <View className="flex-row items-center gap-2">
-          <Text
-            className="text-[11px] text-[#A2A2A2]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[11px] text-[#A2A2A2]" style={{ fontFamily: 'Pretendard-Medium' }}>
             {dateStr}
           </Text>
           <Pressable hitSlop={8} onPress={handleEdit} accessibilityLabel="리뷰 수정">
@@ -100,12 +92,16 @@ function ReviewCard({ item }: { item: WrittenReviewItem }) {
 
 export function MyReviewsScreen() {
   const navigation = useNavigation<NavProp>()
-  const insets = useSafeAreaInsets()
-  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useMyWrittenReviews()
+  const insets = useScreenInsets()
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useMyWrittenReviews()
 
   const reviews = data?.pages.flatMap((p) => p.data) ?? []
 
-  const renderItem = useCallback(({ item }: { item: WrittenReviewItem }) => <ReviewCard item={item} />, [])
+  const renderItem = useCallback(
+    ({ item }: { item: WrittenReviewItem }) => <ReviewCard item={item} />,
+    []
+  )
 
   return (
     <View className="flex-1 bg-[#F2F2F2]" style={{ paddingTop: insets.top }}>
@@ -143,9 +139,15 @@ export function MyReviewsScreen() {
         <FlatList
           data={reviews}
           keyExtractor={(item) => String(item.id)}
-          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: insets.bottom + 24, flexGrow: 1 }}
+          contentContainerStyle={{
+            paddingHorizontal: 16,
+            paddingBottom: insets.bottom + 24,
+            flexGrow: 1,
+          }}
           ItemSeparatorComponent={() => <View className="h-3" />}
-          onEndReached={() => { if (hasNextPage && !isFetchingNextPage) fetchNextPage() }}
+          onEndReached={() => {
+            if (hasNextPage && !isFetchingNextPage) fetchNextPage()
+          }}
           onEndReachedThreshold={0.3}
           ListFooterComponent={
             isFetchingNextPage ? (

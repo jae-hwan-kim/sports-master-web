@@ -2,8 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useState } from 'react'
-import { Linking, Platform, Pressable, ScrollView, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Linking, Modal, Platform, Pressable, ScrollView, View } from 'react-native'
 
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
@@ -14,6 +13,7 @@ import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { useCreateCertification } from '@/hooks/useCreateCertification'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useSignUp } from '@/hooks/useSignUp'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { RootStackParamList } from '@/navigation/RootNavigator'
@@ -27,8 +27,10 @@ type ModalKind = 'albumPermission' | 'missingImage' | 'skipConfirm' | 'submitErr
 
 export function MasterVerificationScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const [certificateImageUri, setCertificateImageUri] = useState<string | null>(null)
+  const [certificateFileName, setCertificateFileName] = useState<string | null>(null)
+  const [imagePreviewVisible, setImagePreviewVisible] = useState(false)
   const [modal, setModal] = useState<ModalKind>(null)
   const [errorMessage, setErrorMessage] = useState('')
   const { mutate: createCertification, isPending: submitting } = useCreateCertification()
@@ -92,8 +94,15 @@ export function MasterVerificationScreen() {
       quality: 0.8,
     })
     if (!result.canceled && result.assets[0]) {
-      setCertificateImageUri(result.assets[0].uri)
+      const asset = result.assets[0]
+      setCertificateImageUri(asset.uri)
+      setCertificateFileName(asset.fileName ?? asset.uri.split('/').pop() ?? '파일')
     }
+  }
+
+  const handleRemoveImage = () => {
+    setCertificateImageUri(null)
+    setCertificateFileName(null)
   }
 
   const handleSubmit = () => {
@@ -167,18 +176,32 @@ export function MasterVerificationScreen() {
         >
           <View className="absolute left-[25px] top-[25px] h-[150px] w-[250px] overflow-hidden rounded-xl border border-[#C6A75E]">
             {certificateImageUri ? (
-              <Pressable
-                onPress={handlePickImage}
-                accessibilityRole="button"
-                accessibilityLabel="자격증 이미지 다시 첨부"
-                className="flex-1"
-              >
-                <Image
-                  source={{ uri: certificateImageUri }}
-                  style={{ width: 250, height: 150 }}
-                  contentFit="cover"
-                />
-              </Pressable>
+              <View className="flex-1 flex-row items-center px-3">
+                <Pressable
+                  hitSlop={8}
+                  accessibilityRole="button"
+                  accessibilityLabel="이미지 크게 보기"
+                  onPress={() => setImagePreviewVisible(true)}
+                  className="flex-1"
+                >
+                  <Text
+                    className="text-[13px] font-medium text-black"
+                    numberOfLines={1}
+                    ellipsizeMode="middle"
+                  >
+                    {certificateFileName}
+                  </Text>
+                </Pressable>
+                <Pressable
+                  hitSlop={8}
+                  accessibilityRole="button"
+                  accessibilityLabel="이미지 선택 취소"
+                  onPress={handleRemoveImage}
+                  className="ml-2 h-[24px] w-[24px] items-center justify-center"
+                >
+                  <Text className="text-[16px] font-semibold text-gray2">✕</Text>
+                </Pressable>
+              </View>
             ) : (
               <View className="flex-1 items-center justify-center px-4">
                 <Text className="text-center text-[20px] font-semibold text-black">
@@ -262,6 +285,32 @@ export function MasterVerificationScreen() {
         onConfirm={() => setModal(null)}
         onCancel={() => setModal(null)}
       />
+
+      {/* 이미지 크게 보기 모달 */}
+      <Modal
+        visible={imagePreviewVisible}
+        transparent
+        animationType="fade"
+        statusBarTranslucent
+        onRequestClose={() => setImagePreviewVisible(false)}
+      >
+        <View className="flex-1 items-center justify-center bg-black/80">
+          <Pressable
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="이미지 닫기"
+            onPress={() => setImagePreviewVisible(false)}
+            className="absolute right-4 top-[60px] z-10 h-[44px] w-[44px] items-center justify-center"
+          >
+            <Text className="text-[24px] font-bold text-white">✕</Text>
+          </Pressable>
+          <Image
+            source={{ uri: certificateImageUri ?? '' }}
+            className="aspect-square w-full"
+            contentFit="contain"
+          />
+        </View>
+      </Modal>
     </View>
   )
 }

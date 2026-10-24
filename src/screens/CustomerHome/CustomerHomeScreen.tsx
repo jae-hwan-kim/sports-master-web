@@ -1,15 +1,19 @@
 // src/screens/CustomerHome/CustomerHomeScreen.tsx
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { FlatList, Platform, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { LocationOnIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
+import LogoSvg from '@/assets/icons/logo.svg'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
+import { ExpertDetailModal } from '@/components/expert/ExpertDetailModal'
 import { useCustomerProfile } from '@/hooks/useCustomerProfile'
+import { type FeaturedExpert, useFeaturedExperts } from '@/hooks/useFeaturedExperts'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { useAuthStore } from '@/store/authStore'
 
@@ -27,44 +31,17 @@ type MasterCardData = {
   imageUri?: string
 }
 
-// ---------------------------------------------------------------------------
-// Mock data — API 연동 전 Figma 디자인 기준 플레이스홀더
-// ---------------------------------------------------------------------------
-
-const FEATURED_MASTERS: MasterCardData[] = [
-  {
-    id: 1,
-    expertProfileId: 1,
-    name: '아쿠아퍼포먼스',
-    intro: '소개글 50자 이내 보이는 곳',
-    address: '아쿠아퍼포먼스 운동센터 (대화동 868-2)',
-    categories: ['방문재활', '선수트레이닝', '컨디셔닝'],
-  },
-  {
-    id: 2,
-    expertProfileId: 2,
-    name: '아쿠아퍼포먼스',
-    intro: '소개글 30자 이내 보이는 곳',
-    address: '아쿠아퍼포먼스 운동센터 (대화동 868-2)',
-    categories: ['방문재활', '선수트레이닝', '컨디셔닝'],
-  },
-  {
-    id: 3,
-    expertProfileId: 3,
-    name: '아쿠아퍼포먼스',
-    intro: '소개글 30자 이내 보이는 곳',
-    address: '아쿠아퍼포먼스 운동센터 (대화동 868-2)',
-    categories: ['방문재활', '선수트레이닝', '컨디셔닝'],
-  },
-  {
-    id: 4,
-    expertProfileId: 4,
-    name: '아쿠아퍼포먼스',
-    intro: '소개글 30자 이내 보이는 곳',
-    address: '아쿠아퍼포먼스 운동센터 (대화동 868-2)',
-    categories: ['방문재활', '선수트레이닝', '컨디셔닝'],
-  },
-]
+function toMasterCard(expert: FeaturedExpert): MasterCardData {
+  return {
+    id: expert.id,
+    expertProfileId: expert.id,
+    name: expert.name,
+    intro: expert.introduction ?? '',
+    address: expert.region,
+    categories: expert.keywordTags?.slice(0, 3) ?? [],
+    imageUri: expert.imageUrl ?? undefined,
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Sub-components
@@ -77,12 +54,12 @@ function CustomerModeBadge({ onPress, disabled }: { onPress: () => void; disable
       hitSlop={8}
       onPress={onPress}
       disabled={disabled}
-      className="h-[20px] w-[80px] overflow-hidden rounded-[10px] bg-gray2 justify-center"
+      className="h-[20px] w-[80px] justify-center overflow-hidden rounded-[10px] bg-gray2"
     >
       {/* 활성 영역 (오른쪽 절반 = 고객모드) — Figma 활성 pill bg: #F2F2F2 */}
-      <View className="absolute right-[2px] top-[2px] bottom-[2px] w-[37px] rounded-[8px] bg-[#F2F2F2]" />
+      <View className="absolute bottom-[2px] right-[2px] top-[2px] w-[37px] rounded-[8px] bg-[#F2F2F2]" />
       <Text
-        className="text-gray3 font-pretendard-semibold text-center"
+        className="text-center font-pretendard-semibold text-gray3"
         style={{ fontSize: 7, paddingLeft: 41, lineHeight: 14 }}
       >
         고객모드
@@ -95,10 +72,7 @@ function CustomerModeBadge({ onPress, disabled }: { onPress: () => void; disable
 function CategoryChip({ label }: { label: string }) {
   return (
     <View className="h-[20px] items-center justify-center rounded-[18px] bg-black px-[12px]">
-      <Text
-        className="font-pretendard-medium text-primary"
-        style={{ fontSize: 8, lineHeight: 14 }}
-      >
+      <Text className="font-pretendard-medium text-primary" style={{ fontSize: 8, lineHeight: 14 }}>
         {label}
       </Text>
     </View>
@@ -106,16 +80,17 @@ function CategoryChip({ label }: { label: string }) {
 }
 
 /** 이달의 소개 명인 카드 */
-function MasterCard({
-  item,
-  onPressDetail,
-}: {
-  item: MasterCardData
-  onPressDetail: () => void
-}) {
+function MasterCard({ item, onPressDetail }: { item: MasterCardData; onPressDetail: () => void }) {
   return (
     // Figma node 2321:9044 — h:289, 카드 x:32 → mx-[32px]
     <View className="mx-[32px] h-[289px] overflow-hidden rounded-[12px] bg-gray1">
+      {item.imageUri && (
+        <Image
+          source={{ uri: item.imageUri }}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+          contentFit="cover"
+        />
+      )}
       {/* 그라디언트 오버레이 (하단 232px) — Figma: from rgba(78,106,169,0) → rgba(19,42,96,0.5) → #1F2A43 */}
       <LinearGradient
         colors={['rgba(78,106,169,0)', 'rgba(19,42,96,0.5)', '#1F2A43']}
@@ -124,13 +99,8 @@ function MasterCard({
       />
 
       {/* 명인명 + 뱃지 — top: 131 (Figma: 559-428) */}
-      <View
-        className="absolute left-[16px] top-[131px] flex-row items-center gap-[4px]"
-      >
-        <Text
-          className="font-pretendard-extrabold text-[#F2F2F2]"
-          style={{ fontSize: 17 }}
-        >
+      <View className="absolute left-[16px] top-[131px] flex-row items-center gap-[4px]">
+        <Text className="font-pretendard-extrabold text-[#F2F2F2]" style={{ fontSize: 17 }}>
           {item.name}
         </Text>
         <StarMedalIcon size={20} />
@@ -145,9 +115,7 @@ function MasterCard({
       </Text>
 
       {/* 위치 행 — top: 181 (Figma: 609-428) */}
-      <View
-        className="absolute left-[16px] right-[16px] top-[181px] h-[28px] flex-row items-center rounded-[4px] border border-gray2 bg-gray3 px-[6px]"
-      >
+      <View className="absolute left-[16px] right-[16px] top-[181px] h-[28px] flex-row items-center rounded-[4px] border border-gray2 bg-gray3 px-[6px]">
         {/* 위치 아이콘 — Figma: location_on 12×12, color: #C6A75E */}
         <LocationOnIcon size={12} color="#C6A75E" />
         <Text
@@ -181,7 +149,7 @@ function MasterCard({
           android: { elevation: 2 },
         })}
       >
-        <Text className="font-pretendard-medium text-[#F2F2F2] text-small2">자세히보기</Text>
+        <Text className="font-pretendard-medium text-small2 text-[#F2F2F2]">자세히보기</Text>
       </Pressable>
     </View>
   )
@@ -191,7 +159,7 @@ function MasterCard({
 function SectionHeader() {
   return (
     <View
-      className="bg-[#F2F2F2] rounded-tl-[16px] rounded-tr-[16px] mt-[12px] pb-[16px] px-[16px] pt-[23px] flex-row items-center justify-between"
+      className="mt-[12px] flex-row items-center justify-between rounded-tl-[16px] rounded-tr-[16px] bg-[#F2F2F2] px-[16px] pb-[16px] pt-[23px]"
       style={Platform.select({
         ios: {
           shadowColor: '#000',
@@ -203,15 +171,12 @@ function SectionHeader() {
         android: { elevation: 3 },
       })}
     >
-      <Text
-        className="font-pretendard-extrabold text-gray3"
-        style={{ fontSize: 18 }}
-      >
+      <Text className="font-pretendard-extrabold text-gray3" style={{ fontSize: 18 }}>
         이달의 소개 명인
       </Text>
       {/* AD 뱃지 */}
       <View className="h-[16px] items-center justify-center rounded-[4px] bg-[#A2A2A2] px-[8px]">
-        <Text className="font-pretendard-semibold text-[#F2F2F2] text-small2">AD</Text>
+        <Text className="font-pretendard-semibold text-small2 text-[#F2F2F2]">AD</Text>
       </View>
     </View>
   )
@@ -222,11 +187,16 @@ function SectionHeader() {
 // ---------------------------------------------------------------------------
 
 export function CustomerHomeScreen() {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const rootNav = useRootNavigation()
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
   const { data: profile } = useCustomerProfile()
+  const { data: featuredExperts } = useFeaturedExperts()
+  const featuredMasters = useMemo(
+    () => (featuredExperts ?? []).map(toMasterCard),
+    [featuredExperts]
+  )
 
   const [switchModeVisible, setSwitchModeVisible] = useState(false)
   // 종료팝업 상태 (Figma: 2321:8871) — 맞춤 명인탐색 완료 후 종료 확인
@@ -245,12 +215,17 @@ export function CustomerHomeScreen() {
     )
   }
 
-  const handleMasterDetail = useCallback(
-    (expertProfileId: number) => {
-      rootNav?.navigate('CustomerMasterDetail', { expertProfileId })
-    },
-    [rootNav]
-  )
+  // 이달의 소개 명인 '자세히보기' — 화면 이동 대신 큰 모달 (Figma 2321:9033)
+  const [detailExpertId, setDetailExpertId] = useState<number | null>(null)
+
+  const handleMasterDetail = useCallback((expertProfileId: number) => {
+    setDetailExpertId(expertProfileId)
+  }, [])
+
+  const handleDetailReview = (expertProfileId: number) => {
+    setDetailExpertId(null)
+    rootNav?.navigate('MasterReview', { expertProfileId })
+  }
 
   const renderMasterCard = useCallback(
     ({ item }: { item: MasterCardData }) => (
@@ -259,36 +234,24 @@ export function CustomerHomeScreen() {
     [handleMasterDetail]
   )
 
-  const renderItemSeparator = useCallback(
-    () => <View className="h-[12px]" />,
-    []
-  )
+  const renderItemSeparator = useCallback(() => <View className="h-[12px]" />, [])
 
   /** FlatList ListHeaderComponent — 내비게이션 바 + 배너 + 히어로 카드 + 섹션 헤더 */
   const listHeader = (
     <View>
       {/* ── 내비게이션 바 ────────────────────────────────────────── */}
       {/* bg-transparent: 루트 bg-[#F2F2F2] 투과 */}
-      <View
-        className="bg-transparent px-[16px]"
-        style={{ paddingTop: insets.top }}
-      >
+      <View className="bg-transparent px-[16px]" style={{ paddingTop: insets.top }}>
         <View className="h-[56px] flex-row items-center">
           {/* 프로필 아바타 + 인사말 */}
           <View className="flex-1 flex-row items-center gap-[8px]">
             {/* TODO: 사용자 프로필 이미지 — API 연동 후 expo-image로 교체 */}
             <View className="h-[36px] w-[36px] rounded-full bg-gray1" />
             <View className="gap-[5px]">
-              <Text
-                className="font-pretendard-medium text-gray3"
-                style={{ fontSize: 10 }}
-              >
+              <Text className="font-pretendard-medium text-gray3" style={{ fontSize: 10 }}>
                 반갑습니다 👋
               </Text>
-              <Text
-                className="font-pretendard-semibold text-black"
-                style={{ fontSize: 12 }}
-              >
+              <Text className="font-pretendard-semibold text-black" style={{ fontSize: 12 }}>
                 {profile?.nickname ?? '고객닉네임'} 님
               </Text>
             </View>
@@ -296,10 +259,7 @@ export function CustomerHomeScreen() {
 
           {/* 모드전환 배지 + 설정 아이콘 */}
           <View className="flex-row items-center">
-            <CustomerModeBadge
-              onPress={() => setSwitchModeVisible(true)}
-              disabled={isSwitching}
-            />
+            <CustomerModeBadge onPress={() => setSwitchModeVisible(true)} disabled={isSwitching} />
             <Pressable
               hitSlop={8}
               onPress={() => rootNav?.navigate('CustomerSettings')}
@@ -380,6 +340,11 @@ export function CustomerHomeScreen() {
           >
             3가지 질문으로 딱 맞는 명인을 발견합니다
           </Text>
+
+          {/* 로고 — Figma 2321:9223 아트보드 4, 101×102, 카드 우하단 (right 11, bottom 10) */}
+          <View className="absolute bottom-[10px] right-[11px]">
+            <LogoSvg width={101} height={102} />
+          </View>
         </Pressable>
       </View>
 
@@ -392,13 +357,19 @@ export function CustomerHomeScreen() {
     // 화면 전체 배경색 — Figma 캔버스 bg: #F2F2F2
     <View className="flex-1 bg-[#F2F2F2]">
       <FlatList
-        data={FEATURED_MASTERS}
+        data={featuredMasters}
         keyExtractor={(item) => String(item.id)}
         renderItem={renderMasterCard}
         ListHeaderComponent={listHeader}
         ItemSeparatorComponent={renderItemSeparator}
         contentContainerStyle={{ paddingBottom: 32 }}
         showsVerticalScrollIndicator={false}
+      />
+
+      <ExpertDetailModal
+        expertProfileId={detailExpertId}
+        onClose={() => setDetailExpertId(null)}
+        onPressReview={handleDetailReview}
       />
 
       {/* ── 모드 전환 확인 팝업 ─────────────────────────────────── */}

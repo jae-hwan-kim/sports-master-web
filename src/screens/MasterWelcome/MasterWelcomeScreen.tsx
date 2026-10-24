@@ -3,18 +3,18 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { ArrowNextIcon } from '@/assets/icons'
 import bgImage from '@/assets/icons/background.png'
 import { Text } from '@/components/AppText'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 export function MasterWelcomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   const handleGoHome = () => {
     // NOTE: 명인 인증 요청 접수 상태 표시는 홈 화면 진입 후 처리

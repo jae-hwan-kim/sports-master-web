@@ -1,7 +1,7 @@
 import { Modal, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Text } from '@/components/AppText'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 
 type Props = {
   visible: boolean
@@ -21,7 +21,7 @@ const LAST_ITEM_RED = '단, 반복적인 특정 리뷰는 삭제요청 기각 �
 const LAST_ITEM_SUB = '\n(예: 불친절하다, 집중하지 않는다 등)'
 
 export function ReviewInfoModal({ visible, onClose }: Props) {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>

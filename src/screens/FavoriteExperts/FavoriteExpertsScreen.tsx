@@ -2,15 +2,14 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback } from 'react'
-
 import { FlatList, Platform, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Image } from 'expo-image'
 
 import { ArrowBackIcon, ProfilePersonIcon, StarFillIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { type FavoriteExpertItem, useFavoriteExperts } from '@/hooks/useFavoriteExperts'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>
@@ -25,13 +24,7 @@ const CARD_SHADOW = Platform.select({
   android: { elevation: 2 },
 })
 
-function ExpertRow({
-  item,
-  onPress,
-}: {
-  item: FavoriteExpertItem
-  onPress: () => void
-}) {
+function ExpertRow({ item, onPress }: { item: FavoriteExpertItem; onPress: () => void }) {
   return (
     <Pressable
       hitSlop={8}
@@ -44,7 +37,11 @@ function ExpertRow({
       {/* 아바타 */}
       <View className="h-[48px] w-[48px] items-center justify-center overflow-hidden rounded-full bg-[#C6A75E]">
         {item.avatarUrl ? (
-          <Image source={{ uri: item.avatarUrl }} style={{ width: 48, height: 48 }} contentFit="cover" />
+          <Image
+            source={{ uri: item.avatarUrl }}
+            style={{ width: 48, height: 48 }}
+            contentFit="cover"
+          />
         ) : (
           <ProfilePersonIcon size={28} />
         )}
@@ -77,7 +74,7 @@ function ExpertRow({
 
 export function FavoriteExpertsScreen() {
   const navigation = useNavigation<NavProp>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const { data: experts, isLoading, isError } = useFavoriteExperts()
 
   const renderItem = useCallback(
@@ -126,7 +123,11 @@ export function FavoriteExpertsScreen() {
         <FlatList
           data={experts ?? []}
           keyExtractor={(item) => String(item.id)}
-          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: insets.bottom + 24, flexGrow: 1 }}
+          contentContainerStyle={{
+            paddingHorizontal: 16,
+            paddingBottom: insets.bottom + 24,
+            flexGrow: 1,
+          }}
           ItemSeparatorComponent={() => <View className="h-2" />}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center pt-20">

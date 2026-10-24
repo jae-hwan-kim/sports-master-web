@@ -10,6 +10,7 @@ import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
 import { useLogout } from '@/hooks/useLogout'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useWithdraw } from '@/hooks/useWithdraw'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
@@ -24,6 +25,7 @@ type SettingItem = {
 
 export function MasterSettingsScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+  const insets = useScreenInsets()
   const logout = useLogout()
   const { mutate: withdraw, isPending: isWithdrawing } = useWithdraw()
   const socialProvider = useAuthStore((s) => s.socialProvider)
@@ -51,7 +53,9 @@ export function MasterSettingsScreen() {
     <View className="flex-1 bg-[#F2F2F2]">
       <ScreenHeader onBack={() => navigation.goBack()} rightIcon={<SettingsIcon size={44} />} />
 
-      <Text className="pl-[26px] pb-[29px] pt-[20px] text-[28px] font-extrabold text-[#07091C]">설정</Text>
+      <Text className="pb-[29px] pl-[26px] pt-[20px] text-[28px] font-extrabold text-[#07091C]">
+        설정
+      </Text>
 
       <FlatList
         data={SETTINGS_ITEMS}
@@ -77,19 +81,19 @@ export function MasterSettingsScreen() {
         )}
       />
 
-      {/* 로고 워터마크 — Figma 1125-5014: left=200, top=560, w=276, h=278 */}
+      {/* 로고 워터마크 — Figma 1125-5014(276×278, 화면 하단 36 위). top 고정 시 기기 높이에 따라
+          하단으로 밀려 일부만 크게 보여서 하단 기준 + 80% 크기로 축소 */}
       <View
         pointerEvents="none"
         style={{
           position: 'absolute',
-          left: 200,
-          top: 560,
-          width: 276,
-          height: 278,
-          overflow: 'hidden',
+          right: -30,
+          bottom: insets.bottom + 36,
+          width: 220,
+          height: 222,
         }}
       >
-        <LogoSvg width={276} height={278} />
+        <LogoSvg width={220} height={222} />
       </View>
 
       <ConfirmDialog
@@ -133,7 +137,9 @@ export function MasterSettingsScreen() {
       >
         <View className="flex-1 items-center justify-center bg-black/50 px-6">
           <View className="w-full max-w-[340px] rounded-2xl bg-white px-5 pb-6 pt-11">
-            <Text className="text-center text-popup-lg font-semibold text-black">비밀번호 확인</Text>
+            <Text className="text-center text-popup-lg font-semibold text-black">
+              비밀번호 확인
+            </Text>
             <Text className="mt-4 text-center text-small3 font-medium text-gray2">
               탈퇴를 위해 비밀번호를 입력해주세요
             </Text>

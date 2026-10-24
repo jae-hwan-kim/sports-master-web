@@ -5,13 +5,13 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useEffect, useRef } from 'react'
 import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { ArrowNextIcon } from '@/assets/icons'
 import bgImage from '@/assets/icons/background.png'
 import { Text } from '@/components/AppText'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useSignUp } from '@/hooks/useSignUp'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { RootStackParamList } from '@/navigation/RootNavigator'
@@ -26,7 +26,7 @@ import { mapSignUpError } from '@/utils/signupValidation'
 export function CustomerWelcomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   // insets.top/insets.bottom은 런타임에만 알 수 있는 동적 값이라 style 사용이 불가피한 의도적 예외
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const { mutate: signUp } = useSignUp()
   const { mutate: switchMode } = useSwitchMode()
   const setAuthSession = useAuthStore((state) => state.setAuthSession)

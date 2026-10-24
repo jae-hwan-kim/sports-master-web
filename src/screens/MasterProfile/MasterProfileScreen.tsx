@@ -1,18 +1,18 @@
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { ActivityIndicator, Image, Platform, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { ActivityIndicator, Image, Platform, Pressable, ScrollView, View } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { StarMedalIcon } from '@/assets/icons'
-import type { MasterProfileStackParamList } from '@/navigation/MasterProfileStackNavigator'
 import ArrowNextSvg from '@/assets/icons/arrow-next.svg'
 import ProfilePersonSvg from '@/assets/icons/profile-person.svg'
 import { Text } from '@/components/AppText'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
+import type { MasterProfileStackParamList } from '@/navigation/MasterProfileStackNavigator'
 import type { components } from '@/types/schema'
 
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
@@ -82,7 +82,10 @@ function EmptyProfileCard() {
           {/* 이름 / 소개 */}
           <View className="absolute bottom-[96px] left-6 right-6">
             <View className="flex-row items-center gap-1">
-              <Text className="text-[20px] text-black" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+              <Text
+                className="text-[20px] text-black"
+                style={{ fontFamily: 'Pretendard-SemiBold' }}
+              >
                 이름최대8글자
               </Text>
               <StarMedalIcon size={24} />
@@ -145,7 +148,7 @@ function EmptyProfileCard() {
 }
 
 export function MasterProfileScreen() {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const navigation = useNavigation<NativeStackNavigationProp<MasterProfileStackParamList>>()
 
   const { data: profile, isLoading } = useMyExpertProfile()
@@ -179,54 +182,63 @@ export function MasterProfileScreen() {
         }}
       />
 
-      {/* 헤더 */}
-      <View className="px-[26px]" style={{ marginTop: 28 }}>
-        <Text className="text-[28px] text-[#07091C]" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
-          프로필
-        </Text>
-        <Text
-          className="mt-[8px] text-[12px] text-[#74768E]"
-          style={{ fontFamily: 'Pretendard-Medium' }}
-        >
-          전문성을 강조할 자료로 능력을 보여주세요
-        </Text>
-      </View>
-
-      {/* 카드 영역 */}
-      <View className="px-[26px]" style={{ marginTop: 34, flex: 1 }}>
-        {isLoading ? (
-          <View className="flex-1 items-center justify-center">
-            <ActivityIndicator size="large" color="#74768E" />
-          </View>
-        ) : (profile ?? (__DEV__ ? MOCK_PROFILE : undefined)) ? (
-          <ProfileCard
-            profile={(profile ?? MOCK_PROFILE) as ExpertProfileResponseDto}
-            onReviewPress={() => navigation.navigate('MasterReview')}
-          />
-        ) : (
-          <EmptyProfileCard />
-        )}
-      </View>
-
-      {/* 상세프로필로 이동 버튼 */}
-      <View
-        className="items-end px-[26px]"
-        style={{ marginTop: 36, marginBottom: insets.bottom + 12 }}
+      {/* 카드(고정 높이)와 버튼이 겹치지 않도록 세로 스크롤로 쌓음 */}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 24 }}
       >
-        <Pressable
-          hitSlop={8}
-          onPress={() => navigation.navigate('MasterDetailProfile')}
-          className="flex-row items-center justify-center"
-          style={{ backgroundColor: '#74768E', height: 36, width: 156, borderRadius: 76 }}
-        >
-          <Text className="text-[12px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
-            상세프로필로 이동
+        {/* 헤더 */}
+        <View className="px-[26px]" style={{ marginTop: 28 }}>
+          <Text
+            className="text-[28px] text-[#07091C]"
+            style={{ fontFamily: 'Pretendard-ExtraBold' }}
+          >
+            프로필
           </Text>
-          <View className="ml-[6px]">
-            <ArrowNextSvg width={15} height={15} />
-          </View>
-        </Pressable>
-      </View>
+          <Text
+            className="mt-[8px] text-[12px] text-[#74768E]"
+            style={{ fontFamily: 'Pretendard-Medium' }}
+          >
+            전문성을 강조할 자료로 능력을 보여주세요
+          </Text>
+        </View>
+
+        {/* 카드 영역 */}
+        <View className="px-[26px]" style={{ marginTop: 34 }}>
+          {isLoading ? (
+            <View className="h-[470px] items-center justify-center">
+              <ActivityIndicator size="large" color="#74768E" />
+            </View>
+          ) : (profile ?? (__DEV__ ? MOCK_PROFILE : undefined)) ? (
+            <ProfileCard
+              profile={(profile ?? MOCK_PROFILE) as ExpertProfileResponseDto}
+              onReviewPress={() => navigation.navigate('MasterReview')}
+            />
+          ) : (
+            <EmptyProfileCard />
+          )}
+        </View>
+
+        {/* 상세프로필로 이동 버튼 */}
+        <View className="items-end px-[26px]" style={{ marginTop: 36 }}>
+          <Pressable
+            hitSlop={8}
+            onPress={() => navigation.navigate('MasterDetailProfile')}
+            className="flex-row items-center justify-center"
+            style={{ backgroundColor: '#74768E', height: 36, width: 156, borderRadius: 76 }}
+          >
+            <Text
+              className="text-[12px] text-[#F2F2F2]"
+              style={{ fontFamily: 'Pretendard-Medium' }}
+            >
+              상세프로필로 이동
+            </Text>
+            <View className="ml-[6px]">
+              <ArrowNextSvg width={15} height={15} />
+            </View>
+          </Pressable>
+        </View>
+      </ScrollView>
     </View>
   )
 }

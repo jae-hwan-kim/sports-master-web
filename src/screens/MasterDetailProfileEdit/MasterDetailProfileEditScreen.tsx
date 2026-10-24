@@ -11,7 +11,6 @@ import {
   ScrollView,
   View,
 } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import * as DocumentPicker from 'expo-document-picker'
 import * as ImagePicker from 'expo-image-picker'
@@ -24,12 +23,13 @@ import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { RegionSelector } from '@/components/profile/RegionSelector'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useUpdateExpertProfile } from '@/hooks/useUpdateExpertProfile'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 export function MasterDetailProfileEditScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const { data: profile } = useMyExpertProfile()
   const updateMutation = useUpdateExpertProfile()
 
@@ -175,7 +175,10 @@ export function MasterDetailProfileEditScreen() {
         >
           {/* 타이틀 */}
           <View className="px-6 pb-4 pt-2">
-            <Text className="text-[28px] text-[#07091C]" style={{ fontFamily: 'Pretendard-ExtraBold' }}>
+            <Text
+              className="text-[28px] text-[#07091C]"
+              style={{ fontFamily: 'Pretendard-ExtraBold' }}
+            >
               상세프로필
             </Text>
             <Text
@@ -274,7 +277,10 @@ export function MasterDetailProfileEditScreen() {
           {/* 학력 및 경력사항 */}
           <SectionLabel label="학력 및 경력사항" />
           <View className="mx-6">
-            <View className="rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]" style={{ minHeight: 164 }}>
+            <View
+              className="rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]"
+              style={{ minHeight: 164 }}
+            >
               <TextInput
                 value={careerText}
                 onChangeText={setCareerText}

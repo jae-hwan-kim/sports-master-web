@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { HomeTabIcon, ProfileTabIcon, SearchTabIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { CustomerExploreScreen } from '@/screens/CustomerExplore/CustomerExploreScreen'
 import { CustomerHomeScreen } from '@/screens/CustomerHome/CustomerHomeScreen'
 import { CustomerProfileScreen } from '@/screens/CustomerProfile/CustomerProfileScreen'
@@ -39,14 +39,14 @@ function CustomTabBar({
   descriptors: _descriptors,
   navigation,
 }: Parameters<NonNullable<React.ComponentProps<typeof Tab.Navigator>['tabBar']>>[0]) {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   return (
     <View
       className="flex-row items-start bg-white"
       style={{
-        paddingBottom: insets.bottom,
-        minHeight: TAB_CONTENT_HEIGHT + insets.bottom,
+        paddingBottom: insets.tabBarBottom,
+        minHeight: TAB_CONTENT_HEIGHT + insets.tabBarBottom,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: -2 },
         shadowOpacity: 0.05,

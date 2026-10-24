@@ -1,4 +1,8 @@
 // src/screens/CustomerExplore/CustomerExploreScreen.tsx
+
+import { useNavigation } from '@react-navigation/native'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { useCallback, useMemo, useState } from 'react'
 import {
   ActivityIndicator,
@@ -11,16 +15,15 @@ import {
   View,
 } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native'
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { useMutation } from '@tanstack/react-query'
 import { Image } from 'expo-image'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import { useMutation } from '@tanstack/react-query'
+
+import { apiClient } from '@/api/client'
 import { SearchTabIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text, TextInput } from '@/components/AppText'
-import { apiClient } from '@/api/client'
 import { useRecommendedMasters } from '@/hooks/useRecommendedMasters'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import type { RootStackParamList } from '@/navigation/RootNavigator'
 
 // ─── 데이터 ──────────────────────────────────────────────────────────────────
@@ -142,10 +145,7 @@ function MasterCard({ item, onPress, onFavoritePress }: MasterCardProps) {
   return (
     <Pressable hitSlop={8} onPress={onPress} className="rounded-lg bg-white" style={CARD_SHADOW}>
       {/* 상단: 아바타 + 텍스트 */}
-      <View
-        className="h-[82px] flex-row items-center px-4"
-        style={CARD_TOP_SECTION_SHADOW}
-      >
+      <View className="h-[82px] flex-row items-center px-4" style={CARD_TOP_SECTION_SHADOW}>
         {item.profileImageUrl ? (
           <Image
             source={{ uri: item.profileImageUrl }}
@@ -205,7 +205,7 @@ function RegionPicker({
   onConfirm,
   onClose,
 }: RegionPickerProps) {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const districts = DISTRICTS[province] ?? []
 
   return (
@@ -325,7 +325,7 @@ function RegionPicker({
 // ─── 메인 화면 ────────────────────────────────────────────────────────────────
 
 export function CustomerExploreScreen() {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
   const { data: recommendedData, isLoading } = useRecommendedMasters()
@@ -367,8 +367,7 @@ export function CustomerExploreScreen() {
   const handleRegionConfirm = useCallback(() => {
     setSelectedProvince(pendingProvince)
     setSelectedDistrict(pendingDistrict)
-    const isWholeRegion =
-      pendingDistrict === '전국' || pendingDistrict === `${pendingProvince}전체`
+    const isWholeRegion = pendingDistrict === '전국' || pendingDistrict === `${pendingProvince}전체`
     const label = isWholeRegion ? pendingProvince : `${pendingProvince} ${pendingDistrict}`
     setFilterRegion(label)
     setRegionPickerVisible(false)
@@ -380,15 +379,18 @@ export function CustomerExploreScreen() {
     setPendingDistrict(first)
   }, [])
 
-  const toggleFavorite = useCallback((id: number) => {
-    setFavoriteIds((prev) => {
-      const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
-      return next
-    })
-    toggleFavoriteAPI(id)
-  }, [toggleFavoriteAPI])
+  const toggleFavorite = useCallback(
+    (id: number) => {
+      setFavoriteIds((prev) => {
+        const next = new Set(prev)
+        if (next.has(id)) next.delete(id)
+        else next.add(id)
+        return next
+      })
+      toggleFavoriteAPI(id)
+    },
+    [toggleFavoriteAPI]
+  )
 
   const renderMasterCard = useCallback(
     ({ item }: { item: MasterItem }) => (
@@ -436,7 +438,7 @@ export function CustomerExploreScreen() {
           hitSlop={8}
           onPress={openRegionPicker}
           className={`h-[28px] flex-row items-center gap-1 rounded-full px-3 ${
-            isRegionActive ? 'bg-[#1F2A43]' : 'bg-transparent border border-gray2'
+            isRegionActive ? 'bg-[#1F2A43]' : 'border border-gray2 bg-transparent'
           }`}
         >
           <Text
@@ -465,7 +467,7 @@ export function CustomerExploreScreen() {
           hitSlop={8}
           onPress={() => setFilterRating((v) => !v)}
           className={`h-[28px] items-center justify-center rounded-full px-3 ${
-            filterRating ? 'bg-[#1F2A43]' : 'bg-transparent border border-gray2'
+            filterRating ? 'bg-[#1F2A43]' : 'border border-gray2 bg-transparent'
           }`}
         >
           <Text

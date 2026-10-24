@@ -1,6 +1,6 @@
-import * as SecureStore from 'expo-secure-store'
-
 import { create } from 'zustand'
+
+import * as SecureStore from 'expo-secure-store'
 
 import type { components } from '@/types/schema'
 
@@ -13,6 +13,7 @@ type AuthUserInfo = {
   currentMode: CurrentMode
   hasSelectedMode: boolean
   socialProvider: SocialProvider
+  name: string
 }
 
 type AuthState = {
@@ -21,6 +22,7 @@ type AuthState = {
   currentMode: CurrentMode | null
   hasSelectedMode: boolean
   socialProvider: SocialProvider | null
+  name: string | null
   autoLogin: boolean
   // 로그인/가입/소셜 로그인 성공 시 토큰+유저정보(모드 포함)를 한 번에 반영
   setAuthSession: (accessToken: string, refreshToken: string, user: AuthUserInfo) => void
@@ -36,6 +38,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   currentMode: null,
   hasSelectedMode: false,
   socialProvider: null,
+  name: null,
   autoLogin: false,
   setAuthSession: (accessToken, refreshToken, user) => {
     if (get().autoLogin) {
@@ -46,6 +49,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
           currentMode: user.currentMode,
           hasSelectedMode: user.hasSelectedMode,
           socialProvider: user.socialProvider,
+          name: user.name,
         })
       ).catch(() => {})
     }
@@ -55,17 +59,18 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       currentMode: user.currentMode,
       hasSelectedMode: user.hasSelectedMode,
       socialProvider: user.socialProvider,
+      name: user.name,
     })
   },
   setModeSelected: (currentMode) => set({ currentMode, hasSelectedMode: true }),
   setAutoLogin: (autoLogin) => {
     set({ autoLogin })
     if (autoLogin) {
-      const { refreshToken, currentMode, hasSelectedMode, socialProvider } = get()
+      const { refreshToken, currentMode, hasSelectedMode, socialProvider, name } = get()
       if (refreshToken) {
         SecureStore.setItemAsync(
           SECURE_SESSION_KEY,
-          JSON.stringify({ refreshToken, currentMode, hasSelectedMode, socialProvider })
+          JSON.stringify({ refreshToken, currentMode, hasSelectedMode, socialProvider, name })
         ).catch(() => {})
       }
     } else {
@@ -80,6 +85,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       currentMode: null,
       hasSelectedMode: false,
       socialProvider: null,
+      name: null,
       autoLogin: false,
     })
   },

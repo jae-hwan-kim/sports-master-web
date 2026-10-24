@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -11,11 +10,12 @@ import { LinearGradient } from 'expo-linear-gradient'
 import bgImage from '@/assets/icons/background.png'
 import logoImage from '@/assets/icons/logo.png'
 import { Text } from '@/components/AppText'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 export function OnboardingScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   return (
     <ImageBackground

@@ -1,16 +1,16 @@
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { useCallback } from 'react'
 import { FlatList, Platform, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
 
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-
 import { Text } from '@/components/AppText'
 import { MasterCard, type MasterItem } from '@/components/MasterCard'
 import { useRecommendedMasters } from '@/hooks/useRecommendedMasters'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>
@@ -22,9 +22,9 @@ function SkeletonCard() {
   return (
     <View>
       <View className="h-[289] w-full rounded-[12] bg-[#1F2A43]" />
-      <View className="mt-3 ml-12 h-[18] w-[120] rounded-[4] bg-[#1F2A43]" />
-      <View className="mt-2 ml-12 h-[14] w-[180] rounded-[4] bg-[#1F2A43]" />
-      <View className="mt-2 ml-12 h-[28] w-[120] rounded-[4] bg-[#1F2A43]" />
+      <View className="ml-12 mt-3 h-[18] w-[120] rounded-[4] bg-[#1F2A43]" />
+      <View className="ml-12 mt-2 h-[14] w-[180] rounded-[4] bg-[#1F2A43]" />
+      <View className="ml-12 mt-2 h-[28] w-[120] rounded-[4] bg-[#1F2A43]" />
     </View>
   )
 }
@@ -38,7 +38,7 @@ const HEADER_HEIGHT = 93
 
 export function RecommendedMastersScreen() {
   const navigation = useNavigation<NavProp>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   const { data: recommendation, isLoading, isError } = useRecommendedMasters()
 
@@ -58,12 +58,10 @@ export function RecommendedMastersScreen() {
     ({ item }: { item: MasterItem }) => (
       <MasterCard
         item={item}
-        onDetail={() =>
-          navigation.navigate('CustomerMasterDetail', { expertProfileId: item.id })
-        }
+        onDetail={() => navigation.navigate('CustomerMasterDetail', { expertProfileId: item.id })}
       />
     ),
-    [navigation],
+    [navigation]
   )
 
   const keyExtractor = useCallback((item: MasterItem) => String(item.id), [])
@@ -119,10 +117,7 @@ export function RecommendedMastersScreen() {
           onPress={() => navigation.goBack()}
           className="mt-4 h-[44] items-center justify-center rounded-[8] bg-[#4285F4] px-6"
         >
-          <Text
-            className="text-[14px] text-[#F2F2F2]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[14px] text-[#F2F2F2]" style={{ fontFamily: 'Pretendard-Medium' }}>
             돌아가기
           </Text>
         </Pressable>

@@ -3,11 +3,11 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { ActivityIndicator, Platform, Pressable, ScrollView, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ArrowNextIcon, ProfilePersonIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { useCustomerProfile } from '@/hooks/useCustomerProfile'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 // ---------------------------------------------------------------------------
@@ -89,7 +89,7 @@ function Section({ title, children }: SectionProps) {
 
 export function CustomerProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const { data: profile, isLoading, isError } = useCustomerProfile()
 
   const handleAccountSettings = () => {

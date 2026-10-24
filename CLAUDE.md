@@ -220,6 +220,23 @@ Figma → 코드 워크플로우는 화면 하나당 여러 에이전트를 호�
 - 감시 대상·화면 매핑: `.claude/figma/registry.json` (스냅샷: `.claude/figma/snapshots/`) — 스크립트로만 갱신, 직접 편집은 `screen`/`ignore` 필드만
 - 새 화면을 Figma로 만들었으면 반드시 `pnpm figma:sync link <nodeId> <ScreenName>`으로 등록 (미등록 시 다음 sync에서 "신규 프레임"으로 다시 잡힘)
 
+## QA 수정 / 화면 개발 시 Figma 우선 확인 (필수)
+
+**코드 수정 전에 반드시 Figma 디자인을 먼저 확인하고 대조한 뒤 수정한다.**
+
+### 절차
+
+1. **프레임명 → node-id 조회**: `.claude/figma/registry.json`에서 `name` 또는 `screen` 필드로 해당 화면의 node-id를 찾는다
+2. **Figma 디자인 확인**: `figma:figma-use` skill 또는 Figma MCP로 해당 node의 디자인을 fetch
+3. **현재 코드와 대조**: 디자인 기준으로 차이를 파악한 뒤 수정
+4. **피그마 링크가 주어진 경우**: 링크의 `node-id` 파라미터를 registry와 대조해 화면 파악
+
+### 이유
+
+- QA 리포트에 피그마 링크가 없어도 프레임명만으로 디자인 확인 가능
+- 구현 의도(배경색·간격·shadow 등)를 코드만 보고 추측하지 않음
+- 수정 후 재수정 방지
+
 ---
 
 ## Figma 구현 전 필수 확인 항목

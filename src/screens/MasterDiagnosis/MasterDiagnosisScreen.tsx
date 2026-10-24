@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 import { ActivityIndicator, FlatList, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
 import LogoSvg from '@/assets/icons/logo.svg'
@@ -10,6 +9,7 @@ import { DiagnosisRequestModal } from '@/components/DiagnosisRequestModal'
 import { useDeleteDiagnosisRequest } from '@/hooks/useDeleteDiagnosisRequest'
 import { useIncomingDiagnosisRequests } from '@/hooks/useIncomingDiagnosisRequests'
 import { useMarkDiagnosisViewed } from '@/hooks/useMarkDiagnosisViewed'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 
 function EmptyState() {
   return (
@@ -46,7 +46,7 @@ function EmptyState() {
 }
 
 export function MasterDiagnosisScreen() {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const { data: items = [], isLoading } = useIncomingDiagnosisRequests()
   const { mutate: deleteDiagnosis } = useDeleteDiagnosisRequest()
   const { mutate: markViewed } = useMarkDiagnosisViewed()

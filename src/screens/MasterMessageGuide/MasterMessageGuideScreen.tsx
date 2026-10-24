@@ -2,10 +2,10 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { ScrollView, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Text } from '@/components/AppText'
 import { ScreenHeader } from '@/components/ScreenHeader'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 const GUIDE_TEXT = `안녕하세요, 운동명인 OOO입니다😊
@@ -23,7 +23,7 @@ const GUIDE_TEXT = `안녕하세요, 운동명인 OOO입니다😊
 
 export function MasterMessageGuideScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   return (
     <View className="flex-1 bg-[#F2F2F2]">

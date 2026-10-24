@@ -12,6 +12,7 @@ type PersistedSession = {
   currentMode: CurrentMode
   hasSelectedMode: boolean
   socialProvider: SocialProvider | null
+  name?: string | null
 }
 
 export type RestoredSession = {
@@ -36,6 +37,7 @@ export async function restoreAutoLoginSession(): Promise<RestoredSession | null>
       currentMode: session.currentMode,
       hasSelectedMode: session.hasSelectedMode,
       socialProvider: session.socialProvider ?? 'local',
+      name: session.name ?? '',
     })
 
     return { currentMode: session.currentMode, hasSelectedMode: session.hasSelectedMode }

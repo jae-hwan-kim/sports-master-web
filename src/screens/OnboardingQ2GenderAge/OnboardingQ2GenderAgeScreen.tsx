@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import { Pressable, StatusBar, StyleSheet, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { useState } from 'react'
+import { Pressable, StatusBar, StyleSheet, View } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { ArrowBackIcon, SettingsIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { Chip } from '@/components/Chip'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import { useOnboardingStore } from '@/store/onboardingStore'
 
@@ -53,7 +53,7 @@ const s = StyleSheet.create({
 export function OnboardingQ2GenderAgeScreen() {
   // RootStackParamList에 OnboardingQ2GenderAge / Settings 미등록 상태 — 추가 후 any 제거 필요
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const [selectedGender, setSelectedGender] = useState<Gender | null>(null)
   const [selectedAge, setSelectedAge] = useState<AgeGroup | null>(null)
   const setGender = useOnboardingStore((s) => s.setGender)
@@ -97,7 +97,7 @@ export function OnboardingQ2GenderAgeScreen() {
       </View>
 
       {/* Progress Bar — total track + filled overlay */}
-      <View className="mt-[8px] mx-[32px] h-[2px] overflow-hidden bg-gray2">
+      <View className="mx-[32px] mt-[8px] h-[2px] overflow-hidden bg-gray2">
         <View className="h-[2px] bg-primary" style={{ width: PROGRESS_FILL_PCT as `${number}%` }} />
       </View>
 

@@ -2,8 +2,17 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useMemo, useState } from 'react'
-import { ActivityIndicator, FlatList, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, Switch, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import {
+  ActivityIndicator,
+  FlatList,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Pressable,
+  ScrollView,
+  Switch,
+  View,
+} from 'react-native'
 
 import { ArrowBackIcon, EditIcon, ProfilePersonIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
@@ -13,6 +22,7 @@ import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { RegionSelector } from '@/components/profile/RegionSelector'
 import { useCustomerProfile } from '@/hooks/useCustomerProfile'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { useUpdateCustomerProfile } from '@/hooks/useUpdateCustomerProfile'
 import { useWithdraw } from '@/hooks/useWithdraw'
@@ -26,16 +36,24 @@ const AGE_OPTIONS: string[] = ['10대', '20대', '30대', '40대', '50대', '60�
 
 const GENDER_TO_KO: Record<string, '여성' | '남성'> = { female: '여성', male: '남성' }
 const GENDER_TO_API: Record<string, 'male' | 'female' | 'other'> = {
-  '여성': 'female',
-  '남성': 'male',
+  여성: 'female',
+  남성: 'male',
 }
 const AGE_TO_KO: Record<string, string> = {
-  '10s': '10대', '20s': '20대', '30s': '30대',
-  '40s': '40대', '50s': '50대', '60s_plus': '60대 이상',
+  '10s': '10대',
+  '20s': '20대',
+  '30s': '30대',
+  '40s': '40대',
+  '50s': '50대',
+  '60s_plus': '60대 이상',
 }
 const AGE_TO_API: Record<string, '10s' | '20s' | '30s' | '40s' | '50s' | '60s_plus'> = {
-  '10대': '10s', '20대': '20s', '30대': '30s',
-  '40대': '40s', '50대': '50s', '60대 이상': '60s_plus',
+  '10대': '10s',
+  '20대': '20s',
+  '30대': '30s',
+  '40대': '40s',
+  '50대': '50s',
+  '60대 이상': '60s_plus',
 }
 const INPUT_BOX_SHADOW = Platform.select({
   ios: {
@@ -50,7 +68,7 @@ const INPUT_BOX_SHADOW = Platform.select({
 export function CustomerSettingsScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const rootNav = useRootNavigation()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
   const clearAuth = useAuthStore((s) => s.clear)
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
@@ -348,7 +366,11 @@ export function CustomerSettingsScreen() {
               </Text>
             </View>
           ) : (
-            <TextField value={draftSport} onChangeText={setDraftSport} label="입력된 정보가 없습니다" />
+            <TextField
+              value={draftSport}
+              onChangeText={setDraftSport}
+              label="입력된 정보가 없습니다"
+            />
           )}
         </View>
 
@@ -403,7 +425,10 @@ export function CustomerSettingsScreen() {
         {/* 탐색키워드 */}
         <View className="px-6 pb-6">
           <View className="mb-3 flex-row items-center gap-2">
-            <Text className="text-[16px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+            <Text
+              className="text-[16px] text-[#1F2A43]"
+              style={{ fontFamily: 'Pretendard-SemiBold' }}
+            >
               탐색키워드
             </Text>
             {mode === 'edit' && (
@@ -443,10 +468,16 @@ export function CustomerSettingsScreen() {
         <View className="mx-6 mb-6 gap-3">
           <View className="flex-row items-center justify-between rounded-xl bg-white px-4 py-4">
             <View>
-              <Text className="text-[15px] text-[#07091C]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+              <Text
+                className="text-[15px] text-[#07091C]"
+                style={{ fontFamily: 'Pretendard-SemiBold' }}
+              >
                 명인 모드
               </Text>
-              <Text className="mt-0.5 text-[12px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text
+                className="mt-0.5 text-[12px] text-[#74768E]"
+                style={{ fontFamily: 'Pretendard-Medium' }}
+              >
                 전문가로 전환합니다
               </Text>
             </View>
@@ -469,7 +500,10 @@ export function CustomerSettingsScreen() {
               accessibilityRole="button"
               accessibilityLabel="로그아웃"
             >
-              <Text className="text-[14px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text
+                className="text-[14px] text-[#1F2A43]"
+                style={{ fontFamily: 'Pretendard-Medium' }}
+              >
                 로그아웃
               </Text>
             </Pressable>
@@ -480,7 +514,10 @@ export function CustomerSettingsScreen() {
               accessibilityRole="button"
               accessibilityLabel="탈퇴하기"
             >
-              <Text className="text-[14px] text-[#E74C3C]" style={{ fontFamily: 'Pretendard-Medium' }}>
+              <Text
+                className="text-[14px] text-[#E74C3C]"
+                style={{ fontFamily: 'Pretendard-Medium' }}
+              >
                 탈퇴하기
               </Text>
             </Pressable>
@@ -539,7 +576,9 @@ export function CustomerSettingsScreen() {
       >
         <View className="flex-1 items-center justify-center bg-black/50 px-6">
           <View className="w-full max-w-[340px] rounded-2xl bg-white px-5 pb-6 pt-11">
-            <Text className="text-center text-popup-lg font-semibold text-black">비밀번호 확인</Text>
+            <Text className="text-center text-popup-lg font-semibold text-black">
+              비밀번호 확인
+            </Text>
             <Text className="mt-4 text-center text-small3 font-medium text-gray2">
               탈퇴를 위해 비밀번호를 입력해주세요
             </Text>

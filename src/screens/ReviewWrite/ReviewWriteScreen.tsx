@@ -1,17 +1,24 @@
-import { useCallback, useState } from 'react'
-import { ActivityIndicator, FlatList, KeyboardAvoidingView, Platform, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-
-import { Image } from 'expo-image'
-
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { useCallback, useState } from 'react'
+import {
+  ActivityIndicator,
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  View,
+} from 'react-native'
+
+import { Image } from 'expo-image'
 
 import { ArrowBackIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text, TextInput } from '@/components/AppText'
 import { StarRating } from '@/components/StarRating'
 import { useCreateReview } from '@/hooks/useCreateReview'
 import { DiagnosisSentItem, useReviewableExperts } from '@/hooks/useReviewableExperts'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>
@@ -62,10 +69,7 @@ function ExpertCard({ item, onSelect }: ExpertCardProps) {
 
       {/* 명인 정보 */}
       <View className="ml-3 flex-1">
-        <Text
-          className="text-[15px] text-[#1F2A43]"
-          style={{ fontFamily: 'Pretendard-SemiBold' }}
-        >
+        <Text className="text-[15px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
           {item.expertName}
         </Text>
         <Text
@@ -79,10 +83,7 @@ function ExpertCard({ item, onSelect }: ExpertCardProps) {
       {/* 리뷰 작성 완료 뱃지 */}
       {item.hasWrittenReview && (
         <View className="rounded-full bg-[#D9D9D9] px-3 py-1">
-          <Text
-            className="text-[11px] text-[#74768E]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[11px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
             작성완료
           </Text>
         </View>
@@ -105,9 +106,7 @@ function StepSelectExpert({ onSelect, onBack, insets }: StepSelectProps) {
   const { data: experts, isLoading, isError } = useReviewableExperts()
 
   const renderItem = useCallback(
-    ({ item }: { item: DiagnosisSentItem }) => (
-      <ExpertCard item={item} onSelect={onSelect} />
-    ),
+    ({ item }: { item: DiagnosisSentItem }) => <ExpertCard item={item} onSelect={onSelect} />,
     [onSelect]
   )
 
@@ -125,10 +124,7 @@ function StepSelectExpert({ onSelect, onBack, insets }: StepSelectProps) {
         >
           <ArrowBackIcon />
         </Pressable>
-        <Text
-          className="text-[17px] text-[#1F2A43]"
-          style={{ fontFamily: 'Pretendard-SemiBold' }}
-        >
+        <Text className="text-[17px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
           리뷰 작성
         </Text>
         <View className="w-[44px]" />
@@ -136,10 +132,7 @@ function StepSelectExpert({ onSelect, onBack, insets }: StepSelectProps) {
 
       {/* 안내 텍스트 */}
       <View className="px-5 pb-3">
-        <Text
-          className="text-[13px] text-[#74768E]"
-          style={{ fontFamily: 'Pretendard-Medium' }}
-        >
+        <Text className="text-[13px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
           진단을 요청한 명인을 선택하세요
         </Text>
       </View>
@@ -152,10 +145,7 @@ function StepSelectExpert({ onSelect, onBack, insets }: StepSelectProps) {
 
       {isError && (
         <View className="flex-1 items-center justify-center">
-          <Text
-            className="text-[14px] text-[#74768E]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[14px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
             목록을 불러오지 못했습니다
           </Text>
         </View>
@@ -163,10 +153,7 @@ function StepSelectExpert({ onSelect, onBack, insets }: StepSelectProps) {
 
       {!isLoading && !isError && (!experts || experts.length === 0) && (
         <View className="flex-1 items-center justify-center">
-          <Text
-            className="text-[14px] text-[#74768E]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
+          <Text className="text-[14px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
             진단을 요청한 명인이 없습니다
           </Text>
         </View>
@@ -240,10 +227,7 @@ function StepWriteReview({ expert, onBack, insets }: StepWriteProps) {
         >
           <ArrowBackIcon />
         </Pressable>
-        <Text
-          className="text-[17px] text-[#1F2A43]"
-          style={{ fontFamily: 'Pretendard-SemiBold' }}
-        >
+        <Text className="text-[17px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
           리뷰 작성
         </Text>
         <View className="w-[44px]" />
@@ -289,7 +273,7 @@ function StepWriteReview({ expert, onBack, insets }: StepWriteProps) {
 
             {/* 별점 */}
             <Text
-              className="mt-6 mb-3 text-[16px] text-[#1F2A43]"
+              className="mb-3 mt-6 text-[16px] text-[#1F2A43]"
               style={{ fontFamily: 'Pretendard-SemiBold' }}
             >
               별점
@@ -305,7 +289,7 @@ function StepWriteReview({ expert, onBack, insets }: StepWriteProps) {
 
             {/* 리뷰 내용 */}
             <Text
-              className="mt-6 mb-3 text-[16px] text-[#1F2A43]"
+              className="mb-3 mt-6 text-[16px] text-[#1F2A43]"
               style={{ fontFamily: 'Pretendard-SemiBold' }}
             >
               리뷰 내용
@@ -375,7 +359,7 @@ function StepWriteReview({ expert, onBack, insets }: StepWriteProps) {
 
 export function ReviewWriteScreen() {
   const navigation = useNavigation<NavProp>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
 
   const [selectedExpert, setSelectedExpert] = useState<DiagnosisSentItem | null>(null)
 

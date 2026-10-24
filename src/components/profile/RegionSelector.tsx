@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
 import { FlatList, Modal, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Text } from '@/components/AppText'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 
 type Props = {
   value: string
@@ -179,7 +179,7 @@ function CheckCircle({ selected }: { selected: boolean }) {
 }
 
 export function RegionSelector({ value, onChange }: Props) {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const [modalVisible, setModalVisible] = useState(false)
   const [activeProvince, setActiveProvince] = useState<string>(PROVINCES[0])
   const [selections, setSelections] = useState<Selection[]>([])

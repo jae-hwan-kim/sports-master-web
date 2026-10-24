@@ -1,6 +1,6 @@
-import { Alert, Share } from 'react-native'
-
 import * as Sentry from '@sentry/react-native'
+
+import { Alert, Share } from 'react-native'
 
 import { useMutation } from '@tanstack/react-query'
 
@@ -10,7 +10,9 @@ import type { components } from '@/types/schema'
 type CreateReviewTokenDto = components['schemas']['CreateReviewTokenDto']
 type ReviewTokenResponseDto = components['schemas']['ReviewTokenResponseDto']
 
-async function requestReviewLink(payload: CreateReviewTokenDto): Promise<ReviewTokenResponseDto> {
+export async function requestReviewLink(
+  payload: CreateReviewTokenDto
+): Promise<ReviewTokenResponseDto> {
   const { data } = await apiClient.post<{ data: ReviewTokenResponseDto }>(
     '/home/review-request',
     payload

@@ -20,6 +20,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/recommendations/masters": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 맞춤 명인 추천 (온보딩 기반, 최대 3명) */
+        get: operations["AiRecommendationsController_getRecommendedMasters"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/auth/check-nickname": {
         parameters: {
             query?: never;
@@ -242,6 +259,41 @@ export interface paths {
         patch: operations["CertificationsController_updateStatus"];
         trace?: never;
     };
+    "/customer-profiles/regions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 선택 가능한 지역 목록 조회 */
+        get: operations["CustomerProfilesController_getRegions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/customer-profiles/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 내 고객 프로필 조회 */
+        get: operations["CustomerProfilesController_getMe"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** 내 고객 프로필 수정 (온보딩 포함) */
+        patch: operations["CustomerProfilesController_updateMe"];
+        trace?: never;
+    };
     "/diagnoses": {
         parameters: {
             query?: never;
@@ -432,6 +484,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/favorite-experts/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 내가 찜한 명인 목록 */
+        get: operations["FavoriteExpertsController_getMyFavorites"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/home/expert-grade": {
         parameters: {
             query?: never;
@@ -534,6 +603,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/reviews/written-by-me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 내가 쓴 리뷰 목록 (고객 전용) */
+        get: operations["ReviewsController_getMyWrittenReviews"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/reviews/{id}/delete-request": {
         parameters: {
             query?: never;
@@ -576,6 +662,65 @@ export interface components {
         ResponseDto: {
             /** @description 응답 페이로드 */
             data: Record<string, never>;
+        };
+        RecommendedExpertDto: {
+            /**
+             * @description 명인 프로필 ID
+             * @example 5
+             */
+            id: number;
+            /**
+             * @description 이름
+             * @example 김명인
+             */
+            name: string;
+            /**
+             * @description 지역
+             * @example 서울 강남구
+             */
+            region: string;
+            /**
+             * @description 대표 서비스
+             * @example 재활 트레이닝
+             */
+            representativeService: string;
+            /**
+             * @description 등급
+             * @example gold
+             */
+            expertGrade?: string;
+            /**
+             * @description 평균 별점
+             * @example 4.8
+             */
+            averageRating: number;
+            /**
+             * @description 총 리뷰 수
+             * @example 42
+             */
+            totalReviewCount: number;
+            /**
+             * @description 프로필 사진 URL
+             * @example https://cdn.example.com/avatar/5.jpg
+             */
+            avatarUrl?: string;
+            /**
+             * @description 키워드 태그
+             * @example [
+             *       "재활",
+             *       "골프"
+             *     ]
+             */
+            keywordTags?: string[];
+        };
+        AiRecommendationResponseDto: {
+            /**
+             * @description AI 요약 메시지
+             * @example 허리 통증이 있는 골퍼에게 적합한 재활 전문 명인을 추천해드립니다.
+             */
+            aiSummary: string;
+            /** @description 추천 명인 목록 (최대 3명) */
+            recommendedExperts: components["schemas"]["RecommendedExpertDto"][];
         };
         AvailabilityResponseDto: {
             /**
@@ -823,6 +968,139 @@ export interface components {
              * @example 이미지가 불명확합니다.
              */
             rejectReason?: string;
+        };
+        RegionsResponseDto: {
+            /**
+             * @description 지역 목록
+             * @example [
+             *       "서울",
+             *       "경기",
+             *       "인천"
+             *     ]
+             */
+            regions: string[];
+        };
+        CustomerProfileResponseDto: {
+            /**
+             * @description 고객 프로필 ID
+             * @example 1
+             */
+            id: number;
+            /**
+             * @description 유저 ID
+             * @example 1
+             */
+            userId: number;
+            /**
+             * @description 활동명
+             * @example 스포츠러버
+             */
+            nickname: string;
+            /**
+             * @description 나이
+             * @example 28
+             */
+            age?: number;
+            /**
+             * @description 성별
+             * @example male
+             * @enum {string}
+             */
+            gender?: "male" | "female" | "other";
+            /**
+             * @description 연령대
+             * @example 30s
+             * @enum {string}
+             */
+            ageGroup?: "10s" | "20s" | "30s" | "40s" | "50s" | "60s_plus";
+            /**
+             * @description 지역
+             * @example 서울 강남구
+             */
+            region: string;
+            /**
+             * @description 주 운동종목
+             * @example 골프
+             */
+            mainSport?: string;
+            /**
+             * @description 증상/불편 부위
+             * @example [
+             *       "허리",
+             *       "무릎"
+             *     ]
+             */
+            symptoms?: string[];
+            /**
+             * @description 키워드 태그
+             * @example [
+             *       "재활"
+             *     ]
+             */
+            keywordTags?: string[];
+            /**
+             * Format: date-time
+             * @description 생성일
+             * @example 2024-01-15T09:00:00.000Z
+             */
+            createdAt: string;
+            /**
+             * Format: date-time
+             * @description 수정일
+             * @example 2024-06-01T12:00:00.000Z
+             */
+            updatedAt: string;
+        };
+        UpdateCustomerProfileDto: {
+            /**
+             * @description 활동명 (닉네임)
+             * @example 운동왕
+             */
+            nickname?: string;
+            /**
+             * @description 성별
+             * @example male
+             * @enum {string}
+             */
+            gender?: "male" | "female" | "other";
+            /**
+             * @description 연령대
+             * @example 30s
+             * @enum {string}
+             */
+            ageGroup?: "10s" | "20s" | "30s" | "40s" | "50s" | "60s_plus";
+            /**
+             * @description 나이
+             * @example 29
+             */
+            age?: number;
+            /**
+             * @description 지역
+             * @example 서울 서초구
+             */
+            region?: string;
+            /**
+             * @description 운동 종목 목록
+             * @example [
+             *       "수영",
+             *       "골프"
+             *     ]
+             */
+            sports?: string[];
+            /**
+             * @description 증상/불편 부위 목록
+             * @example [
+             *       "어깨"
+             *     ]
+             */
+            symptoms?: string[];
+            /**
+             * @description 키워드 태그 목록
+             * @example [
+             *       "재활"
+             *     ]
+             */
+            keywords?: string[];
         };
         DiagnosisRequestResponseDto: {
             /**
@@ -1082,6 +1360,15 @@ export interface components {
              * @example 10년 경력의 재활 전문 트레이너입니다.
              */
             bio?: string;
+            /**
+             * @description 연관 키워드 목록 (최대 3개)
+             * @example [
+             *       "재활운동",
+             *       "체형교정",
+             *       "컨디셔닝"
+             *     ]
+             */
+            keywordTags?: string[];
         };
         UpdateExpertProfileDto: {
             /**
@@ -1140,6 +1427,38 @@ export interface components {
              */
             favoriteId?: number | null;
         };
+        FavoriteExpertItemDto: {
+            /**
+             * @description 명인 프로필 ID
+             * @example 5
+             */
+            id: number;
+            /**
+             * @description 이름
+             * @example 김명인
+             */
+            name: string;
+            /**
+             * @description 등급
+             * @example gold
+             */
+            grade?: string;
+            /**
+             * @description 리뷰 수
+             * @example 42
+             */
+            reviewCount: number;
+            /**
+             * @description 평균 별점
+             * @example 4.8
+             */
+            avgRating: number;
+            /**
+             * @description 프로필 사진 URL
+             * @example https://cdn.example.com/avatar/5.jpg
+             */
+            avatarUrl?: string;
+        };
         ReviewTokenResponseDto: {
             /**
              * @description 리뷰 요청 토큰
@@ -1154,10 +1473,50 @@ export interface components {
         };
         CreateReviewTokenDto: {
             /**
-             * @description 채팅방 ID
+             * @description 채팅방 ID (생략 시 명인 단위 링크)
              * @example 1
              */
-            chatRoomId: number;
+            chatRoomId?: number;
+        };
+        FeaturedExpertDto: {
+            /**
+             * @description 명인 프로필 ID
+             * @example 5
+             */
+            id: number;
+            /**
+             * @description 센터명
+             * @example 아쿠아퍼포먼스
+             */
+            name: string;
+            /**
+             * @description 한줄 소개
+             * @example 국가대표 출신 재활 트레이너
+             */
+            introduction?: string | null;
+            /**
+             * @description 지역
+             * @example 경기 고양시 일산서구
+             */
+            region: string;
+            /**
+             * @description 키워드 태그
+             * @example [
+             *       "방문재활",
+             *       "선수트레이닝"
+             *     ]
+             */
+            keywordTags?: string[] | null;
+            /**
+             * @description 대표 이미지 URL
+             * @example https://cdn.example.com/expert/5.jpg
+             */
+            imageUrl?: string | null;
+            /**
+             * @description 등급
+             * @example gold
+             */
+            expertGrade: string | null;
         };
         UpdateModeResponseDto: {
             /**
@@ -1373,6 +1732,27 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    AiRecommendationsController_getRecommendedMasters: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["AiRecommendationResponseDto"];
+                    };
+                };
             };
         };
     };
@@ -1712,6 +2092,73 @@ export interface operations {
             };
         };
     };
+    CustomerProfilesController_getRegions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["RegionsResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    CustomerProfilesController_getMe: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["CustomerProfileResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    CustomerProfilesController_updateMe: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateCustomerProfileDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["CustomerProfileResponseDto"];
+                    };
+                };
+            };
+        };
+    };
     DiagnosesController_createRequest: {
         parameters: {
             query?: never;
@@ -2020,6 +2467,27 @@ export interface operations {
             };
         };
     };
+    FavoriteExpertsController_getMyFavorites: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["FavoriteExpertItemDto"][];
+                    };
+                };
+            };
+        };
+    };
     HomeController_getExpertGrade: {
         parameters: {
             query?: never;
@@ -2154,6 +2622,32 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ResponseDto"] & {
                         data?: components["schemas"]["ReviewSummaryDto"];
+                    };
+                };
+            };
+        };
+    };
+    ReviewsController_getMyWrittenReviews: {
+        parameters: {
+            query?: {
+                sort?: "latest" | "best";
+                photoOnly?: boolean;
+                page?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["PaginatedReviewsDto"];
                     };
                 };
             };

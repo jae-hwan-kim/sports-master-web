@@ -2,8 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useMemo, useState } from 'react'
-import { Alert, ActivityIndicator, FlatList, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { ActivityIndicator, Alert, FlatList, Pressable, View } from 'react-native'
 
 import { ArrowBackIcon, LinkIcon } from '@/assets/icons'
 import InfoSvg from '@/assets/icons/info.svg'
@@ -18,10 +17,8 @@ import { useDeleteReviewRequest } from '@/hooks/useDeleteReviewRequest'
 import { ReviewItem as ReviewItemHook, useMyReviews } from '@/hooks/useMyReviews'
 import { useRequestReviewLink } from '@/hooks/useRequestReviewLink'
 import { useReviewSummary } from '@/hooks/useReviewSummary'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import type { MasterProfileStackParamList } from '@/navigation/MasterProfileStackNavigator'
-import type { components } from '@/types/schema'
-
-type CreateReviewTokenDto = components['schemas']['CreateReviewTokenDto']
 
 // ISO → 'YYYY.MM.DD'
 function toDisplayDate(iso: string) {
@@ -41,7 +38,7 @@ function toReviewData(item: ReviewItemHook): ReviewData {
 }
 
 export function MasterReviewScreen() {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const nav = useNavigation<NativeStackNavigationProp<MasterProfileStackParamList>>()
 
   const [activeSort, setActiveSort] = useState<ReviewSort>('latest')
@@ -132,7 +129,7 @@ export function MasterReviewScreen() {
   }, [])
 
   const handleReviewLinkPress = useCallback(() => {
-    requestReviewLink({} as CreateReviewTokenDto)
+    requestReviewLink({})
   }, [requestReviewLink])
 
   const renderItem = useCallback(

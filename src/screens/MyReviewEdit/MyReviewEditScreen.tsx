@@ -1,3 +1,6 @@
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { useCallback, useState } from 'react'
 import {
   Alert,
@@ -8,14 +11,11 @@ import {
   ScrollView,
   View,
 } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-
-import { useNavigation, useRoute } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { ArrowBackIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text, TextInput } from '@/components/AppText'
 import { StarRating } from '@/components/StarRating'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useUpdateReview } from '@/hooks/useUpdateReview'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
@@ -43,7 +43,6 @@ const CARD_SHADOW = Platform.select({
   android: { elevation: 3 },
 })
 
-
 function ExitModal({
   visible,
   onExit,
@@ -60,7 +59,7 @@ function ExitModal({
         style={{ backgroundColor: 'rgba(7,9,28,0.6)' }}
       >
         <View
-          className="rounded-2xl bg-[#F2F2F2] px-6 pt-8 pb-6"
+          className="rounded-2xl bg-[#F2F2F2] px-6 pb-6 pt-8"
           style={{
             width: 340,
             ...Platform.select({
@@ -128,7 +127,7 @@ function ExitModal({
 export function MyReviewEditScreen() {
   const navigation = useNavigation<NavProp>()
   const route = useRoute<RouteProp>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const { mutate: updateReview, isPending } = useUpdateReview()
 
   const { reviewId, expertName, initialRating, initialContent } = route.params
@@ -216,16 +215,17 @@ export function MyReviewEditScreen() {
               size={40}
               onChange={setRating}
               renderStar={({ size, filled }) =>
-                filled ? <StarFillIcon size={size} color="#FBBC05" /> : <StarNoneIcon size={size} color="#1F2A43" />
+                filled ? (
+                  <StarFillIcon size={size} color="#FBBC05" />
+                ) : (
+                  <StarNoneIcon size={size} color="#1F2A43" />
+                )
               }
             />
           </View>
 
           {/* 리뷰 내용 */}
-          <View
-            className="mt-8 rounded-[8px] bg-[#F2F2F2] px-4 py-3"
-            style={CARD_SHADOW}
-          >
+          <View className="mt-8 rounded-[8px] bg-[#F2F2F2] px-4 py-3" style={CARD_SHADOW}>
             <TextInput
               value={content}
               onChangeText={(t) => setContent(t.slice(0, MAX_LENGTH))}

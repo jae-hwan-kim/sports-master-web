@@ -1,8 +1,8 @@
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { useNavigation } from '@react-navigation/native'
 
-import { Alert, FlatList, ImageBackground, Platform, Pressable, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useState } from 'react'
+import { FlatList, ImageBackground, Platform, Pressable, View } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
@@ -10,10 +10,19 @@ import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
-import { ArrowNextIcon, LinkIcon, ProfilePersonIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
+import {
+  ArrowNextIcon,
+  LinkIcon,
+  ProfilePersonIcon,
+  SettingsIcon,
+  StarMedalIcon,
+} from '@/assets/icons'
 import { Text } from '@/components/AppText'
+import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
+import { useCopyReviewLink } from '@/hooks/useCopyReviewLink'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
 import type { MasterTabParamList } from '@/navigation/MasterTabNavigator'
 import { useAuthStore } from '@/store/authStore'
@@ -49,23 +58,16 @@ function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?
       hitSlop={8}
       onPress={onPress}
       disabled={disabled}
-      className="w-20 h-5 rounded-[10px] border border-[#1C236E] bg-black overflow-hidden justify-center"
+      className="h-[20px] w-[80px] justify-center overflow-hidden rounded-[10px] bg-gray2"
     >
-      {/* 네이비 그라디언트 pill — Figma: LinearGradient -11.3deg #181E5D→#20287F */}
-      <LinearGradient
-        colors={['#181E5D', '#20287F']}
-        start={{ x: 0.4, y: 1 }}
-        end={{ x: 0.6, y: 0 }}
-        style={{
-          position: 'absolute',
-          top: 2,
-          left: 3,
-          bottom: 2,
-          width: 36,
-          borderRadius: 8,
-        }}
-      />
-      <Text className="text-[7px] text-white font-pretendard-semibold text-center">명인모드</Text>
+      {/* 활성 pill — 왼쪽(명인모드 선택됨) */}
+      <View className="absolute bottom-[2px] left-[2px] top-[2px] w-[37px] rounded-[8px] bg-[#F2F2F2]" />
+      <Text
+        className="text-center font-pretendard-semibold text-gray3"
+        style={{ fontSize: 7, paddingRight: 41, lineHeight: 14 }}
+      >
+        명인모드
+      </Text>
     </Pressable>
   )
 }
@@ -73,8 +75,8 @@ function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?
 function StatBox({ value, label }: { value: string; label: string }) {
   return (
     <View className="w-14 items-center gap-2">
-      <Text className="text-lg font-pretendard-extrabold text-white text-center">{value}</Text>
-      <Text className="text-small2 font-pretendard-medium text-white text-center">{label}</Text>
+      <Text className="text-center font-pretendard-extrabold text-lg text-white">{value}</Text>
+      <Text className="text-center font-pretendard-medium text-small2 text-white">{label}</Text>
     </View>
   )
 }
@@ -82,27 +84,28 @@ function StatBox({ value, label }: { value: string; label: string }) {
 function StatDivider() {
   return (
     <View
-      className="w-px h-[38.5px] self-center mx-5"
+      className="mx-5 h-[38.5px] w-px self-center"
       style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}
     />
   )
 }
 
-function EmptyNoProfile() {
+function EmptyNoProfile({ onPressWrite }: { onPressWrite: () => void }) {
   return (
-    <View className="rounded-lg bg-gray1 h-[278px] w-[338px] items-center justify-center gap-2">
-      <Text className="text-gray2 text-lg font-pretendard-extrabold text-center">
+    // Figma: 338×278 — 폭은 좌우 32 여백 안에서 유연, 높이는 남은 공간 안에서 최대 278
+    <View className="max-h-[278px] w-full flex-1 items-center justify-center gap-2 rounded-lg bg-gray1">
+      <Text className="text-center font-pretendard-extrabold text-lg text-gray2">
         아직 요청 고객이 없습니다
       </Text>
-      <Text className="text-gray2 text-small2 font-pretendard-medium text-center">
+      <Text className="text-center font-pretendard-medium text-small2 text-gray2">
         프로필을 작성해 전문성을 보여주세요!
       </Text>
       <Pressable
         hitSlop={8}
-        onPress={() => Alert.alert('준비 중', '프로필 작성 기능을 준비 중입니다.')}
-        className="mt-3 bg-primary rounded-lg h-[50px] w-[145px] items-center justify-center"
+        onPress={onPressWrite}
+        className="mt-3 h-[50px] w-[145px] items-center justify-center rounded-lg bg-primary"
       >
-        <Text className="text-white text-main font-pretendard-medium">프로필 작성하기</Text>
+        <Text className="font-pretendard-medium text-main text-white">프로필 작성하기</Text>
       </Pressable>
     </View>
   )
@@ -110,20 +113,23 @@ function EmptyNoProfile() {
 
 function EmptyHasTip() {
   return (
-    <View className="rounded-lg bg-[#F0F0F0] p-6 items-center justify-center min-h-[180px] gap-2">
-      <Text className="text-gray2 text-sm font-pretendard-medium text-center">Tip.</Text>
-      <Text className="text-gray2 text-small1 font-pretendard-regular text-center leading-5">
-        {'링크를 통해 외부 고객도 리뷰 작성이 가능합니다\n리뷰 점수를 높여 고객요청 확률을 높여봅시다!'}
+    <View className="min-h-[180px] items-center justify-center gap-2 rounded-lg bg-[#F0F0F0] p-6">
+      <Text className="text-center font-pretendard-medium text-sm text-gray2">Tip.</Text>
+      <Text className="text-center font-pretendard-regular text-small1 leading-5 text-gray2">
+        {
+          '링크를 통해 외부 고객도 리뷰 작성이 가능합니다\n리뷰 점수를 높여 고객요청 확률을 높여봅시다!'
+        }
       </Text>
     </View>
   )
 }
 
 export function MasterHomeScreen() {
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const rootNav = useRootNavigation()
   const tabNav = useNavigation<BottomTabNavigationProp<MasterTabParamList>>()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
+  const userName = useAuthStore((s) => s.name)
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const { data: expertProfile, isError: expertProfileError } = useQuery({
     queryKey: ['expertGrade'],
@@ -137,7 +143,7 @@ export function MasterHomeScreen() {
   })
 
   const hasProfile = expertProfile !== undefined && !expertProfileError
-  const nickname = expertProfile?.centerName ?? '-'
+  const nickname = userName ?? '-'
   const gradeLabel = expertProfile?.expertGrade
     ? (GRADE_LABEL[expertProfile.expertGrade] ?? expertProfile.expertGrade)
     : '-'
@@ -148,7 +154,10 @@ export function MasterHomeScreen() {
   const topPercentile =
     expertProfile?.topPercentile != null ? `${expertProfile.topPercentile}%` : '-'
 
-  const handleModeSwitch = () => {
+  const [switchModeVisible, setSwitchModeVisible] = useState(false)
+
+  const handleModeSwitchConfirm = () => {
+    setSwitchModeVisible(false)
     switchMode(
       { mode: 'customer' },
       {
@@ -160,8 +169,15 @@ export function MasterHomeScreen() {
     )
   }
 
-  const handleReviewLink = () => {
-    Alert.alert('안내', '채팅방에서 고객에게 리뷰 링크를 보낼 수 있습니다.')
+  // Figma 791:4558 명인홈_링크복사 완료 — 확인 시 리뷰 관리 화면으로 이동
+  const [linkCopiedVisible, setLinkCopiedVisible] = useState(false)
+  const { mutate: copyReviewLink, isPending: isCopyingLink } = useCopyReviewLink(() =>
+    setLinkCopiedVisible(true)
+  )
+
+  const handleLinkCopiedConfirm = () => {
+    setLinkCopiedVisible(false)
+    tabNav.navigate('ProfileTab', { screen: 'MasterReview', initial: false })
   }
 
   return (
@@ -191,20 +207,20 @@ export function MasterHomeScreen() {
           <View className="flex-row items-center gap-2">
             <ProfilePersonIcon size={36} color="#1F2A43" />
             <View>
-              <Text className="text-[10px] text-gray3 font-pretendard-medium">반갑습니다 👋</Text>
-              <Text className="text-small2 text-black font-pretendard-semibold">{nickname} 님</Text>
+              <Text className="font-pretendard-medium text-[10px] text-gray3">반갑습니다 👋</Text>
+              <Text className="font-pretendard-semibold text-small2 text-black">{nickname} 님</Text>
             </View>
           </View>
           {/* 우측: 모드 배지 + 설정 */}
           <View className="flex-row items-center gap-2">
-            <MasterModeBadge onPress={handleModeSwitch} disabled={isSwitching} />
+            <MasterModeBadge onPress={() => setSwitchModeVisible(true)} disabled={isSwitching} />
             <Pressable
               hitSlop={8}
               onPress={() => rootNav?.navigate('MasterSettings')}
               accessibilityRole="button"
               accessibilityLabel="설정"
             >
-              <SettingsIcon size={44} color="#F2F2F2" />
+              <SettingsIcon size={44} color="#1F2A43" />
             </Pressable>
           </View>
         </View>
@@ -212,19 +228,20 @@ export function MasterHomeScreen() {
         {/* 리뷰 링크 배너 — height:54 */}
         <Pressable
           hitSlop={8}
-          onPress={handleReviewLink}
-          className="h-[54px] mx-4 rounded-lg flex-row items-center px-[3px]"
+          onPress={() => copyReviewLink()}
+          disabled={isCopyingLink}
+          className="mx-4 h-[54px] flex-row items-center rounded-lg px-[3px]"
           style={{ backgroundColor: 'rgba(7,9,28,0.6)' }}
         >
           <LinkIcon size={44} color="#FFFFFF" />
-          <Text className="flex-1 text-white text-small2 font-pretendard-medium">
+          <Text className="flex-1 font-pretendard-medium text-small2 text-white">
             내 고객이라면 누구나 리뷰 작성 가능
           </Text>
-          <Text className="text-gray1 text-small2 font-pretendard-medium pr-3">링크 보내기</Text>
+          <Text className="pr-3 font-pretendard-medium text-small2 text-gray1">링크 보내기</Text>
         </Pressable>
 
         {/* 명인 등급 카드 */}
-        <View className="h-[175px] mx-4 mt-3 mb-[13px] rounded-2xl overflow-hidden">
+        <View className="mx-4 mb-[13px] mt-3 h-[175px] overflow-hidden rounded-2xl">
           <LinearGradient
             colors={['rgba(7,9,28,0.6)', 'rgba(87,103,125,0.6)']}
             style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
@@ -234,15 +251,15 @@ export function MasterHomeScreen() {
             <StarMedalIcon size={100} />
           </View>
 
-          <View className="flex-1 pl-4 pt-[18px] justify-between pb-6">
+          <View className="flex-1 justify-between pb-6 pl-4 pt-[18px]">
             <View>
-              <Text className="text-white text-lg font-pretendard-extrabold">명인 등급</Text>
-              <Text className="text-gray1 text-small2 font-pretendard-medium mt-[7px]">
+              <Text className="font-pretendard-extrabold text-lg text-white">명인 등급</Text>
+              <Text className="mt-[7px] font-pretendard-medium text-small2 text-gray1">
                 현재 명인 등급 <Text className="text-[#FBBC05]">{gradeLabel}</Text> 입니다
               </Text>
             </View>
 
-            <View className="flex-row items-center self-start ml-4">
+            <View className="ml-4 flex-row items-center self-start">
               <StatBox value={reviewCount} label="리뷰" />
               <StatDivider />
               <StatBox value={avgRating} label="평점" />
@@ -255,9 +272,14 @@ export function MasterHomeScreen() {
 
       {/* 하단 진단요청 고객 섹션 */}
       <View
-        className="flex-1 bg-white rounded-t-2xl pt-[23px]"
+        className="flex-1 rounded-t-2xl bg-white pt-[23px]"
         style={Platform.select({
-          ios: { shadowColor: '#000', shadowOffset: { width: 0, height: -5 }, shadowOpacity: 0.05, shadowRadius: 5 },
+          ios: {
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: -5 },
+            shadowOpacity: 0.05,
+            shadowRadius: 5,
+          },
           android: { elevation: 5 },
         })}
       >
@@ -265,11 +287,11 @@ export function MasterHomeScreen() {
         <Pressable
           hitSlop={8}
           onPress={() => tabNav.navigate('DiagnosisTab')}
-          className="flex-row items-center justify-between pl-8 pr-[25px] mb-4"
+          className="mb-4 flex-row items-center justify-between pl-8 pr-[25px]"
         >
           <View>
-            <Text className="text-gray3 text-lg font-pretendard-extrabold">진단요청 고객</Text>
-            <Text className="text-gray2 text-small2 font-pretendard-medium mt-[3px]">
+            <Text className="font-pretendard-extrabold text-lg text-gray3">진단요청 고객</Text>
+            <Text className="mt-[3px] font-pretendard-medium text-small2 text-gray2">
               나를 찾는 고객 프로필 전부 확인하기
             </Text>
           </View>
@@ -281,7 +303,7 @@ export function MasterHomeScreen() {
           data={diagnosisItems}
           keyExtractor={(item) => String(item.id)}
           scrollEnabled={false}
-          contentContainerStyle={{ paddingHorizontal: 32 }}
+          contentContainerStyle={{ paddingHorizontal: 32, paddingBottom: 24, flexGrow: 1 }}
           ItemSeparatorComponent={() => <View className="h-4" />}
           renderItem={({ item }) => (
             <DiagnosisRequestCard
@@ -290,11 +312,21 @@ export function MasterHomeScreen() {
               cardBg="#F2F2F2"
             />
           )}
-          ListEmptyComponent={hasProfile ? <EmptyHasTip /> : <EmptyNoProfile />}
+          ListEmptyComponent={
+            hasProfile ? (
+              <EmptyHasTip />
+            ) : (
+              <EmptyNoProfile
+                onPressWrite={() =>
+                  tabNav.navigate('ProfileTab', { screen: 'MasterDetailProfile', initial: false })
+                }
+              />
+            )
+          }
           ListFooterComponent={
             diagnosisItems.length > 0 ? (
               <Text
-                className="text-[10px] font-pretendard-medium text-right mt-4 pb-4"
+                className="mt-4 pb-4 text-right font-pretendard-medium text-[10px]"
                 style={{ color: 'rgba(116,118,142,0.5)' }}
               >
                 가장 먼저 요청한 3인이 보여집니다
@@ -304,6 +336,24 @@ export function MasterHomeScreen() {
         />
       </View>
 
+      <ConfirmDialog
+        visible={linkCopiedVisible}
+        title="링크 복사 완료"
+        description="복사한 링크로 리뷰 요청이 가능합니다"
+        onConfirm={handleLinkCopiedConfirm}
+      />
+
+      {/* 모드 전환 확인 팝업 — 고객홈과 동일 패턴 */}
+      <ConfirmDialog
+        visible={switchModeVisible}
+        title="고객모드로 전환"
+        description="고객모드로 전환합니까?"
+        confirmLabel="전환하기"
+        cancelLabel="취소"
+        confirmLoading={isSwitching}
+        onConfirm={handleModeSwitchConfirm}
+        onCancel={() => setSwitchModeVisible(false)}
+      />
     </View>
   )
 }

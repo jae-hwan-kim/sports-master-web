@@ -3,11 +3,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useState } from 'react'
 import { ScrollView, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Text } from '@/components/AppText'
 import { RoleCard } from '@/components/RoleCard'
 import { ScreenHeader } from '@/components/ScreenHeader'
+import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type Role = 'master' | 'customer'
@@ -20,7 +20,7 @@ type Role = 'master' | 'customer'
 // 선택완료·나중에 / CustomerWelcome 진입)에서 register 호출 시 mode로 함께 전달된다.
 export function SignUpRoleSelectScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const insets = useSafeAreaInsets()
+  const insets = useScreenInsets()
   const [selectedRole, setSelectedRole] = useState<Role | null>(null)
 
   const goToMasterVerification = () => {
