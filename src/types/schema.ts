@@ -294,6 +294,23 @@ export interface paths {
         patch: operations["CustomerProfilesController_updateMe"];
         trace?: never;
     };
+    "/diagnoses/my-sent": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 내가 진단요청한 명인 목록 조회 (고객용) — 리뷰 작성 여부 포함 */
+        get: operations["DiagnosesController_getMySent"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/diagnoses": {
         parameters: {
             query?: never;
@@ -381,6 +398,23 @@ export interface paths {
         patch: operations["ExpertProfilesController_updateMe"];
         trace?: never;
     };
+    "/expert-profiles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 명인 목록 조회 (고객 명인탐색) — 필터 없으면 전체 */
+        get: operations["ExpertProfilesController_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/expert-profiles/{id}": {
         parameters: {
             query?: never;
@@ -398,7 +432,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/expert-profiles/me/images": {
+    "/expert-profiles/me/uploads": {
         parameters: {
             query?: never;
             header?: never;
@@ -407,42 +441,8 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** 프로필 이미지 업로드 */
-        post: operations["ExpertProfilesController_uploadImages"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/expert-profiles/me/images/{index}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /** 프로필 이미지 삭제 (인덱스 기준) */
-        delete: operations["ExpertProfilesController_deleteImage"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/expert-profiles/me/certificates": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** 자격증 이미지 업로드 */
-        post: operations["ExpertProfilesController_uploadCertificates"];
+        /** 프로필 파일 업로드 (이미지 최대 3장 / PDF 1개) — URL만 반환, 저장은 PATCH me */
+        post: operations["ExpertProfilesController_uploadFiles"];
         delete?: never;
         options?: never;
         head?: never;
@@ -527,8 +527,25 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** 명인 홈: 리뷰 요청 링크 생성 (카카오 딥링크) */
+        /** 명인 홈: 리뷰 요청 링크 생성 (chatRoomId 생략 시 명인 단위 링크) */
         post: operations["HomeController_createReviewRequestLink"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/home/featured-experts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 고객 홈: 이달의 소개 명인 목록 */
+        get: operations["HomeController_getFeaturedExperts"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -569,6 +586,23 @@ export interface paths {
         patch: operations["HomeController_switchMode"];
         trace?: never;
     };
+    "/reviews": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 리뷰 생성 (고객용) — 진단요청한 명인에 대해 작성 */
+        post: operations["ReviewsController_createReview"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/reviews/me": {
         parameters: {
             query?: never;
@@ -603,6 +637,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/reviews/experts/{expertProfileId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 특정 명인의 리뷰 목록 (고객의 명인 상세 리뷰 보기) */
+        get: operations["ReviewsController_getExpertReviews"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/reviews/experts/{expertProfileId}/summary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 특정 명인의 리뷰 요약 */
+        get: operations["ReviewsController_getExpertSummary"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/reviews/written-by-me": {
         parameters: {
             query?: never;
@@ -618,6 +686,23 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/reviews/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** 리뷰 수정 (본인 리뷰만) */
+        patch: operations["ReviewsController_updateReview"];
         trace?: never;
     };
     "/reviews/{id}/delete-request": {
@@ -1102,6 +1187,43 @@ export interface components {
              */
             keywords?: string[];
         };
+        DiagnosisSentItemDto: {
+            /**
+             * @description 명인 프로필 ID
+             * @example 5
+             */
+            expertProfileId: number;
+            /**
+             * @description 명인 이름 (센터명 또는 닉네임)
+             * @example 운동의신 센터
+             */
+            expertName: string;
+            /**
+             * @description 명인 프로필 이미지 URL
+             * @example https://...
+             */
+            expertAvatarUrl?: string | null;
+            /**
+             * @description 명인 등급
+             * @enum {string|null}
+             */
+            expertGrade?: "bronze" | "silver" | "gold" | "platinum" | "diamond" | null;
+            /**
+             * @description 평균 별점
+             * @example 4.5
+             */
+            avgRating: number;
+            /**
+             * @description 리뷰 수
+             * @example 12
+             */
+            reviewCount: number;
+            /**
+             * @description 이 고객이 해당 명인에게 리뷰를 작성했는지
+             * @example false
+             */
+            hasWrittenReview: boolean;
+        };
         DiagnosisRequestResponseDto: {
             /**
              * @description 진단요청 ID
@@ -1370,6 +1492,51 @@ export interface components {
              */
             keywordTags?: string[];
         };
+        ExpertListItemDto: {
+            /**
+             * @description 명인 프로필 ID
+             * @example 5
+             */
+            id: number;
+            /**
+             * @description 센터명
+             * @example 아쿠아퍼포먼스
+             */
+            name: string;
+            /**
+             * @description 지역
+             * @example 경기 고양시 일산서구
+             */
+            region: string;
+            /**
+             * @description 대표 서비스
+             * @example 재활 트레이닝
+             */
+            representativeService: string;
+            /**
+             * @description 키워드 태그
+             * @example [
+             *       "방문재활",
+             *       "선수트레이닝"
+             *     ]
+             */
+            keywordTags?: string[];
+            /**
+             * @description 대표 이미지 URL
+             * @example https://cdn.example.com/expert/5.jpg
+             */
+            imageUrl?: string;
+            /**
+             * @description 평균 평점
+             * @example 4.8
+             */
+            averageRating: number;
+            /**
+             * @description 리뷰 수
+             * @example 12
+             */
+            totalReviewCount: number;
+        };
         UpdateExpertProfileDto: {
             /**
              * @description 활동 지역
@@ -1418,14 +1585,14 @@ export interface components {
              */
             openChatUrl?: string;
         };
-        ImageUploadResponseDto: {
+        UploadedFilesResponseDto: {
             /**
-             * @description 업로드된 이미지 URL 목록
+             * @description 업로드된 파일 공개 URL 목록 (요청 순서 유지) — PATCH /expert-profiles/me에 넣어 저장
              * @example [
-             *       "https://cdn.example.com/img/1.jpg"
+             *       "https://files.example.com/experts/1/images/uuid.jpg"
              *     ]
              */
-            imageUrls: string[];
+            urls: string[];
         };
         FavoriteStatusDto: {
             /**
@@ -1485,7 +1652,7 @@ export interface components {
         };
         CreateReviewTokenDto: {
             /**
-             * @description 채팅방 ID (생략 시 명인 단위 링크)
+             * @description 채팅방 ID — 생략 시 명인 단위 링크 생성 (명인홈 링크 복사)
              * @example 1
              */
             chatRoomId?: number;
@@ -1505,7 +1672,7 @@ export interface components {
              * @description 한줄 소개
              * @example 국가대표 출신 재활 트레이너
              */
-            introduction?: string | null;
+            introduction?: string;
             /**
              * @description 지역
              * @example 경기 고양시 일산서구
@@ -1518,12 +1685,12 @@ export interface components {
              *       "선수트레이닝"
              *     ]
              */
-            keywordTags?: string[] | null;
+            keywordTags?: string[];
             /**
              * @description 대표 이미지 URL
              * @example https://cdn.example.com/expert/5.jpg
              */
-            imageUrl?: string | null;
+            imageUrl?: string;
             /**
              * @description 등급
              * @example gold
@@ -1550,6 +1717,30 @@ export interface components {
              * @enum {string}
              */
             mode: "expert" | "customer";
+        };
+        ReviewCreatedDto: {
+            /**
+             * @description 생성된 리뷰 ID
+             * @example 1
+             */
+            id: number;
+        };
+        CreateDiagnosisReviewDto: {
+            /**
+             * @description 명인 프로필 ID
+             * @example 5
+             */
+            expertProfileId: number;
+            /**
+             * @description 별점 (1~5)
+             * @example 5
+             */
+            rating: number;
+            /**
+             * @description 리뷰 코멘트
+             * @example 정말 도움이 되었습니다!
+             */
+            comment?: string;
         };
         ReviewResponseDto: {
             /**
@@ -1593,6 +1784,16 @@ export interface components {
              * @example false
              */
             deleteRequested: boolean;
+            /**
+             * @description 리뷰 대상 명인 프로필 ID
+             * @example 3
+             */
+            expertProfileId: number;
+            /**
+             * @description 리뷰 대상 명인 이름 (내가 쓴 리뷰 목록에서만 채움)
+             * @example 김명인
+             */
+            expertName?: string;
         };
         PaginatedReviewsDto: {
             data: components["schemas"]["ReviewResponseDto"][];
@@ -1629,6 +1830,18 @@ export interface components {
              * @example 5
              */
             photoReviewCount: number;
+        };
+        UpdateReviewDto: {
+            /**
+             * @description 별점 (1~5)
+             * @example 4
+             */
+            rating?: number;
+            /**
+             * @description 리뷰 코멘트
+             * @example 수정된 리뷰입니다.
+             */
+            comment?: string;
         };
         DeleteRequestResponseDto: {
             /**
@@ -2171,6 +2384,27 @@ export interface operations {
             };
         };
     };
+    DiagnosesController_getMySent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["DiagnosisSentItemDto"][];
+                    };
+                };
+            };
+        };
+    };
     DiagnosesController_createRequest: {
         parameters: {
             query?: never;
@@ -2326,6 +2560,31 @@ export interface operations {
             };
         };
     };
+    ExpertProfilesController_list: {
+        parameters: {
+            query: {
+                q: string;
+                region: string;
+                minRating: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["ExpertListItemDto"][];
+                    };
+                };
+            };
+        };
+    };
     ExpertProfilesController_getById: {
         parameters: {
             query?: never;
@@ -2349,9 +2608,11 @@ export interface operations {
             };
         };
     };
-    ExpertProfilesController_uploadImages: {
+    ExpertProfilesController_uploadFiles: {
         parameters: {
-            query?: never;
+            query: {
+                kind: "image" | "pdf";
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -2364,51 +2625,7 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ResponseDto"] & {
-                        data?: components["schemas"]["ImageUploadResponseDto"];
-                    };
-                };
-            };
-        };
-    };
-    ExpertProfilesController_deleteImage: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                index: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ResponseDto"] & {
-                        data?: components["schemas"]["ImageUploadResponseDto"];
-                    };
-                };
-            };
-        };
-    };
-    ExpertProfilesController_uploadCertificates: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ResponseDto"] & {
-                        data?: components["schemas"]["ImageUploadResponseDto"];
+                        data?: components["schemas"]["UploadedFilesResponseDto"];
                     };
                 };
             };
@@ -2546,6 +2763,27 @@ export interface operations {
             };
         };
     };
+    HomeController_getFeaturedExperts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["FeaturedExpertDto"][];
+                    };
+                };
+            };
+        };
+    };
     HomeController_getDiagnosisPreview: {
         parameters: {
             query?: never;
@@ -2587,6 +2825,31 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ResponseDto"] & {
                         data?: components["schemas"]["UpdateModeResponseDto"];
+                    };
+                };
+            };
+        };
+    };
+    ReviewsController_createReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDiagnosisReviewDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["ReviewCreatedDto"];
                     };
                 };
             };
@@ -2639,6 +2902,57 @@ export interface operations {
             };
         };
     };
+    ReviewsController_getExpertReviews: {
+        parameters: {
+            query?: {
+                sort?: "latest" | "best";
+                photoOnly?: boolean;
+                page?: number;
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                expertProfileId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["PaginatedReviewsDto"];
+                    };
+                };
+            };
+        };
+    };
+    ReviewsController_getExpertSummary: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                expertProfileId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["ReviewSummaryDto"];
+                    };
+                };
+            };
+        };
+    };
     ReviewsController_getMyWrittenReviews: {
         parameters: {
             query?: {
@@ -2660,6 +2974,33 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ResponseDto"] & {
                         data?: components["schemas"]["PaginatedReviewsDto"];
+                    };
+                };
+            };
+        };
+    };
+    ReviewsController_updateReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateReviewDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["ReviewResponseDto"];
                     };
                 };
             };
