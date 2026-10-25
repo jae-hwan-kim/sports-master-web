@@ -130,11 +130,12 @@ export function CustomerSettingsScreen() {
   const handleSaveConfirm = useCallback(() => {
     updateProfile(
       {
-        region: draftRegion || undefined,
-        sports: draftSport ? [draftSport] : undefined,
+        // 빈 값도 그대로 보내야 지운 항목이 서버에 반영됨
+        region: draftRegion,
+        sports: draftSport ? [draftSport] : [],
         gender: draftGender ? GENDER_TO_API[draftGender] : undefined,
         ageGroup: draftAgeGroup ? AGE_TO_API[draftAgeGroup] : undefined,
-        keywords: draftKeywords.length > 0 ? draftKeywords : undefined,
+        keywords: draftKeywords,
       },
       {
         onSuccess: () => {

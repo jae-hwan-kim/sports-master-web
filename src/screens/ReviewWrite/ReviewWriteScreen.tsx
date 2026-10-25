@@ -15,6 +15,8 @@ import { Image } from 'expo-image'
 
 import { ArrowBackIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text, TextInput } from '@/components/AppText'
+import { EmptyState } from '@/components/EmptyState'
+import { PanelScreen } from '@/components/PanelScreen'
 import { StarRating } from '@/components/StarRating'
 import { useCreateReview } from '@/hooks/useCreateReview'
 import { DiagnosisSentItem, useReviewableExperts } from '@/hooks/useReviewableExperts'
@@ -23,7 +25,7 @@ import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>
 
-const MAX_LENGTH = 300
+const MAX_LENGTH = 200
 
 // ---------------------------------------------------------------------------
 // 명인 카드 (단계 1)
@@ -113,66 +115,34 @@ function StepSelectExpert({ onSelect, onBack, insets }: StepSelectProps) {
   const keyExtractor = useCallback((item: DiagnosisSentItem) => String(item.expertProfileId), [])
 
   return (
-    <View className="flex-1 bg-[#F2F2F2]" style={{ paddingTop: insets.top }}>
-      {/* 네비바 */}
-      <View className="h-[60px] flex-row items-center justify-between px-4">
-        <Pressable
-          hitSlop={8}
-          accessibilityRole="button"
-          accessibilityLabel="뒤로가기"
-          onPress={onBack}
-        >
-          <ArrowBackIcon />
-        </Pressable>
-        <Text className="text-[17px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
-          리뷰 작성
-        </Text>
-        <View className="w-[44px]" />
-      </View>
-
-      {/* 안내 텍스트 */}
-      <View className="px-5 pb-3">
-        <Text className="text-[13px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
-          진단을 요청한 명인을 선택하세요
-        </Text>
-      </View>
-
-      {isLoading && (
+    <PanelScreen title="리뷰작성" subtitle="내가 만난 명인에 대한 후기를 알려주세요" onBack={onBack}>
+      {isLoading ? (
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator color="#1F2A43" />
         </View>
-      )}
-
-      {isError && (
+      ) : isError ? (
         <View className="flex-1 items-center justify-center">
           <Text className="text-[14px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
             목록을 불러오지 못했습니다
           </Text>
         </View>
-      )}
-
-      {!isLoading && !isError && (!experts || experts.length === 0) && (
-        <View className="flex-1 items-center justify-center">
-          <Text className="text-[14px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
-            진단을 요청한 명인이 없습니다
-          </Text>
-        </View>
-      )}
-
-      {!isLoading && !isError && experts && experts.length > 0 && (
+      ) : (
         <FlatList
-          data={experts}
+          data={experts ?? []}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            paddingHorizontal: 20,
+            paddingHorizontal: 32,
+            paddingTop: 28,
             paddingBottom: insets.bottom + 32,
             gap: 10,
+            flexGrow: 1,
           }}
+          ListEmptyComponent={<EmptyState title="리뷰 작성 가능한 명인이 없습니다" />}
         />
       )}
-    </View>
+    </PanelScreen>
   )
 }
 

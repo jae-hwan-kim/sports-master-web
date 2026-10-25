@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { CustomerTabNavigator } from '@/navigation/CustomerTabNavigator'
-import { MasterTabNavigator } from '@/navigation/MasterTabNavigator'
+import { ModeHomeNavigator } from '@/navigation/ModeHomeNavigator'
 import { CustomerMasterDetailScreen } from '@/screens/CustomerMasterDetail/CustomerMasterDetailScreen'
 import { CustomerSettingsScreen } from '@/screens/CustomerSettings/CustomerSettingsScreen'
 import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
@@ -80,8 +79,8 @@ export function RootNavigator() {
         component={MasterWelcomeScreen}
         options={{ gestureEnabled: false }}
       />
-      <Stack.Screen name="MasterHome" component={MasterTabNavigator} />
-      <Stack.Screen name="CustomerHome" component={CustomerTabNavigator} />
+      <Stack.Screen name="MasterHome" component={ModeHomeNavigator} />
+      <Stack.Screen name="CustomerHome" component={ModeHomeNavigator} />
       <Stack.Screen name="CustomerSettings" component={CustomerSettingsScreen} />
       <Stack.Screen name="MasterSettings" component={MasterSettingsScreen} />
       <Stack.Screen name="MasterProfileEdit" component={MasterProfileEditScreen} />

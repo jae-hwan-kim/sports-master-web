@@ -9,14 +9,19 @@ export type ReviewSummary = {
   photoReviewCount: number
 }
 
-async function fetchReviewSummary(): Promise<ReviewSummary> {
-  const { data } = await apiClient.get<{ data: ReviewSummary }>('/reviews/me/summary')
+async function fetchReviewSummary(expertProfileId?: number): Promise<ReviewSummary> {
+  const path =
+    expertProfileId === undefined
+      ? '/reviews/me/summary'
+      : `/reviews/experts/${expertProfileId}/summary`
+  const { data } = await apiClient.get<{ data: ReviewSummary }>(path)
   return data.data
 }
 
-export function useReviewSummary() {
+// expertProfileId 지정 시 해당 명인의 요약, 생략 시 내(명인) 요약
+export function useReviewSummary(expertProfileId?: number) {
   return useQuery({
-    queryKey: ['reviews', 'me', 'summary'],
-    queryFn: fetchReviewSummary,
+    queryKey: ['reviews', expertProfileId ?? 'me', 'summary'],
+    queryFn: () => fetchReviewSummary(expertProfileId),
   })
 }

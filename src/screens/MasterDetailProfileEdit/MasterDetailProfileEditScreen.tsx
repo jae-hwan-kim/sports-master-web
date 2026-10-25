@@ -5,7 +5,6 @@ import { useCallback, useEffect, useState } from 'react'
 import {
   FlatList,
   KeyboardAvoidingView,
-  Modal,
   Platform,
   Pressable,
   ScrollView,
@@ -17,6 +16,7 @@ import * as ImagePicker from 'expo-image-picker'
 
 import { ArrowBackIcon } from '@/assets/icons'
 import { Text, TextInput } from '@/components/AppText'
+import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { TextField } from '@/components/TextField'
 import { ImageUploadGrid } from '@/components/profile/ImageUploadGrid'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
@@ -24,7 +24,9 @@ import { ProfileCard } from '@/components/profile/ProfileCard'
 import { RegionSelector } from '@/components/profile/RegionSelector'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
+import { useCreateCertification } from '@/hooks/useCreateCertification'
 import { useUpdateExpertProfile } from '@/hooks/useUpdateExpertProfile'
+import { isLocalUri, uploadExpertFiles } from '@/hooks/useUploadExpertFiles'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 export function MasterDetailProfileEditScreen() {
@@ -38,12 +40,16 @@ export function MasterDetailProfileEditScreen() {
   const [centerPhone, setCenterPhone] = useState('')
   const [keywords, setKeywords] = useState<string[]>([])
   const [images, setImages] = useState<string[]>([])
-  const [portfolioPdfName, setPortfolioPdfName] = useState('')
+  // 기존 PDF는 원격 URL, 새로 고르면 로컬 uri — 저장 시 로컬만 업로드
+  const [portfolioPdf, setPortfolioPdf] = useState<{ uri: string; name: string } | null>(null)
   const [careerText, setCareerText] = useState('')
   const [certifications, setCertifications] = useState<string[]>([])
 
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
+  const [saving, setSaving] = useState(false)
+  const { mutateAsync: createCertification } = useCreateCertification()
 
   useEffect(() => {
     if (!profile) return
@@ -53,10 +59,11 @@ export function MasterDetailProfileEditScreen() {
     setKeywords(profile.keywordTags ?? [])
     setImages(profile.portfolioImageUrls ?? [])
     setCareerText(profile.careerText ?? '')
-    if (profile.educationPdfUrl) {
-      const segments = profile.educationPdfUrl.split('/')
-      setPortfolioPdfName(segments[segments.length - 1] ?? 'portfolio.pdf')
-    }
+    setPortfolioPdf(
+      profile.educationPdfUrl
+        ? { uri: profile.educationPdfUrl, name: 'portfolio.pdf' }
+        : null
+    )
   }, [profile])
 
   const regionCount = region ? region.split(', ').length : 0
@@ -80,7 +87,7 @@ export function MasterDetailProfileEditScreen() {
       copyToCacheDirectory: true,
     })
     if (!result.canceled && result.assets[0]) {
-      setPortfolioPdfName(result.assets[0].name)
+      setPortfolioPdf({ uri: result.assets[0].uri, name: result.assets[0].name })
     }
   }, [])
 
@@ -101,18 +108,54 @@ export function MasterDetailProfileEditScreen() {
     setCertifications((prev) => prev.filter((_, i) => i !== index))
   }, [])
 
-  const handleConfirmedSave = () => {
+  const handleConfirmedSave = async () => {
     setShowConfirmDialog(false)
-    updateMutation.mutate(
-      {
+    setSaving(true)
+    try {
+      // 새로 고른 로컬 이미지만 R2에 올리고, 원래 순서 그대로 원격 URL로 치환
+      const localImages = images.filter(isLocalUri)
+      const uploaded = await uploadExpertFiles(
+        'image',
+        localImages.map((uri) => ({ uri }))
+      )
+      let uploadedIndex = 0
+      const portfolioImageUrls = images.map((uri) =>
+        isLocalUri(uri) ? uploaded[uploadedIndex++] : uri
+      )
+
+      let educationPdfUrl = portfolioPdf?.uri ?? ''
+      if (portfolioPdf && isLocalUri(portfolioPdf.uri)) {
+        const [pdfUrl] = await uploadExpertFiles('pdf', [
+          { uri: portfolioPdf.uri, name: portfolioPdf.name, mimeType: 'application/pdf' },
+        ])
+        educationPdfUrl = pdfUrl
+      }
+
+      // 증명서는 자격증 검수 요청으로 1장씩 등록 — 성공분은 목록에서 비워 재시도 시 중복 등록 방지
+      for (const uri of certifications) {
+        await createCertification({ fileUri: uri, type: 'license' })
+        setCertifications((prev) => prev.filter((item) => item !== uri))
+      }
+
+      await updateMutation.mutateAsync({
         region: region || undefined,
         openChatUrl: openChatUrl || undefined,
         keywordTags: keywords.length > 0 ? keywords : undefined,
-        bio: careerText || undefined,
-        // portfolioImageUrls, educationPdfUrl, certificationUris — BE 스키마 추가 후 generate-types 실행 필요
-      },
-      { onSuccess: () => setShowSuccessDialog(true) }
-    )
+        careerText,
+        portfolioImageUrls,
+        educationPdfUrl,
+      })
+      setShowSuccessDialog(true)
+    } catch (error) {
+      const message = (error as { response?: { data?: { message?: string | string[] } } })
+        ?.response?.data?.message
+      setSaveError(
+        (Array.isArray(message) ? message[0] : message) ??
+          '저장에 실패했습니다. 잠시 후 다시 시도해 주세요.'
+      )
+    } finally {
+      setSaving(false)
+    }
   }
 
   const handleSuccessConfirm = () => {
@@ -146,7 +189,7 @@ export function MasterDetailProfileEditScreen() {
           <Pressable
             hitSlop={8}
             onPress={() => setShowConfirmDialog(true)}
-            disabled={updateMutation.isPending}
+            disabled={saving}
             className="h-[24px] w-[56px] items-center justify-center rounded-[4px] bg-[#1F2A43]"
             accessibilityRole="button"
             accessibilityLabel="수정완료"
@@ -155,7 +198,7 @@ export function MasterDetailProfileEditScreen() {
               className="text-[12px] text-[#F2F2F2]"
               style={{
                 fontFamily: 'Pretendard-SemiBold',
-                opacity: updateMutation.isPending ? 0.4 : 1,
+                opacity: saving ? 0.4 : 1,
               }}
             >
               수정완료
@@ -269,7 +312,7 @@ export function MasterDetailProfileEditScreen() {
                 style={{ fontFamily: 'Pretendard-Medium' }}
                 numberOfLines={1}
               >
-                {portfolioPdfName || 'PDF 용량 99MB 이하'}
+                {portfolioPdf?.name || 'PDF 용량 99MB 이하'}
               </Text>
             </Pressable>
           </View>
@@ -331,98 +374,33 @@ export function MasterDetailProfileEditScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      {/* 저장 확인 다이얼로그 */}
-      <Modal visible={showConfirmDialog} transparent animationType="fade">
-        <View className="flex-1 items-center justify-center bg-black/60">
-          <View className="w-[340px] overflow-hidden rounded-[16px] bg-[#F2F2F2]">
-            <View className="items-center gap-2 px-6 pb-6 pt-8">
-              <Text
-                className="text-[24px] text-[#07091C]"
-                style={{ fontFamily: 'Pretendard-SemiBold' }}
-              >
-                프로필을 저장할까요?
-              </Text>
-              <Text
-                className="text-[16px] text-[#74768E]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                수정사항이 즉시 반영됩니다
-              </Text>
-            </View>
-            <View className="h-[1px] bg-[#D9D9D9]" />
-            <View className="flex-row">
-              <Pressable
-                hitSlop={0}
-                onPress={() => setShowConfirmDialog(false)}
-                className="h-[50px] flex-1 items-center justify-center bg-[#102343]"
-                accessibilityRole="button"
-                accessibilityLabel="취소"
-              >
-                <Text
-                  className="text-[16px] text-white"
-                  style={{ fontFamily: 'Pretendard-SemiBold' }}
-                >
-                  취소
-                </Text>
-              </Pressable>
-              <View className="w-[1px] bg-[#D9D9D9]" />
-              <Pressable
-                hitSlop={0}
-                onPress={handleConfirmedSave}
-                className="h-[50px] flex-1 items-center justify-center bg-[#C6A75E]"
-                accessibilityRole="button"
-                accessibilityLabel="저장하기"
-              >
-                <Text
-                  className="text-[16px] text-white"
-                  style={{ fontFamily: 'Pretendard-SemiBold' }}
-                >
-                  저장하기
-                </Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      {/* 저장 확인 다이얼로그 — Figma: 저장하기(골드) / 취소 */}
+      <ConfirmDialog
+        visible={showConfirmDialog}
+        title="프로필을 저장할까요?"
+        description="수정사항이 즉시 반영됩니다"
+        confirmLabel="저장하기"
+        cancelLabel="취소"
+        onConfirm={handleConfirmedSave}
+        onCancel={() => setShowConfirmDialog(false)}
+      />
 
       {/* 저장 완료 다이얼로그 */}
-      <Modal visible={showSuccessDialog} transparent animationType="fade">
-        <View className="flex-1 items-center justify-center bg-black/60">
-          <View className="w-[340px] overflow-hidden rounded-[16px] bg-[#F2F2F2]">
-            <View className="items-center gap-2 px-6 pb-6 pt-8">
-              <Text
-                className="text-[24px] text-[#07091C]"
-                style={{ fontFamily: 'Pretendard-SemiBold' }}
-              >
-                저장이 완료되었습니다!
-              </Text>
-              <Text
-                className="text-[16px] text-[#74768E]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                언제든 수정이 가능합니다
-              </Text>
-            </View>
-            <View className="h-[1px] bg-[#D9D9D9]" />
-            <View className="items-center py-3">
-              <Pressable
-                hitSlop={8}
-                onPress={handleSuccessConfirm}
-                className="h-[50px] w-[145px] items-center justify-center rounded-[8px] bg-[#C6A75E]"
-                accessibilityRole="button"
-                accessibilityLabel="확인"
-              >
-                <Text
-                  className="text-[16px] text-white"
-                  style={{ fontFamily: 'Pretendard-SemiBold' }}
-                >
-                  확인
-                </Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <ConfirmDialog
+        visible={showSuccessDialog}
+        title="저장이 완료되었습니다!"
+        description="언제든 수정이 가능합니다"
+        onConfirm={handleSuccessConfirm}
+      />
+
+      {/* 저장 실패 다이얼로그 */}
+      <ConfirmDialog
+        visible={saveError !== null}
+        title="저장에 실패했습니다"
+        description={saveError ?? ''}
+        isError
+        onConfirm={() => setSaveError(null)}
+      />
     </View>
   )
 }

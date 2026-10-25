@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useState } from 'react'
-import { Linking, Modal, Platform, Pressable, ScrollView, View } from 'react-native'
+import { useCallback, useState } from 'react'
+import { FlatList, Linking, Modal, Platform, Pressable, ScrollView, View } from 'react-native'
 
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
@@ -25,15 +25,19 @@ import { mapSignUpError } from '@/utils/signupValidation'
 // 이 화면의 모달 state로 흡수 — 별도 화면/프레임으로 분리하지 않음
 type ModalKind = 'albumPermission' | 'missingImage' | 'skipConfirm' | 'submitError' | null
 
+// 자격증 이미지 최대 첨부 수 — 상세프로필 이미지 정책(최대 3개)과 통일
+const MAX_IMAGES = 3
+
+type CertificateImage = { uri: string; name: string }
+
 export function MasterVerificationScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useScreenInsets()
-  const [certificateImageUri, setCertificateImageUri] = useState<string | null>(null)
-  const [certificateFileName, setCertificateFileName] = useState<string | null>(null)
-  const [imagePreviewVisible, setImagePreviewVisible] = useState(false)
+  const [images, setImages] = useState<CertificateImage[]>([])
+  const [previewUri, setPreviewUri] = useState<string | null>(null)
   const [modal, setModal] = useState<ModalKind>(null)
   const [errorMessage, setErrorMessage] = useState('')
-  const { mutate: createCertification, isPending: submitting } = useCreateCertification()
+  const { mutateAsync: createCertification, isPending: submitting } = useCreateCertification()
   const { mutate: signUp, isPending: registering } = useSignUp()
   const { mutate: switchMode, isPending: switchingMode } = useSwitchMode()
   const setAuthSession = useAuthStore((state) => state.setAuthSession)
@@ -92,42 +96,42 @@ export function MasterVerificationScreen() {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       quality: 0.8,
+      allowsMultipleSelection: true,
+      selectionLimit: MAX_IMAGES - images.length,
     })
-    if (!result.canceled && result.assets[0]) {
-      const asset = result.assets[0]
-      setCertificateImageUri(asset.uri)
-      setCertificateFileName(asset.fileName ?? asset.uri.split('/').pop() ?? '파일')
+    if (!result.canceled) {
+      const picked = result.assets.map((asset) => ({
+        uri: asset.uri,
+        name: asset.fileName ?? asset.uri.split('/').pop() ?? '파일',
+      }))
+      setImages((prev) => [...prev, ...picked].slice(0, MAX_IMAGES))
     }
   }
 
-  const handleRemoveImage = () => {
-    setCertificateImageUri(null)
-    setCertificateFileName(null)
+  const handleRemoveImage = (uri: string) => {
+    setImages((prev) => prev.filter((image) => image.uri !== uri))
   }
 
   const handleSubmit = () => {
-    if (!certificateImageUri) {
+    if (images.length === 0) {
       setModal('missingImage')
       return
     }
 
-    confirmExpertMode(() => {
-      createCertification(
-        { fileUri: certificateImageUri, type: 'license' },
-        {
-          // 성공 시 심사 대기(pending) 상태로 전환됨 — 서버가 status: 'pending'으로 응답
-          onSuccess: () => {
-            navigation.navigate('MasterWelcome')
-          },
-          onError: (error) => {
-            const message =
-              (error as { response?: { data?: { message?: string } } })?.response?.data?.message ??
-              '자격증 이미지 업로드에 실패했습니다. 다시 시도해 주세요.'
-            setErrorMessage(message)
-            setModal('submitError')
-          },
+    confirmExpertMode(async () => {
+      try {
+        // 서버는 요청당 파일 1개 — 이미지마다 자격증 1건씩 등록 (각각 심사 대기 pending)
+        for (const image of images) {
+          await createCertification({ fileUri: image.uri, type: 'license' })
         }
-      )
+        navigation.navigate('MasterWelcome')
+      } catch (error) {
+        const message =
+          (error as { response?: { data?: { message?: string } } })?.response?.data?.message ??
+          '자격증 이미지 업로드에 실패했습니다. 다시 시도해 주세요.'
+        setErrorMessage(message)
+        setModal('submitError')
+      }
     })
   }
 
@@ -137,6 +141,38 @@ export function MasterVerificationScreen() {
     // (목적에 맞는 "인증 보류" 엔드포인트가 백엔드에 없음 — notes 참고)
     confirmExpertMode(() => navigation.navigate('MasterWelcome'))
   }
+
+  const renderImageRow = useCallback(
+    ({ item }: { item: CertificateImage }) => (
+      <View className="h-[32px] flex-row items-center">
+        <Pressable
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel="이미지 크게 보기"
+          onPress={() => setPreviewUri(item.uri)}
+          className="flex-1"
+        >
+          <Text
+            className="text-[13px] font-medium text-black"
+            numberOfLines={1}
+            ellipsizeMode="middle"
+          >
+            {item.name}
+          </Text>
+        </Pressable>
+        <Pressable
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel="이미지 선택 취소"
+          onPress={() => handleRemoveImage(item.uri)}
+          className="ml-2 h-[24px] w-[24px] items-center justify-center"
+        >
+          <Text className="text-[16px] font-semibold text-gray2">✕</Text>
+        </Pressable>
+      </View>
+    ),
+    []
+  )
 
   const handleOpenSettings = () => {
     setModal(null)
@@ -175,32 +211,26 @@ export function MasterVerificationScreen() {
           })}
         >
           <View className="absolute left-[25px] top-[25px] h-[150px] w-[250px] overflow-hidden rounded-xl border border-[#C6A75E]">
-            {certificateImageUri ? (
-              <View className="flex-1 flex-row items-center px-3">
-                <Pressable
-                  hitSlop={8}
-                  accessibilityRole="button"
-                  accessibilityLabel="이미지 크게 보기"
-                  onPress={() => setImagePreviewVisible(true)}
-                  className="flex-1"
-                >
-                  <Text
-                    className="text-[13px] font-medium text-black"
-                    numberOfLines={1}
-                    ellipsizeMode="middle"
+            {images.length > 0 ? (
+              <View className="flex-1 justify-center px-3">
+                <FlatList
+                  data={images}
+                  keyExtractor={(image) => image.uri}
+                  scrollEnabled={false}
+                  style={{ flexGrow: 0 }}
+                  renderItem={renderImageRow}
+                />
+                {images.length < MAX_IMAGES && (
+                  <Pressable
+                    hitSlop={8}
+                    accessibilityRole="button"
+                    accessibilityLabel="자격증 이미지 추가"
+                    onPress={handlePickImage}
+                    className="mt-1 h-[44px] w-[44px] items-center justify-center self-center"
                   >
-                    {certificateFileName}
-                  </Text>
-                </Pressable>
-                <Pressable
-                  hitSlop={8}
-                  accessibilityRole="button"
-                  accessibilityLabel="이미지 선택 취소"
-                  onPress={handleRemoveImage}
-                  className="ml-2 h-[24px] w-[24px] items-center justify-center"
-                >
-                  <Text className="text-[16px] font-semibold text-gray2">✕</Text>
-                </Pressable>
+                    <AddCircleIcon />
+                  </Pressable>
+                )}
               </View>
             ) : (
               <View className="flex-1 items-center justify-center px-4">
@@ -288,24 +318,24 @@ export function MasterVerificationScreen() {
 
       {/* 이미지 크게 보기 모달 */}
       <Modal
-        visible={imagePreviewVisible}
+        visible={previewUri !== null}
         transparent
         animationType="fade"
         statusBarTranslucent
-        onRequestClose={() => setImagePreviewVisible(false)}
+        onRequestClose={() => setPreviewUri(null)}
       >
         <View className="flex-1 items-center justify-center bg-black/80">
           <Pressable
             hitSlop={8}
             accessibilityRole="button"
             accessibilityLabel="이미지 닫기"
-            onPress={() => setImagePreviewVisible(false)}
+            onPress={() => setPreviewUri(null)}
             className="absolute right-4 top-[60px] z-10 h-[44px] w-[44px] items-center justify-center"
           >
             <Text className="text-[24px] font-bold text-white">✕</Text>
           </Pressable>
           <Image
-            source={{ uri: certificateImageUri ?? '' }}
+            source={{ uri: previewUri ?? '' }}
             className="aspect-square w-full"
             contentFit="contain"
           />

@@ -4,8 +4,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback } from 'react'
 import { FlatList, Platform, Pressable, View } from 'react-native'
 
-import { ArrowBackIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
+import { StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
+import { EmptyState } from '@/components/EmptyState'
+import { PanelScreen } from '@/components/PanelScreen'
 import { StarRating } from '@/components/StarRating'
 import { type WrittenReviewItem, useMyWrittenReviews } from '@/hooks/useMyWrittenReviews'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
@@ -91,7 +93,6 @@ function ReviewCard({ item }: { item: WrittenReviewItem }) {
 }
 
 export function MyReviewsScreen() {
-  const navigation = useNavigation<NavProp>()
   const insets = useScreenInsets()
   const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useMyWrittenReviews()
@@ -104,25 +105,7 @@ export function MyReviewsScreen() {
   )
 
   return (
-    <View className="flex-1 bg-[#F2F2F2]" style={{ paddingTop: insets.top }}>
-      {/* 네비바 */}
-      <View className="h-[60px] flex-row items-center px-4">
-        <Pressable
-          hitSlop={8}
-          accessibilityRole="button"
-          accessibilityLabel="뒤로가기"
-          onPress={() => navigation.goBack()}
-        >
-          <ArrowBackIcon />
-        </Pressable>
-        <Text
-          className="ml-3 text-[20px] text-[#1F2A43]"
-          style={{ fontFamily: 'Pretendard-ExtraBold' }}
-        >
-          내가 작성한 리뷰
-        </Text>
-      </View>
-
+    <PanelScreen title="내가 작성한 리뷰" subtitle="내가 쓴 리뷰를 수정하고 삭제할 수 있습니다">
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
           <Text className="text-[14px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
@@ -140,7 +123,8 @@ export function MyReviewsScreen() {
           data={reviews}
           keyExtractor={(item) => String(item.id)}
           contentContainerStyle={{
-            paddingHorizontal: 16,
+            paddingHorizontal: 32,
+            paddingTop: 28,
             paddingBottom: insets.bottom + 24,
             flexGrow: 1,
           }}
@@ -159,19 +143,10 @@ export function MyReviewsScreen() {
               </Text>
             ) : null
           }
-          ListEmptyComponent={
-            <View className="flex-1 items-center justify-center pt-20">
-              <Text
-                className="text-[14px] text-[#74768E]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                아직 작성한 리뷰가 없습니다
-              </Text>
-            </View>
-          }
+          ListEmptyComponent={<EmptyState title="내가 작성한 리뷰가 없습니다" />}
           renderItem={renderItem}
         />
       )}
-    </View>
+    </PanelScreen>
   )
 }

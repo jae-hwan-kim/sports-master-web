@@ -43,6 +43,8 @@ export function useFavoriteExpert(expertProfileId: number) {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(queryKey, data)
+      // 저장한 명인 목록·탐색 화면 찜 표시 갱신
+      queryClient.invalidateQueries({ queryKey: ['favorite-experts', 'me'] })
     },
     onError: (error, _, context) => {
       if (context?.previous !== undefined) {

@@ -17,12 +17,13 @@ import {
 
 import { Image } from 'expo-image'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import { SearchOutlineIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text, TextInput } from '@/components/AppText'
 import { useExperts } from '@/hooks/useExperts'
+import { useFavoriteExperts } from '@/hooks/useFavoriteExperts'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import type { RootStackParamList } from '@/navigation/RootNavigator'
 
@@ -328,10 +329,34 @@ export function CustomerExploreScreen() {
   const insets = useScreenInsets()
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
-  const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set())
+  const queryClient = useQueryClient()
+  // 찜 여부는 서버 찜 목록 기준 + 토글 직후 낙관적 반영값(overrides)
+  const { data: favorites } = useFavoriteExperts()
+  const serverFavoriteIds = useMemo(() => new Set(favorites?.map((f) => f.id)), [favorites])
+  const [favoriteOverrides, setFavoriteOverrides] = useState<Map<number, boolean>>(new Map())
+
+  const setOverride = useCallback((id: number, value: boolean | undefined) => {
+    setFavoriteOverrides((prev) => {
+      const next = new Map(prev)
+      if (value === undefined) next.delete(id)
+      else next.set(id, value)
+      return next
+    })
+  }, [])
 
   const { mutate: toggleFavoriteAPI } = useMutation({
-    mutationFn: (id: number) => apiClient.post(`/favorite-experts/${id}`),
+    mutationFn: async (id: number) => {
+      const { data } = await apiClient.post<{ data: { isFavorited: boolean } }>(
+        `/favorite-experts/${id}`
+      )
+      return data.data
+    },
+    onSuccess: (result, id) => {
+      setOverride(id, result.isFavorited)
+      queryClient.invalidateQueries({ queryKey: ['favorite-experts', 'me'] })
+      queryClient.invalidateQueries({ queryKey: ['favoriteExpert', id] })
+    },
+    onError: (_error, id) => setOverride(id, undefined),
   })
 
   const [searchText, setSearchText] = useState('')
@@ -366,9 +391,9 @@ export function CustomerExploreScreen() {
         bio: e.representativeService,
         specialties: e.keywordTags ?? [],
         profileImageUrl: e.imageUrl ?? undefined,
-        isFavorite: favoriteIds.has(e.id),
+        isFavorite: favoriteOverrides.get(e.id) ?? serverFavoriteIds.has(e.id),
       })) ?? [],
-    [experts, favoriteIds]
+    [experts, favoriteOverrides, serverFavoriteIds]
   )
 
   const openRegionPicker = useCallback(() => {
@@ -381,7 +406,8 @@ export function CustomerExploreScreen() {
     setSelectedProvince(pendingProvince)
     setSelectedDistrict(pendingDistrict)
     const isWholeRegion = pendingDistrict === '전국' || pendingDistrict === `${pendingProvince}전체`
-    const label = isWholeRegion ? pendingProvince : `${pendingProvince} ${pendingDistrict}`
+    // 명인 region 저장 형식(RegionSelector)과 동일하게 '시/도 > 구'
+    const label = isWholeRegion ? pendingProvince : `${pendingProvince} > ${pendingDistrict}`
     setFilterRegion(label)
     setRegionPickerVisible(false)
   }, [pendingProvince, pendingDistrict])
@@ -394,15 +420,11 @@ export function CustomerExploreScreen() {
 
   const toggleFavorite = useCallback(
     (id: number) => {
-      setFavoriteIds((prev) => {
-        const next = new Set(prev)
-        if (next.has(id)) next.delete(id)
-        else next.add(id)
-        return next
-      })
+      const current = favoriteOverrides.get(id) ?? serverFavoriteIds.has(id)
+      setOverride(id, !current)
       toggleFavoriteAPI(id)
     },
-    [toggleFavoriteAPI]
+    [favoriteOverrides, serverFavoriteIds, setOverride, toggleFavoriteAPI]
   )
 
   const renderMasterCard = useCallback(

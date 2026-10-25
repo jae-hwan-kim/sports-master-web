@@ -31,7 +31,7 @@ type RouteProp = {
   }
 }
 
-const MAX_LENGTH = 300
+const MAX_LENGTH = 200
 
 const CARD_SHADOW = Platform.select({
   ios: {

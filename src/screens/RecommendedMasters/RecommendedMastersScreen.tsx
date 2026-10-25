@@ -210,7 +210,10 @@ export function RecommendedMastersScreen() {
         description="언제든 다시 탐색이 가능합니다"
         onConfirm={() => {
           setExitVisible(false)
-          navigation.popTo('CustomerHome')
+          // 모드 토글 후엔 홈 루트 이름이 'MasterHome'일 수 있음 — 스택 루트가 홈이면 그대로 복귀
+          const rootName = navigation.getState().routes[0]?.name
+          if (rootName === 'MasterHome' || rootName === 'CustomerHome') navigation.popToTop()
+          else navigation.reset({ index: 0, routes: [{ name: 'CustomerHome' }] })
         }}
       />
     </View>

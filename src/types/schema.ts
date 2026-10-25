@@ -1392,6 +1392,11 @@ export interface components {
              */
             bio?: string;
             /**
+             * @description 경력 텍스트 (줄바꿈 구분)
+             * @example 2018-현재 강남 스포츠 클리닉 원장
+             */
+            careerText?: string;
+            /**
              * @description 키워드 태그 목록
              * @example [
              *       "재활",
@@ -1400,6 +1405,13 @@ export interface components {
              *     ]
              */
             keywordTags?: string[];
+            /** @description 소개 이미지 URL 목록 (최대 3장, 첫 장이 대표) — POST me/uploads?kind=image 결과 URL만 허용 */
+            portfolioImageUrls?: string[];
+            /**
+             * @description 포트폴리오 PDF URL — POST me/uploads?kind=pdf 결과 URL, 빈 문자열이면 삭제
+             * @example https://files.example.com/experts/1/pdf/uuid.pdf
+             */
+            educationPdfUrl?: string;
             /**
              * @description 카카오 오픈채팅 URL
              * @example https://open.kakao.com/o/example

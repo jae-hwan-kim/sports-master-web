@@ -90,10 +90,12 @@ function CustomTabBar({
   )
 }
 
-export function MasterTabNavigator() {
+// onTabFocus: ModeHomeNavigator가 홈 탭일 때만 공용 상단을 표시하기 위해 포커스된 탭 이름을 받는다
+export function MasterTabNavigator({ onTabFocus }: { onTabFocus?: (tabName: string) => void }) {
   return (
     <Tab.Navigator
       screenOptions={{ headerShown: false }}
+      screenListeners={({ route }) => ({ focus: () => onTabFocus?.(route.name) })}
       tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tab.Screen name="HomeTab" component={MasterHomeScreen} />

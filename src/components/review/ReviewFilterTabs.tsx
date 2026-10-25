@@ -8,7 +8,8 @@ type Props = {
   activeSort: ReviewSort
   onSortChange: (sort: ReviewSort) => void
   isDeleteMode: boolean
-  onDeleteModeToggle: () => void
+  // 생략 시 삭제요청 버튼 숨김 (고객이 보는 명인 리뷰)
+  onDeleteModeToggle?: () => void
 }
 
 type TabItem = { key: ReviewSort; label: string }
@@ -57,6 +58,7 @@ export function ReviewFilterTabs({
       <View className="flex-1" />
 
       {/* 삭제요청 버튼 */}
+      {onDeleteModeToggle && (
       <Pressable
         hitSlop={8}
         onPress={onDeleteModeToggle}
@@ -73,6 +75,7 @@ export function ReviewFilterTabs({
           삭제요청
         </Text>
       </Pressable>
+      )}
     </View>
   )
 }

@@ -10,18 +10,14 @@ import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
-import { ArrowNextIcon, LinkIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
+import { ArrowNextIcon, LinkIcon, StarMedalIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
-import { HomeGreeting } from '@/components/HomeGreeting'
 import { useDoubleBackToExit } from '@/hooks/useAndroidBack'
 import { useCopyReviewLink } from '@/hooks/useCopyReviewLink'
-import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
-import { useSwitchMode } from '@/hooks/useSwitchMode'
 import type { MasterTabParamList } from '@/navigation/MasterTabNavigator'
-import { useAuthStore } from '@/store/authStore'
 import type { components } from '@/types/schema'
 
 import masterBg from '../../assets/icons/master-background.png'
@@ -46,26 +42,6 @@ async function fetchDiagnosisPreview(): Promise<DiagnosisIncomingItem[]> {
     '/home/diagnosis-requests/preview'
   )
   return data.data
-}
-
-function MasterModeBadge({ onPress, disabled }: { onPress: () => void; disabled?: boolean }) {
-  return (
-    <Pressable
-      hitSlop={8}
-      onPress={onPress}
-      disabled={disabled}
-      className="h-[20px] w-[80px] justify-center overflow-hidden rounded-[10px] bg-gray2"
-    >
-      {/* 활성 pill — 왼쪽(명인모드 선택됨) */}
-      <View className="absolute bottom-[2px] left-[2px] top-[2px] w-[37px] rounded-[8px] bg-[#F2F2F2]" />
-      <Text
-        className="text-center font-pretendard-semibold text-gray3"
-        style={{ fontSize: 7, paddingRight: 41, lineHeight: 14 }}
-      >
-        명인모드
-      </Text>
-    </Pressable>
-  )
 }
 
 function StatBox({ value, label }: { value: string; label: string }) {
@@ -123,10 +99,7 @@ function EmptyHasTip() {
 export function MasterHomeScreen() {
   const insets = useScreenInsets()
   useDoubleBackToExit()
-  const rootNav = useRootNavigation()
   const tabNav = useNavigation<BottomTabNavigationProp<MasterTabParamList>>()
-  const setModeSelected = useAuthStore((s) => s.setModeSelected)
-  const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const { data: expertProfile, isError: expertProfileError } = useQuery({
     queryKey: ['expertGrade'],
     queryFn: fetchExpertGrade,
@@ -148,21 +121,6 @@ export function MasterHomeScreen() {
   const avgRating = expertProfile ? String(Number(expertProfile.averageRating).toFixed(1)) : '-'
   const topPercentile =
     expertProfile?.topPercentile != null ? `${expertProfile.topPercentile}%` : '-'
-
-  const [switchModeVisible, setSwitchModeVisible] = useState(false)
-
-  const handleModeSwitchConfirm = () => {
-    setSwitchModeVisible(false)
-    switchMode(
-      { mode: 'customer' },
-      {
-        onSuccess: () => {
-          setModeSelected('customer')
-          rootNav?.reset({ index: 0, routes: [{ name: 'CustomerHome' }] })
-        },
-      }
-    )
-  }
 
   // Figma 791:4558 명인홈_링크복사 완료 — 확인 시 리뷰 관리 화면으로 이동
   const [linkCopiedVisible, setLinkCopiedVisible] = useState(false)
@@ -212,23 +170,8 @@ export function MasterHomeScreen() {
           }}
         />
 
-        {/* 내비게이션 바 */}
-        <View className="h-14 flex-row items-center justify-between px-4">
-          {/* 좌측: 아바타 + 인사말 — 고객홈과 동일 컴포넌트 */}
-          <HomeGreeting />
-          {/* 우측: 모드 배지 + 설정 */}
-          <View className="flex-row items-center">
-            <MasterModeBadge onPress={() => setSwitchModeVisible(true)} disabled={isSwitching} />
-            <Pressable
-              hitSlop={8}
-              onPress={() => rootNav?.navigate('MasterSettings')}
-              accessibilityRole="button"
-              accessibilityLabel="설정"
-            >
-              <SettingsIcon size={44} color="#1F2A43" />
-            </Pressable>
-          </View>
-        </View>
+        {/* 상단(인사말 + 모드 토글 + 설정) 자리 — 실제 상단은 ModeHomeNavigator가 overlay로 그림 */}
+        <View className="h-14" />
 
         {/* 리뷰 링크 배너 — height:54 */}
         <Pressable
@@ -360,17 +303,6 @@ export function MasterHomeScreen() {
         onConfirm={() => setLinkErrorVisible(false)}
       />
 
-      {/* 모드 전환 확인 팝업 — 고객홈과 동일 패턴 */}
-      <ConfirmDialog
-        visible={switchModeVisible}
-        title="고객모드로 전환"
-        description="고객모드로 전환합니까?"
-        confirmLabel="전환하기"
-        cancelLabel="취소"
-        confirmLoading={isSwitching}
-        onConfirm={handleModeSwitchConfirm}
-        onCancel={() => setSwitchModeVisible(false)}
-      />
     </View>
   )
 }

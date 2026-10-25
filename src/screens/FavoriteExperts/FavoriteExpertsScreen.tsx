@@ -6,8 +6,10 @@ import { FlatList, Platform, Pressable, View } from 'react-native'
 
 import { Image } from 'expo-image'
 
-import { ArrowBackIcon, ProfilePersonIcon, StarFillIcon } from '@/assets/icons'
+import { ProfilePersonIcon, StarFillIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
+import { EmptyState } from '@/components/EmptyState'
+import { PanelScreen } from '@/components/PanelScreen'
 import { type FavoriteExpertItem, useFavoriteExperts } from '@/hooks/useFavoriteExperts'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
@@ -88,25 +90,7 @@ export function FavoriteExpertsScreen() {
   )
 
   return (
-    <View className="flex-1 bg-[#F2F2F2]" style={{ paddingTop: insets.top }}>
-      {/* 네비바 */}
-      <View className="h-[60px] flex-row items-center px-4">
-        <Pressable
-          hitSlop={8}
-          accessibilityRole="button"
-          accessibilityLabel="뒤로가기"
-          onPress={() => navigation.goBack()}
-        >
-          <ArrowBackIcon />
-        </Pressable>
-        <Text
-          className="ml-3 text-[20px] text-[#1F2A43]"
-          style={{ fontFamily: 'Pretendard-ExtraBold' }}
-        >
-          저장한 명인
-        </Text>
-      </View>
-
+    <PanelScreen title="저장한 명인" subtitle="마음에 드는 명인을 모아볼 수 있습니다">
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
           <Text className="text-[14px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
@@ -124,24 +108,16 @@ export function FavoriteExpertsScreen() {
           data={experts ?? []}
           keyExtractor={(item) => String(item.id)}
           contentContainerStyle={{
-            paddingHorizontal: 16,
+            paddingHorizontal: 32,
+            paddingTop: 28,
             paddingBottom: insets.bottom + 24,
             flexGrow: 1,
           }}
           ItemSeparatorComponent={() => <View className="h-2" />}
-          ListEmptyComponent={
-            <View className="flex-1 items-center justify-center pt-20">
-              <Text
-                className="text-[14px] text-[#74768E]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                아직 찜한 명인이 없습니다
-              </Text>
-            </View>
-          }
+          ListEmptyComponent={<EmptyState title="아직 저장한 명인이 없습니다" />}
           renderItem={renderItem}
         />
       )}
-    </View>
+    </PanelScreen>
   )
 }

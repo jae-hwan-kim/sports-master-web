@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useMemo, useState } from 'react'
@@ -40,6 +40,10 @@ function toReviewData(item: ReviewItemHook): ReviewData {
 export function MasterReviewScreen() {
   const insets = useScreenInsets()
   const nav = useNavigation<NativeStackNavigationProp<MasterProfileStackParamList>>()
+  // 고객이 명인 상세에서 들어오면 expertProfileId가 있음 → 그 명인의 리뷰를 읽기 전용으로 표시
+  const expertProfileId = (useRoute().params as { expertProfileId?: number } | undefined)
+    ?.expertProfileId
+  const readOnly = expertProfileId !== undefined
 
   const [activeSort, setActiveSort] = useState<ReviewSort>('latest')
   const [isDeleteMode, setIsDeleteMode] = useState(false)
@@ -49,7 +53,7 @@ export function MasterReviewScreen() {
 
   const sortParam = activeSort === 'best' ? 'best' : 'latest'
 
-  const { data: summary } = useReviewSummary()
+  const { data: summary } = useReviewSummary(expertProfileId)
 
   const {
     data: reviewsData,
@@ -58,6 +62,7 @@ export function MasterReviewScreen() {
     isFetchingNextPage,
   } = useMyReviews({
     sort: sortParam,
+    expertProfileId,
   })
 
   const { mutate: deleteReviewRequest, isPending: isDeleting } = useDeleteReviewRequest()
@@ -199,7 +204,7 @@ export function MasterReviewScreen() {
           activeSort={activeSort}
           onSortChange={handleSortChange}
           isDeleteMode={isDeleteMode}
-          onDeleteModeToggle={handleDeleteModeToggle}
+          onDeleteModeToggle={readOnly ? undefined : handleDeleteModeToggle}
         />
       </View>
     </>
@@ -229,6 +234,9 @@ export function MasterReviewScreen() {
       >
         아직 고객의 리뷰가 없습니다
       </Text>
+      {/* 링크 요청 안내는 명인 본인에게만 */}
+      {!readOnly && (
+        <>
       <Text
         style={{
           fontFamily: 'Pretendard-Medium',
@@ -266,6 +274,8 @@ export function MasterReviewScreen() {
           링크로 리뷰 요청하기
         </Text>
       </Pressable>
+        </>
+      )}
     </View>
   )
 

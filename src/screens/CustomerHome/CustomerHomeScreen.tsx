@@ -5,18 +5,14 @@ import { FlatList, Platform, Pressable, View } from 'react-native'
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import { LocationOnIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
+import { LocationOnIcon, StarMedalIcon } from '@/assets/icons'
 import LogoSvg from '@/assets/icons/logo.svg'
 import { Text } from '@/components/AppText'
-import { ConfirmDialog } from '@/components/ConfirmDialog'
-import { HomeGreeting } from '@/components/HomeGreeting'
 import { ExpertDetailModal } from '@/components/expert/ExpertDetailModal'
 import { useDoubleBackToExit } from '@/hooks/useAndroidBack'
 import { type FeaturedExpert, useFeaturedExperts } from '@/hooks/useFeaturedExperts'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
-import { useSwitchMode } from '@/hooks/useSwitchMode'
-import { useAuthStore } from '@/store/authStore'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -47,27 +43,6 @@ function toMasterCard(expert: FeaturedExpert): MasterCardData {
 // ---------------------------------------------------------------------------
 // Sub-components
 // ---------------------------------------------------------------------------
-
-/** 고객모드 전환 배지 — 오른쪽(고객모드) 활성 상태 */
-function CustomerModeBadge({ onPress, disabled }: { onPress: () => void; disabled?: boolean }) {
-  return (
-    <Pressable
-      hitSlop={8}
-      onPress={onPress}
-      disabled={disabled}
-      className="h-[20px] w-[80px] justify-center overflow-hidden rounded-[10px] bg-gray2"
-    >
-      {/* 활성 영역 (오른쪽 절반 = 고객모드) — Figma 활성 pill bg: #F2F2F2 */}
-      <View className="absolute bottom-[2px] right-[2px] top-[2px] w-[37px] rounded-[8px] bg-[#F2F2F2]" />
-      <Text
-        className="text-center font-pretendard-semibold text-gray3"
-        style={{ fontSize: 7, paddingLeft: 41, lineHeight: 14 }}
-      >
-        고객모드
-      </Text>
-    </Pressable>
-  )
-}
 
 /** 카테고리 칩 */
 function CategoryChip({ label }: { label: string }) {
@@ -191,28 +166,11 @@ export function CustomerHomeScreen() {
   const insets = useScreenInsets()
   useDoubleBackToExit()
   const rootNav = useRootNavigation()
-  const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
-  const setModeSelected = useAuthStore((s) => s.setModeSelected)
   const { data: featuredExperts } = useFeaturedExperts()
   const featuredMasters = useMemo(
     () => (featuredExperts ?? []).map(toMasterCard),
     [featuredExperts]
   )
-
-  const [switchModeVisible, setSwitchModeVisible] = useState(false)
-
-  const handleModeSwitchConfirm = () => {
-    setSwitchModeVisible(false)
-    switchMode(
-      { mode: 'expert' },
-      {
-        onSuccess: () => {
-          setModeSelected('expert')
-          rootNav?.reset({ index: 0, routes: [{ name: 'MasterHome' }] })
-        },
-      }
-    )
-  }
 
   // 이달의 소개 명인 '자세히보기' — 화면 이동 대신 큰 모달 (Figma 2321:9033)
   const [detailExpertId, setDetailExpertId] = useState<number | null>(null)
@@ -238,28 +196,6 @@ export function CustomerHomeScreen() {
   /** FlatList ListHeaderComponent — 내비게이션 바 + 배너 + 히어로 카드 + 섹션 헤더 */
   const listHeader = (
     <View>
-      {/* ── 내비게이션 바 ────────────────────────────────────────── */}
-      {/* bg-transparent: 루트 bg-[#F2F2F2] 투과 */}
-      <View className="bg-transparent px-[16px]" style={{ paddingTop: insets.top }}>
-        <View className="h-[56px] flex-row items-center">
-          {/* 프로필 아바타 + 인사말 — 명인홈과 동일 컴포넌트 */}
-          <HomeGreeting />
-
-          {/* 모드전환 배지 + 설정 아이콘 */}
-          <View className="flex-row items-center">
-            <CustomerModeBadge onPress={() => setSwitchModeVisible(true)} disabled={isSwitching} />
-            <Pressable
-              hitSlop={8}
-              onPress={() => rootNav?.navigate('CustomerSettings')}
-              accessibilityRole="button"
-              accessibilityLabel="설정"
-            >
-              <SettingsIcon size={44} color="#1F2A43" />
-            </Pressable>
-          </View>
-        </View>
-      </View>
-
       {/* ── 리뷰 작성 배너 ────────────────────────────────────────── */}
       {/* bg-transparent: 루트 bg-[#F2F2F2] 투과 */}
       <View className="bg-transparent px-[16px] pb-[4px]">
@@ -344,6 +280,9 @@ export function CustomerHomeScreen() {
   return (
     // 화면 전체 배경색 — Figma 캔버스 bg: #F2F2F2
     <View className="flex-1 bg-[#F2F2F2]">
+      {/* 상단(인사말 + 모드 토글 + 설정) 자리 — 실제 상단은 ModeHomeNavigator가 overlay로 그림.
+          목록은 이 아래에서만 스크롤돼 상단과 겹치지 않음 */}
+      <View style={{ height: insets.top + 56 }} />
       <FlatList
         data={featuredMasters}
         keyExtractor={(item) => String(item.id)}
@@ -360,17 +299,6 @@ export function CustomerHomeScreen() {
         onPressReview={handleDetailReview}
       />
 
-      {/* ── 모드 전환 확인 팝업 ─────────────────────────────────── */}
-      <ConfirmDialog
-        visible={switchModeVisible}
-        title="명인모드로 전환"
-        description="명인모드로 전환합니까?"
-        confirmLabel="전환하기"
-        cancelLabel="취소"
-        confirmLoading={isSwitching}
-        onConfirm={handleModeSwitchConfirm}
-        onCancel={() => setSwitchModeVisible(false)}
-      />
     </View>
   )
 }
