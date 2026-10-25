@@ -7,7 +7,7 @@ import { Alert, Pressable, ScrollView, View } from 'react-native'
 import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
-import { ArrowNextIcon, SettingsIcon } from '@/assets/icons'
+import { ArrowNextIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
@@ -75,7 +75,7 @@ export function MasterProfileEditScreen() {
 
   return (
     <View className="flex-1 bg-[#F2F2F2]">
-      <ScreenHeader onBack={() => navigation.goBack()} rightIcon={<SettingsIcon size={44} />} />
+      <ScreenHeader onBack={() => navigation.goBack()} />
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {/* 타이틀 */}

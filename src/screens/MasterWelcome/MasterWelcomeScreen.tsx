@@ -2,6 +2,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
+import { useCallback } from 'react'
 import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient'
@@ -9,6 +10,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { ArrowNextIcon } from '@/assets/icons'
 import bgImage from '@/assets/icons/background.png'
 import { Text } from '@/components/AppText'
+import { useAndroidBack } from '@/hooks/useAndroidBack'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
@@ -16,10 +18,18 @@ export function MasterWelcomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useScreenInsets()
 
-  const handleGoHome = () => {
+  const handleGoHome = useCallback(() => {
     // NOTE: 명인 인증 요청 접수 상태 표시는 홈 화면 진입 후 처리
-    navigation.navigate('MasterHome')
-  }
+    navigation.reset({ index: 0, routes: [{ name: 'MasterHome' }] })
+  }, [navigation])
+
+  // 계정 생성 후 화면 — 뒤로가기로 가입 단계에 돌아가지 않고 홈으로 진행
+  useAndroidBack(
+    useCallback(() => {
+      handleGoHome()
+      return true
+    }, [handleGoHome])
+  )
 
   return (
     <Pressable onPress={handleGoHome} className="flex-1">

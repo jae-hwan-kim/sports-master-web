@@ -2,29 +2,29 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { CustomerTabNavigator } from '@/navigation/CustomerTabNavigator'
 import { MasterTabNavigator } from '@/navigation/MasterTabNavigator'
-import { CustomerSettingsScreen } from '@/screens/CustomerSettings/CustomerSettingsScreen'
-import { FavoriteExpertsScreen } from '@/screens/FavoriteExperts/FavoriteExpertsScreen'
-import { MasterReviewScreen } from '@/screens/MasterReview/MasterReviewScreen'
-import { MyReviewEditScreen } from '@/screens/MyReviewEdit/MyReviewEditScreen'
-import { MyReviewsScreen } from '@/screens/MyReviews/MyReviewsScreen'
-import { ReviewWriteScreen } from '@/screens/ReviewWrite/ReviewWriteScreen'
-import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
-import { OnboardingQ2GenderAgeScreen } from '@/screens/OnboardingQ2GenderAge/OnboardingQ2GenderAgeScreen'
-import { RecommendedMastersScreen } from '@/screens/RecommendedMasters/RecommendedMastersScreen'
-import { RegionSelectQ1Screen } from '@/screens/RegionSelectQ1/RegionSelectQ1Screen'
-import { SurveyKeywordSelectScreen } from '@/screens/SurveyKeywordSelect/SurveyKeywordSelectScreen'
-import { LoginScreen } from '@/screens/Login/LoginScreen'
 import { CustomerMasterDetailScreen } from '@/screens/CustomerMasterDetail/CustomerMasterDetailScreen'
+import { CustomerSettingsScreen } from '@/screens/CustomerSettings/CustomerSettingsScreen'
+import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
+import { FavoriteExpertsScreen } from '@/screens/FavoriteExperts/FavoriteExpertsScreen'
+import { LoginScreen } from '@/screens/Login/LoginScreen'
 import { MasterDetailProfileEditScreen } from '@/screens/MasterDetailProfileEdit/MasterDetailProfileEditScreen'
 import { MasterMessageGuideScreen } from '@/screens/MasterMessageGuide/MasterMessageGuideScreen'
 import { MasterPhoneChangeScreen } from '@/screens/MasterPhoneChange/MasterPhoneChangeScreen'
 import { MasterProfileEditScreen } from '@/screens/MasterProfileEdit/MasterProfileEditScreen'
+import { MasterReviewScreen } from '@/screens/MasterReview/MasterReviewScreen'
 import { MasterSettingsScreen } from '@/screens/MasterSettings/MasterSettingsScreen'
 import { MasterVerificationScreen } from '@/screens/MasterVerification/MasterVerificationScreen'
 import { MasterWelcomeScreen } from '@/screens/MasterWelcome/MasterWelcomeScreen'
+import { MyReviewEditScreen } from '@/screens/MyReviewEdit/MyReviewEditScreen'
+import { MyReviewsScreen } from '@/screens/MyReviews/MyReviewsScreen'
 import { OnboardingScreen } from '@/screens/Onboarding/OnboardingScreen'
+import { OnboardingQ2GenderAgeScreen } from '@/screens/OnboardingQ2GenderAge/OnboardingQ2GenderAgeScreen'
+import { RecommendedMastersScreen } from '@/screens/RecommendedMasters/RecommendedMastersScreen'
+import { RegionSelectQ1Screen } from '@/screens/RegionSelectQ1/RegionSelectQ1Screen'
+import { ReviewWriteScreen } from '@/screens/ReviewWrite/ReviewWriteScreen'
 import { SignUpScreen } from '@/screens/SignUp/SignUpScreen'
 import { SignUpRoleSelectScreen } from '@/screens/SignUpRoleSelect/SignUpRoleSelectScreen'
+import { SurveyKeywordSelectScreen } from '@/screens/SurveyKeywordSelect/SurveyKeywordSelectScreen'
 
 export type RootStackParamList = {
   Onboarding: undefined
@@ -69,8 +69,17 @@ export function RootNavigator() {
       <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="SignUpRoleSelect" component={SignUpRoleSelectScreen} />
       <Stack.Screen name="MasterVerification" component={MasterVerificationScreen} />
-      <Stack.Screen name="CustomerWelcome" component={CustomerWelcomeScreen} />
-      <Stack.Screen name="MasterWelcome" component={MasterWelcomeScreen} />
+      {/* 계정 생성 완료 화면 — iOS 스와이프 뒤로가기 차단 (Android는 화면에서 홈으로 진행 처리) */}
+      <Stack.Screen
+        name="CustomerWelcome"
+        component={CustomerWelcomeScreen}
+        options={{ gestureEnabled: false }}
+      />
+      <Stack.Screen
+        name="MasterWelcome"
+        component={MasterWelcomeScreen}
+        options={{ gestureEnabled: false }}
+      />
       <Stack.Screen name="MasterHome" component={MasterTabNavigator} />
       <Stack.Screen name="CustomerHome" component={CustomerTabNavigator} />
       <Stack.Screen name="CustomerSettings" component={CustomerSettingsScreen} />

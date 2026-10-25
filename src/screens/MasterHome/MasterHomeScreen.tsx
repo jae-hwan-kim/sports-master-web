@@ -15,6 +15,7 @@ import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
 import { HomeGreeting } from '@/components/HomeGreeting'
+import { useDoubleBackToExit } from '@/hooks/useAndroidBack'
 import { useCopyReviewLink } from '@/hooks/useCopyReviewLink'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
@@ -121,6 +122,7 @@ function EmptyHasTip() {
 
 export function MasterHomeScreen() {
   const insets = useScreenInsets()
+  useDoubleBackToExit()
   const rootNav = useRootNavigation()
   const tabNav = useNavigation<BottomTabNavigationProp<MasterTabParamList>>()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)

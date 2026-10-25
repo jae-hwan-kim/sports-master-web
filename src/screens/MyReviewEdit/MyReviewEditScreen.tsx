@@ -1,7 +1,7 @@
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation, usePreventRemove, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Alert,
   KeyboardAvoidingView,
@@ -135,37 +135,43 @@ export function MyReviewEditScreen() {
   const [rating, setRating] = useState(initialRating)
   const [content, setContent] = useState(initialContent)
   const [showExitModal, setShowExitModal] = useState(false)
+  const [saved, setSaved] = useState(false)
 
   const isDirty = rating !== initialRating || content !== initialContent
   const canSubmit = isDirty && !isPending
 
-  const handleBack = useCallback(() => {
-    if (isDirty) {
-      setShowExitModal(true)
-    } else {
-      navigation.goBack()
-    }
-  }, [isDirty, navigation])
+  // 하드웨어 뒤로가기·iOS 스와이프·헤더 뒤로가기 모두 수정 중이면 나가기 확인 팝업
+  const pendingLeave = useRef<Parameters<typeof navigation.dispatch>[0] | null>(null)
+  usePreventRemove(isDirty && !saved, ({ data }) => {
+    pendingLeave.current = data.action
+    setShowExitModal(true)
+  })
+
+  const handleBack = useCallback(() => navigation.goBack(), [navigation])
 
   const handleExit = useCallback(() => {
     setShowExitModal(false)
-    navigation.goBack()
+    // 가로챈 원래 이동을 그대로 수행 (data.action dispatch는 prevent 대상에서 제외됨)
+    if (pendingLeave.current) navigation.dispatch(pendingLeave.current)
   }, [navigation])
+
+  // 저장 성공 → prevent 해제가 반영된 뒤 이전 화면으로
+  useEffect(() => {
+    if (saved) navigation.goBack()
+  }, [saved, navigation])
 
   const handleSubmit = useCallback(() => {
     if (!canSubmit) return
     updateReview(
       { id: reviewId, rating, comment: content },
       {
-        onSuccess: () => {
-          navigation.goBack()
-        },
+        onSuccess: () => setSaved(true),
         onError: () => {
           Alert.alert('오류', '리뷰 수정에 실패했습니다. 다시 시도해 주세요.')
         },
       }
     )
-  }, [canSubmit, updateReview, reviewId, rating, content, navigation])
+  }, [canSubmit, updateReview, reviewId, rating, content])
 
   return (
     <>

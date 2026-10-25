@@ -11,6 +11,7 @@ import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { HomeGreeting } from '@/components/HomeGreeting'
 import { ExpertDetailModal } from '@/components/expert/ExpertDetailModal'
+import { useDoubleBackToExit } from '@/hooks/useAndroidBack'
 import { type FeaturedExpert, useFeaturedExperts } from '@/hooks/useFeaturedExperts'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
@@ -188,6 +189,7 @@ function SectionHeader() {
 
 export function CustomerHomeScreen() {
   const insets = useScreenInsets()
+  useDoubleBackToExit()
   const rootNav = useRootNavigation()
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
@@ -198,8 +200,6 @@ export function CustomerHomeScreen() {
   )
 
   const [switchModeVisible, setSwitchModeVisible] = useState(false)
-  // 종료팝업 상태 (Figma: 2321:8871) — 맞춤 명인탐색 완료 후 종료 확인
-  const [exitSearchVisible, setExitSearchVisible] = useState(false)
 
   const handleModeSwitchConfirm = () => {
     setSwitchModeVisible(false)
@@ -370,16 +370,6 @@ export function CustomerHomeScreen() {
         confirmLoading={isSwitching}
         onConfirm={handleModeSwitchConfirm}
         onCancel={() => setSwitchModeVisible(false)}
-      />
-
-      {/* ── 종료팝업 — Figma 2321:8871 ──────────────────────────── */}
-      {/* 맞춤 명인탐색 결과 화면에서 종료 시 표시 */}
-      <ConfirmDialog
-        visible={exitSearchVisible}
-        title="탐색을 종료합니다"
-        description="언제든 다시 탐색이 가능합니다"
-        confirmLabel="확인"
-        onConfirm={() => setExitSearchVisible(false)}
       />
     </View>
   )

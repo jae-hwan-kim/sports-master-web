@@ -13,6 +13,9 @@ import { Text } from '@/components/AppText'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
+// Figma 523:1773 — 버튼 하단 ~ 홈 인디케이터 위 여백 (874 - 759.75 - 34)
+const BUTTON_BOTTOM_GAP = 80
+
 export function OnboardingScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useScreenInsets()
@@ -33,7 +36,7 @@ export function OnboardingScreen() {
 
       <View
         className="flex-1 px-[44px]"
-        style={{ paddingTop: insets.top + 56, paddingBottom: insets.bottom + 16 }}
+        style={{ paddingTop: insets.top + 56, paddingBottom: insets.bottom + BUTTON_BOTTOM_GAP }}
       >
         <Image
           source={logoImage}
@@ -42,7 +45,8 @@ export function OnboardingScreen() {
         />
 
         <View
-          className="mb-[8px] mt-[20px] h-[190px] w-px bg-gray2"
+          // 화면이 짧으면 세로선이 줄어들어 버튼 하단 여백을 확보 (Figma 190 → 최소 24)
+          className="mb-[8px] mt-[20px] max-h-[190px] min-h-[24px] w-px flex-1 bg-gray2"
           accessible={false}
           importantForAccessibility="no-hide-descendants"
         />

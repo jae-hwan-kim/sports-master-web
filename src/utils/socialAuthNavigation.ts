@@ -19,9 +19,13 @@ export function navigateAfterAuth(
   navigation: NativeStackNavigationProp<RootStackParamList>,
   { isNewUser, hasSelectedMode, currentMode }: AuthNavigationInfo
 ) {
+  // 뒤로가기로 로그인/가입 폼에 돌아가지 않도록 스택에서 현재 화면을 교체/초기화
   if (isNewUser || !hasSelectedMode) {
-    navigation.navigate('SignUpRoleSelect')
+    navigation.replace('SignUpRoleSelect')
     return
   }
-  navigation.navigate(currentMode === 'expert' ? 'MasterHome' : 'CustomerHome')
+  navigation.reset({
+    index: 0,
+    routes: [{ name: currentMode === 'expert' ? 'MasterHome' : 'CustomerHome' }],
+  })
 }

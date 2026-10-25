@@ -1,4 +1,4 @@
-import { createNavigationContainerRef, NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
 import * as Sentry from '@sentry/react-native'
 
 import { useEffect, useRef, useState } from 'react'
@@ -62,11 +62,15 @@ export default function App() {
   const handleNavReady = () => {
     const session = restoredSession.current
     if (!session) return
+    // 자동로그인 — 홈에서 뒤로가기 시 온보딩으로 돌아가지 않도록 스택을 홈 하나로 초기화
     if (!session.hasSelectedMode) {
-      navRef.navigate('SignUpRoleSelect')
+      navRef.reset({ index: 1, routes: [{ name: 'Onboarding' }, { name: 'SignUpRoleSelect' }] })
       return
     }
-    navRef.navigate(session.currentMode === 'expert' ? 'MasterHome' : 'CustomerHome')
+    navRef.reset({
+      index: 0,
+      routes: [{ name: session.currentMode === 'expert' ? 'MasterHome' : 'CustomerHome' }],
+    })
   }
 
   return (

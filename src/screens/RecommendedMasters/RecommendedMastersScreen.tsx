@@ -1,13 +1,14 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { FlatList, Platform, Pressable, View } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
 
 import { Text } from '@/components/AppText'
+import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { MasterCard, type MasterItem } from '@/components/MasterCard'
 import { useRecommendedMasters } from '@/hooks/useRecommendedMasters'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
@@ -39,6 +40,8 @@ const HEADER_HEIGHT = 93
 export function RecommendedMastersScreen() {
   const navigation = useNavigation<NavProp>()
   const insets = useScreenInsets()
+  // Figma 2321:8871 종료팝업 — 확인 시 설문 화면들을 닫고 고객홈으로
+  const [exitVisible, setExitVisible] = useState(false)
 
   const { data: recommendation, isLoading, isError } = useRecommendedMasters()
 
@@ -178,7 +181,7 @@ export function RecommendedMastersScreen() {
           hitSlop={8}
           accessibilityRole="button"
           accessibilityLabel="종료하기"
-          onPress={() => navigation.goBack()}
+          onPress={() => setExitVisible(true)}
           className="h-[69] w-[370] items-center justify-center rounded-[16] bg-[rgba(16,51,111,0.41)]"
           style={Platform.select({
             ios: {
@@ -200,6 +203,16 @@ export function RecommendedMastersScreen() {
           </Text>
         </Pressable>
       </View>
+
+      <ConfirmDialog
+        visible={exitVisible}
+        title="탐색을 종료합니다"
+        description="언제든 다시 탐색이 가능합니다"
+        onConfirm={() => {
+          setExitVisible(false)
+          navigation.popTo('CustomerHome')
+        }}
+      />
     </View>
   )
 }

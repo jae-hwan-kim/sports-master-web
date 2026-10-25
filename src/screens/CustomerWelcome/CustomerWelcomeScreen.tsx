@@ -3,7 +3,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient'
@@ -11,6 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { ArrowNextIcon } from '@/assets/icons'
 import bgImage from '@/assets/icons/background.png'
 import { Text } from '@/components/AppText'
+import { useAndroidBack } from '@/hooks/useAndroidBack'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useSignUp } from '@/hooks/useSignUp'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
@@ -27,8 +28,8 @@ export function CustomerWelcomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   // insets.top/insets.bottom은 런타임에만 알 수 있는 동적 값이라 style 사용이 불가피한 의도적 예외
   const insets = useScreenInsets()
-  const { mutate: signUp } = useSignUp()
-  const { mutate: switchMode } = useSwitchMode()
+  const { mutate: signUp, isPending: isSigningUp } = useSignUp()
+  const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const setAuthSession = useAuthStore((state) => state.setAuthSession)
   const setModeSelected = useAuthStore((state) => state.setModeSelected)
   const draft = useSignUpDraftStore((state) => state.draft)
@@ -73,9 +74,20 @@ export function CustomerWelcomeScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handlePress = () => {
-    navigation.navigate('CustomerHome')
-  }
+  // 가입/모드전환 응답 전에 홈으로 reset하면 이 화면이 unmount돼 onSuccess(토큰 저장)가 실행되지 않음
+  const isRegistering = isSigningUp || isSwitching
+  const handlePress = useCallback(() => {
+    if (isRegistering) return
+    navigation.reset({ index: 0, routes: [{ name: 'CustomerHome' }] })
+  }, [isRegistering, navigation])
+
+  // 계정 생성 후 화면 — 뒤로가기로 가입 단계에 돌아가지 않고 홈으로 진행
+  useAndroidBack(
+    useCallback(() => {
+      handlePress()
+      return true
+    }, [handlePress])
+  )
 
   return (
     <Pressable

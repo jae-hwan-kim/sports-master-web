@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useState } from 'react'
 import { ActivityIndicator, FlatList, Modal, Pressable, View } from 'react-native'
 
-import { ArrowNextIcon, SettingsIcon } from '@/assets/icons'
+import { ArrowNextIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
@@ -60,7 +60,7 @@ export function MasterSettingsScreen() {
 
   return (
     <View className="flex-1 bg-[#F2F2F2]">
-      <ScreenHeader onBack={() => navigation.goBack()} rightIcon={<SettingsIcon size={44} />} />
+      <ScreenHeader onBack={() => navigation.goBack()} />
 
       <Text className="pb-[29px] pl-[26px] pt-[20px] text-[28px] font-extrabold text-[#07091C]">
         설정

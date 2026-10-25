@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, usePreventRemove } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useMemo, useState } from 'react'
@@ -21,6 +21,7 @@ import { TextField } from '@/components/TextField'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { RegionSelector } from '@/components/profile/RegionSelector'
 import { useCustomerProfile } from '@/hooks/useCustomerProfile'
+import { useLogout } from '@/hooks/useLogout'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useSwitchMode } from '@/hooks/useSwitchMode'
@@ -70,7 +71,7 @@ export function CustomerSettingsScreen() {
   const rootNav = useRootNavigation()
   const insets = useScreenInsets()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
-  const clearAuth = useAuthStore((s) => s.clear)
+  const logout = useLogout()
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
 
   const { data: profile } = useCustomerProfile()
@@ -121,13 +122,10 @@ export function CustomerSettingsScreen() {
     setMode('edit')
   }, [region, sport, gender, ageGroup, keywords])
 
-  const handleBack = useCallback(() => {
-    if (mode === 'edit') {
-      setExitDialogVisible(true)
-    } else {
-      navigation.goBack()
-    }
-  }, [mode, navigation])
+  // 수정 중에는 헤더·하드웨어 뒤로가기·iOS 스와이프 모두 수정 종료 확인 팝업 (확인 시 보기 모드로 복귀)
+  usePreventRemove(mode === 'edit', () => setExitDialogVisible(true))
+
+  const handleBack = useCallback(() => navigation.goBack(), [navigation])
 
   const handleSaveConfirm = useCallback(() => {
     updateProfile(
@@ -493,10 +491,7 @@ export function CustomerSettingsScreen() {
           <View className="flex-row justify-between rounded-xl bg-white px-4 py-3">
             <Pressable
               hitSlop={8}
-              onPress={() => {
-                clearAuth()
-                rootNav?.reset({ index: 0, routes: [{ name: 'Onboarding' }] })
-              }}
+              onPress={logout}
               accessibilityRole="button"
               accessibilityLabel="로그아웃"
             >

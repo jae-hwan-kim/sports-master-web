@@ -14,6 +14,7 @@ export function useLogout() {
   return () => {
     clear()
     queryClient.clear()
-    navigation.reset({ index: 0, routes: [{ name: 'Login' }] })
+    // 로그인 화면의 뒤로가기가 온보딩으로 가도록 온보딩을 아래에 둠 (없으면 뒤로가기 무반응/앱 종료)
+    navigation.reset({ index: 1, routes: [{ name: 'Onboarding' }, { name: 'Login' }] })
   }
 }
