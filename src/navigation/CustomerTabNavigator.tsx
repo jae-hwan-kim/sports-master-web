@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { Pressable, View } from 'react-native'
 
-import { HomeTabIcon, ProfileTabIcon, SearchTabIcon } from '@/assets/icons'
+import { DiagnosisTabIcon, HomeTabIcon, ProfileTabIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { CustomerExploreScreen } from '@/screens/CustomerExplore/CustomerExploreScreen'
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator<CustomerTabParamList>()
 
 const TAB_ICONS = {
   CustomerHomeTab: HomeTabIcon,
-  CustomerExploreTab: SearchTabIcon,
+  CustomerExploreTab: DiagnosisTabIcon,
   CustomerProfileTab: ProfileTabIcon,
 } as const
 

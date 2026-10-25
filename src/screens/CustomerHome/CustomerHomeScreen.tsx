@@ -9,8 +9,8 @@ import { LocationOnIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
 import LogoSvg from '@/assets/icons/logo.svg'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
+import { HomeGreeting } from '@/components/HomeGreeting'
 import { ExpertDetailModal } from '@/components/expert/ExpertDetailModal'
-import { useCustomerProfile } from '@/hooks/useCustomerProfile'
 import { type FeaturedExpert, useFeaturedExperts } from '@/hooks/useFeaturedExperts'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
@@ -191,7 +191,6 @@ export function CustomerHomeScreen() {
   const rootNav = useRootNavigation()
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
-  const { data: profile } = useCustomerProfile()
   const { data: featuredExperts } = useFeaturedExperts()
   const featuredMasters = useMemo(
     () => (featuredExperts ?? []).map(toMasterCard),
@@ -243,19 +242,8 @@ export function CustomerHomeScreen() {
       {/* bg-transparent: 루트 bg-[#F2F2F2] 투과 */}
       <View className="bg-transparent px-[16px]" style={{ paddingTop: insets.top }}>
         <View className="h-[56px] flex-row items-center">
-          {/* 프로필 아바타 + 인사말 */}
-          <View className="flex-1 flex-row items-center gap-[8px]">
-            {/* TODO: 사용자 프로필 이미지 — API 연동 후 expo-image로 교체 */}
-            <View className="h-[36px] w-[36px] rounded-full bg-gray1" />
-            <View className="gap-[5px]">
-              <Text className="font-pretendard-medium text-gray3" style={{ fontSize: 10 }}>
-                반갑습니다 👋
-              </Text>
-              <Text className="font-pretendard-semibold text-black" style={{ fontSize: 12 }}>
-                {profile?.nickname ?? '고객닉네임'} 님
-              </Text>
-            </View>
-          </View>
+          {/* 프로필 아바타 + 인사말 — 명인홈과 동일 컴포넌트 */}
+          <HomeGreeting />
 
           {/* 모드전환 배지 + 설정 아이콘 */}
           <View className="flex-row items-center">

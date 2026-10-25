@@ -15,6 +15,7 @@ import LocationOnSvg from './location-on.svg'
 import MasterSvg from './master.svg'
 import PersonSvg from './person.svg'
 import ProfilePersonSvg from './profile-person.svg'
+import SearchOutlineSvg from './search-outline.svg'
 import SearchSvg from './search.svg'
 import SettingsSvg from './settings.svg'
 import StarFillSvg from './star-fill.svg'
@@ -99,6 +100,11 @@ export function SearchTabIcon({ size = 44, ...rest }: IconProps) {
   return <SearchSvg width={size} height={size} {...rest} />
 }
 
+// 명인탐색 검색창 돋보기 — Figma 2272:12405 얇은 outline, 44x44 탭 영역 포함
+export function SearchOutlineIcon({ size = 44, color = '#74768E', ...rest }: IconProps) {
+  return <SearchOutlineSvg width={size} height={size} color={color} {...rest} />
+}
+
 export function LinkIcon({ size = 44, ...rest }: IconProps) {
   return <LinkSvg width={size} height={size} {...rest} />
 }
@@ -118,6 +124,7 @@ export function LocationOnIcon({ size = 12, ...rest }: IconProps) {
 }
 
 // profile-person.svg는 프로필 아바타용 실루엣 아이콘 (원본 88×104, 비율 유지)
-export function ProfilePersonIcon({ size = 54, ...rest }: IconProps) {
-  return <ProfilePersonSvg width={size} height={(size * 104) / 88} {...rest} />
+// fill=currentColor — 기본 #BDBDBD
+export function ProfilePersonIcon({ size = 54, color = '#BDBDBD', ...rest }: IconProps) {
+  return <ProfilePersonSvg width={size} height={(size * 104) / 88} color={color} {...rest} />
 }

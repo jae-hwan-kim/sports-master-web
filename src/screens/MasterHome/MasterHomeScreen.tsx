@@ -10,16 +10,11 @@ import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
-import {
-  ArrowNextIcon,
-  LinkIcon,
-  ProfilePersonIcon,
-  SettingsIcon,
-  StarMedalIcon,
-} from '@/assets/icons'
+import { ArrowNextIcon, LinkIcon, SettingsIcon, StarMedalIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
+import { HomeGreeting } from '@/components/HomeGreeting'
 import { useCopyReviewLink } from '@/hooks/useCopyReviewLink'
 import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
@@ -129,7 +124,6 @@ export function MasterHomeScreen() {
   const rootNav = useRootNavigation()
   const tabNav = useNavigation<BottomTabNavigationProp<MasterTabParamList>>()
   const setModeSelected = useAuthStore((s) => s.setModeSelected)
-  const userName = useAuthStore((s) => s.name)
   const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
   const { data: expertProfile, isError: expertProfileError } = useQuery({
     queryKey: ['expertGrade'],
@@ -143,7 +137,6 @@ export function MasterHomeScreen() {
   })
 
   const hasProfile = expertProfile !== undefined && !expertProfileError
-  const nickname = userName ?? '-'
   const gradeLabel = expertProfile?.expertGrade
     ? (GRADE_LABEL[expertProfile.expertGrade] ?? expertProfile.expertGrade)
     : '-'
@@ -171,9 +164,25 @@ export function MasterHomeScreen() {
 
   // Figma 791:4558 명인홈_링크복사 완료 — 확인 시 리뷰 관리 화면으로 이동
   const [linkCopiedVisible, setLinkCopiedVisible] = useState(false)
-  const { mutate: copyReviewLink, isPending: isCopyingLink } = useCopyReviewLink(() =>
-    setLinkCopiedVisible(true)
-  )
+  // 리뷰 링크는 명인 프로필 단위 — 프로필이 없으면 작성 유도
+  const [noProfileVisible, setNoProfileVisible] = useState(false)
+  const [linkErrorVisible, setLinkErrorVisible] = useState(false)
+  const { mutate: copyReviewLink, isPending: isCopyingLink } = useCopyReviewLink({
+    onCopied: () => setLinkCopiedVisible(true),
+    onNoProfile: () => setNoProfileVisible(true),
+    onError: () => setLinkErrorVisible(true),
+  })
+
+  const goWriteProfile = () =>
+    tabNav.navigate('ProfileTab', { screen: 'MasterDetailProfile', initial: false })
+
+  const handleSendLink = () => {
+    if (expertProfileError) {
+      setNoProfileVisible(true)
+      return
+    }
+    copyReviewLink()
+  }
 
   const handleLinkCopiedConfirm = () => {
     setLinkCopiedVisible(false)
@@ -203,16 +212,10 @@ export function MasterHomeScreen() {
 
         {/* 내비게이션 바 */}
         <View className="h-14 flex-row items-center justify-between px-4">
-          {/* 좌측: 아바타 + 인사말 */}
-          <View className="flex-row items-center gap-2">
-            <ProfilePersonIcon size={36} color="#1F2A43" />
-            <View>
-              <Text className="font-pretendard-medium text-[10px] text-gray3">반갑습니다 👋</Text>
-              <Text className="font-pretendard-semibold text-small2 text-black">{nickname} 님</Text>
-            </View>
-          </View>
+          {/* 좌측: 아바타 + 인사말 — 고객홈과 동일 컴포넌트 */}
+          <HomeGreeting />
           {/* 우측: 모드 배지 + 설정 */}
-          <View className="flex-row items-center gap-2">
+          <View className="flex-row items-center">
             <MasterModeBadge onPress={() => setSwitchModeVisible(true)} disabled={isSwitching} />
             <Pressable
               hitSlop={8}
@@ -228,7 +231,7 @@ export function MasterHomeScreen() {
         {/* 리뷰 링크 배너 — height:54 */}
         <Pressable
           hitSlop={8}
-          onPress={() => copyReviewLink()}
+          onPress={handleSendLink}
           disabled={isCopyingLink}
           className="mx-4 h-[54px] flex-row items-center rounded-lg px-[3px]"
           style={{ backgroundColor: 'rgba(7,9,28,0.6)' }}
@@ -313,15 +316,7 @@ export function MasterHomeScreen() {
             />
           )}
           ListEmptyComponent={
-            hasProfile ? (
-              <EmptyHasTip />
-            ) : (
-              <EmptyNoProfile
-                onPressWrite={() =>
-                  tabNav.navigate('ProfileTab', { screen: 'MasterDetailProfile', initial: false })
-                }
-              />
-            )
+            hasProfile ? <EmptyHasTip /> : <EmptyNoProfile onPressWrite={goWriteProfile} />
           }
           ListFooterComponent={
             diagnosisItems.length > 0 ? (
@@ -341,6 +336,26 @@ export function MasterHomeScreen() {
         title="링크 복사 완료"
         description="복사한 링크로 리뷰 요청이 가능합니다"
         onConfirm={handleLinkCopiedConfirm}
+      />
+
+      <ConfirmDialog
+        visible={noProfileVisible}
+        title="프로필을 먼저 작성해주세요"
+        description="프로필 작성 후 리뷰 링크를 보낼 수 있습니다"
+        confirmLabel="작성하기"
+        cancelLabel="취소"
+        onConfirm={() => {
+          setNoProfileVisible(false)
+          goWriteProfile()
+        }}
+        onCancel={() => setNoProfileVisible(false)}
+      />
+
+      <ConfirmDialog
+        visible={linkErrorVisible}
+        title="링크 생성 실패"
+        description="잠시 후 다시 시도해주세요"
+        onConfirm={() => setLinkErrorVisible(false)}
       />
 
       {/* 모드 전환 확인 팝업 — 고객홈과 동일 패턴 */}

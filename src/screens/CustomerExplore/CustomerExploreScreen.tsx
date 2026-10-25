@@ -3,7 +3,7 @@
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   ActivityIndicator,
   FlatList,
@@ -20,9 +20,9 @@ import { Image } from 'expo-image'
 import { useMutation } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
-import { SearchTabIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
+import { SearchOutlineIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text, TextInput } from '@/components/AppText'
-import { useRecommendedMasters } from '@/hooks/useRecommendedMasters'
+import { useExperts } from '@/hooks/useExperts'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import type { RootStackParamList } from '@/navigation/RootNavigator'
 
@@ -328,28 +328,14 @@ export function CustomerExploreScreen() {
   const insets = useScreenInsets()
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
-  const { data: recommendedData, isLoading } = useRecommendedMasters()
   const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set())
 
   const { mutate: toggleFavoriteAPI } = useMutation({
     mutationFn: (id: number) => apiClient.post(`/favorite-experts/${id}`),
   })
 
-  const masters = useMemo<MasterItem[]>(
-    () =>
-      recommendedData?.recommendedExperts.map((e) => ({
-        id: e.id,
-        nickname: e.name,
-        region: e.region,
-        bio: e.representativeService,
-        specialties: e.keywordTags ?? [],
-        profileImageUrl: e.avatarUrl ?? undefined,
-        isFavorite: favoriteIds.has(e.id),
-      })) ?? [],
-    [recommendedData, favoriteIds]
-  )
-
   const [searchText, setSearchText] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
   const [regionPickerVisible, setRegionPickerVisible] = useState(false)
   const [selectedProvince, setSelectedProvince] = useState('서울')
   const [selectedDistrict, setSelectedDistrict] = useState('서울전체')
@@ -357,6 +343,33 @@ export function CustomerExploreScreen() {
   const [pendingDistrict, setPendingDistrict] = useState('서울전체')
   const [filterRegion, setFilterRegion] = useState<string | null>(null)
   const [filterRating, setFilterRating] = useState(false)
+
+  // 입력마다 요청하지 않도록 300ms 디바운스
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(searchText.trim()), 300)
+    return () => clearTimeout(timer)
+  }, [searchText])
+
+  // 필터가 없으면 전체 명인
+  const { data: experts, isLoading } = useExperts({
+    q: debouncedSearch || undefined,
+    region: filterRegion ?? undefined,
+    minRating: filterRating ? 4 : undefined,
+  })
+
+  const masters = useMemo<MasterItem[]>(
+    () =>
+      experts?.map((e) => ({
+        id: e.id,
+        nickname: e.name,
+        region: e.region,
+        bio: e.representativeService,
+        specialties: e.keywordTags ?? [],
+        profileImageUrl: e.imageUrl ?? undefined,
+        isFavorite: favoriteIds.has(e.id),
+      })) ?? [],
+    [experts, favoriteIds]
+  )
 
   const openRegionPicker = useCallback(() => {
     setPendingProvince(selectedProvince)
@@ -418,44 +431,46 @@ export function CustomerExploreScreen() {
 
       {/* 검색바 + 필터 칩 */}
       <View className="mt-5 flex-row items-center gap-2 px-[26px]">
-        {/* 검색창 */}
-        <View className="h-[36px] flex-1 flex-row items-center overflow-hidden rounded-lg border border-[#C6A75E] bg-gray1 pl-3">
+        {/* 검색창 — Figma 2272:12405: 36h, bg #D9D9D9, radius 8, 테두리 없음, 텍스트 left 16 */}
+        <View className="h-[36px] flex-1 flex-row items-center overflow-hidden rounded-lg bg-gray1 pl-4">
+          {/* Android TextInput 기본 상하 padding 때문에 36h 안에서 글자 윗부분이 잘려 py-0 + 세로 가운데 정렬 */}
           <TextInput
             value={searchText}
             onChangeText={setSearchText}
             placeholder="명인 직접검색"
             placeholderTextColor="#A2A2A2"
             returnKeyType="search"
-            className="flex-1 font-pretendard-medium text-[13px] text-gray3"
+            textAlignVertical="center"
+            className="h-full flex-1 py-0 font-pretendard-medium text-[13px] text-gray3"
           />
-          <Pressable hitSlop={8} className="items-center justify-center">
-            <SearchTabIcon size={44} />
-          </Pressable>
+          <View className="items-center justify-center">
+            <SearchOutlineIcon size={44} />
+          </View>
         </View>
 
-        {/* 지역 필터 칩 */}
+        {/* 지역 필터 칩 — Figma: 36h, radius 18, px 12, 기본 bg #D9D9D9 / 선택 bg #1F2A43, 테두리 없음 */}
         <Pressable
           hitSlop={8}
           onPress={openRegionPicker}
-          className={`h-[28px] flex-row items-center gap-1 rounded-full px-3 ${
-            isRegionActive ? 'bg-[#1F2A43]' : 'border border-gray2 bg-transparent'
+          className={`h-[36px] flex-row items-center gap-2 rounded-[18px] px-3 ${
+            isRegionActive ? 'bg-gray3' : 'bg-gray1'
           }`}
         >
           <Text
             className={`font-pretendard-medium text-[13px] ${
-              isRegionActive ? 'text-white' : 'text-gray3'
+              isRegionActive ? 'text-[#F2F2F2]' : 'text-gray3'
             }`}
           >
             {regionChipLabel}
           </Text>
-          {/* 드롭다운 화살표 */}
+          {/* 드롭다운 화살표 — Figma Vector 9: stroke #74768E 1px (선택 여부 무관) */}
           <View
             style={{
-              width: 7,
-              height: 7,
-              borderRightWidth: 1.5,
-              borderBottomWidth: 1.5,
-              borderColor: isRegionActive ? '#F2F2F2' : '#1F2A43',
+              width: 6,
+              height: 6,
+              borderRightWidth: 1,
+              borderBottomWidth: 1,
+              borderColor: '#74768E',
               transform: [{ rotate: '45deg' }],
               marginBottom: 3,
             }}
@@ -466,13 +481,13 @@ export function CustomerExploreScreen() {
         <Pressable
           hitSlop={8}
           onPress={() => setFilterRating((v) => !v)}
-          className={`h-[28px] items-center justify-center rounded-full px-3 ${
-            filterRating ? 'bg-[#1F2A43]' : 'border border-gray2 bg-transparent'
+          className={`h-[36px] items-center justify-center rounded-[18px] px-3 ${
+            filterRating ? 'bg-gray3' : 'bg-gray1'
           }`}
         >
           <Text
             className={`font-pretendard-medium text-[13px] ${
-              filterRating ? 'text-white' : 'text-gray3'
+              filterRating ? 'text-[#F2F2F2]' : 'text-gray3'
             }`}
           >
             4점 이상
@@ -501,7 +516,9 @@ export function CustomerExploreScreen() {
           ListEmptyComponent={
             <View className="items-center pt-20">
               <Text className="font-pretendard-medium text-[14px] text-[#74768E]">
-                추천 명인이 없습니다
+                {debouncedSearch || filterRegion || filterRating
+                  ? '조건에 맞는 명인이 없습니다'
+                  : '등록된 명인이 없습니다'}
               </Text>
             </View>
           }

@@ -17,6 +17,10 @@ import { useAuthStore } from '@/store/authStore'
 
 import LogoSvg from '../../assets/icons/logo.svg'
 
+// Figma 276×278의 80% — 큰 기기 기준 최대 크기
+const LOGO_WIDTH = 220
+const LOGO_HEIGHT = 222
+
 type SettingItem = {
   id: string
   label: string
@@ -33,6 +37,11 @@ export function MasterSettingsScreen() {
   const [withdrawVisible, setWithdrawVisible] = useState(false)
   const [withdrawPasswordVisible, setWithdrawPasswordVisible] = useState(false)
   const [withdrawPassword, setWithdrawPassword] = useState('')
+  const [logoAreaHeight, setLogoAreaHeight] = useState(0)
+  // 계정탈퇴와 최소 16 간격 확보, 공간이 너무 작으면 숨김
+  const logoFitHeight = logoAreaHeight - insets.bottom - 36 - 16
+  const logoSize =
+    logoFitHeight < 80 ? 0 : Math.min(LOGO_WIDTH, logoFitHeight * (LOGO_WIDTH / LOGO_HEIGHT))
 
   const SETTINGS_ITEMS: SettingItem[] = [
     {
@@ -59,6 +68,8 @@ export function MasterSettingsScreen() {
 
       <FlatList
         data={SETTINGS_ITEMS}
+        scrollEnabled={false}
+        className="grow-0"
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
         renderItem={({ item }) => (
@@ -81,19 +92,18 @@ export function MasterSettingsScreen() {
         )}
       />
 
-      {/* 로고 워터마크 — Figma 1125-5014(276×278, 화면 하단 36 위). top 고정 시 기기 높이에 따라
-          하단으로 밀려 일부만 크게 보여서 하단 기준 + 80% 크기로 축소 */}
+      {/* 로고 워터마크 — Figma 1125-5014(276×278, 화면 하단 36 위, 계정탈퇴 아래).
+          목록 아래 남은 공간 안에서만 그려서 작은 기기에서도 계정탈퇴 버튼을 덮지 않음 */}
       <View
         pointerEvents="none"
-        style={{
-          position: 'absolute',
-          right: -30,
-          bottom: insets.bottom + 36,
-          width: 220,
-          height: 222,
-        }}
+        className="flex-1 overflow-hidden"
+        onLayout={(e) => setLogoAreaHeight(e.nativeEvent.layout.height)}
       >
-        <LogoSvg width={220} height={222} />
+        {logoSize > 0 && (
+          <View className="absolute right-[-30px]" style={{ bottom: insets.bottom + 36 }}>
+            <LogoSvg width={logoSize} height={logoSize * (LOGO_HEIGHT / LOGO_WIDTH)} />
+          </View>
+        )}
       </View>
 
       <ConfirmDialog
