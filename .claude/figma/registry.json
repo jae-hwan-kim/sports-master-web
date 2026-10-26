@@ -5,7 +5,7 @@
     "321:458"
   ],
   "version": "2411226840444579745",
-  "syncedAt": "2026-10-17T13:30:05.781Z",
+  "syncedAt": "2026-10-26T04:12:44.109Z",
   "handledComments": [
     "1925628224",
     "1854023859",
@@ -21,7 +21,9 @@
     "1961969964",
     "1961988134",
     "1961976481",
-    "1970438816"
+    "1970438816",
+    "1970442561",
+    "1970440775"
   ],
   "frames": {
     "791:4157": {
@@ -92,7 +94,7 @@
       "page": "완료화면 전체 정리공간 / 로그인",
       "screen": "Onboarding",
       "ignore": false,
-      "hash": "5d30c6dfc271"
+      "hash": "4298929e5f2e"
     },
     "523:1655": {
       "name": "로그인",
@@ -246,14 +248,14 @@
       "page": "완료화면 전체 정리공간 / 회원가입",
       "screen": "CustomerWelcome",
       "ignore": false,
-      "hash": "c748b069511d"
+      "hash": "b93ab5657f5c"
     },
     "523:1816": {
       "name": "명인환영",
       "page": "완료화면 전체 정리공간 / 회원가입",
       "screen": "MasterWelcome",
       "ignore": false,
-      "hash": "a786c493222d"
+      "hash": "519db850cd00"
     },
     "621:3235": {
       "name": "명인_이미지선택X 선택완료 터치",
@@ -316,21 +318,21 @@
       "page": "완료화면 전체 정리공간 / 명인 / 홈",
       "screen": "MasterHome",
       "ignore": false,
-      "hash": "abd506b0a177"
+      "hash": "a461d538fedf"
     },
     "791:4558": {
       "name": "명인홈_링크복사 완료",
       "page": "완료화면 전체 정리공간 / 명인 / 홈",
       "screen": "MasterHome",
       "ignore": false,
-      "hash": "70ab04e8a785"
+      "hash": "c27a4ea4de9f"
     },
     "791:4613": {
       "name": "명인홈_프로필 작성 후",
       "page": "완료화면 전체 정리공간 / 명인 / 홈",
       "screen": "MasterHome",
       "ignore": false,
-      "hash": "28ee5732c05f"
+      "hash": "bfbd911dfc4b"
     },
     "1125:5013": {
       "name": "설정",
@@ -407,14 +409,14 @@
       "page": "완료화면 전체 정리공간 / 명인 / 홈",
       "screen": "MasterHome",
       "ignore": false,
-      "hash": "af89635c873e"
+      "hash": "d8f708ca2d3f"
     },
     "732:5979": {
       "name": "진단요청_empty",
       "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
       "screen": "MasterDiagnosis",
       "ignore": false,
-      "hash": "1355ebf4613e"
+      "hash": "56f41636de4a"
     },
     "732:5586": {
       "name": "진단요청_상세",
@@ -428,91 +430,91 @@
       "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
       "screen": "MasterDiagnosis",
       "ignore": false,
-      "hash": "4f439cb6eaa4"
+      "hash": "33db57ced1a2"
     },
     "1057:5166": {
       "name": "진단요청",
       "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
       "screen": "MasterDiagnosis",
       "ignore": false,
-      "hash": "1d9c99847f8d"
+      "hash": "dda4573d6017"
     },
     "1057:5254": {
       "name": "진단요청_프로필 확인 완료",
       "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
       "screen": "MasterDiagnosis",
       "ignore": false,
-      "hash": "de12598a8524"
+      "hash": "e4121f4f3fee"
     },
     "1057:5351": {
       "name": "진단요청_프로필 삭제 완료",
       "page": "완료화면 전체 정리공간 / 명인 / 진단요청",
       "screen": "MasterDiagnosis",
       "ignore": false,
-      "hash": "ed5220c9df07"
+      "hash": "ff81ecfaeced"
     },
     "1184:3481": {
       "name": "프로필_Default",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterProfile",
       "ignore": false,
-      "hash": "b317473bf588"
+      "hash": "51f08491c69b"
     },
     "1376:10189": {
       "name": "상세페이지_Full",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfile",
       "ignore": false,
-      "hash": "030ff00ebd60"
+      "hash": "88e1b28e22a7"
     },
     "1376:10264": {
       "name": "상세페이지_Full_수정",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "bd7a49c56349"
+      "hash": "f0d4805a973f"
     },
     "1472:11166": {
       "name": "상세페이지_Full_지역선택",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "718725460090"
+      "hash": "59acd0506d1f"
     },
     "1476:12494": {
       "name": "상세페이지_Full_지역선택_강서구",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "c0f5598de174"
+      "hash": "31a3abf30f70"
     },
     "1476:12822": {
       "name": "상세페이지_Full_지역선택_경기",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "49d33cd9bb78"
+      "hash": "aee2191747e9"
     },
     "1476:13158": {
       "name": "상세페이지_Full_지역선택_덕양구",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "187701a5bde5"
+      "hash": "f83a0021cbc5"
     },
     "1476:14417": {
       "name": "상세페이지_수정완료Full",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "addb9574b8b8"
+      "hash": "90be23c88b61"
     },
     "1476:14787": {
       "name": "상세페이지_수정완료 저장",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "5b5eee1ce45e"
+      "hash": "887c2ccdd8c9"
     },
     "1484:15004": {
       "name": "상세페이지_Full_지역수정완료",
@@ -526,7 +528,7 @@
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "36b6d58d49e3"
+      "hash": "762b80cf5050"
     },
     "1442:8896": {
       "name": "서울",
@@ -652,7 +654,7 @@
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterProfile",
       "ignore": false,
-      "hash": "9d33bd6d1420"
+      "hash": "0989af53ea18"
     },
     "1308:10012": {
       "name": "리뷰_Default",
@@ -673,49 +675,49 @@
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfile",
       "ignore": false,
-      "hash": "b14b49c7d34a"
+      "hash": "8cc79f70a5d6"
     },
     "1376:10681": {
       "name": "상세페이지_Default_자격증 존재",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfile",
       "ignore": false,
-      "hash": "9b221a82ac07"
+      "hash": "eff771708346"
     },
     "1376:10751": {
       "name": "상세페이지_수정하기 Default",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "0620a925ed5f"
+      "hash": "63715453c9ed"
     },
     "1376:10866": {
       "name": "상세페이지_수정하기_이미지,증명서 업로드",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "93850b97e223"
+      "hash": "f00405e4a938"
     },
     "1376:10981": {
       "name": "상세페이지_수정완료_프로필저장",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "0a73d36547ab"
+      "hash": "6da099e3807f"
     },
     "1376:11098": {
       "name": "상세페이지_수정취소",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfileEdit",
       "ignore": false,
-      "hash": "b787e758b863"
+      "hash": "8e85391bcad5"
     },
     "1376:11225": {
       "name": "상세페이지_자격증이미지확인",
       "page": "완료화면 전체 정리공간 / 명인 / 프로필",
       "screen": "MasterDetailProfile",
       "ignore": false,
-      "hash": "5e9107a1f88c"
+      "hash": "30e11a54cf7f"
     },
     "1308:8925": {
       "name": "리뷰_최신순",
@@ -757,7 +759,7 @@
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": null,
       "ignore": false,
-      "hash": "426aebf54d19",
+      "hash": "f8da23339e66",
       "todo": true
     },
     "2187:11801": {
@@ -765,7 +767,7 @@
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": null,
       "ignore": false,
-      "hash": "5d80ce9e2047",
+      "hash": "d70ec7961d8c",
       "todo": true
     },
     "2187:11812": {
@@ -773,21 +775,21 @@
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": "RegionSelectQ1",
       "ignore": false,
-      "hash": "6d23a9abe8c2"
+      "hash": "4f28509a3627"
     },
     "2187:12425": {
       "name": "Q1-3_선택완료",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": "RegionSelectQ1",
       "ignore": false,
-      "hash": "761a04e8a4a9"
+      "hash": "fab77d9afc7d"
     },
     "2187:11827": {
       "name": "Q1-2_지역선택",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": null,
       "ignore": false,
-      "hash": "fd220522aaba",
+      "hash": "9fbd13853425",
       "todo": true
     },
     "2187:12465": {
@@ -795,7 +797,7 @@
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": null,
       "ignore": false,
-      "hash": "b13bc74ca9f3",
+      "hash": "30d64a9cb2f2",
       "todo": true
     },
     "2187:11841": {
@@ -803,21 +805,21 @@
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": "SurveyKeywordSelect",
       "ignore": false,
-      "hash": "d435c92d44d8"
+      "hash": "5435d9c1ae81"
     },
     "2187:11867": {
       "name": "Q2",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": "OnboardingQ2GenderAge",
       "ignore": false,
-      "hash": "4638b64f7f7f"
+      "hash": "477fc1cf6532"
     },
     "2187:11886": {
       "name": "추천3인",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": "RecommendedMasters",
       "ignore": false,
-      "hash": "a716a2a92f62"
+      "hash": "8e8b4de079f1"
     },
     "1822:11265": {
       "name": "계정설정_Default",
@@ -859,14 +861,14 @@
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": "CustomerHome",
       "ignore": false,
-      "hash": "0625e2bfaeab"
+      "hash": "ca68f015fa4c"
     },
     "2321:8871": {
       "name": "종료팝업",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
       "screen": "CustomerHome",
       "ignore": false,
-      "hash": "0c0331310a9a"
+      "hash": "ccae3a0f7d56"
     },
     "2272:12405": {
       "name": "명인탐색",
@@ -901,49 +903,49 @@
       "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
       "screen": "CustomerExplore",
       "ignore": false,
-      "hash": "5eda87e85cca"
+      "hash": "b0c44d78627a"
     },
     "2321:10613": {
       "name": "명인탐색_지역선택",
       "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
       "screen": "CustomerExplore",
       "ignore": false,
-      "hash": "8533bbd4fdd7"
+      "hash": "82a2e11b25b9"
     },
     "2321:10745": {
       "name": "이미지크게보기",
       "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
       "screen": "CustomerExplore",
       "ignore": false,
-      "hash": "ee0f8766031d"
+      "hash": "1e63564dc881"
     },
     "2321:9373": {
       "name": "진단요청팝업",
       "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
       "screen": "CustomerExplore",
       "ignore": false,
-      "hash": "b8ab59339665"
+      "hash": "c3a9b5ccb70c"
     },
     "2321:9507": {
       "name": "센터URL이동",
       "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
       "screen": "CustomerExplore",
       "ignore": false,
-      "hash": "8af561648e1c"
+      "hash": "185479b0fe31"
     },
     "2272:12607": {
       "name": "명인자세히보기",
       "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
       "screen": "CustomerMasterDetail",
       "ignore": false,
-      "hash": "23e4bc649065"
+      "hash": "409856393256"
     },
     "2321:10883": {
       "name": "명인자세히보기",
       "page": "완료화면 전체 정리공간 / 고객 / 명인탐색",
       "screen": "CustomerMasterDetail",
       "ignore": false,
-      "hash": "78bab66dbf57"
+      "hash": "4ec560b23cde"
     },
     "2321:11810": {
       "name": "계정설정",
@@ -957,126 +959,126 @@
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "FavoriteExperts",
       "ignore": false,
-      "hash": "1388d41f1b57"
+      "hash": "9d28b989d6fa"
     },
     "2452:16441": {
       "name": "저장한명인_Default",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "FavoriteExperts",
       "ignore": false,
-      "hash": "7fbaa44fd196"
+      "hash": "50a63f71ebeb"
     },
     "2449:13835": {
       "name": "저장한명인_자세히보기",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "CustomerMasterDetail",
       "ignore": false,
-      "hash": "34b7e9274529"
+      "hash": "296358e1ef06"
     },
     "2449:13953": {
       "name": "리뷰작성",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "ReviewWrite",
       "ignore": false,
-      "hash": "62bbc09e6214"
+      "hash": "ff9554a189cd"
     },
     "2452:16571": {
       "name": "리뷰작성_Default",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "ReviewWrite",
       "ignore": false,
-      "hash": "55d010bf87c7"
+      "hash": "7aed88b01884"
     },
     "2449:15238": {
       "name": "리뷰작성_완료",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "ReviewWrite",
       "ignore": false,
-      "hash": "8d149d67e070"
+      "hash": "aa0c1e9864db"
     },
     "2449:14084": {
       "name": "리뷰작성_작성페이지",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "ReviewWrite",
       "ignore": false,
-      "hash": "6da0971b04a1"
+      "hash": "d9c1e5010b3d"
     },
     "2449:15145": {
       "name": "리뷰작성_작성완료확인",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "ReviewWrite",
       "ignore": false,
-      "hash": "169f3ae7da2a"
+      "hash": "1c84ec61924e"
     },
     "2449:15328": {
       "name": "리뷰작성_작성종료",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "ReviewWrite",
       "ignore": false,
-      "hash": "2fca9a49cef0"
+      "hash": "0962526b7b41"
     },
     "2452:15444": {
       "name": "내가 작성한 리뷰",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviews",
       "ignore": false,
-      "hash": "18859ffae9eb"
+      "hash": "2e786956d87c"
     },
     "2452:16658": {
       "name": "내가 작성한 리뷰_Default",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviews",
       "ignore": false,
-      "hash": "b111ac995c9e"
+      "hash": "7f79ebe44ae2"
     },
     "2452:16217": {
       "name": "내가 작성한 리뷰2",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviews",
       "ignore": false,
-      "hash": "2dd51dac8a53"
+      "hash": "1521117a8236"
     },
     "2452:15530": {
       "name": "내가작성한리뷰확인",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviews",
       "ignore": false,
-      "hash": "e105c8faf70e"
+      "hash": "97f23cc734ec"
     },
     "2452:15634": {
       "name": "내가작성한리뷰_수정",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviewEdit",
       "ignore": false,
-      "hash": "fd2e7cafae2e"
+      "hash": "c70a208b2bd8"
     },
     "2452:16312": {
       "name": "내가작성한리뷰_종료",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviewEdit",
       "ignore": false,
-      "hash": "a731c49e207b"
+      "hash": "a9f72f98fd32"
     },
     "2452:15724": {
       "name": "내가작성한리뷰_삭제",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviews",
       "ignore": false,
-      "hash": "9090bd32191f"
+      "hash": "75e176e31e08"
     },
     "2452:16097": {
       "name": "내가작성한리뷰_삭제완료",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviews",
       "ignore": false,
-      "hash": "a6a5c7cc7cb3"
+      "hash": "a1488dd8a8c0"
     },
     "2452:15755": {
       "name": "내가작성한리뷰_수정완료",
       "page": "완료화면 전체 정리공간 / 고객 / 마이페이지",
       "screen": "MyReviewEdit",
       "ignore": false,
-      "hash": "2a660937e184"
+      "hash": "03f4734e4c6a"
     },
     "2449:13794": {
       "name": "명인인증_사진 선택",

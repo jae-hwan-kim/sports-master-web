@@ -17,6 +17,7 @@ import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import type { components } from '@/types/schema'
+import { formatPhone } from '@/utils/phone'
 
 type CertificationResponseDto = components['schemas']['CertificationResponseDto']
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
@@ -225,10 +226,10 @@ export function MasterDetailProfileScreen() {
             </Pressable>
           </View>
 
-          {/* 센터연락처 — BE 스키마 추가 후 profile.centerPhone 연결 */}
+          {/* 센터연락처 */}
           <View>
             <SectionLabel label="센터연락처" />
-            <ReadonlyTextRow text="-" />
+            <ReadonlyTextRow text={profile?.centerPhone ? formatPhone(profile.centerPhone) : '-'} />
           </View>
 
           {/* 키워드 Chip 목록 (가로 스크롤) */}

@@ -111,7 +111,19 @@ export function MasterHomeScreen() {
     queryFn: fetchDiagnosisPreview,
   })
 
-  const hasProfile = expertProfile !== undefined && !expertProfileError
+  // 프로필 행은 가입 시 빈 값으로 자동 생성됨 → 실제 작성된 내용이 있어야 작성 완료로 판단
+  const hasProfile =
+    !expertProfileError &&
+    !!expertProfile &&
+    !!(
+      expertProfile.region ||
+      expertProfile.centerName ||
+      expertProfile.representativeService ||
+      expertProfile.introduction ||
+      expertProfile.careerText ||
+      expertProfile.keywordTags?.length ||
+      expertProfile.portfolioImageUrls?.length
+    )
   const gradeLabel = expertProfile?.expertGrade
     ? (GRADE_LABEL[expertProfile.expertGrade] ?? expertProfile.expertGrade)
     : '-'
@@ -137,7 +149,7 @@ export function MasterHomeScreen() {
     tabNav.navigate('ProfileTab', { screen: 'MasterDetailProfile', initial: false })
 
   const handleSendLink = () => {
-    if (expertProfileError) {
+    if (!hasProfile) {
       setNoProfileVisible(true)
       return
     }

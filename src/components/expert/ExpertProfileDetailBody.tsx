@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { StarMedalIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import type { components } from '@/types/schema'
+import { formatPhone } from '@/utils/phone'
 
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
 
@@ -68,9 +69,9 @@ export function ExpertProfileDetailBody({
     <>
       {/* 프로필 이미지 */}
       <View className="mt-[11px] h-[470px] overflow-hidden rounded-[12px]">
-        {profile?.portfolioImageUrls?.[0] ? (
+        {profile?.profileImageUrl ? (
           <Image
-            source={{ uri: profile.portfolioImageUrls[0] }}
+            source={{ uri: profile.profileImageUrl }}
             style={{ width: '100%', height: 470 }}
             contentFit="cover"
           />
@@ -205,7 +206,7 @@ export function ExpertProfileDetailBody({
         <SectionLabel label="센터연락처" />
         <ReadonlyBox>
           <Text className="text-[12px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-Medium' }}>
-            -
+            {profile?.centerPhone ? formatPhone(profile.centerPhone) : '-'}
           </Text>
         </ReadonlyBox>
       </View>

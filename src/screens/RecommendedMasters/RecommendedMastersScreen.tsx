@@ -168,7 +168,7 @@ export function RecommendedMastersScreen() {
       <LinearGradient
         colors={['rgba(0,19,75,0)', '#1A4B8E', '#429EF4']}
         locations={[0, 0.688, 1.0]}
-        className="absolute bottom-0 left-0 right-0 h-[239]"
+        style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 239 }}
         pointerEvents="none"
       />
 

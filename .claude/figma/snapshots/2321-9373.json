@@ -123,8 +123,8 @@
               "type": "GRADIENT_LINEAR",
               "opacity": 0.9,
               "stops": [
-                "#F2F2F2@0",
-                "#F2F2F2@0.16",
+                "#F2F2F2/0@0",
+                "#F2F2F2/0.67@0.16",
                 "#F2F2F2@0.59"
               ]
             }

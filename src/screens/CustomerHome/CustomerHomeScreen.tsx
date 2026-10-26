@@ -48,7 +48,7 @@ function toMasterCard(expert: FeaturedExpert): MasterCardData {
 function CategoryChip({ label }: { label: string }) {
   return (
     <View className="h-[20px] items-center justify-center rounded-[18px] bg-black px-[12px]">
-      <Text className="font-pretendard-medium text-primary" style={{ fontSize: 8, lineHeight: 14 }}>
+      <Text className="font-pretendard-medium text-primary" style={{ fontSize: 10, lineHeight: 18 }}>
         {label}
       </Text>
     </View>
@@ -59,7 +59,7 @@ function CategoryChip({ label }: { label: string }) {
 function MasterCard({ item, onPressDetail }: { item: MasterCardData; onPressDetail: () => void }) {
   return (
     // Figma node 2321:9044 — h:289, 카드 x:32 → mx-[32px]
-    <View className="mx-[32px] h-[289px] overflow-hidden rounded-[12px] bg-gray1">
+    <View className="mx-[32px] h-[289px] overflow-hidden rounded-[12px] border border-gray1 bg-gray1">
       {item.imageUri && (
         <Image
           source={{ uri: item.imageUri }}
@@ -75,8 +75,12 @@ function MasterCard({ item, onPressDetail }: { item: MasterCardData; onPressDeta
       />
 
       {/* 명인명 + 뱃지 — top: 131 (Figma: 559-428) */}
-      <View className="absolute left-[16px] top-[131px] flex-row items-center gap-[4px]">
-        <Text className="font-pretendard-extrabold text-[#F2F2F2]" style={{ fontSize: 17 }}>
+      <View className="absolute left-[16px] right-[16px] top-[131px] flex-row items-center gap-[4px]">
+        <Text
+          className="shrink font-pretendard-extrabold text-[#F2F2F2]"
+          style={{ fontSize: 17, lineHeight: 20 }}
+          numberOfLines={1}
+        >
           {item.name}
         </Text>
         <StarMedalIcon size={20} />
@@ -84,8 +88,9 @@ function MasterCard({ item, onPressDetail }: { item: MasterCardData; onPressDeta
 
       {/* 소개글 — top: 155 (Figma: 583-428) */}
       <Text
-        className="absolute left-[16px] top-[155px] font-pretendard-semibold"
-        style={{ fontSize: 12, color: '#FBBC05' }}
+        className="absolute left-[16px] right-[16px] top-[155px] font-pretendard-semibold"
+        style={{ fontSize: 12, lineHeight: 14, color: '#FBBC05' }}
+        numberOfLines={1}
       >
         {item.intro}
       </Text>
@@ -131,29 +136,18 @@ function MasterCard({ item, onPressDetail }: { item: MasterCardData; onPressDeta
   )
 }
 
-/** 섹션 패널 헤더 — 이달의 소개 명인 + AD 뱃지 */
+/** 섹션 패널 헤더 — 이달의 소개 명인 (Figma 2321:9033: 패널 y364, 텍스트 x32·y387, 첫 카드 y428) */
 function SectionHeader() {
   return (
     <View
-      className="mt-[12px] flex-row items-center justify-between rounded-tl-[16px] rounded-tr-[16px] bg-[#F2F2F2] px-[16px] pb-[16px] pt-[23px]"
-      style={Platform.select({
-        ios: {
-          shadowColor: '#000',
-          // Figma: '0px -1px 5.5px' — 위쪽으로 shadow
-          shadowOffset: { width: 0, height: -1 },
-          shadowOpacity: 0.1,
-          shadowRadius: 5.5,
-        },
-        android: { elevation: 3 },
-      })}
+      className="mt-[12px] rounded-tl-[16px] rounded-tr-[16px] bg-[#F2F2F2] px-[32px] pb-[20px] pt-[23px]"
+      // Figma '0 -1 5.5 rgba(0,0,0,0.1)' — 패널이 카드 목록까지 이어지므로 위쪽으로만 그림자.
+      // 음수 spread로 아래쪽 번짐을 없애 헤더/카드 사이 이음새가 생기지 않게 함 (iOS·Android 공통)
+      style={{ boxShadow: '0px -4px 6px -2px rgba(0,0,0,0.1)' }}
     >
-      <Text className="font-pretendard-extrabold text-gray3" style={{ fontSize: 18 }}>
+      <Text className="font-pretendard-extrabold text-gray3" style={{ fontSize: 18, lineHeight: 21 }}>
         이달의 소개 명인
       </Text>
-      {/* AD 뱃지 */}
-      <View className="h-[16px] items-center justify-center rounded-[4px] bg-[#A2A2A2] px-[8px]">
-        <Text className="font-pretendard-semibold text-small2 text-[#F2F2F2]">AD</Text>
-      </View>
     </View>
   )
 }

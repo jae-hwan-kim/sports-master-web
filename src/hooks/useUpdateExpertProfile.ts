@@ -23,6 +23,11 @@ export function useUpdateExpertProfile() {
     mutationFn: updateMyExpertProfile,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expertProfile', 'me'] })
+      // 명인홈의 프로필 작성 여부·등급 카드도 즉시 갱신
+      queryClient.invalidateQueries({ queryKey: ['expertGrade'] })
+      // 고객 쪽 탐색·이달의 명인 카드에도 지역/이미지/키워드 노출
+      queryClient.invalidateQueries({ queryKey: ['experts'] })
+      queryClient.invalidateQueries({ queryKey: ['home', 'featured-experts'] })
     },
     onError: (error: unknown) => {
       console.error('[useUpdateExpertProfile]', error)

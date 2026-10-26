@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useEffect, useState } from 'react'
 import {
+  ActivityIndicator,
   FlatList,
   KeyboardAvoidingView,
   Platform,
@@ -22,12 +23,14 @@ import { ImageUploadGrid } from '@/components/profile/ImageUploadGrid'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { RegionSelector } from '@/components/profile/RegionSelector'
+import { useAndroidBack } from '@/hooks/useAndroidBack'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { useCreateCertification } from '@/hooks/useCreateCertification'
 import { useUpdateExpertProfile } from '@/hooks/useUpdateExpertProfile'
 import { isLocalUri, uploadExpertFiles } from '@/hooks/useUploadExpertFiles'
 import { RootStackParamList } from '@/navigation/RootNavigator'
+import { formatPhone, isValidPhone, toPhoneDigits } from '@/utils/phone'
 
 export function MasterDetailProfileEditScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
@@ -39,6 +42,8 @@ export function MasterDetailProfileEditScreen() {
   const [openChatUrl, setOpenChatUrl] = useState('')
   const [centerPhone, setCenterPhone] = useState('')
   const [keywords, setKeywords] = useState<string[]>([])
+  // 프로필 카드 대표 사진 — 하단 이미지(images)와 별개. 원격 URL 또는 새로 고른 로컬 uri
+  const [profileImage, setProfileImage] = useState<string | null>(null)
   const [images, setImages] = useState<string[]>([])
   // 기존 PDF는 원격 URL, 새로 고르면 로컬 uri — 저장 시 로컬만 업로드
   const [portfolioPdf, setPortfolioPdf] = useState<{ uri: string; name: string } | null>(null)
@@ -48,14 +53,19 @@ export function MasterDetailProfileEditScreen() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
-  const [saving, setSaving] = useState(false)
+  // 저장 단계 문구 — null이 아니면 저장 중 (업로드·등록이 순차라 수 초 걸림 → 진행 상황 노출)
+  const [savingLabel, setSavingLabel] = useState<string | null>(null)
+  const saving = savingLabel !== null
+  // 저장 중 Android 뒤로가기 차단 — 업로드 도중 화면 이탈 방지
+  useAndroidBack(useCallback(() => saving, [saving]))
   const { mutateAsync: createCertification } = useCreateCertification()
 
   useEffect(() => {
     if (!profile) return
     setRegion(profile.region ?? '')
     setOpenChatUrl(profile.kakaoOpenChatUrl ?? '')
-    // centerPhone — BE 스키마 추가 후 setCenterPhone(profile.centerPhone ?? '') 연결
+    setCenterPhone(profile.centerPhone ?? '')
+    setProfileImage(profile.profileImageUrl ?? null)
     setKeywords(profile.keywordTags ?? [])
     setImages(profile.portfolioImageUrls ?? [])
     setCareerText(profile.careerText ?? '')
@@ -76,8 +86,7 @@ export function MasterDetailProfileEditScreen() {
       quality: 0.8,
     })
     if (!result.canceled && result.assets[0]) {
-      const uri = result.assets[0].uri
-      setImages((prev) => [uri, ...prev.slice(1)])
+      setProfileImage(result.assets[0].uri)
     }
   }, [])
 
@@ -108,12 +117,21 @@ export function MasterDetailProfileEditScreen() {
     setCertifications((prev) => prev.filter((_, i) => i !== index))
   }, [])
 
+  const handlePressSave = () => {
+    if (centerPhone && !isValidPhone(centerPhone)) {
+      setSaveError('센터연락처를 정확히 입력해 주세요 (예: 010-1234-5678)')
+      return
+    }
+    setShowConfirmDialog(true)
+  }
+
   const handleConfirmedSave = async () => {
     setShowConfirmDialog(false)
-    setSaving(true)
+    setSavingLabel('저장 중...')
     try {
       // 새로 고른 로컬 이미지만 R2에 올리고, 원래 순서 그대로 원격 URL로 치환
       const localImages = images.filter(isLocalUri)
+      if (localImages.length > 0) setSavingLabel('이미지 업로드 중...')
       const uploaded = await uploadExpertFiles(
         'image',
         localImages.map((uri) => ({ uri }))
@@ -123,8 +141,15 @@ export function MasterDetailProfileEditScreen() {
         isLocalUri(uri) ? uploaded[uploadedIndex++] : uri
       )
 
+      let profileImageUrl = profileImage ?? ''
+      if (profileImage && isLocalUri(profileImage)) {
+        setSavingLabel('프로필 사진 업로드 중...')
+        ;[profileImageUrl] = await uploadExpertFiles('image', [{ uri: profileImage }])
+      }
+
       let educationPdfUrl = portfolioPdf?.uri ?? ''
       if (portfolioPdf && isLocalUri(portfolioPdf.uri)) {
+        setSavingLabel('포트폴리오 업로드 중...')
         const [pdfUrl] = await uploadExpertFiles('pdf', [
           { uri: portfolioPdf.uri, name: portfolioPdf.name, mimeType: 'application/pdf' },
         ])
@@ -132,17 +157,22 @@ export function MasterDetailProfileEditScreen() {
       }
 
       // 증명서는 자격증 검수 요청으로 1장씩 등록 — 성공분은 목록에서 비워 재시도 시 중복 등록 방지
+      if (certifications.length > 0) setSavingLabel('증명서 등록 중...')
       for (const uri of certifications) {
         await createCertification({ fileUri: uri, type: 'license' })
         setCertifications((prev) => prev.filter((item) => item !== uri))
       }
 
+      setSavingLabel('프로필 저장 중...')
       await updateMutation.mutateAsync({
         region: region || undefined,
         openChatUrl: openChatUrl || undefined,
         keywordTags: keywords.length > 0 ? keywords : undefined,
         careerText,
         portfolioImageUrls,
+        profileImageUrl,
+        // 빈 문자열이면 서버에서 삭제
+        centerPhone,
         educationPdfUrl,
       })
       setShowSuccessDialog(true)
@@ -154,7 +184,7 @@ export function MasterDetailProfileEditScreen() {
           '저장에 실패했습니다. 잠시 후 다시 시도해 주세요.'
       )
     } finally {
-      setSaving(false)
+      setSavingLabel(null)
     }
   }
 
@@ -188,7 +218,7 @@ export function MasterDetailProfileEditScreen() {
           </Pressable>
           <Pressable
             hitSlop={8}
-            onPress={() => setShowConfirmDialog(true)}
+            onPress={handlePressSave}
             disabled={saving}
             className="h-[24px] w-[56px] items-center justify-center rounded-[4px] bg-[#1F2A43]"
             accessibilityRole="button"
@@ -236,7 +266,7 @@ export function MasterDetailProfileEditScreen() {
           {profile && (
             <View className="mx-6">
               <View>
-                <ProfileCard profile={{ ...profile, portfolioImageUrls: images }} />
+                <ProfileCard profile={{ ...profile, profileImageUrl: profileImage }} />
                 <Pressable
                   hitSlop={8}
                   onPress={handlePickCoverPhoto}
@@ -273,14 +303,15 @@ export function MasterDetailProfileEditScreen() {
             />
           </View>
 
-          {/* 센터연락처 — BE 스키마 추가 후 mutation에 centerPhone 포함 */}
+          {/* 센터연락처 — 숫자만 입력, 하이픈은 자동 표시 (state·서버는 숫자만) */}
           <SectionLabel label="센터연락처" />
           <View className="mx-6">
             <TextField
-              value={centerPhone}
-              onChangeText={setCenterPhone}
+              value={formatPhone(centerPhone)}
+              onChangeText={(text) => setCenterPhone(toPhoneDigits(text))}
               label="연락처 입력 (예: 010-0000-0000)"
-              keyboardType="phone-pad"
+              keyboardType="number-pad"
+              maxLength={13}
               autoCorrect={false}
             />
           </View>
@@ -384,6 +415,22 @@ export function MasterDetailProfileEditScreen() {
         onConfirm={handleConfirmedSave}
         onCancel={() => setShowConfirmDialog(false)}
       />
+
+      {/* 저장 중 오버레이 — 화면 전체 터치 차단. 완료/실패 다이얼로그(Modal)와 겹쳐도 iOS에서
+          Modal 전환 충돌이 없도록 Modal이 아닌 absolute View 사용 */}
+      {saving && (
+        <View className="absolute inset-0 items-center justify-center bg-black/40">
+          <View className="items-center gap-3 rounded-2xl bg-white px-8 py-6">
+            <ActivityIndicator size="large" color="#1F2A43" />
+            <Text
+              className="text-[14px] text-[#1F2A43]"
+              style={{ fontFamily: 'Pretendard-Medium' }}
+            >
+              {savingLabel}
+            </Text>
+          </View>
+        </View>
+      )}
 
       {/* 저장 완료 다이얼로그 */}
       <ConfirmDialog

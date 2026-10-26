@@ -55,7 +55,8 @@ export type RootStackParamList = {
     initialRating: number
     initialContent?: string
   }
-  ReviewWrite: undefined
+  // reviewToken: 명인이 보낸 리뷰 링크로 진입 — 대상 명인 선택 단계 생략
+  ReviewWrite: { reviewToken?: string } | undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()

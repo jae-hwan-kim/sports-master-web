@@ -22,6 +22,8 @@ export function useDeleteDiagnosisRequest() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['diagnoses', 'incoming'] })
+      // 명인홈 '진단요청 고객' 미리보기도 같은 데이터 — 함께 갱신
+      queryClient.invalidateQueries({ queryKey: ['diagnosisPreview'] })
     },
   })
 }

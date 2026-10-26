@@ -18,8 +18,9 @@ type Handlers = {
 export function useCopyReviewLink({ onCopied, onNoProfile, onError }: Handlers) {
   return useMutation({
     mutationFn: () => requestReviewLink({}),
-    onSuccess: async ({ deepLink }) => {
-      await Clipboard.setStringAsync(deepLink)
+    // 메신저에서 클릭되는 https 링크 우선 (구버전 서버는 shareUrl 없음 → 딥링크)
+    onSuccess: async ({ shareUrl, deepLink }) => {
+      await Clipboard.setStringAsync(shareUrl ?? deepLink)
       onCopied()
     },
     onError: (error) => {

@@ -11,6 +11,7 @@
 //   reply  <commentId> <message>             Figma 댓글에 답글 + 처리 완료로 기록
 //   ack    <commentId...>                    Figma 에 쓰지 않고 처리 완료로만 기록 (Q&A·진행 공지 등 코드 무관 댓글)
 //   url    <nodeId>                          MCP get_design_context용 Figma 노드 URL 출력
+//   resnap                                   정규화 포맷 변경 후 baseline 재작성 (Figma 버전이 baseline과 같을 때만)
 //
 // 환경변수: FIGMA_TOKEN (scope: file_content:read, file_comments:read, file_comments:write)
 
@@ -71,7 +72,11 @@ function paint(p) {
   if (p.color) out.color = hex(p.color)
   const a = (p.opacity ?? 1) * (p.color?.a ?? 1)
   if (a !== 1) out.opacity = r(a)
-  if (p.gradientStops) out.stops = p.gradientStops.map((s) => `${hex(s.color)}@${r(s.position)}`)
+  // stop 형식: #RRGGBB@위치, 투명도가 있으면 #RRGGBB/알파@위치 (예: #4E6AA9/0@0 = 완전 투명)
+  if (p.gradientStops)
+    out.stops = p.gradientStops.map(
+      (s) => `${hex(s.color)}${(s.color.a ?? 1) !== 1 ? `/${r(s.color.a)}` : ''}@${r(s.position)}`
+    )
   if (p.imageRef) out.image = true
   return out
 }
@@ -318,6 +323,29 @@ async function cmdDiff() {
   }, null, 2))
 }
 
+// 스크립트의 정규화 포맷이 바뀌면 hash가 전부 달라져 diff가 오탐함 → 같은 Figma 버전에서 baseline만 다시 씀
+async function cmdResnap() {
+  const reg = readJson(REGISTRY)
+  const file = await fetchFile(reg.fileKey, reg.pages)
+  if (file.version !== reg.version) die('Figma 파일이 baseline 이후 변경됨 — diff/commit 으로 먼저 반영하세요')
+  const liveIds = new Set(file.pages.flatMap((p) => p.frames).map((f) => f.id))
+  const ids = Object.entries(reg.frames)
+    .filter(([id, f]) => !f.ignore && liveIds.has(id))
+    .map(([id]) => id)
+  const nodes = await fetchNodes(reg.fileKey, ids)
+  const rewritten = []
+  for (const id of ids) {
+    const n = nodes[id]
+    if (!n) continue
+    writeJson(snapPath(id), n)
+    if (reg.frames[id].hash !== hash(n)) rewritten.push(id)
+    reg.frames[id].hash = hash(n)
+  }
+  reg.syncedAt = new Date().toISOString()
+  writeJson(REGISTRY, reg)
+  console.log(JSON.stringify({ total: ids.length, hashChanged: rewritten.length }, null, 2))
+}
+
 function cmdCommit(ids) {
   const reg = readJson(REGISTRY)
   const pending = readJson(PENDING)
@@ -398,6 +426,7 @@ switch (cmd) {
   case 'unlink': cmdUnlink(rest[0] ?? die('nodeId 가 필요합니다')); break
   case 'reply': await cmdReply(rest[0], rest.slice(1).join(' ') || die('message 가 필요합니다')); break
   case 'ack': cmdAck(rest.length ? rest : die('commentId 가 필요합니다')); break
+  case 'resnap': await cmdResnap(); break
   case 'url': cmdUrl(rest[0] ?? die('nodeId 가 필요합니다')); break
   default: die('command: pages | init | diff | commit | link | unlink | reply | ack | url')
 }

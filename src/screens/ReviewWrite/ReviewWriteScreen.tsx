@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useState } from 'react'
@@ -19,6 +19,7 @@ import { EmptyState } from '@/components/EmptyState'
 import { PanelScreen } from '@/components/PanelScreen'
 import { StarRating } from '@/components/StarRating'
 import { useCreateReview } from '@/hooks/useCreateReview'
+import { useReviewLinkInfo } from '@/hooks/useReviewLinkInfo'
 import { DiagnosisSentItem, useReviewableExperts } from '@/hooks/useReviewableExperts'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
@@ -151,12 +152,16 @@ function StepSelectExpert({ onSelect, onBack, insets }: StepSelectProps) {
 // ---------------------------------------------------------------------------
 
 type StepWriteProps = {
-  expert: DiagnosisSentItem
+  expert: Pick<
+    DiagnosisSentItem,
+    'expertProfileId' | 'expertName' | 'expertAvatarUrl' | 'expertGrade'
+  >
+  reviewToken?: string
   onBack: () => void
   insets: { top: number; bottom: number }
 }
 
-function StepWriteReview({ expert, onBack, insets }: StepWriteProps) {
+function StepWriteReview({ expert, reviewToken, onBack, insets }: StepWriteProps) {
   const navigation = useNavigation<NavProp>()
   const { mutate: createReview, isPending } = useCreateReview()
 
@@ -172,6 +177,7 @@ function StepWriteReview({ expert, onBack, insets }: StepWriteProps) {
         expertProfileId: expert.expertProfileId,
         rating,
         comment: content.trim() || undefined,
+        reviewToken,
       },
       {
         onSuccess: () => {
@@ -179,7 +185,7 @@ function StepWriteReview({ expert, onBack, insets }: StepWriteProps) {
         },
       }
     )
-  }, [canSubmit, createReview, expert.expertProfileId, rating, content, navigation])
+  }, [canSubmit, createReview, expert.expertProfileId, rating, content, reviewToken, navigation])
 
   return (
     <KeyboardAvoidingView
@@ -327,11 +333,54 @@ function StepWriteReview({ expert, onBack, insets }: StepWriteProps) {
 // Screen (2단계 상태 관리)
 // ---------------------------------------------------------------------------
 
+// 리뷰 링크로 진입 — 토큰의 명인으로 바로 작성 단계
+function LinkedReviewWrite({ reviewToken }: { reviewToken: string }) {
+  const navigation = useNavigation<NavProp>()
+  const insets = useScreenInsets()
+  const { data: info, isLoading, isError } = useReviewLinkInfo(reviewToken)
+
+  if (info && !info.isMine && !info.alreadyReviewed) {
+    return (
+      <StepWriteReview
+        expert={{ ...info, expertGrade: info.expertGrade ?? '' }}
+        reviewToken={reviewToken}
+        onBack={() => navigation.goBack()}
+        insets={insets}
+      />
+    )
+  }
+
+  const message = isError
+    ? '만료되었거나 올바르지 않은 리뷰 링크입니다'
+    : info?.isMine
+      ? '본인에게는 리뷰를 작성할 수 없습니다'
+      : '이미 리뷰를 작성한 명인입니다'
+
+  return (
+    <PanelScreen
+      title="리뷰작성"
+      subtitle="내가 만난 명인에 대한 후기를 알려주세요"
+      onBack={() => navigation.goBack()}
+    >
+      {isLoading ? (
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator color="#1F2A43" />
+        </View>
+      ) : (
+        <EmptyState title={message} />
+      )}
+    </PanelScreen>
+  )
+}
+
 export function ReviewWriteScreen() {
   const navigation = useNavigation<NavProp>()
   const insets = useScreenInsets()
+  const reviewToken = useRoute<RouteProp<RootStackParamList, 'ReviewWrite'>>().params?.reviewToken
 
   const [selectedExpert, setSelectedExpert] = useState<DiagnosisSentItem | null>(null)
+
+  if (reviewToken) return <LinkedReviewWrite reviewToken={reviewToken} />
 
   if (selectedExpert === null) {
     return (

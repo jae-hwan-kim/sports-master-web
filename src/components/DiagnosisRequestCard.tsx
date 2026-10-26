@@ -51,7 +51,7 @@ export function DiagnosisRequestCard({ item, onPress, onDelete, cardBg = '#D9D9D
             <Text className="font-pretendard-medium text-small1 text-secondary">
               #{customerProfile.personalCode}
             </Text>
-            {isViewed && (
+            {isViewed && onDelete && (
               <Pressable
                 hitSlop={8}
                 onPress={() => setDeleteVisible(true)}

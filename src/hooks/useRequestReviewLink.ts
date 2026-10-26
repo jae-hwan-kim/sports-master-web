@@ -23,8 +23,9 @@ export async function requestReviewLink(
 export function useRequestReviewLink() {
   return useMutation({
     mutationFn: requestReviewLink,
-    onSuccess: async ({ deepLink }) => {
-      await Share.share({ url: deepLink, message: deepLink })
+    onSuccess: async ({ shareUrl, deepLink }) => {
+      const link = shareUrl ?? deepLink
+      await Share.share({ url: link, message: link })
     },
     onError: (error) => {
       Sentry.captureException(error, { tags: { flow: 'requestReviewLink' } })

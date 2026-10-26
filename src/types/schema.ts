@@ -1425,6 +1425,16 @@ export interface components {
              */
             educationPdfUrl?: string;
             /**
+             * @description 프로필 대표 사진 URL
+             * @example https://cdn.example.com/images/1.jpg
+             */
+            profileImageUrl?: string | null;
+            /**
+             * @description 센터 연락처 (숫자만)
+             * @example 01012345678
+             */
+            centerPhone?: string | null;
+            /**
              * @description 프로필 이미지 URL 목록
              * @example [
              *       "https://cdn.example.com/images/1.jpg"
@@ -1580,6 +1590,16 @@ export interface components {
              */
             educationPdfUrl?: string;
             /**
+             * @description 프로필 대표 사진 URL — POST me/uploads?kind=image 결과 URL, 빈 문자열이면 삭제
+             * @example https://files.example.com/experts/1/images/uuid.jpg
+             */
+            profileImageUrl?: string;
+            /**
+             * @description 센터 연락처 (숫자만 9~11자리), 빈 문자열이면 삭제
+             * @example 01012345678
+             */
+            centerPhone?: string;
+            /**
              * @description 카카오 오픈채팅 URL
              * @example https://open.kakao.com/o/example
              */
@@ -1649,6 +1669,43 @@ export interface components {
              * @example sportsmaster://review?token=abc123reviewtoken
              */
             deepLink: string;
+            /**
+             * @description 공유용 https 링크 — 메신저에서 클릭 가능, 열면 앱(딥링크)으로 이동
+             * @example https://api.example.com/r/review?token=abc123reviewtoken
+             */
+            shareUrl: string;
+        };
+        ReviewLinkInfoDto: {
+            /**
+             * @description 명인 프로필 ID
+             * @example 5
+             */
+            expertProfileId: number;
+            /**
+             * @description 명인 표시 이름
+             * @example 아쿠아퍼포먼스
+             */
+            expertName: string;
+            /**
+             * @description 명인 대표 사진 URL
+             * @example https://cdn.example.com/images/1.jpg
+             */
+            expertAvatarUrl: string | null;
+            /**
+             * @description 명인 등급
+             * @enum {string}
+             */
+            expertGrade: "bronze" | "silver" | "gold" | "platinum" | "diamond" | null;
+            /**
+             * @description 본인(명인)의 링크인지 — 본인에게는 리뷰 작성 불가
+             * @example false
+             */
+            isMine: boolean;
+            /**
+             * @description 이미 이 명인에게 리뷰를 작성했는지
+             * @example false
+             */
+            alreadyReviewed: boolean;
         };
         CreateReviewTokenDto: {
             /**
@@ -1741,6 +1798,8 @@ export interface components {
              * @example 정말 도움이 되었습니다!
              */
             comment?: string;
+            /** @description 리뷰 요청 링크 토큰 — 있으면 진단요청 이력 없이 작성 가능 (명인이 보낸 링크) */
+            reviewToken?: string;
         };
         ReviewResponseDto: {
             /**

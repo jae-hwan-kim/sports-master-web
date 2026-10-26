@@ -20,5 +20,8 @@ export function useMarkDiagnosisViewed() {
     onError: (_err, _id, ctx) => {
       queryClient.setQueryData(['diagnoses', 'incoming'], ctx?.prev)
     },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['diagnosisPreview'] })
+    },
   })
 }

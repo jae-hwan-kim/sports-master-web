@@ -2447,7 +2447,7 @@
           "type": "GRADIENT_LINEAR",
           "stops": [
             "#F2F2F2@0.35",
-            "#F2F2F2@1"
+            "#F2F2F2/0@1"
           ]
         }
       ]

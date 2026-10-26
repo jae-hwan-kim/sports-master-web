@@ -45,6 +45,8 @@ export function useUpdateCustomerProfile() {
     mutationFn: updateMyCustomerProfile,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['customerProfile', 'me'] })
+      // 추천 명인은 지역·키워드 기반
+      queryClient.invalidateQueries({ queryKey: ['recommendations'] })
     },
     onError: (error: unknown) => {
       console.error('[useUpdateCustomerProfile]', error)

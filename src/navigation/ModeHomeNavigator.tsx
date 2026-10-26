@@ -4,7 +4,7 @@ import type {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Animated, Pressable, View } from 'react-native'
 
 import { SettingsIcon } from '@/assets/icons'
@@ -17,6 +17,7 @@ import { CustomerTabNavigator } from '@/navigation/CustomerTabNavigator'
 import { MasterTabNavigator } from '@/navigation/MasterTabNavigator'
 import type { RootStackParamList } from '@/navigation/RootNavigator'
 import { useAuthStore } from '@/store/authStore'
+import { useReviewLinkStore } from '@/store/reviewLinkStore'
 
 // 홈 탭 이름 — 이 탭이 포커스일 때만 공용 상단(인사말 + 모드 토글 + 설정)을 표시
 const HOME_TABS = ['HomeTab', 'CustomerHomeTab']
@@ -41,6 +42,14 @@ export function ModeHomeNavigator({ route }: Props) {
   const contentOpacity = useRef(new Animated.Value(1)).current
 
   const nextMode: HomeMode = mode === 'expert' ? 'customer' : 'expert'
+
+  // 리뷰 링크로 들어온 경우 — 로그인된 홈에 도달한 시점에 리뷰 작성 화면으로 이동
+  const pendingReviewToken = useReviewLinkStore((s) => s.pendingToken)
+  useEffect(() => {
+    if (!pendingReviewToken) return
+    useReviewLinkStore.getState().clearPendingToken()
+    navigation.navigate('ReviewWrite', { reviewToken: pendingReviewToken })
+  }, [pendingReviewToken, navigation])
 
   const handleSwitchConfirm = () => {
     setConfirmVisible(false)

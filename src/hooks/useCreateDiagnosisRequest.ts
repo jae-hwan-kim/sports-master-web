@@ -21,6 +21,8 @@ export function useCreateDiagnosisRequest() {
     mutationFn: (expertProfileId: number) => createDiagnosisRequest(expertProfileId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['diagnosisPreview'] })
+      // 리뷰 작성 가능한 명인 목록 = 내가 보낸 진단요청 기준
+      queryClient.invalidateQueries({ queryKey: ['diagnoses', 'my-sent'] })
     },
     onError: (error) => {
       Sentry.captureException(error, { tags: { flow: 'createDiagnosisRequest' } })

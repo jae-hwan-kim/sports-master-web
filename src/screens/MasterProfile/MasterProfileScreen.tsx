@@ -73,10 +73,11 @@ function EmptyProfileCard() {
 
           {/* 그라디언트 오버레이 */}
           <LinearGradient
-            colors={['transparent', 'rgba(242,242,242,0.6)', 'rgba(242,242,242,0.9)']}
+            // Figma: fill 0.9 × stops #F2F2F2/0 → /0.67 → /1 — 'transparent'(투명 검정)는 중간이 회색으로 탁해짐
+            colors={['rgba(242,242,242,0)', 'rgba(242,242,242,0.6)', 'rgba(242,242,242,0.9)']}
             locations={[0, 0.16, 0.59]}
-            className="absolute bottom-0 left-0 right-0"
-            style={{ height: 220 }}
+            // LinearGradient는 className 미지원(cssInterop 미등록) → style로 배치
+            style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 220 }}
           />
 
           {/* 이름 / 소개 */}

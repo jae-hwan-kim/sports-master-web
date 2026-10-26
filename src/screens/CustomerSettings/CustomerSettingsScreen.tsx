@@ -2,17 +2,7 @@ import { useNavigation, usePreventRemove } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback, useMemo, useState } from 'react'
-import {
-  ActivityIndicator,
-  FlatList,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
-  Pressable,
-  ScrollView,
-  Switch,
-  View,
-} from 'react-native'
+import { FlatList, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
 
 import { ArrowBackIcon, EditIcon, ProfilePersonIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
@@ -21,14 +11,9 @@ import { TextField } from '@/components/TextField'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { RegionSelector } from '@/components/profile/RegionSelector'
 import { useCustomerProfile } from '@/hooks/useCustomerProfile'
-import { useLogout } from '@/hooks/useLogout'
-import { useRootNavigation } from '@/hooks/useRootNavigation'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
-import { useSwitchMode } from '@/hooks/useSwitchMode'
 import { useUpdateCustomerProfile } from '@/hooks/useUpdateCustomerProfile'
-import { useWithdraw } from '@/hooks/useWithdraw'
 import { RootStackParamList } from '@/navigation/RootNavigator'
-import { useAuthStore } from '@/store/authStore'
 
 type Mode = 'view' | 'edit'
 
@@ -68,26 +53,10 @@ const INPUT_BOX_SHADOW = Platform.select({
 
 export function CustomerSettingsScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-  const rootNav = useRootNavigation()
   const insets = useScreenInsets()
-  const setModeSelected = useAuthStore((s) => s.setModeSelected)
-  const logout = useLogout()
-  const { mutate: switchMode, isPending: isSwitching } = useSwitchMode()
 
   const { data: profile } = useCustomerProfile()
   const { mutate: updateProfile, isPending: isSaving } = useUpdateCustomerProfile()
-
-  const handleSwitchToMaster = useCallback(() => {
-    switchMode(
-      { mode: 'expert' },
-      {
-        onSuccess: () => {
-          setModeSelected('expert')
-          rootNav?.reset({ index: 0, routes: [{ name: 'MasterHome' }] })
-        },
-      }
-    )
-  }, [switchMode, setModeSelected, rootNav])
 
   // 저장된 실제 상태 — API 데이터 기반
   const region = profile?.region ?? ''
@@ -103,15 +72,9 @@ export function CustomerSettingsScreen() {
   const [draftAgeGroup, setDraftAgeGroup] = useState<string | null>(null)
   const [draftKeywords, setDraftKeywords] = useState<string[]>([])
 
-  const { mutate: withdraw, isPending: isWithdrawing } = useWithdraw()
-  const socialProvider = useAuthStore((s) => s.socialProvider)
-
   const [mode, setMode] = useState<Mode>('view')
   const [saveDialogVisible, setSaveDialogVisible] = useState(false)
   const [exitDialogVisible, setExitDialogVisible] = useState(false)
-  const [withdrawDialogVisible, setWithdrawDialogVisible] = useState(false)
-  const [withdrawPasswordVisible, setWithdrawPasswordVisible] = useState(false)
-  const [withdrawPassword, setWithdrawPassword] = useState('')
 
   const enterEditMode = useCallback(() => {
     setDraftRegion(region)
@@ -247,13 +210,9 @@ export function CustomerSettingsScreen() {
         </Pressable>
 
         {mode === 'view' ? (
-          <Pressable
-            hitSlop={10}
-            onPress={enterEditMode}
-            accessibilityRole="button"
-            accessibilityLabel="편집"
-          >
-            <EditIcon size={24} />
+          <Pressable onPress={enterEditMode} accessibilityRole="button" accessibilityLabel="편집">
+            {/* edit.svg는 44 viewBox 안에 24 글리프 — Figma edit 인스턴스(44×44) 그대로 */}
+            <EditIcon size={44} />
           </Pressable>
         ) : (
           <Pressable
@@ -462,65 +421,6 @@ export function CustomerSettingsScreen() {
         </View>
       </ScrollView>
 
-      {/* 명인 모드 전환 + 로그아웃/탈퇴 — VIEW 모드에서만 표시 */}
-      {mode === 'view' && (
-        <View className="mx-6 mb-6 gap-3">
-          <View className="flex-row items-center justify-between rounded-xl bg-white px-4 py-4">
-            <View>
-              <Text
-                className="text-[15px] text-[#07091C]"
-                style={{ fontFamily: 'Pretendard-SemiBold' }}
-              >
-                명인 모드
-              </Text>
-              <Text
-                className="mt-0.5 text-[12px] text-[#74768E]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                전문가로 전환합니다
-              </Text>
-            </View>
-            <Switch
-              value={false}
-              onValueChange={handleSwitchToMaster}
-              disabled={isSwitching}
-              trackColor={{ false: '#D9D9D9', true: '#1F2A43' }}
-              thumbColor="#FFFFFF"
-            />
-          </View>
-
-          <View className="flex-row justify-between rounded-xl bg-white px-4 py-3">
-            <Pressable
-              hitSlop={8}
-              onPress={logout}
-              accessibilityRole="button"
-              accessibilityLabel="로그아웃"
-            >
-              <Text
-                className="text-[14px] text-[#1F2A43]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                로그아웃
-              </Text>
-            </Pressable>
-            <Pressable
-              hitSlop={8}
-              onPress={() => setWithdrawDialogVisible(true)}
-              disabled={isWithdrawing}
-              accessibilityRole="button"
-              accessibilityLabel="탈퇴하기"
-            >
-              <Text
-                className="text-[14px] text-[#E74C3C]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                탈퇴하기
-              </Text>
-            </Pressable>
-          </View>
-        </View>
-      )}
-
       {/* 저장 확인 다이얼로그 */}
       <ConfirmDialog
         visible={saveDialogVisible}
@@ -542,87 +442,6 @@ export function CustomerSettingsScreen() {
         onConfirm={handleExitConfirm}
         onCancel={() => setExitDialogVisible(false)}
       />
-
-      {/* 탈퇴 확인 다이얼로그 */}
-      <ConfirmDialog
-        visible={withdrawDialogVisible}
-        title="정말 탈퇴하시겠습니까?"
-        description="탈퇴 시 모든 데이터가 삭제되며 복구할 수 없습니다"
-        confirmLabel="탈퇴"
-        cancelLabel="취소"
-        onConfirm={() => {
-          setWithdrawDialogVisible(false)
-          if (socialProvider !== null && socialProvider !== 'local') {
-            withdraw({})
-          } else {
-            setWithdrawPasswordVisible(true)
-          }
-        }}
-        onCancel={() => setWithdrawDialogVisible(false)}
-      />
-
-      <Modal
-        visible={withdrawPasswordVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={() => {
-          setWithdrawPasswordVisible(false)
-          setWithdrawPassword('')
-        }}
-      >
-        <View className="flex-1 items-center justify-center bg-black/50 px-6">
-          <View className="w-full max-w-[340px] rounded-2xl bg-white px-5 pb-6 pt-11">
-            <Text className="text-center text-popup-lg font-semibold text-black">
-              비밀번호 확인
-            </Text>
-            <Text className="mt-4 text-center text-small3 font-medium text-gray2">
-              탈퇴를 위해 비밀번호를 입력해주세요
-            </Text>
-            <View className="mt-6">
-              <TextField
-                label="비밀번호"
-                value={withdrawPassword}
-                onChangeText={setWithdrawPassword}
-                secureToggle
-                secureTextEntry
-              />
-            </View>
-            <View className="mt-12 w-full flex-row gap-2">
-              <Pressable
-                hitSlop={8}
-                disabled={isWithdrawing || !withdrawPassword}
-                onPress={() => withdraw({ password: withdrawPassword })}
-                accessibilityRole="button"
-                accessibilityLabel="탈퇴"
-                className={`h-[50px] flex-1 items-center justify-center rounded-lg bg-primary ${
-                  isWithdrawing || !withdrawPassword ? 'opacity-50' : 'opacity-100'
-                }`}
-              >
-                {isWithdrawing ? (
-                  <ActivityIndicator color="#FFFFFF" />
-                ) : (
-                  <Text className="text-main font-medium text-white">탈퇴</Text>
-                )}
-              </Pressable>
-              <Pressable
-                hitSlop={8}
-                disabled={isWithdrawing}
-                onPress={() => {
-                  setWithdrawPasswordVisible(false)
-                  setWithdrawPassword('')
-                }}
-                accessibilityRole="button"
-                accessibilityLabel="취소"
-                className={`h-[50px] flex-1 items-center justify-center rounded-lg border border-dialogBorder bg-dialogBg ${
-                  isWithdrawing ? 'opacity-50' : 'opacity-100'
-                }`}
-              >
-                <Text className="text-main font-medium text-white">취소</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </KeyboardAvoidingView>
   )
 }

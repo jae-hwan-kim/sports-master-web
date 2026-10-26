@@ -2,9 +2,11 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
+import { useState } from 'react'
 import { ActivityIndicator, Platform, Pressable, ScrollView, View } from 'react-native'
 
 import { ArrowNextIcon, ProfilePersonIcon } from '@/assets/icons'
+import { type AccountExitAction, AccountExitDialogs } from '@/components/AccountExitDialogs'
 import { Text } from '@/components/AppText'
 import { useCustomerProfile } from '@/hooks/useCustomerProfile'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
@@ -91,6 +93,7 @@ export function CustomerProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useScreenInsets()
   const { data: profile, isLoading, isError } = useCustomerProfile()
+  const [exitAction, setExitAction] = useState<AccountExitAction>(null)
 
   const handleAccountSettings = () => {
     navigation.navigate('CustomerSettings')
@@ -237,7 +240,15 @@ export function CustomerProfileScreen() {
           <MenuRow label="리뷰 작성하기" onPress={handleWriteReview} />
           <MenuRow label="내가 작성한 리뷰 보기" onPress={handleMyReviews} />
         </Section>
+
+        {/* 계정 — Figma 미정의, 고객 모드의 로그아웃/탈퇴 진입점 (명인 설정과 동일 동작) */}
+        <Section title="계정">
+          <MenuRow label="로그아웃" onPress={() => setExitAction('logout')} />
+          <MenuRow label="계정탈퇴" onPress={() => setExitAction('withdraw')} />
+        </Section>
       </ScrollView>
+
+      <AccountExitDialogs action={exitAction} onClose={() => setExitAction(null)} />
     </View>
   )
 }

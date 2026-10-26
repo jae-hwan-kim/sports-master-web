@@ -18,7 +18,9 @@ export function useUpdateReview() {
   return useMutation({
     mutationFn: updateReview,
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['reviews', 'written-by-me'] })
+      // written-by-me 포함 해당 명인 리뷰 목록·요약 전체
+      qc.invalidateQueries({ queryKey: ['reviews'] })
+      qc.invalidateQueries({ queryKey: ['experts'] })
     },
   })
 }
