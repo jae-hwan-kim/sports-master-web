@@ -342,7 +342,11 @@ function LinkedReviewWrite({ reviewToken }: { reviewToken: string }) {
   if (info && !info.isMine && !info.alreadyReviewed) {
     return (
       <StepWriteReview
-        expert={{ ...info, expertGrade: info.expertGrade ?? '' }}
+        expert={{
+          ...info,
+          expertAvatarUrl: info.expertAvatarUrl ?? null,
+          expertGrade: info.expertGrade ?? '',
+        }}
         reviewToken={reviewToken}
         onBack={() => navigation.goBack()}
         insets={insets}

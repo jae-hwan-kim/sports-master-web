@@ -603,6 +603,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/reviews/link": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 리뷰 요청 링크 토큰 확인 (고객용) — 링크로 열린 리뷰 작성 화면의 대상 명인 */
+        get: operations["ReviewsController_getReviewLinkInfo"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/reviews/me": {
         parameters: {
             query?: never;
@@ -1428,12 +1445,12 @@ export interface components {
              * @description 프로필 대표 사진 URL
              * @example https://cdn.example.com/images/1.jpg
              */
-            profileImageUrl?: string | null;
+            profileImageUrl?: string;
             /**
              * @description 센터 연락처 (숫자만)
              * @example 01012345678
              */
-            centerPhone?: string | null;
+            centerPhone?: string;
             /**
              * @description 프로필 이미지 URL 목록
              * @example [
@@ -1675,38 +1692,6 @@ export interface components {
              */
             shareUrl: string;
         };
-        ReviewLinkInfoDto: {
-            /**
-             * @description 명인 프로필 ID
-             * @example 5
-             */
-            expertProfileId: number;
-            /**
-             * @description 명인 표시 이름
-             * @example 아쿠아퍼포먼스
-             */
-            expertName: string;
-            /**
-             * @description 명인 대표 사진 URL
-             * @example https://cdn.example.com/images/1.jpg
-             */
-            expertAvatarUrl: string | null;
-            /**
-             * @description 명인 등급
-             * @enum {string}
-             */
-            expertGrade: "bronze" | "silver" | "gold" | "platinum" | "diamond" | null;
-            /**
-             * @description 본인(명인)의 링크인지 — 본인에게는 리뷰 작성 불가
-             * @example false
-             */
-            isMine: boolean;
-            /**
-             * @description 이미 이 명인에게 리뷰를 작성했는지
-             * @example false
-             */
-            alreadyReviewed: boolean;
-        };
         CreateReviewTokenDto: {
             /**
              * @description 채팅방 ID — 생략 시 명인 단위 링크 생성 (명인홈 링크 복사)
@@ -1800,6 +1785,38 @@ export interface components {
             comment?: string;
             /** @description 리뷰 요청 링크 토큰 — 있으면 진단요청 이력 없이 작성 가능 (명인이 보낸 링크) */
             reviewToken?: string;
+        };
+        ReviewLinkInfoDto: {
+            /**
+             * @description 명인 프로필 ID
+             * @example 5
+             */
+            expertProfileId: number;
+            /**
+             * @description 명인 표시 이름
+             * @example 아쿠아퍼포먼스
+             */
+            expertName: string;
+            /**
+             * @description 명인 대표 사진 URL
+             * @example https://cdn.example.com/images/1.jpg
+             */
+            expertAvatarUrl?: string;
+            /**
+             * @description 명인 등급
+             * @enum {string}
+             */
+            expertGrade?: "bronze" | "silver" | "gold" | "platinum" | "diamond";
+            /**
+             * @description 본인(명인)의 링크인지 — 본인에게는 리뷰 작성 불가
+             * @example false
+             */
+            isMine: boolean;
+            /**
+             * @description 이미 이 명인에게 리뷰를 작성했는지
+             * @example false
+             */
+            alreadyReviewed: boolean;
         };
         ReviewResponseDto: {
             /**
@@ -2621,10 +2638,13 @@ export interface operations {
     };
     ExpertProfilesController_list: {
         parameters: {
-            query: {
-                q: string;
-                region: string;
-                minRating: number;
+            query?: {
+                /** @description 검색어 (센터명·대표서비스·닉네임) */
+                q?: string;
+                /** @description 지역 ('시/도' 또는 '시/도 > 구') */
+                region?: string;
+                /** @description 최소 평점 */
+                minRating?: number;
             };
             header?: never;
             path?: never;
@@ -2909,6 +2929,29 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ResponseDto"] & {
                         data?: components["schemas"]["ReviewCreatedDto"];
+                    };
+                };
+            };
+        };
+    };
+    ReviewsController_getReviewLinkInfo: {
+        parameters: {
+            query: {
+                token: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["ReviewLinkInfoDto"];
                     };
                 };
             };

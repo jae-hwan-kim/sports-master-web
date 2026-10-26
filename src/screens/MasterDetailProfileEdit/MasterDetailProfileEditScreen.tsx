@@ -266,7 +266,7 @@ export function MasterDetailProfileEditScreen() {
           {profile && (
             <View className="mx-6">
               <View>
-                <ProfileCard profile={{ ...profile, profileImageUrl: profileImage }} />
+                <ProfileCard profile={{ ...profile, profileImageUrl: profileImage ?? undefined }} />
                 <Pressable
                   hitSlop={8}
                   onPress={handlePickCoverPhoto}
