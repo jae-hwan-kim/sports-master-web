@@ -10,38 +10,51 @@ import { ProfilePersonIcon, StarFillIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { EmptyState } from '@/components/EmptyState'
 import { PanelScreen } from '@/components/PanelScreen'
-import { type FavoriteExpertItem, useFavoriteExperts } from '@/hooks/useFavoriteExperts'
+import {
+  type FavoriteExpertItem,
+  useFavoriteExperts,
+  useRemoveFavoriteExpert,
+} from '@/hooks/useFavoriteExperts'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>
 
+// 명인탐색 카드 상단과 동일한 스타일 (#F2F2F2, shadow #8B8B8B 15%)
 const CARD_SHADOW = Platform.select({
   ios: {
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.11,
-    shadowRadius: 2.9,
+    shadowColor: '#8B8B8B',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
   },
-  android: { elevation: 2 },
+  android: { elevation: 3 },
 })
 
-function ExpertRow({ item, onPress }: { item: FavoriteExpertItem; onPress: () => void }) {
+function ExpertRow({
+  item,
+  onPress,
+  onUnfavorite,
+}: {
+  item: FavoriteExpertItem
+  onPress: () => void
+  onUnfavorite: () => void
+}) {
   return (
     <Pressable
       hitSlop={8}
       onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel={`${item.name} 명인 상세보기`}
-      className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-4"
-      style={{ height: 72, ...CARD_SHADOW }}
+      className="h-[82px] flex-row items-center rounded-lg bg-white pl-4"
+      style={CARD_SHADOW}
     >
       {/* 아바타 */}
-      <View className="h-[48px] w-[48px] items-center justify-center overflow-hidden rounded-full bg-[#C6A75E]">
+      <View className="h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-full bg-[#C6A75E]">
         {item.avatarUrl ? (
           <Image
             source={{ uri: item.avatarUrl }}
-            style={{ width: 48, height: 48 }}
+            style={{ width: 50, height: 50 }}
             contentFit="cover"
           />
         ) : (
@@ -49,27 +62,28 @@ function ExpertRow({ item, onPress }: { item: FavoriteExpertItem; onPress: () =>
         )}
       </View>
 
-      {/* 정보 */}
-      <View className="ml-3 flex-1">
-        <Text className="text-[15px] text-[#1F2A43]" style={{ fontFamily: 'Pretendard-SemiBold' }}>
+      {/* 닉네임 + 소개글 (없으면 비움) */}
+      <View className="ml-5 flex-1 justify-center gap-3">
+        <Text className="font-pretendard-semibold text-[14px] text-secondary" numberOfLines={1}>
           {item.name}
         </Text>
-        <View className="mt-1 flex-row items-center gap-1">
-          <StarFillIcon size={12} />
-          <Text className="text-[12px] text-[#74768E]" style={{ fontFamily: 'Pretendard-Medium' }}>
-            {item.avgRating.toFixed(1)} · 리뷰 {item.reviewCount}개
+        {!!item.introduction && (
+          <Text className="font-pretendard-medium text-small2 text-gray3" numberOfLines={1}>
+            {item.introduction}
           </Text>
-        </View>
+        )}
       </View>
 
-      {/* 등급 */}
-      {item.grade && (
-        <View className="h-[20px] items-center justify-center rounded-full bg-[#1F2A43] px-3">
-          <Text className="text-[10px] text-[#C6A75E]" style={{ fontFamily: 'Pretendard-Medium' }}>
-            {item.grade}
-          </Text>
-        </View>
-      )}
+      {/* 저장 해제 */}
+      <Pressable
+        hitSlop={8}
+        onPress={onUnfavorite}
+        accessibilityRole="button"
+        accessibilityLabel={`${item.name} 저장 해제`}
+        className="h-[44px] w-[44px] items-center justify-center"
+      >
+        <StarFillIcon size={44} />
+      </Pressable>
     </Pressable>
   )
 }
@@ -78,15 +92,17 @@ export function FavoriteExpertsScreen() {
   const navigation = useNavigation<NavProp>()
   const insets = useScreenInsets()
   const { data: experts, isLoading, isError } = useFavoriteExperts()
+  const { mutate: removeFavorite } = useRemoveFavoriteExpert()
 
   const renderItem = useCallback(
     ({ item }: { item: FavoriteExpertItem }) => (
       <ExpertRow
         item={item}
         onPress={() => navigation.navigate('CustomerMasterDetail', { expertProfileId: item.id })}
+        onUnfavorite={() => removeFavorite(item.id)}
       />
     ),
-    [navigation]
+    [navigation, removeFavorite]
   )
 
   return (
@@ -113,7 +129,7 @@ export function FavoriteExpertsScreen() {
             paddingBottom: insets.bottom + 24,
             flexGrow: 1,
           }}
-          ItemSeparatorComponent={() => <View className="h-2" />}
+          ItemSeparatorComponent={() => <View className="h-4" />}
           ListEmptyComponent={<EmptyState title="아직 저장한 명인이 없습니다" />}
           renderItem={renderItem}
         />

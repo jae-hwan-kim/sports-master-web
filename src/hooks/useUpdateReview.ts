@@ -24,3 +24,17 @@ export function useUpdateReview() {
     },
   })
 }
+
+// 고객 본인 리뷰 삭제 (복구 불가)
+export function useDeleteReview() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (id: number) => apiClient.delete(`/reviews/${id}`),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['reviews'] })
+      qc.invalidateQueries({ queryKey: ['experts'] })
+      // 리뷰작성 목록의 작성 완료 여부
+      qc.invalidateQueries({ queryKey: ['diagnoses', 'my-sent'] })
+    },
+  })
+}

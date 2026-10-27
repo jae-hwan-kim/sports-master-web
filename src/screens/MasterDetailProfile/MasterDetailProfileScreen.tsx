@@ -5,21 +5,18 @@ import { FlatList, Linking, Pressable, ScrollView, View } from 'react-native'
 
 import { Image } from 'expo-image'
 
-import { useQuery } from '@tanstack/react-query'
-
-import { apiClient } from '@/api/client'
 import { ArrowBackIcon } from '@/assets/icons'
 import EditSvg from '@/assets/icons/edit.svg'
 import { Text } from '@/components/AppText'
 import { Chip } from '@/components/Chip'
 import { ProfileCard } from '@/components/profile/ProfileCard'
+import { useMyCertifications } from '@/hooks/useMyCertifications'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 import type { components } from '@/types/schema'
 import { formatPhone } from '@/utils/phone'
 
-type CertificationResponseDto = components['schemas']['CertificationResponseDto']
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
 
 const MOCK_PROFILE: ExpertProfileResponseDto = {
@@ -27,6 +24,7 @@ const MOCK_PROFILE: ExpertProfileResponseDto = {
   userId: 1,
   region: '서울 강남구',
   centerName: '김명인',
+  name: '김명인',
   representativeService: '재활 트레이닝',
   introduction: '10년 경력의 재활 전문 트레이너입니다.',
   kakaoOpenChatUrl: 'https://open.kakao.com/o/example',
@@ -41,11 +39,6 @@ const MOCK_PROFILE: ExpertProfileResponseDto = {
   topPercentile: 5,
   createdAt: '2024-01-15T09:00:00.000Z',
   updatedAt: '2024-06-01T12:00:00.000Z',
-}
-
-async function fetchMyCertifications(): Promise<CertificationResponseDto[]> {
-  const { data } = await apiClient.get<{ data: CertificationResponseDto[] }>('/certifications/me')
-  return data.data
 }
 
 // ─── 공용 하위 컴포넌트 ──────────────────────────────────────────────────────
@@ -113,10 +106,7 @@ export function MasterDetailProfileScreen() {
   const { data: profileData, isError: isProfileError } = useMyExpertProfile()
   const profile = profileData ?? (__DEV__ ? MOCK_PROFILE : undefined)
 
-  const { data: certifications, isError: isCertError } = useQuery({
-    queryKey: ['certifications', 'me'],
-    queryFn: fetchMyCertifications,
-  })
+  const { data: certifications, isError: isCertError } = useMyCertifications()
 
   // careerText 불릿 아이템
   const careerItems = profile?.careerText ? profile.careerText.split('\n').filter(Boolean) : []

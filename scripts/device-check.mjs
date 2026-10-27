@@ -28,6 +28,8 @@ const SCREENS = [
   'MasterWelcome', 'MasterHome', 'MasterDiagnosis', 'MasterProfile', 'MasterDetailProfile',
   'MasterDetailProfileEdit', 'MasterReview', 'MasterSettings', 'MasterProfileEdit', 'MasterMessageGuide',
   'MasterPhoneChange', 'CustomerHome', 'CustomerExplore', 'CustomerProfile', 'CustomerSettings',
+  'MasterQuickRecommend', 'RegionSelectQ1', 'OnboardingQ2GenderAge', 'SurveyKeywordSelect',
+  'RecommendedMasters', 'FavoriteExperts', 'ReviewWrite', 'MyReviews',
 ]
 
 // iOS: 기기별 시뮬레이터 × 글자 크기. xxxl ≈ 1.35배 → AppText 상한(1.2) 동작 확인용

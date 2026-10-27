@@ -16,16 +16,10 @@ type Props = {
 }
 
 export function ProfileCard({ profile, onReviewPress }: Props) {
-  const {
-    centerName,
-    introduction,
-    totalReviewCount,
-    averageRating,
-    topPercentile,
-    profileImageUrl,
-  } = profile
+  const { name, introduction, totalReviewCount, averageRating, topPercentile, profileImageUrl } =
+    profile
 
-  const displayName = (centerName ?? '').slice(0, 8)
+  const displayName = (name ?? '').slice(0, 8)
   const displayIntro = (introduction ?? '').slice(0, 30)
   // 대표 사진은 하단 소개 이미지(portfolioImageUrls)와 별개
   const coverUri = profileImageUrl ?? undefined

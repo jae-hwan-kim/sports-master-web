@@ -715,7 +715,8 @@ export interface paths {
         get?: never;
         put?: never;
         post?: never;
-        delete?: never;
+        /** 리뷰 삭제 (고객 본인 리뷰만, 복구 불가) */
+        delete: operations["ReviewsController_deleteReview"];
         options?: never;
         head?: never;
         /** 리뷰 수정 (본인 리뷰만) */
@@ -971,6 +972,11 @@ export interface components {
              * @example c7f9e2d1...
              */
             authorizationCode?: string;
+            /**
+             * @description 애플 사용자 이름 (최초 로그인 시에만 애플이 제공)
+             * @example 홍길동
+             */
+            fullName?: string;
         };
         GoogleLoginDto: {
             /**
@@ -1099,6 +1105,11 @@ export interface components {
              */
             nickname: string;
             /**
+             * @description 이름 (소셜 로그인 제공자 이름, 닉네임 없을 때 표시용)
+             * @example 홍길동
+             */
+            name?: string;
+            /**
              * @description 나이
              * @example 28
              */
@@ -1211,10 +1222,15 @@ export interface components {
              */
             expertProfileId: number;
             /**
-             * @description 명인 이름 (센터명 또는 닉네임)
-             * @example 운동의신 센터
+             * @description 명인 표시 이름 (닉네임, 없으면 이름)
+             * @example 김명인
              */
             expertName: string;
+            /**
+             * @description 명인 소개글
+             * @example 국가대표 상비군 출신 건강운동관리사입니다.
+             */
+            expertIntroduction?: string | null;
             /**
              * @description 명인 프로필 이미지 URL
              * @example https://...
@@ -1380,6 +1396,11 @@ export interface components {
              */
             centerName: string;
             /**
+             * @description 표시 이름 (닉네임, 없으면 이름)
+             * @example 김명인
+             */
+            name: string;
+            /**
              * @description 대표 서비스
              * @example 재활 트레이닝
              */
@@ -1526,8 +1547,8 @@ export interface components {
              */
             id: number;
             /**
-             * @description 센터명
-             * @example 아쿠아퍼포먼스
+             * @description 표시 이름 (닉네임, 없으면 이름)
+             * @example 김명인
              */
             name: string;
             /**
@@ -1540,6 +1561,11 @@ export interface components {
              * @example 재활 트레이닝
              */
             representativeService: string;
+            /**
+             * @description 소개글
+             * @example 국가대표 상비군 출신 건강운동관리사입니다.
+             */
+            introduction?: string;
             /**
              * @description 키워드 태그
              * @example [
@@ -1650,10 +1676,15 @@ export interface components {
              */
             id: number;
             /**
-             * @description 이름
+             * @description 표시 이름 (닉네임, 없으면 이름)
              * @example 김명인
              */
             name: string;
+            /**
+             * @description 소개글
+             * @example 국가대표 상비군 출신 건강운동관리사입니다.
+             */
+            introduction?: string;
             /**
              * @description 등급
              * @example gold
@@ -1870,6 +1901,8 @@ export interface components {
              * @example 김명인
              */
             expertName?: string;
+            /** @description 리뷰 대상 명인 대표 사진 (내가 쓴 리뷰 목록에서만 채움) */
+            expertAvatarUrl?: string | null;
         };
         PaginatedReviewsDto: {
             data: components["schemas"]["ReviewResponseDto"][];
@@ -3076,6 +3109,29 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ResponseDto"] & {
                         data?: components["schemas"]["PaginatedReviewsDto"];
+                    };
+                };
+            };
+        };
+    };
+    ReviewsController_deleteReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResponseDto"] & {
+                        data?: components["schemas"]["MessageResponseDto"];
                     };
                 };
             };

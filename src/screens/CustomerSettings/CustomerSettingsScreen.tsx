@@ -5,9 +5,8 @@ import { useCallback, useMemo, useState } from 'react'
 import { FlatList, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
 
 import { ArrowBackIcon, EditIcon, ProfilePersonIcon } from '@/assets/icons'
-import { Text } from '@/components/AppText'
+import { Text, TextInput } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
-import { TextField } from '@/components/TextField'
 import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { RegionSelector } from '@/components/profile/RegionSelector'
 import { useCustomerProfile } from '@/hooks/useCustomerProfile'
@@ -266,7 +265,7 @@ export function CustomerSettingsScreen() {
             className="mt-2 text-[20px] text-[#1F2A43]"
             style={{ fontFamily: 'Pretendard-SemiBold' }}
           >
-            {profile?.nickname ?? '닉네임'}
+            {profile?.nickname || profile?.name || '닉네임'}
           </Text>
           <Text
             className="text-[13px] text-[#B48247]"
@@ -324,11 +323,21 @@ export function CustomerSettingsScreen() {
               </Text>
             </View>
           ) : (
-            <TextField
-              value={draftSport}
-              onChangeText={setDraftSport}
-              label="입력된 정보가 없습니다"
-            />
+            // Figma 정보수정: 보기 모드와 같은 #F2F2F2 + shadow 박스
+            <View
+              className="h-[46px] flex-row items-center rounded-[4px] bg-[#F2F2F2] px-4"
+              style={INPUT_BOX_SHADOW}
+            >
+              <TextInput
+                value={draftSport}
+                onChangeText={setDraftSport}
+                placeholder="입력된 정보가 없습니다"
+                placeholderTextColor="#74768E"
+                className="flex-1 text-[13px] text-[#1F2A43]"
+                style={{ fontFamily: 'Pretendard-Medium', paddingVertical: 0 }}
+                numberOfLines={1}
+              />
+            </View>
           )}
         </View>
 
@@ -426,7 +435,7 @@ export function CustomerSettingsScreen() {
         visible={saveDialogVisible}
         title="저장하시겠습니까?"
         description="변경된 내용이 저장됩니다"
-        confirmLabel="저장"
+        confirmLabel="저장하기"
         cancelLabel="취소"
         onConfirm={handleSaveConfirm}
         onCancel={() => setSaveDialogVisible(false)}
@@ -437,7 +446,7 @@ export function CustomerSettingsScreen() {
         visible={exitDialogVisible}
         title="수정을 종료하시겠습니까?"
         description="변경된 내용은 저장되지 않습니다"
-        confirmLabel="종료"
+        confirmLabel="종료하기"
         cancelLabel="취소"
         onConfirm={handleExitConfirm}
         onCancel={() => setExitDialogVisible(false)}

@@ -7,6 +7,8 @@ import { useScreenInsets } from '@/hooks/useScreenInsets'
 type Props = {
   value: string
   onChange: (region: string) => void
+  // 트리거 UI 교체용 (맞춤 명인탐색 Q1 등 어두운 화면) — 생략 시 기본 입력칸
+  renderTrigger?: (open: () => void) => React.ReactNode
 }
 
 type Selection = {
@@ -178,7 +180,7 @@ function CheckCircle({ selected }: { selected: boolean }) {
   )
 }
 
-export function RegionSelector({ value, onChange }: Props) {
+export function RegionSelector({ value, onChange, renderTrigger }: Props) {
   const insets = useScreenInsets()
   const [modalVisible, setModalVisible] = useState(false)
   const [activeProvince, setActiveProvince] = useState<string>(PROVINCES[0])
@@ -310,22 +312,26 @@ export function RegionSelector({ value, onChange }: Props) {
 
   return (
     <>
-      <Pressable
-        hitSlop={8}
-        onPress={openModal}
-        className="h-[46px] flex-row items-center justify-between rounded-lg border border-[#D9D9D9] bg-[#F2F2F2] px-4"
-        accessibilityRole="button"
-        accessibilityLabel="지역 선택"
-      >
-        <Text
-          className={`flex-1 text-[12px] ${value ? 'text-[#1F2A43]' : 'text-[#74768E]'}`}
-          style={{ fontFamily: 'Pretendard-Medium' }}
-          numberOfLines={1}
+      {renderTrigger ? (
+        renderTrigger(openModal)
+      ) : (
+        <Pressable
+          hitSlop={8}
+          onPress={openModal}
+          className="h-[46px] flex-row items-center justify-between rounded-lg border border-[#D9D9D9] bg-[#F2F2F2] px-4"
+          accessibilityRole="button"
+          accessibilityLabel="지역 선택"
         >
-          {value || '지역 선택'}
-        </Text>
-        <Text className="text-[13px] text-[#74768E]">▼</Text>
-      </Pressable>
+          <Text
+            className={`flex-1 text-[12px] ${value ? 'text-[#1F2A43]' : 'text-[#74768E]'}`}
+            style={{ fontFamily: 'Pretendard-Medium' }}
+            numberOfLines={1}
+          >
+            {value || '지역 선택'}
+          </Text>
+          <Text className="text-[13px] text-[#74768E]">▼</Text>
+        </Pressable>
+      )}
 
       <Modal visible={modalVisible} transparent animationType="slide" onRequestClose={handleClose}>
         <View className="flex-1 justify-end">

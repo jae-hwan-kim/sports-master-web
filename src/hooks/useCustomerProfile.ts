@@ -6,6 +6,8 @@ export type CustomerProfileData = {
   id: number
   userId: number
   nickname: string
+  // 소셜 가입자 이름 — 닉네임이 없을 때 표시
+  name?: string | null
   age: number | null
   gender: string | null
   ageGroup: string | null

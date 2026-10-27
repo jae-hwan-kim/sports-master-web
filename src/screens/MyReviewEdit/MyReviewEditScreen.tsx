@@ -1,282 +1,192 @@
-import { useNavigation, usePreventRemove, useRoute } from '@react-navigation/native'
+import { RouteProp, useNavigation, usePreventRemove, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
-  Pressable,
-  ScrollView,
-  View,
-} from 'react-native'
+import { useState } from 'react'
+import { ActivityIndicator, Pressable, View } from 'react-native'
 
-import { ArrowBackIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
-import { Text, TextInput } from '@/components/AppText'
-import { StarRating } from '@/components/StarRating'
-import { useScreenInsets } from '@/hooks/useScreenInsets'
-import { useUpdateReview } from '@/hooks/useUpdateReview'
+import { Text } from '@/components/AppText'
+import { ConfirmDialog } from '@/components/ConfirmDialog'
+import { ReviewForm } from '@/components/review/ReviewForm'
+import { useDeleteReview, useUpdateReview } from '@/hooks/useUpdateReview'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>
-type RouteProp = {
-  key: string
-  name: 'MyReviewEdit'
-  params: {
-    reviewId: number
-    expertName?: string
-    initialRating: number
-    initialContent: string
-  }
-}
 
-const MAX_LENGTH = 200
+type Dialog = 'exitEdit' | 'updated' | 'confirmDelete' | 'deleted' | null
 
-const CARD_SHADOW = Platform.select({
-  ios: {
-    shadowColor: '#8B8B8B',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
-  },
-  android: { elevation: 3 },
-})
-
-function ExitModal({
-  visible,
-  onExit,
-  onCancel,
-}: {
-  visible: boolean
-  onExit: () => void
-  onCancel: () => void
-}) {
-  return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onCancel}>
-      <View
-        className="flex-1 items-center justify-center"
-        style={{ backgroundColor: 'rgba(7,9,28,0.6)' }}
-      >
-        <View
-          className="rounded-2xl bg-[#F2F2F2] px-6 pb-6 pt-8"
-          style={{
-            width: 340,
-            ...Platform.select({
-              ios: {
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 0 },
-                shadowOpacity: 0.1,
-                shadowRadius: 12.7,
-              },
-              android: { elevation: 8 },
-            }),
-          }}
-        >
-          {/* 제목 */}
-          <Text
-            className="text-center text-[24px] text-[#000000]"
-            style={{ fontFamily: 'Pretendard-SemiBold' }}
-          >
-            수정을 종료할까요?
-          </Text>
-
-          {/* 부제목 */}
-          <Text
-            className="mt-3 text-center text-[16px] text-[#74768E]"
-            style={{ fontFamily: 'Pretendard-Medium' }}
-          >
-            수정사항은 저장되지 않습니다
-          </Text>
-
-          {/* 버튼 행 */}
-          <View className="mt-8 flex-row gap-3">
-            <Pressable
-              hitSlop={4}
-              onPress={onExit}
-              className="h-[50px] flex-1 items-center justify-center rounded-[8px]"
-              style={{ backgroundColor: '#C6A75E' }}
-            >
-              <Text
-                className="text-[17px] text-[#F2F2F2]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                종료하기
-              </Text>
-            </Pressable>
-            <Pressable
-              hitSlop={4}
-              onPress={onCancel}
-              className="h-[50px] flex-1 items-center justify-center rounded-[8px] border"
-              style={{ backgroundColor: '#102343', borderColor: '#4A5198' }}
-            >
-              <Text
-                className="text-[17px] text-[#F2F2F2]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                취소
-              </Text>
-            </Pressable>
-          </View>
-        </View>
-      </View>
-    </Modal>
-  )
-}
-
+// Figma: 내가작성한리뷰확인(보기) ↔ 내가작성한리뷰_수정(수정) — 같은 화면에서 모드 전환
 export function MyReviewEditScreen() {
   const navigation = useNavigation<NavProp>()
-  const route = useRoute<RouteProp>()
-  const insets = useScreenInsets()
-  const { mutate: updateReview, isPending } = useUpdateReview()
+  const { reviewId, expertName, expertAvatarUrl, initialRating, initialContent } =
+    useRoute<RouteProp<RootStackParamList, 'MyReviewEdit'>>().params
+  const { mutate: updateReview, isPending: isUpdating } = useUpdateReview()
+  const { mutate: deleteReview, isPending: isDeleting } = useDeleteReview()
 
-  const { reviewId, expertName, initialRating, initialContent } = route.params
+  const [mode, setMode] = useState<'view' | 'edit'>('view')
+  // 저장된 값 — 수정 완료 후 보기 모드에 반영
+  const [saved, setSaved] = useState({ rating: initialRating, content: initialContent ?? '' })
+  const [rating, setRating] = useState(saved.rating)
+  const [content, setContent] = useState(saved.content)
+  const [dialog, setDialog] = useState<Dialog>(null)
+  const [error, setError] = useState<string | null>(null)
 
-  const [rating, setRating] = useState(initialRating)
-  const [content, setContent] = useState(initialContent)
-  const [showExitModal, setShowExitModal] = useState(false)
-  const [saved, setSaved] = useState(false)
+  const isDirty = rating !== saved.rating || content !== saved.content
 
-  const isDirty = rating !== initialRating || content !== initialContent
-  const canSubmit = isDirty && !isPending
+  // 수정 중 뒤로가기(헤더·하드웨어) → 변경 있으면 종료 확인, 없으면 보기 모드로
+  const handleEditBack = () => {
+    if (isDirty) setDialog('exitEdit')
+    else setMode('view')
+  }
+  usePreventRemove(mode === 'edit', handleEditBack)
 
-  // 하드웨어 뒤로가기·iOS 스와이프·헤더 뒤로가기 모두 수정 중이면 나가기 확인 팝업
-  const pendingLeave = useRef<Parameters<typeof navigation.dispatch>[0] | null>(null)
-  usePreventRemove(isDirty && !saved, ({ data }) => {
-    pendingLeave.current = data.action
-    setShowExitModal(true)
-  })
+  const leaveEdit = () => {
+    setRating(saved.rating)
+    setContent(saved.content)
+    setMode('view')
+  }
 
-  const handleBack = useCallback(() => navigation.goBack(), [navigation])
-
-  const handleExit = useCallback(() => {
-    setShowExitModal(false)
-    // 가로챈 원래 이동을 그대로 수행 (data.action dispatch는 prevent 대상에서 제외됨)
-    if (pendingLeave.current) navigation.dispatch(pendingLeave.current)
-  }, [navigation])
-
-  // 저장 성공 → prevent 해제가 반영된 뒤 이전 화면으로
-  useEffect(() => {
-    if (saved) navigation.goBack()
-  }, [saved, navigation])
-
-  const handleSubmit = useCallback(() => {
-    if (!canSubmit) return
+  const handleUpdate = () => {
+    if (!isDirty || isUpdating) return
     updateReview(
       { id: reviewId, rating, comment: content },
       {
-        onSuccess: () => setSaved(true),
-        onError: () => {
-          Alert.alert('오류', '리뷰 수정에 실패했습니다. 다시 시도해 주세요.')
+        onSuccess: () => {
+          setSaved({ rating, content })
+          setDialog('updated')
         },
+        onError: () => setError('리뷰 수정에 실패했습니다. 다시 시도해 주세요.'),
       }
     )
-  }, [canSubmit, updateReview, reviewId, rating, content])
+  }
+
+  const handleDelete = () => {
+    setDialog(null)
+    deleteReview(reviewId, {
+      onSuccess: () => setDialog('deleted'),
+      onError: () => setError('리뷰 삭제에 실패했습니다. 다시 시도해 주세요.'),
+    })
+  }
+
+  const title = `${expertName ?? ''} 님은\n이런 경험을 제공했습니다`
 
   return (
     <>
-      <KeyboardAvoidingView
-        className="flex-1 bg-[#F2F2F2]"
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ paddingTop: insets.top }}
-      >
-        {/* 네비바 */}
-        <View className="h-[60px] flex-row items-center justify-between px-4">
-          <Pressable
-            hitSlop={8}
-            accessibilityRole="button"
-            accessibilityLabel="뒤로가기"
-            onPress={handleBack}
-          >
-            <ArrowBackIcon />
-          </Pressable>
-          <Text
-            className="text-[17px] text-[#1F2A43]"
-            style={{ fontFamily: 'Pretendard-SemiBold' }}
-          >
-            {expertName ?? '리뷰 수정'}
-          </Text>
-          <View className="w-[44px]" />
-        </View>
-
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: insets.bottom + 32 }}
-        >
-          {/* 명인 이름 */}
-          {expertName && (
-            <Text
-              className="mt-6 text-center text-[24px] text-[#1F2A43]"
-              style={{ fontFamily: 'Pretendard-ExtraBold', lineHeight: 32 }}
-            >
-              {expertName} 님은{'\n'}이런 경험을 제공했습니다
-            </Text>
-          )}
-
-          {/* 별점 */}
-          <View className="mt-8">
-            <StarRating
-              value={rating}
-              size={40}
-              onChange={setRating}
-              renderStar={({ size, filled }) =>
-                filled ? (
-                  <StarFillIcon size={size} color="#FBBC05" />
+      {mode === 'view' ? (
+        <ReviewForm
+          title={title}
+          avatarUri={expertAvatarUrl}
+          rating={saved.rating}
+          content={saved.content}
+          onBack={() => navigation.goBack()}
+          footer={
+            <View className="flex-row justify-center gap-3">
+              <Pressable
+                hitSlop={8}
+                onPress={() => setMode('edit')}
+                accessibilityRole="button"
+                accessibilityLabel="리뷰수정"
+                className="h-[50px] w-[145px] items-center justify-center rounded-lg bg-primary"
+              >
+                <Text className="font-pretendard-medium text-[17px] text-white">리뷰수정</Text>
+              </Pressable>
+              <Pressable
+                hitSlop={8}
+                onPress={() => setDialog('confirmDelete')}
+                disabled={isDeleting}
+                accessibilityRole="button"
+                accessibilityLabel="삭제"
+                className="h-[50px] w-[145px] items-center justify-center rounded-lg border border-dialogBorder bg-dialogBg"
+              >
+                {isDeleting ? (
+                  <ActivityIndicator color="#F2F2F2" />
                 ) : (
-                  <StarNoneIcon size={size} color="#1F2A43" />
-                )
-              }
-            />
-          </View>
-
-          {/* 리뷰 내용 */}
-          <View className="mt-8 rounded-[8px] bg-[#F2F2F2] px-4 py-3" style={CARD_SHADOW}>
-            <TextInput
-              value={content}
-              onChangeText={(t) => setContent(t.slice(0, MAX_LENGTH))}
-              placeholder="명인과의 경험을 자유롭게 작성해 주세요"
-              placeholderTextColor="#A2A2A2"
-              multiline
-              textAlignVertical="top"
-              style={{
-                fontFamily: 'Pretendard-Medium',
-                fontSize: 14,
-                color: '#1F2A43',
-                minHeight: 153,
-              }}
-            />
-            <Text
-              className="mt-2 text-right text-[14px]"
-              style={{ fontFamily: 'Pretendard-Medium', color: '#C6A75E' }}
+                  <Text className="font-pretendard-medium text-[17px] text-white">삭제</Text>
+                )}
+              </Pressable>
+            </View>
+          }
+        />
+      ) : (
+        <ReviewForm
+          title={title}
+          avatarUri={expertAvatarUrl}
+          rating={rating}
+          content={content}
+          onRatingChange={setRating}
+          onContentChange={setContent}
+          onBack={handleEditBack}
+          footer={
+            <Pressable
+              hitSlop={8}
+              onPress={handleUpdate}
+              disabled={!isDirty || isUpdating}
+              accessibilityRole="button"
+              accessibilityLabel="수정완료"
+              className={`h-[50px] items-center justify-center rounded-lg bg-primary ${
+                isDirty ? 'opacity-100' : 'opacity-50'
+              }`}
             >
-              {content.length}/{MAX_LENGTH}
-            </Text>
-          </View>
+              {isUpdating ? (
+                <ActivityIndicator color="#F2F2F2" />
+              ) : (
+                <Text className="font-pretendard-medium text-[17px] text-white">수정완료</Text>
+              )}
+            </Pressable>
+          }
+        />
+      )}
 
-          {/* 수정완료 버튼 */}
-          <Pressable
-            hitSlop={8}
-            onPress={handleSubmit}
-            disabled={!canSubmit}
-            className="mt-6 h-[50px] items-center justify-center rounded-[8px]"
-            style={{ backgroundColor: canSubmit ? '#C6A75E' : '#D9D9D9' }}
-          >
-            <Text
-              className="text-[17px] text-[#F2F2F2]"
-              style={{ fontFamily: 'Pretendard-Medium' }}
-            >
-              수정완료
-            </Text>
-          </Pressable>
-        </ScrollView>
-      </KeyboardAvoidingView>
+      {/* Figma: 내가작성한리뷰_종료 */}
+      <ConfirmDialog
+        visible={dialog === 'exitEdit'}
+        title="수정을 종료할까요?"
+        description="수정사항은 저장되지 않습니다"
+        confirmLabel="종료하기"
+        onConfirm={() => {
+          setDialog(null)
+          leaveEdit()
+        }}
+        onCancel={() => setDialog(null)}
+      />
 
-      {/* 종료 확인 팝업 */}
-      <ExitModal
-        visible={showExitModal}
-        onExit={handleExit}
-        onCancel={() => setShowExitModal(false)}
+      {/* Figma: 내가작성한리뷰_수정완료 */}
+      <ConfirmDialog
+        visible={dialog === 'updated'}
+        title="리뷰 수정 완료"
+        description="언제나 수정 및 삭제 가능합니다"
+        onConfirm={() => {
+          setDialog(null)
+          setMode('view')
+        }}
+      />
+
+      {/* Figma: 내가작성한리뷰_삭제 */}
+      <ConfirmDialog
+        visible={dialog === 'confirmDelete'}
+        title="리뷰를 삭제할까요?"
+        description="삭제시 복구 불가합니다"
+        confirmLabel="삭제하기"
+        onConfirm={handleDelete}
+        onCancel={() => setDialog(null)}
+      />
+
+      {/* Figma: 내가작성한리뷰_삭제완료 */}
+      <ConfirmDialog
+        visible={dialog === 'deleted'}
+        title="리뷰가 삭제되었습니다"
+        description=""
+        onConfirm={() => {
+          setDialog(null)
+          navigation.goBack()
+        }}
+      />
+
+      <ConfirmDialog
+        visible={error !== null}
+        title="오류"
+        description={error ?? ''}
+        isError
+        onConfirm={() => setError(null)}
       />
     </>
   )

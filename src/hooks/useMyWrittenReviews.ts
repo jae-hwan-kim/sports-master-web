@@ -10,6 +10,7 @@ export type WrittenReviewItem = {
   createdAt: string
   expertProfileId?: number
   expertName?: string
+  expertAvatarUrl?: string | null
 }
 
 type ReviewsPage = {

@@ -8,6 +8,7 @@ export type ExpertListItem = {
   name: string
   region: string
   representativeService: string
+  introduction: string | null
   keywordTags: string[] | null
   imageUrl: string | null
   averageRating: number

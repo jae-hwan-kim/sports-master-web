@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
 
 import { Platform } from 'react-native'
 
@@ -29,4 +29,44 @@ apiClient.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${accessToken}`
   }
   return config
+})
+
+// access token(1h) 만료 시 refresh 후 원 요청 1회 재시도 — 갱신 로직이 없으면 장시간 사용 중 모든 API가 401
+// refresh token은 회전(사용 시 폐기)되므로 동시 401은 하나의 refresh 요청을 공유
+let refreshing: Promise<string> | null = null
+
+async function refreshAccessToken(): Promise<string> {
+  const { refreshToken, setTokens } = useAuthStore.getState()
+  if (!refreshToken) throw new Error('refresh token 없음')
+  const { data } = await axios.post<{ data: { accessToken: string; refreshToken: string } }>(
+    `${apiClient.defaults.baseURL}/auth/refresh`,
+    { refreshToken },
+    { timeout: 10000 }
+  )
+  setTokens(data.data.accessToken, data.data.refreshToken)
+  return data.data.accessToken
+}
+
+apiClient.interceptors.response.use(undefined, async (error: AxiosError) => {
+  const config = error.config as (InternalAxiosRequestConfig & { _retried?: boolean }) | undefined
+  if (
+    error.response?.status !== 401 ||
+    !config ||
+    config._retried ||
+    // 로그인·가입·refresh 자체의 401은 갱신 대상 아님 (로그아웃·탈퇴는 갱신 후 재시도)
+    (config.url?.startsWith('/auth/') && !/^\/auth\/(logout|withdraw)/.test(config.url))
+  ) {
+    throw error
+  }
+  config._retried = true
+  try {
+    refreshing ??= refreshAccessToken().finally(() => {
+      refreshing = null
+    })
+    const accessToken = await refreshing
+    config.headers.Authorization = `Bearer ${accessToken}`
+    return apiClient(config)
+  } catch {
+    throw error
+  }
 })

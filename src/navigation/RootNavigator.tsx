@@ -10,6 +10,7 @@ import { MasterDetailProfileEditScreen } from '@/screens/MasterDetailProfileEdit
 import { MasterMessageGuideScreen } from '@/screens/MasterMessageGuide/MasterMessageGuideScreen'
 import { MasterPhoneChangeScreen } from '@/screens/MasterPhoneChange/MasterPhoneChangeScreen'
 import { MasterProfileEditScreen } from '@/screens/MasterProfileEdit/MasterProfileEditScreen'
+import { MasterQuickRecommendScreen } from '@/screens/MasterQuickRecommend/MasterQuickRecommendScreen'
 import { MasterReviewScreen } from '@/screens/MasterReview/MasterReviewScreen'
 import { MasterSettingsScreen } from '@/screens/MasterSettings/MasterSettingsScreen'
 import { MasterVerificationScreen } from '@/screens/MasterVerification/MasterVerificationScreen'
@@ -42,6 +43,7 @@ export type RootStackParamList = {
   MasterDetailProfileEdit: undefined
   MasterMessageGuide: undefined
   MasterPhoneChange: undefined
+  MasterQuickRecommend: undefined
   RegionSelectQ1: undefined
   OnboardingQ2GenderAge: undefined
   SurveyKeywordSelect: undefined
@@ -52,6 +54,7 @@ export type RootStackParamList = {
   MyReviewEdit: {
     reviewId: number
     expertName?: string
+    expertAvatarUrl?: string | null
     initialRating: number
     initialContent?: string
   }
@@ -89,6 +92,7 @@ export function RootNavigator() {
       <Stack.Screen name="MasterDetailProfileEdit" component={MasterDetailProfileEditScreen} />
       <Stack.Screen name="MasterMessageGuide" component={MasterMessageGuideScreen} />
       <Stack.Screen name="MasterPhoneChange" component={MasterPhoneChangeScreen} />
+      <Stack.Screen name="MasterQuickRecommend" component={MasterQuickRecommendScreen} />
       <Stack.Screen name="RegionSelectQ1" component={RegionSelectQ1Screen} />
       <Stack.Screen name="OnboardingQ2GenderAge" component={OnboardingQ2GenderAgeScreen} />
       <Stack.Screen name="SurveyKeywordSelect" component={SurveyKeywordSelectScreen} />

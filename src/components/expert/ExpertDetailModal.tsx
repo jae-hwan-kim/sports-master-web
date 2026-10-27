@@ -55,7 +55,7 @@ export function ExpertDetailModal({ expertProfileId, onClose, onPressReview }: P
               style={{ fontFamily: 'Pretendard-SemiBold' }}
               numberOfLines={1}
             >
-              {profile?.centerName ?? ''}
+              {profile?.name ?? ''}
             </Text>
             <Pressable
               hitSlop={8}

@@ -9,6 +9,7 @@ export function useAppleAuth() {
   const promptApple = async (): Promise<{
     identityToken: string
     authorizationCode?: string
+    fullName?: string
   } | null> => {
     if (Platform.OS !== 'ios') {
       throw new Error('APPLE_LOGIN_IOS_ONLY')
@@ -34,6 +35,11 @@ export function useAppleAuth() {
       return {
         identityToken: credential.identityToken,
         authorizationCode: credential.authorizationCode ?? undefined,
+        // 애플은 최초 로그인 시에만 이름을 제공 — 서버에 저장해 닉네임 없을 때 표시
+        fullName:
+          [credential.fullName?.familyName, credential.fullName?.givenName]
+            .filter(Boolean)
+            .join('') || undefined,
       }
     } catch (error: unknown) {
       // 사용자가 직접 취소한 경우 — 에러로 취급하지 않고 null 반환

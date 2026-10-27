@@ -28,8 +28,9 @@ type IconProps = { size?: number } & Omit<SvgProps, 'width' | 'height'>
 
 // back/visibility 에셋은 Figma에서 44x44 탭 영역 전체를 포함해 내보내져 있어
 // (실제 글리프는 내부 24x24), 그래서 44로 렌더링해야 원본과 동일한 크기로 보임
-export function ArrowBackIcon({ size = 44, ...rest }: IconProps) {
-  return <BackSvg width={size} height={size} {...rest} />
+// back.svg는 currentColor — 기본 #07091C, 어두운 화면은 color로 지정
+export function ArrowBackIcon({ size = 44, color = '#07091C', ...rest }: IconProps) {
+  return <BackSvg width={size} height={size} color={color} {...rest} />
 }
 
 export function SettingsIcon({ size = 44, ...rest }: IconProps) {

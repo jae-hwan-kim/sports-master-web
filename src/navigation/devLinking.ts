@@ -23,6 +23,14 @@ export const devLinking: LinkingOptions<RootStackParamList> | undefined = __DEV_
           MasterDetailProfileEdit: 'dev/MasterDetailProfileEdit',
           MasterMessageGuide: 'dev/MasterMessageGuide',
           MasterPhoneChange: 'dev/MasterPhoneChange',
+          MasterQuickRecommend: 'dev/MasterQuickRecommend',
+          RegionSelectQ1: 'dev/RegionSelectQ1',
+          OnboardingQ2GenderAge: 'dev/OnboardingQ2GenderAge',
+          SurveyKeywordSelect: 'dev/SurveyKeywordSelect',
+          RecommendedMasters: 'dev/RecommendedMasters',
+          FavoriteExperts: 'dev/FavoriteExperts',
+          ReviewWrite: 'dev/ReviewWrite',
+          MyReviews: 'dev/MyReviews',
           MasterHome: {
             screens: {
               HomeTab: 'dev/MasterHome',

@@ -1,5 +1,3 @@
-import { Alert } from 'react-native'
-
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
@@ -29,7 +27,8 @@ export function useCreateReview() {
       qc.invalidateQueries({ queryKey: ['experts'] })
     },
     onError: () => {
-      Alert.alert('오류', '리뷰 등록에 실패했습니다. 다시 시도해 주세요.')
+      // 진단요청이 삭제된 명인 등 — 작성 가능 목록 갱신 (오류 안내는 화면 다이얼로그)
+      qc.invalidateQueries({ queryKey: ['diagnoses', 'my-sent'] })
     },
   })
 }

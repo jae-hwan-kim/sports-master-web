@@ -26,6 +26,8 @@ type AuthState = {
   autoLogin: boolean
   // 로그인/가입/소셜 로그인 성공 시 토큰+유저정보(모드 포함)를 한 번에 반영
   setAuthSession: (accessToken: string, refreshToken: string, user: AuthUserInfo) => void
+  // access token 만료 시 refresh 결과 반영 (유저 정보는 그대로)
+  setTokens: (accessToken: string, refreshToken: string) => void
   // 모드선택 화면에서 useSwitchMode 성공 시(토큰은 그대로, 모드만 갱신) 사용
   setModeSelected: (currentMode: CurrentMode) => void
   setAutoLogin: (value: boolean) => void
@@ -61,6 +63,17 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       socialProvider: user.socialProvider,
       name: user.name,
     })
+  },
+  setTokens: (accessToken, refreshToken) => {
+    const { currentMode, hasSelectedMode, socialProvider, name, autoLogin } = get()
+    // refresh token은 회전되므로 자동로그인 세션도 새 토큰으로 갱신
+    if (autoLogin) {
+      SecureStore.setItemAsync(
+        SECURE_SESSION_KEY,
+        JSON.stringify({ refreshToken, currentMode, hasSelectedMode, socialProvider, name })
+      ).catch(() => {})
+    }
+    set({ accessToken, refreshToken })
   },
   setModeSelected: (currentMode) => set({ currentMode, hasSelectedMode: true }),
   setAutoLogin: (autoLogin) => {

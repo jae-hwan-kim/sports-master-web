@@ -22,6 +22,7 @@ const MOCK_PROFILE: ExpertProfileResponseDto = {
   userId: 1,
   region: '서울 강남구',
   centerName: '김명인',
+  name: '김명인',
   representativeService: '재활 트레이닝',
   introduction: '10년 경력의 재활 전문 트레이너입니다.',
   kakaoOpenChatUrl: 'https://open.kakao.com/o/example',

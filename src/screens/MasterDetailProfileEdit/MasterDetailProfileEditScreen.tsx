@@ -24,9 +24,10 @@ import { KeywordChipInput } from '@/components/profile/KeywordChipInput'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { RegionSelector } from '@/components/profile/RegionSelector'
 import { useAndroidBack } from '@/hooks/useAndroidBack'
+import { useCreateCertification } from '@/hooks/useCreateCertification'
+import { useMyCertifications } from '@/hooks/useMyCertifications'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
-import { useCreateCertification } from '@/hooks/useCreateCertification'
 import { useUpdateExpertProfile } from '@/hooks/useUpdateExpertProfile'
 import { isLocalUri, uploadExpertFiles } from '@/hooks/useUploadExpertFiles'
 import { RootStackParamList } from '@/navigation/RootNavigator'
@@ -37,6 +38,9 @@ export function MasterDetailProfileEditScreen() {
   const insets = useScreenInsets()
   const { data: profile } = useMyExpertProfile()
   const updateMutation = useUpdateExpertProfile()
+  const { data: uploadedCertifications } = useMyCertifications()
+  // 이미 등록된 증명서 파일 — 삭제 API가 없어 읽기 전용으로 노출
+  const uploadedCertUrls = (uploadedCertifications ?? []).flatMap((c) => c.fileUrls)
 
   const [region, setRegion] = useState('')
   const [openChatUrl, setOpenChatUrl] = useState('')
@@ -70,9 +74,7 @@ export function MasterDetailProfileEditScreen() {
     setImages(profile.portfolioImageUrls ?? [])
     setCareerText(profile.careerText ?? '')
     setPortfolioPdf(
-      profile.educationPdfUrl
-        ? { uri: profile.educationPdfUrl, name: 'portfolio.pdf' }
-        : null
+      profile.educationPdfUrl ? { uri: profile.educationPdfUrl, name: 'portfolio.pdf' } : null
     )
   }, [profile])
 
@@ -177,8 +179,8 @@ export function MasterDetailProfileEditScreen() {
       })
       setShowSuccessDialog(true)
     } catch (error) {
-      const message = (error as { response?: { data?: { message?: string | string[] } } })
-        ?.response?.data?.message
+      const message = (error as { response?: { data?: { message?: string | string[] } } })?.response
+        ?.data?.message
       setSaveError(
         (Array.isArray(message) ? message[0] : message) ??
           '저장에 실패했습니다. 잠시 후 다시 시도해 주세요.'
@@ -193,14 +195,19 @@ export function MasterDetailProfileEditScreen() {
     navigation.goBack()
   }
 
+  // 등록된 증명서(원격) 뒤에 새로 고른 증명서(로컬)를 이어 붙여 표시
+  const certRows = [...uploadedCertUrls, ...certifications]
   const renderCertItem = useCallback(
-    ({ item: uri, index }: { item: string; index: number }) => (
-      <CertificationRow
-        label={uri.split('/').pop() ?? `자격증 이미지 ${index + 1}`}
-        onRemove={() => handleRemoveCertification(index)}
-      />
-    ),
-    [handleRemoveCertification]
+    ({ item: uri, index }: { item: string; index: number }) => {
+      const localIndex = index - uploadedCertUrls.length
+      return (
+        <CertificationRow
+          label={uri.split('/').pop() ?? `자격증 이미지 ${index + 1}`}
+          onRemove={localIndex >= 0 ? () => handleRemoveCertification(localIndex) : undefined}
+        />
+      )
+    },
+    [handleRemoveCertification, uploadedCertUrls.length]
   )
 
   return (
@@ -377,13 +384,13 @@ export function MasterDetailProfileEditScreen() {
           <SectionLabel label="증명서" />
           <View className="mx-6 gap-3">
             <FlatList
-              data={certifications}
+              data={certRows}
               keyExtractor={(uri, index) => `cert-${index}-${uri}`}
               scrollEnabled={false}
               ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
               renderItem={renderCertItem}
               ListFooterComponent={
-                <View style={{ marginTop: certifications.length > 0 ? 12 : 0 }}>
+                <View style={{ marginTop: certRows.length > 0 ? 12 : 0 }}>
                   <Pressable
                     hitSlop={8}
                     onPress={handleAddCertification}
@@ -467,7 +474,7 @@ function SectionLabel({ label, count, max }: { label: string; count?: number; ma
   )
 }
 
-function CertificationRow({ label, onRemove }: { label: string; onRemove: () => void }) {
+function CertificationRow({ label, onRemove }: { label: string; onRemove?: () => void }) {
   return (
     <View className="flex-row items-center rounded-[4px] bg-[#F2F2F2] px-[13px] py-[15px]">
       <Text
@@ -477,16 +484,18 @@ function CertificationRow({ label, onRemove }: { label: string; onRemove: () => 
       >
         {label}
       </Text>
-      <Pressable
-        hitSlop={8}
-        onPress={onRemove}
-        accessibilityRole="button"
-        accessibilityLabel="삭제"
-      >
-        <Text className="text-[#74768E]" style={{ fontSize: 14 }}>
-          ✕
-        </Text>
-      </Pressable>
+      {onRemove && (
+        <Pressable
+          hitSlop={8}
+          onPress={onRemove}
+          accessibilityRole="button"
+          accessibilityLabel="삭제"
+        >
+          <Text className="text-[#74768E]" style={{ fontSize: 14 }}>
+            ✕
+          </Text>
+        </Pressable>
+      )}
     </View>
   )
 }

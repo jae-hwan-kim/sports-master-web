@@ -2,93 +2,53 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCallback } from 'react'
-import { FlatList, Platform, Pressable, View } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 
-import { StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { EmptyState } from '@/components/EmptyState'
 import { PanelScreen } from '@/components/PanelScreen'
-import { StarRating } from '@/components/StarRating'
+import { ExpertAvatar, REVIEW_CARD_SHADOW } from '@/components/review/ReviewForm'
 import { type WrittenReviewItem, useMyWrittenReviews } from '@/hooks/useMyWrittenReviews'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import { RootStackParamList } from '@/navigation/RootNavigator'
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>
 
-const EDIT_ICON_SIZE = 16
-
-const CARD_SHADOW = Platform.select({
-  ios: {
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.11,
-    shadowRadius: 2.9,
-  },
-  android: { elevation: 2 },
-})
-
+// Figma 내가 작성한 리뷰: 명인 사진 + 닉네임 + 내가 쓴 후기(1줄) — 탭하면 리뷰 확인 화면
 function ReviewCard({ item }: { item: WrittenReviewItem }) {
   const navigation = useNavigation<NavProp>()
-  const dateStr = new Date(item.createdAt).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
 
-  const handleEdit = () => {
+  const handlePress = () => {
     navigation.navigate('MyReviewEdit', {
       reviewId: item.id,
       expertName: item.expertName,
+      expertAvatarUrl: item.expertAvatarUrl,
       initialRating: item.rating,
       initialContent: item.content ?? '',
     })
   }
 
   return (
-    <View className="rounded-[4px] bg-[#F2F2F2] px-4 py-4" style={CARD_SHADOW}>
-      <View className="flex-row items-center justify-between">
-        <StarRating
-          value={item.rating}
-          size={14}
-          renderStar={({ size, filled }) =>
-            filled ? <StarFillIcon size={size} /> : <StarNoneIcon size={size} />
-          }
-        />
-        <View className="flex-row items-center gap-2">
-          <Text className="text-[11px] text-[#A2A2A2]" style={{ fontFamily: 'Pretendard-Medium' }}>
-            {dateStr}
+    <Pressable
+      hitSlop={8}
+      onPress={handlePress}
+      accessibilityRole="button"
+      accessibilityLabel={`${item.expertName ?? ''} 리뷰 확인`}
+      className="h-[82px] flex-row items-center rounded-[8px] bg-white px-4"
+      style={REVIEW_CARD_SHADOW}
+    >
+      <ExpertAvatar uri={item.expertAvatarUrl} size={50} />
+      <View className="ml-4 flex-1 justify-center gap-3">
+        <Text className="font-pretendard-medium text-[12px] text-secondary" numberOfLines={1}>
+          {item.expertName}
+        </Text>
+        {!!item.content && (
+          <Text className="font-pretendard-medium text-[12px] text-gray2" numberOfLines={1}>
+            {item.content}
           </Text>
-          <Pressable hitSlop={8} onPress={handleEdit} accessibilityLabel="리뷰 수정">
-            <View
-              className="items-center justify-center"
-              style={{ width: EDIT_ICON_SIZE + 8, height: EDIT_ICON_SIZE + 8 }}
-            >
-              <Text
-                className="text-[11px] text-[#C6A75E]"
-                style={{ fontFamily: 'Pretendard-Medium' }}
-              >
-                수정
-              </Text>
-            </View>
-          </Pressable>
-        </View>
+        )}
       </View>
-      {item.content ? (
-        <Text
-          className="mt-2 text-[13px] text-[#1F2A43]"
-          style={{ fontFamily: 'Pretendard-Medium', lineHeight: 20 }}
-        >
-          {item.content}
-        </Text>
-      ) : (
-        <Text
-          className="mt-2 text-[13px] text-[#A2A2A2]"
-          style={{ fontFamily: 'Pretendard-Medium' }}
-        >
-          내용 없음
-        </Text>
-      )}
-    </View>
+    </Pressable>
   )
 }
 
@@ -128,7 +88,7 @@ export function MyReviewsScreen() {
             paddingBottom: insets.bottom + 24,
             flexGrow: 1,
           }}
-          ItemSeparatorComponent={() => <View className="h-3" />}
+          ItemSeparatorComponent={() => <View className="h-4" />}
           onEndReached={() => {
             if (hasNextPage && !isFetchingNextPage) fetchNextPage()
           }}

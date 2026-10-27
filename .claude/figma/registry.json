@@ -757,10 +757,9 @@
     "2187:11788": {
       "name": "명인빠른추천",
       "page": "완료화면 전체 정리공간 / 고객 / 홈",
-      "screen": null,
+      "screen": "MasterQuickRecommend",
       "ignore": false,
-      "hash": "f8da23339e66",
-      "todo": true
+      "hash": "f8da23339e66"
     },
     "2187:11801": {
       "name": "진행여부 파악",

@@ -48,7 +48,10 @@ function toMasterCard(expert: FeaturedExpert): MasterCardData {
 function CategoryChip({ label }: { label: string }) {
   return (
     <View className="h-[20px] items-center justify-center rounded-[18px] bg-black px-[12px]">
-      <Text className="font-pretendard-medium text-primary" style={{ fontSize: 10, lineHeight: 18 }}>
+      <Text
+        className="font-pretendard-medium text-primary"
+        style={{ fontSize: 10, lineHeight: 18 }}
+      >
         {label}
       </Text>
     </View>
@@ -145,7 +148,10 @@ function SectionHeader() {
       // 음수 spread로 아래쪽 번짐을 없애 헤더/카드 사이 이음새가 생기지 않게 함 (iOS·Android 공통)
       style={{ boxShadow: '0px -4px 6px -2px rgba(0,0,0,0.1)' }}
     >
-      <Text className="font-pretendard-extrabold text-gray3" style={{ fontSize: 18, lineHeight: 21 }}>
+      <Text
+        className="font-pretendard-extrabold text-gray3"
+        style={{ fontSize: 18, lineHeight: 21 }}
+      >
         이달의 소개 명인
       </Text>
     </View>
@@ -215,7 +221,7 @@ export function CustomerHomeScreen() {
       <View className="bg-transparent px-[16px] pb-[0px]">
         <Pressable
           hitSlop={8}
-          onPress={() => rootNav?.navigate('RegionSelectQ1')}
+          onPress={() => rootNav?.navigate('MasterQuickRecommend')}
           className="mt-[12px] h-[176px] overflow-hidden rounded-[16px]"
           style={Platform.select({
             ios: {
@@ -292,7 +298,6 @@ export function CustomerHomeScreen() {
         onClose={() => setDetailExpertId(null)}
         onPressReview={handleDetailReview}
       />
-
     </View>
   )
 }

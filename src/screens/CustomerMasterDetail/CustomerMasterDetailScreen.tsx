@@ -1,10 +1,12 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { Alert, Platform, Pressable, ScrollView, View } from 'react-native'
+import { useState } from 'react'
+import { Linking, Platform, Pressable, ScrollView, View } from 'react-native'
 
-import { ArrowBackIcon, StarFillIcon, StarMedalIcon, StarNoneIcon } from '@/assets/icons'
+import { ArrowBackIcon, StarFillIcon, StarNoneIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
+import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ExpertProfileDetailBody } from '@/components/expert/ExpertProfileDetailBody'
 import { useCreateDiagnosisRequest } from '@/hooks/useCreateDiagnosisRequest'
 import { useExpertProfile } from '@/hooks/useExpertProfile'
@@ -31,26 +33,35 @@ export function CustomerMasterDetailScreen() {
   const { isFavorited, toggle: toggleFavorite, isToggling } = useFavoriteExpert(expertProfileId)
   const { mutate: createDiagnosis, isPending: isDiagnosing } = useCreateDiagnosisRequest()
 
-  const handleDiagnosisRequest = () => {
-    Alert.alert('진단요청', `${profile?.centerName ?? '이 명인'}에게 진단을 요청하시겠습니까?`, [
-      { text: '취소', style: 'cancel' },
-      {
-        text: '요청하기',
-        onPress: () => {
-          createDiagnosis(expertProfileId, {
-            onSuccess: () => Alert.alert('완료', '진단 요청이 전송되었습니다.'),
-            onError: (err: unknown) => {
-              const status = (err as { response?: { status?: number } })?.response?.status
-              const msg =
-                status === 409
-                  ? '이미 접수된 진단 요청이 있습니다.'
-                  : '진단 요청에 실패했습니다. 다시 시도해주세요.'
-              Alert.alert('오류', msg)
-            },
-          })
-        },
+  const [showDiagnosisDialog, setShowDiagnosisDialog] = useState(false)
+  const [resultMessage, setResultMessage] = useState<{ title: string; isError: boolean } | null>(
+    null
+  )
+
+  // Figma: 진단요청팝업 — 진단요청 등록 후 명인 오픈채팅으로 이동
+  const openChat = () => {
+    const url = profile?.kakaoOpenChatUrl
+    if (url) {
+      Linking.openURL(url).catch(() => {})
+    } else {
+      setResultMessage({ title: '진단 요청이 전송되었습니다', isError: false })
+    }
+  }
+
+  const handleDiagnosisConfirm = () => {
+    setShowDiagnosisDialog(false)
+    createDiagnosis(expertProfileId, {
+      onSuccess: openChat,
+      onError: (err: unknown) => {
+        const status = (err as { response?: { status?: number } })?.response?.status
+        // 이미 요청한 명인이면 오픈채팅 이동만 진행
+        if (status === 409) {
+          openChat()
+          return
+        }
+        setResultMessage({ title: '진단 요청에 실패했습니다. 다시 시도해주세요.', isError: true })
       },
-    ])
+    })
   }
 
   if (isLoading) {
@@ -75,7 +86,6 @@ export function CustomerMasterDetailScreen() {
         >
           <ArrowBackIcon />
         </Pressable>
-        <StarMedalIcon size={44} />
       </View>
 
       <ScrollView
@@ -88,25 +98,22 @@ export function CustomerMasterDetailScreen() {
             className="text-[28px] text-[#1F2A43]"
             style={{ fontFamily: 'Pretendard-ExtraBold' }}
           >
-            {profile?.centerName ?? '-'}
+            {profile?.name || '-'}
           </Text>
         </View>
 
-        {/* 프로필 카드 — 이미지부터 학력까지 단일 반투명 카드 */}
+        {/* 프로필 카드 — Figma: 흰색 30%(glass) over #D9D9D9 = #E4E4E4.
+            반투명 bg는 shadow/elevation이 카드 안으로 비쳐 플랫폼마다 색이 달라지므로 합성색으로 고정 */}
         <View
-          className="mx-[26px] overflow-hidden rounded-[16px] px-[13px] pb-6"
+          className="mx-[26px] rounded-[16px] bg-[#E4E4E4] px-[13px] pb-6"
           style={Platform.select({
             ios: {
-              backgroundColor: 'rgba(255,255,255,0.3)',
               shadowColor: '#424A56',
               shadowOffset: { width: 2, height: 4 },
               shadowOpacity: 0.31,
               shadowRadius: 18.1,
             },
-            android: {
-              backgroundColor: 'rgba(255,255,255,0.5)',
-              elevation: 8,
-            },
+            android: { elevation: 8 },
           })}
         >
           <ExpertProfileDetailBody
@@ -156,7 +163,7 @@ export function CustomerMasterDetailScreen() {
           className="ml-4 h-[52px] flex-1 items-center justify-center rounded-[8px] bg-[#C6A75E]"
           accessibilityRole="button"
           accessibilityLabel="진단요청하기"
-          onPress={handleDiagnosisRequest}
+          onPress={() => setShowDiagnosisDialog(true)}
           disabled={isDiagnosing}
         >
           <Text
@@ -167,6 +174,23 @@ export function CustomerMasterDetailScreen() {
           </Text>
         </Pressable>
       </View>
+
+      <ConfirmDialog
+        visible={showDiagnosisDialog}
+        title="진단요청하기"
+        description="명인의 오픈채팅으로 이동할까요?"
+        confirmLabel="이동하기"
+        onConfirm={handleDiagnosisConfirm}
+        onCancel={() => setShowDiagnosisDialog(false)}
+      />
+
+      <ConfirmDialog
+        visible={resultMessage !== null}
+        title={resultMessage?.isError ? '오류' : '완료'}
+        description={resultMessage?.title ?? ''}
+        isError={resultMessage?.isError}
+        onConfirm={() => setResultMessage(null)}
+      />
     </View>
   )
 }

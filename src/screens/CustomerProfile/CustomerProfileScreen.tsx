@@ -200,7 +200,7 @@ export function CustomerProfileScreen() {
                 className="text-[20px]"
                 style={{ fontFamily: 'Pretendard-SemiBold', color: '#07091C' }}
               >
-                {profile.nickname}
+                {profile.nickname || profile.name}
               </Text>
               <Text
                 className="mt-[2px] text-[14px]"

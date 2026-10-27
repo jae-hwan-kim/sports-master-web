@@ -116,22 +116,23 @@ const CARD_SHADOW = Platform.select({
   android: { elevation: 2 },
 })
 
+// Figma: 상단(프로필) 영역이 별도 카드처럼 떠 보이도록 자체 bg + shadow
 const CARD_TOP_SECTION_SHADOW = Platform.select({
   ios: {
     shadowColor: '#8B8B8B',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.15,
-    shadowRadius: 4,
+    shadowRadius: 8,
   },
-  android: { elevation: 1 },
+  android: { elevation: 3 },
 })
 
 // ─── 서브 컴포넌트 ─────────────────────────────────────────────────────────────
 
 function SpecialtyChip({ label }: { label: string }) {
   return (
-    <View className="h-[20px] items-center justify-center rounded-[18px] bg-gray3 px-3">
-      <Text className="font-pretendard-medium text-[8px] text-white">{label}</Text>
+    <View className="h-[20px] items-center justify-center rounded-[14.5px] bg-gray3 px-[13px]">
+      <Text className="font-pretendard-medium text-[10px] text-white">{label}</Text>
     </View>
   )
 }
@@ -146,7 +147,10 @@ function MasterCard({ item, onPress, onFavoritePress }: MasterCardProps) {
   return (
     <Pressable hitSlop={8} onPress={onPress} className="rounded-lg bg-white" style={CARD_SHADOW}>
       {/* 상단: 아바타 + 텍스트 */}
-      <View className="h-[82px] flex-row items-center px-4" style={CARD_TOP_SECTION_SHADOW}>
+      <View
+        className="h-[82px] flex-row items-center rounded-lg bg-white px-4"
+        style={CARD_TOP_SECTION_SHADOW}
+      >
         {item.profileImageUrl ? (
           <Image
             source={{ uri: item.profileImageUrl }}
@@ -156,13 +160,15 @@ function MasterCard({ item, onPress, onFavoritePress }: MasterCardProps) {
         ) : (
           <View className="h-[50px] w-[50px] rounded-full bg-gray1" />
         )}
-        <View className="ml-5 flex-1 justify-center gap-2">
+        <View className="ml-5 flex-1 justify-center gap-3">
           <Text className="font-pretendard-semibold text-[14px] text-secondary" numberOfLines={1}>
             {item.nickname} | {item.region}
           </Text>
-          <Text className="font-pretendard-medium text-small2 text-[#A2A2A2]" numberOfLines={1}>
-            {item.bio}
-          </Text>
+          {!!item.bio && (
+            <Text className="font-pretendard-medium text-small2 text-gray3" numberOfLines={1}>
+              {item.bio}
+            </Text>
+          )}
         </View>
       </View>
 
@@ -178,7 +184,8 @@ function MasterCard({ item, onPress, onFavoritePress }: MasterCardProps) {
           onPress={onFavoritePress}
           className="h-[44px] w-[44px] items-center justify-center"
         >
-          {item.isFavorite ? <StarFillIcon size={24} /> : <StarNoneIcon size={24} />}
+          {/* svg viewBox 44 안에 별 24 — Figma Star 인스턴스(44) 그대로 */}
+          {item.isFavorite ? <StarFillIcon size={44} /> : <StarNoneIcon size={44} />}
         </Pressable>
       </View>
     </Pressable>
@@ -388,7 +395,7 @@ export function CustomerExploreScreen() {
         id: e.id,
         nickname: e.name,
         region: e.region,
-        bio: e.representativeService,
+        bio: e.introduction ?? '',
         specialties: e.keywordTags ?? [],
         profileImageUrl: e.imageUrl ?? undefined,
         isFavorite: favoriteOverrides.get(e.id) ?? serverFavoriteIds.has(e.id),
