@@ -95,7 +95,15 @@ export function ExpertProfileDetailBody({
           <StarMedalIcon size={58} />
         </View>
 
-        {/* 키워드 칩 (이미지 위, 소개글 상단) */}
+        {/* 하단 그라디언트 오버레이 */}
+        {/* Figma: #F2F2F2 0%→67%(16%)→100%(59%), 레이어 opacity 0.9 */}
+        <LinearGradient
+          colors={['rgba(242,242,242,0)', 'rgba(242,242,242,0.6)', 'rgba(242,242,242,0.9)']}
+          locations={[0, 0.16, 0.59]}
+          style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 220 }}
+        />
+
+        {/* 키워드 칩 (그라디언트 위, 소개글 상단) */}
         <View className="absolute bottom-[139px] left-[24px] flex-row gap-2">
           <FlatList
             horizontal
@@ -114,14 +122,6 @@ export function ExpertProfileDetailBody({
             )}
           />
         </View>
-
-        {/* 하단 그라디언트 오버레이 */}
-        {/* Figma: #F2F2F2 0%→67%(16%)→100%(59%), 레이어 opacity 0.9 */}
-        <LinearGradient
-          colors={['rgba(242,242,242,0)', 'rgba(242,242,242,0.6)', 'rgba(242,242,242,0.9)']}
-          locations={[0, 0.16, 0.59]}
-          style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 220 }}
-        />
 
         {/* 소개글 + 통계 오버레이 (그라디언트 위) */}
         <View

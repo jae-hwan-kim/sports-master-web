@@ -158,7 +158,8 @@ export function RecommendedMastersScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingTop: scrollPaddingTop,
-          paddingBottom: 120,
+          // 마지막 카드가 종료하기 버튼(69 + 하단 31)에 가리지 않도록
+          paddingBottom: insets.bottom + 31 + 69 + 24,
           paddingHorizontal: 32,
           gap: 16,
         }}
@@ -172,10 +173,10 @@ export function RecommendedMastersScreen() {
         pointerEvents="none"
       />
 
-      {/* EndButton — bottom-anchored for reliable cross-device positioning */}
+      {/* EndButton — Figma y=739 (Q1·Q3와 동일), SurveyLayout 하단 여백과 맞춤 */}
       <View
         className="absolute left-0 right-0 z-20 items-center"
-        style={{ bottom: insets.bottom + 100 }}
+        style={{ bottom: insets.bottom + 31 }}
       >
         <Pressable
           hitSlop={8}
@@ -190,9 +191,8 @@ export function RecommendedMastersScreen() {
               shadowOpacity: 0.25,
               shadowRadius: 10,
             },
-            android: {
-              elevation: 6,
-            },
+            // Android elevation은 반투명 배경 아래로 비쳐 어두운 사각형이 생김 → 미적용 (SurveyLayout 동일)
+            android: {},
           })}
         >
           <Text

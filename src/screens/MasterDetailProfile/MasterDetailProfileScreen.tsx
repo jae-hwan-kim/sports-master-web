@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
+import { useState } from 'react'
 import { FlatList, Linking, Pressable, ScrollView, View } from 'react-native'
 
 import { Image } from 'expo-image'
@@ -9,6 +10,7 @@ import { ArrowBackIcon } from '@/assets/icons'
 import EditSvg from '@/assets/icons/edit.svg'
 import { Text } from '@/components/AppText'
 import { Chip } from '@/components/Chip'
+import { ImageViewerModal } from '@/components/expert/ImageViewerModal'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useMyCertifications } from '@/hooks/useMyCertifications'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
@@ -102,6 +104,7 @@ function CertFileRow({ url }: { url: string }) {
 export function MasterDetailProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const insets = useScreenInsets()
+  const [viewerUri, setViewerUri] = useState<string | null>(null)
 
   const { data: profileData, isError: isProfileError } = useMyExpertProfile()
   const profile = profileData ?? (__DEV__ ? MOCK_PROFILE : undefined)
@@ -253,11 +256,18 @@ export function MasterDetailProfileScreen() {
                 keyExtractor={(item, index) => `img-${index}`}
                 ItemSeparatorComponent={() => <View className="w-2" />}
                 renderItem={({ item }) => (
-                  <Image
-                    source={{ uri: item }}
-                    style={{ width: 80, height: 80, borderRadius: 4 }}
-                    contentFit="cover"
-                  />
+                  <Pressable
+                    hitSlop={4}
+                    accessibilityRole="imagebutton"
+                    accessibilityLabel="이미지 크게보기"
+                    onPress={() => setViewerUri(item)}
+                  >
+                    <Image
+                      source={{ uri: item }}
+                      style={{ width: 80, height: 80, borderRadius: 4 }}
+                      contentFit="cover"
+                    />
+                  </Pressable>
                 )}
               />
             ) : (
@@ -338,6 +348,8 @@ export function MasterDetailProfileScreen() {
           </View>
         </View>
       </ScrollView>
+
+      <ImageViewerModal uri={viewerUri} onClose={() => setViewerUri(null)} />
     </View>
   )
 }
