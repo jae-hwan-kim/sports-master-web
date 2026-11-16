@@ -69,6 +69,7 @@ type StepSelectProps = {
 }
 
 function StepSelectExpert({ onSelect, onBack, insets }: StepSelectProps) {
+  // 본인 명인 제외와 링크 방문 명인 포함은 서버(my-sent)에서 처리
   const { data: experts, isLoading, isError } = useReviewableExperts()
 
   const renderItem = useCallback(
