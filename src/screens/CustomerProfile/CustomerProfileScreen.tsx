@@ -16,14 +16,24 @@ import { RootStackParamList } from '@/navigation/RootNavigator'
 // Sub-components
 // ---------------------------------------------------------------------------
 
+// 기본 아바타 — 피그마(마이페이지_Default): 골드 원 + 연한 실루엣(#F2F2F2), 몸통은 원 아래에서 잘림, 원 아래 옅은 그림자
+// 실루엣 치수: 원(80) 대비 몸통 폭 ≈70%(56), 머리 상단 ≈16px 아래
 function Avatar() {
   return (
     <View
-      className="items-center justify-center overflow-hidden rounded-full"
-      style={{ width: 80, height: 80, backgroundColor: '#C6A75E' }}
+      style={{
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        backgroundColor: '#C6A75E',
+        overflow: 'hidden',
+        ...Platform.select({
+          ios: { shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4 },
+          android: { elevation: 3 },
+        }),
+      }}
     >
-      {/* size=46 → 원 대비 비율 유지 — overflow-hidden이 잘라줌 */}
-      <ProfilePersonIcon size={46} />
+      <ProfilePersonIcon size={56} color="#F2F2F2" style={{ position: 'absolute', left: 12, top: 16 }} />
     </View>
   )
 }
@@ -32,9 +42,11 @@ type MenuRowProps = {
   label: string
   onPress: () => void
   showTopDivider?: boolean
+  // 디자인 그림자 값 — 관심명인·리뷰 행은 #000 5%, 계정 행은 기존 값(11%)
+  shadowOpacity?: number
 }
 
-function MenuRow({ label, onPress, showTopDivider = false }: MenuRowProps) {
+function MenuRow({ label, onPress, showTopDivider = false, shadowOpacity = 0.11 }: MenuRowProps) {
   return (
     <>
       {showTopDivider && <View style={{ height: 1, backgroundColor: '#F2F2F2' }} />}
@@ -50,7 +62,7 @@ function MenuRow({ label, onPress, showTopDivider = false }: MenuRowProps) {
             ios: {
               shadowColor: '#000',
               shadowOffset: { width: 2, height: 2 },
-              shadowOpacity: 0.11,
+              shadowOpacity,
               shadowRadius: 2.9,
             },
             android: { elevation: 2 },
@@ -232,13 +244,13 @@ export function CustomerProfileScreen() {
 
         {/* 관심명인 section */}
         <Section title="관심명인">
-          <MenuRow label="내가 저장한 명인 보러가기" onPress={handleFavoriteExperts} />
+          <MenuRow label="내가 저장한 명인 보러가기" shadowOpacity={0.05} onPress={handleFavoriteExperts} />
         </Section>
 
         {/* 리뷰관리 section */}
         <Section title="리뷰관리">
-          <MenuRow label="리뷰 작성하기" onPress={handleWriteReview} />
-          <MenuRow label="내가 작성한 리뷰 보기" onPress={handleMyReviews} />
+          <MenuRow label="리뷰 작성하기" shadowOpacity={0.05} onPress={handleWriteReview} />
+          <MenuRow label="내가 작성한 리뷰 보기" shadowOpacity={0.05} onPress={handleMyReviews} />
         </Section>
 
         {/* 계정 — Figma 미정의, 고객 모드의 로그아웃/탈퇴 진입점 (명인 설정과 동일 동작) */}

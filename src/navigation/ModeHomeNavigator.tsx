@@ -101,7 +101,7 @@ export function ModeHomeNavigator({ route }: Props) {
               <Pressable
                 hitSlop={8}
                 onPress={() =>
-                  navigation.navigate(mode === 'expert' ? 'MasterSettings' : 'CustomerSettings')
+                  navigation.navigate(mode === 'expert' ? 'MasterSettings' : 'CustomerSettingsMenu')
                 }
                 accessibilityRole="button"
                 accessibilityLabel="설정"

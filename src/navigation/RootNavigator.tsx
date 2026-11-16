@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ModeHomeNavigator } from '@/navigation/ModeHomeNavigator'
 import { CustomerMasterDetailScreen } from '@/screens/CustomerMasterDetail/CustomerMasterDetailScreen'
 import { CustomerSettingsScreen } from '@/screens/CustomerSettings/CustomerSettingsScreen'
+import { CustomerSettingsMenuScreen } from '@/screens/CustomerSettingsMenu/CustomerSettingsMenuScreen'
 import { CustomerWelcomeScreen } from '@/screens/CustomerWelcome/CustomerWelcomeScreen'
 import { FavoriteExpertsScreen } from '@/screens/FavoriteExperts/FavoriteExpertsScreen'
 import { LoginScreen } from '@/screens/Login/LoginScreen'
@@ -37,6 +38,7 @@ export type RootStackParamList = {
   MasterHome: undefined
   CustomerHome: undefined
   CustomerSettings: undefined
+  CustomerSettingsMenu: undefined
   MasterSettings: undefined
   MasterProfileEdit: undefined
   CustomerMasterDetail: { expertProfileId: number }
@@ -85,6 +87,7 @@ export function RootNavigator() {
       />
       <Stack.Screen name="MasterHome" component={ModeHomeNavigator} />
       <Stack.Screen name="CustomerHome" component={ModeHomeNavigator} />
+      <Stack.Screen name="CustomerSettingsMenu" component={CustomerSettingsMenuScreen} />
       <Stack.Screen name="CustomerSettings" component={CustomerSettingsScreen} />
       <Stack.Screen name="MasterSettings" component={MasterSettingsScreen} />
       <Stack.Screen name="MasterProfileEdit" component={MasterProfileEditScreen} />

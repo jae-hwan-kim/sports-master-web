@@ -17,6 +17,7 @@ export const devLinking: LinkingOptions<RootStackParamList> | undefined = __DEV_
           MasterVerification: 'dev/MasterVerification',
           CustomerWelcome: 'dev/CustomerWelcome',
           MasterWelcome: 'dev/MasterWelcome',
+          CustomerSettingsMenu: 'dev/CustomerSettingsMenu',
           CustomerSettings: 'dev/CustomerSettings',
           MasterSettings: 'dev/MasterSettings',
           MasterProfileEdit: 'dev/MasterProfileEdit',
