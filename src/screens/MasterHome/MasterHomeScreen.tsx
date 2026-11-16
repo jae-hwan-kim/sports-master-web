@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { apiClient } from '@/api/client'
 import type { DiagnosisIncomingItem } from '@/api/diagnosis'
-import { ArrowNextIcon, LinkIcon, StarMedalIcon } from '@/assets/icons'
+import { ArrowNextIcon, getGradeInfo, GradeMedalIcon, LinkIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { DiagnosisRequestCard } from '@/components/DiagnosisRequestCard'
@@ -23,14 +23,6 @@ import type { components } from '@/types/schema'
 import masterBg from '../../assets/icons/master-background.png'
 
 type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
-
-const GRADE_LABEL: Record<string, string> = {
-  bronze: '브론즈',
-  silver: '실버메달',
-  gold: '스타메달',
-  platinum: '플래티넘',
-  diamond: '다이아몬드',
-}
 
 async function fetchExpertGrade(): Promise<ExpertProfileResponseDto> {
   const { data } = await apiClient.get<{ data: ExpertProfileResponseDto }>('/home/expert-grade')
@@ -125,14 +117,17 @@ export function MasterHomeScreen() {
       expertProfile.portfolioImageUrls?.length
     )
   const gradeLabel = expertProfile?.expertGrade
-    ? (GRADE_LABEL[expertProfile.expertGrade] ?? expertProfile.expertGrade)
+    ? (getGradeInfo(expertProfile.expertGrade)?.label ?? expertProfile.expertGrade)
     : '-'
   const reviewCount = expertProfile
     ? String(expertProfile.totalReviewCount > 999 ? '999+' : expertProfile.totalReviewCount)
     : '-'
   const avgRating = expertProfile ? String(Number(expertProfile.averageRating).toFixed(1)) : '-'
-  const topPercentile =
-    expertProfile?.topPercentile != null ? `${expertProfile.topPercentile}%` : '-'
+  const topPercentile = !expertProfile?.expertGrade
+    ? '100%'
+    : expertProfile.topPercentile != null
+      ? `${expertProfile.topPercentile}%`
+      : '-'
 
   // Figma 791:4558 명인홈_링크복사 완료 — 확인 시 리뷰 관리 화면으로 이동
   const [linkCopiedVisible, setLinkCopiedVisible] = useState(false)
@@ -208,7 +203,7 @@ export function MasterHomeScreen() {
           />
 
           <View className="absolute right-0 top-0">
-            <StarMedalIcon size={100} />
+            <GradeMedalIcon grade={expertProfile?.expertGrade} size={100} />
           </View>
 
           <View className="flex-1 justify-between pb-6 pl-4 pt-[18px]">

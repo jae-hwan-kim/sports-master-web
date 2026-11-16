@@ -12,7 +12,11 @@ import HomeSvg from './home.svg'
 import KakaoSvg from './kakao.svg'
 import LinkSvg from './link.svg'
 import LocationOnSvg from './location-on.svg'
-import MasterSvg from './master.svg'
+import MedalBronzeSvg from './medal-bronze.svg'
+import MedalDefaultSvg from './medal-default.svg'
+import MedalGoldSvg from './medal-gold.svg'
+import MedalSilverSvg from './medal-silver.svg'
+import MasterSvg from './medal-master.svg'
 import PersonSvg from './person.svg'
 import ProfilePersonSvg from './profile-person.svg'
 import SearchOutlineSvg from './search-outline.svg'
@@ -112,6 +116,33 @@ export function LinkIcon({ size = 44, ...rest }: IconProps) {
 
 export function StarMedalIcon({ size = 100, ...rest }: IconProps) {
   return <StarMedalSvg width={size} height={size} {...rest} />
+}
+
+// 명인 등급 단일 표 — 라벨(홈 화면 문구)과 메달 아이콘을 한 곳에서 관리
+// API expertGrade(bronze|silver|gold|platinum|diamond) → 디자인 메달
+// platinum → gold, diamond → master, 등급 없음 → default (디자이너 확정)
+export type ExpertGrade = 'bronze' | 'silver' | 'gold' | 'platinum' | 'diamond'
+
+export const GRADE_INFO: Record<ExpertGrade, { label: string; Icon: typeof MedalGoldSvg }> = {
+  bronze: { label: '브론즈', Icon: MedalBronzeSvg },
+  silver: { label: '실버메달', Icon: MedalSilverSvg },
+  gold: { label: '스타메달', Icon: MedalGoldSvg },
+  platinum: { label: '플래티넘', Icon: MedalGoldSvg },
+  diamond: { label: '다이아몬드', Icon: MasterSvg },
+}
+
+// 등급 문자열 → 표의 항목 (알 수 없는 값·없음은 undefined)
+export function getGradeInfo(grade?: string | null) {
+  return grade && grade in GRADE_INFO ? GRADE_INFO[grade as ExpertGrade] : undefined
+}
+
+export function GradeMedalIcon({
+  grade,
+  size = 100,
+  ...rest
+}: IconProps & { grade?: string | null }) {
+  const Medal = getGradeInfo(grade)?.Icon ?? MedalDefaultSvg
+  return <Medal width={size} height={size} {...rest} />
 }
 
 // edit.svg는 자체 여백 없는 24x24 글리프

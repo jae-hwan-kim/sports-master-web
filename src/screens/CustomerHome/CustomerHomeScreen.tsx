@@ -5,7 +5,7 @@ import { FlatList, Platform, Pressable, View } from 'react-native'
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import { LocationOnIcon, StarMedalIcon } from '@/assets/icons'
+import { GradeMedalIcon, LocationOnIcon } from '@/assets/icons'
 import LogoSvg from '@/assets/icons/logo.svg'
 import { Text } from '@/components/AppText'
 import { ExpertDetailModal } from '@/components/expert/ExpertDetailModal'
@@ -26,6 +26,7 @@ type MasterCardData = {
   address: string
   categories: string[]
   imageUri?: string
+  expertGrade: string | null
 }
 
 function toMasterCard(expert: FeaturedExpert): MasterCardData {
@@ -37,6 +38,7 @@ function toMasterCard(expert: FeaturedExpert): MasterCardData {
     address: expert.region,
     categories: expert.keywordTags?.slice(0, 3) ?? [],
     imageUri: expert.imageUrl ?? undefined,
+    expertGrade: expert.expertGrade,
   }
 }
 
@@ -61,8 +63,8 @@ function CategoryChip({ label }: { label: string }) {
 /** 이달의 소개 명인 카드 */
 function MasterCard({ item, onPressDetail }: { item: MasterCardData; onPressDetail: () => void }) {
   return (
-    // Figma node 2321:9044 — h:289, 카드 x:32 → mx-[32px]
-    <View className="mx-[32px] h-[289px] overflow-hidden rounded-[12px] border border-gray1 bg-gray1">
+    // 높이 289 유지, 가로폭은 상단 맞춤 명인탐색 카드와 동일 (같은 FlatList, 좌우 여백 16)
+    <View className="mx-[16px] h-[289px] overflow-hidden rounded-[12px] border border-gray1 bg-gray1">
       {item.imageUri && (
         <Image
           source={{ uri: item.imageUri }}
@@ -86,7 +88,7 @@ function MasterCard({ item, onPressDetail }: { item: MasterCardData; onPressDeta
         >
           {item.name}
         </Text>
-        <StarMedalIcon size={20} />
+        <GradeMedalIcon grade={item.expertGrade} size={20} />
       </View>
 
       {/* 소개글 — top: 155 (Figma: 583-428) */}
