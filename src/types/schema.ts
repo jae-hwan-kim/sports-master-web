@@ -1406,6 +1406,11 @@ export interface components {
              */
             representativeService: string;
             /**
+             * @description 명인 전용 표시명 (없으면 null, 표시는 name 사용)
+             * @example 서초 재활 트레이너
+             */
+            displayName?: string | null;
+            /**
              * @description 소개 텍스트
              * @example 10년 경력의 재활 전문 트레이너입니다.
              */
@@ -1647,6 +1652,16 @@ export interface components {
              * @example https://open.kakao.com/o/example
              */
             openChatUrl?: string;
+            /**
+             * @description 명인 표시명 (최대 20자), 빈 문자열이면 계정 닉네임으로 복귀
+             * @example 서초 재활 트레이너
+             */
+            displayName?: string;
+            /**
+             * @description 센터정보 URL (예: 네이버 주소 URL), 빈 문자열이면 삭제
+             * @example https://naver.me/example
+             */
+            centerInfoUrl?: string;
         };
         UploadedFilesResponseDto: {
             /**

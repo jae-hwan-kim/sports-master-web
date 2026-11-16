@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   FlatList,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   Pressable,
   ScrollView,
@@ -44,6 +45,14 @@ export function MasterDetailProfileEditScreen() {
 
   const [region, setRegion] = useState('')
   const [openChatUrl, setOpenChatUrl] = useState('')
+  const [centerInfoUrl, setCenterInfoUrl] = useState('')
+  // 명인 표시명(없으면 빈 값 → 카드·저장 시 계정 닉네임으로 대체)
+  const [displayName, setDisplayName] = useState('')
+  const [introduction, setIntroduction] = useState('')
+  // 프로필 카드 이름·소개글 편집 대상 (null이면 모달 닫힘)
+  const [editTarget, setEditTarget] = useState<'name' | 'intro' | null>(null)
+  const [editDraft, setEditDraft] = useState('')
+  const editMax = editTarget === 'name' ? 20 : 50
   const [centerPhone, setCenterPhone] = useState('')
   const [keywords, setKeywords] = useState<string[]>([])
   // 프로필 카드 대표 사진 — 하단 이미지(images)와 별개. 원격 URL 또는 새로 고른 로컬 uri
@@ -68,6 +77,9 @@ export function MasterDetailProfileEditScreen() {
     if (!profile) return
     setRegion(profile.region ?? '')
     setOpenChatUrl(profile.kakaoOpenChatUrl ?? '')
+    setCenterInfoUrl(profile.centerInfoUrl ?? '')
+    setIntroduction(profile.introduction ?? '')
+    setDisplayName(profile.displayName ?? '')
     setCenterPhone(profile.centerPhone ?? '')
     setProfileImage(profile.profileImageUrl ?? null)
     setKeywords(profile.keywordTags ?? [])
@@ -169,6 +181,12 @@ export function MasterDetailProfileEditScreen() {
       await updateMutation.mutateAsync({
         region: region || undefined,
         openChatUrl: openChatUrl || undefined,
+        // 빈 문자열이면 서버에서 삭제
+        centerInfoUrl,
+        // 프로필 카드 소개글 — 서버 PATCH 필드는 bio (조회 시 introduction으로 반환)
+        bio: introduction,
+        // 빈 문자열이면 서버에서 계정 닉네임으로 복귀
+        displayName,
         keywordTags: keywords.length > 0 ? keywords : undefined,
         careerText,
         portfolioImageUrls,
@@ -273,20 +291,23 @@ export function MasterDetailProfileEditScreen() {
           {profile && (
             <View className="mx-6">
               <View>
-                <ProfileCard profile={{ ...profile, profileImageUrl: profileImage ?? undefined }} />
-                <Pressable
-                  hitSlop={8}
-                  onPress={handlePickCoverPhoto}
-                  className="absolute inset-0"
-                  accessibilityRole="button"
-                  accessibilityLabel="대표 사진 변경"
-                >
-                  <View className="absolute right-3 top-3 h-8 w-8 items-center justify-center rounded-full bg-black/50">
-                    <Text className="text-white" style={{ fontSize: 14 }}>
-                      ✎
-                    </Text>
-                  </View>
-                </Pressable>
+                <ProfileCard
+                  profile={{
+                    ...profile,
+                    name: displayName || profile.name,
+                    profileImageUrl: profileImage ?? undefined,
+                    introduction,
+                  }}
+                  onNamePress={() => {
+                    setEditDraft(displayName)
+                    setEditTarget('name')
+                  }}
+                  onIntroPress={() => {
+                    setEditDraft(introduction)
+                    setEditTarget('intro')
+                  }}
+                  onCoverPress={handlePickCoverPhoto}
+                />
               </View>
             </View>
           )}
@@ -297,13 +318,28 @@ export function MasterDetailProfileEditScreen() {
             <RegionSelector value={region} onChange={setRegion} />
           </View>
 
-          {/* 센터정보 */}
+          {/* 센터정보 — 주소성 URL (예: 네이버 주소) */}
           <SectionLabel label="센터정보" />
           <View className="mx-6">
             <TextField
+              value={centerInfoUrl}
+              containerClassName="bg-white"
+              onChangeText={setCenterInfoUrl}
+              label="URL 입력 (예: 네이버 주소 URL)"
+              keyboardType="url"
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+          </View>
+
+          {/* 채팅URL — 카카오 오픈채팅 등 (고객이 진단요청 후 이동) */}
+          <SectionLabel label="채팅URL" />
+          <View className="mx-6">
+            <TextField
               value={openChatUrl}
+              containerClassName="bg-white"
               onChangeText={setOpenChatUrl}
-              label="URL 입력 (예: 카카오 오픈채팅)"
+              label="URL 입력 (예: 카카오 오픈채팅 URL)"
               keyboardType="url"
               autoCapitalize="none"
               autoCorrect={false}
@@ -315,6 +351,7 @@ export function MasterDetailProfileEditScreen() {
           <View className="mx-6">
             <TextField
               value={formatPhone(centerPhone)}
+              containerClassName="bg-white"
               onChangeText={(text) => setCenterPhone(toPhoneDigits(text))}
               label="연락처 입력 (예: 010-0000-0000)"
               keyboardType="number-pad"
@@ -413,6 +450,58 @@ export function MasterDetailProfileEditScreen() {
       </KeyboardAvoidingView>
 
       {/* 저장 확인 다이얼로그 — Figma: 저장하기(골드) / 취소 */}
+      {/* 이름·소개글 편집 — 프로필 카드 탭 시 열림, 저장은 하단 저장 버튼에서 함께 전송 */}
+      <Modal
+        visible={editTarget !== null}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setEditTarget(null)}
+      >
+        <View className="flex-1 items-center justify-center bg-black/40 px-6">
+          <View className="w-full rounded-2xl bg-white p-5">
+            <Text className="text-[16px] font-semibold text-[#07091C]">
+              {editTarget === 'name' ? '명인 이름' : '소개글'}
+            </Text>
+            <TextInput
+              value={editDraft}
+              onChangeText={(text) => setEditDraft(text.slice(0, editMax))}
+              placeholder={
+                editTarget === 'name'
+                  ? `이름을 입력하세요 (최대 ${editMax}자, 비우면 계정 닉네임)`
+                  : `소개글을 입력하세요 (최대 ${editMax}자)`
+              }
+              placeholderTextColor="#74768E"
+              multiline={editTarget === 'intro'}
+              textAlignVertical="top"
+              className="mt-3 min-h-[96px] rounded-lg bg-[#F2F2F2] p-3 text-[14px] text-[#07091C]"
+            />
+            <Text className="mt-1 self-end text-[12px] text-[#74768E]">
+              {editDraft.length}/{editMax}
+            </Text>
+            <View className="mt-4 flex-row justify-end gap-2">
+              <Pressable
+                hitSlop={8}
+                onPress={() => setEditTarget(null)}
+                className="h-[40px] items-center justify-center rounded-lg px-4"
+              >
+                <Text className="text-[14px] text-[#74768E]">취소</Text>
+              </Pressable>
+              <Pressable
+                hitSlop={8}
+                onPress={() => {
+                  if (editTarget === 'name') setDisplayName(editDraft.trim())
+                  else setIntroduction(editDraft)
+                  setEditTarget(null)
+                }}
+                className="h-[40px] items-center justify-center rounded-lg bg-primary px-4"
+              >
+                <Text className="text-[14px] text-white">확인</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       <ConfirmDialog
         visible={showConfirmDialog}
         title="프로필을 저장할까요?"

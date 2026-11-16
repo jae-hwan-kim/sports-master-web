@@ -13,31 +13,7 @@ import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useMyExpertProfile } from '@/hooks/useMyExpertProfile'
 import { useScreenInsets } from '@/hooks/useScreenInsets'
 import type { MasterProfileStackParamList } from '@/navigation/MasterProfileStackNavigator'
-import type { components } from '@/types/schema'
 
-type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto']
-
-const MOCK_PROFILE: ExpertProfileResponseDto = {
-  id: 1,
-  userId: 1,
-  region: '서울 강남구',
-  centerName: '김명인',
-  name: '김명인',
-  representativeService: '재활 트레이닝',
-  introduction: '10년 경력의 재활 전문 트레이너입니다.',
-  kakaoOpenChatUrl: 'https://open.kakao.com/o/example',
-  expertGrade: 'gold',
-  totalReviewCount: 42,
-  averageRating: 4.8,
-  certificationStatus: 'approved',
-  portfolioImageUrls: [],
-  keywordTags: ['재활', '골프', '체형교정'],
-  careerText: '2018-현재 강남 스포츠 클리닉 원장\n2015-2018 국가대표 트레이너',
-  educationPdfUrl: undefined,
-  topPercentile: 5,
-  createdAt: '2024-01-15T09:00:00.000Z',
-  updatedAt: '2024-06-01T12:00:00.000Z',
-}
 
 function EmptyProfileCard() {
   return (
@@ -59,8 +35,8 @@ function EmptyProfileCard() {
       <View className="p-[13px] pt-[11px]">
         <View className="overflow-hidden rounded-xl" style={{ height: 470 }}>
           {/* 플레이스홀더 배경 + 실루엣 */}
-          <View className="flex-1 items-center justify-center bg-[#D9D9D9]">
-            <ProfilePersonSvg width={88} height={104} />
+          <View className="flex-1 items-center justify-center bg-[#E8E8E8]">
+            <ProfilePersonSvg width={88} height={104} color="#BDBDBD" />
           </View>
 
           {/* Logo badge — top-right */}
@@ -157,33 +133,6 @@ export function MasterProfileScreen() {
 
   return (
     <View className="flex-1" style={{ backgroundColor: '#F2F2F2', paddingTop: insets.top }}>
-      {/* 장식용 블롭 — left area */}
-      <View
-        style={{
-          position: 'absolute',
-          left: -46,
-          top: 202,
-          width: 353,
-          height: 353,
-          borderRadius: 177,
-          backgroundColor: 'rgba(180,170,220,0.25)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* 장식용 블롭 — right-bottom area */}
-      <View
-        style={{
-          position: 'absolute',
-          right: -30,
-          bottom: 60,
-          width: 246,
-          height: 246,
-          borderRadius: 123,
-          backgroundColor: 'rgba(220,200,140,0.25)',
-          pointerEvents: 'none',
-        }}
-      />
-
       {/* 카드(고정 높이)와 버튼이 겹치지 않도록 세로 스크롤로 쌓음 */}
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -211,11 +160,8 @@ export function MasterProfileScreen() {
             <View className="h-[470px] items-center justify-center">
               <ActivityIndicator size="large" color="#74768E" />
             </View>
-          ) : (profile ?? (__DEV__ ? MOCK_PROFILE : undefined)) ? (
-            <ProfileCard
-              profile={(profile ?? MOCK_PROFILE) as ExpertProfileResponseDto}
-              onReviewPress={() => navigation.navigate('MasterReview')}
-            />
+          ) : profile ? (
+            <ProfileCard profile={profile} onReviewPress={() => navigation.navigate('MasterReview')} />
           ) : (
             <EmptyProfileCard />
           )}

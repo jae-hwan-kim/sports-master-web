@@ -3,7 +3,7 @@ import { Platform, Pressable, Image as RNImage, View } from 'react-native'
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import { StarMedalIcon } from '@/assets/icons'
+import { GradeMedalIcon } from '@/assets/icons'
 import ProfilePersonSvg from '@/assets/icons/profile-person.svg'
 import { Text } from '@/components/AppText'
 import { components } from '@/types/schema'
@@ -13,14 +13,25 @@ type ExpertProfileResponseDto = components['schemas']['ExpertProfileResponseDto'
 type Props = {
   profile: ExpertProfileResponseDto
   onReviewPress?: () => void
+  // 이름·소개글 탭 → 편집 (상세 수정 화면에서만 전달)
+  onNamePress?: () => void
+  onIntroPress?: () => void
+  onCoverPress?: () => void
 }
 
-export function ProfileCard({ profile, onReviewPress }: Props) {
+export function ProfileCard({
+  profile,
+  onReviewPress,
+  onNamePress,
+  onIntroPress,
+  onCoverPress,
+}: Props) {
   const { name, introduction, totalReviewCount, averageRating, topPercentile, profileImageUrl } =
     profile
 
-  const displayName = (name ?? '').slice(0, 8)
-  const displayIntro = (introduction ?? '').slice(0, 30)
+  // 입력 제한과 동일 (표시명 20자, 소개글 50자). 카드 줄 수 제한은 numberOfLines가 담당
+  const displayName = (name ?? '').slice(0, 20)
+  const displayIntro = (introduction ?? '').slice(0, 50)
   // 대표 사진은 하단 소개 이미지(portfolioImageUrls)와 별개
   const coverUri = profileImageUrl ?? undefined
 
@@ -60,8 +71,8 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
               />
             </>
           ) : (
-            <View className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center bg-gray1">
-              <ProfilePersonSvg width={88} height={104} />
+            <View className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center bg-[#E8E8E8]">
+              <ProfilePersonSvg width={88} height={104} color="#BDBDBD" />
             </View>
           )}
 
@@ -74,25 +85,52 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
             resizeMode="contain"
           />
 
+          {/* 사진 영역 탭 → 대표 사진 변경 (상세 수정 화면에서만 전달). 텍스트 오버레이보다 먼저 그려 이름·소개글 탭과 겹치지 않음 */}
+          {onCoverPress && (
+            <Pressable
+              onPress={onCoverPress}
+              className="absolute bottom-[170px] left-0 right-0 top-0"
+              accessibilityRole="button"
+              accessibilityLabel="대표 사진 변경"
+            >
+              <View className="absolute right-3 top-3 h-8 w-8 items-center justify-center rounded-full bg-black/50">
+                <Text className="text-white" style={{ fontSize: 14 }}>
+                  ✎
+                </Text>
+              </View>
+            </Pressable>
+          )}
+
           {/* Text overlay */}
           <View className="absolute bottom-[96px] left-6 right-6">
             <View className="flex-row items-center gap-1">
-              <Text
-                className="text-[20px] text-black"
-                style={{ fontFamily: 'Pretendard-SemiBold' }}
-                numberOfLines={1}
+              {/* 터치 영역 확대: 패딩으로 위아래 6px 넓히고 음수 마진으로 레이아웃은 그대로 유지 */}
+              <Pressable
+                disabled={!onNamePress}
+                onPress={onNamePress}
+                hitSlop={8}
+                className="-mt-[6px] pt-[6px] -mb-[12px] pb-[12px]"
               >
-                {displayName}
-              </Text>
-              <StarMedalIcon size={24} />
+                <Text
+                  className="text-[20px] text-black"
+                  style={{ fontFamily: 'Pretendard-SemiBold' }}
+                  numberOfLines={1}
+                >
+                  {displayName}
+                </Text>
+              </Pressable>
+              <GradeMedalIcon grade={profile.expertGrade} size={24} />
             </View>
-            <Text
-              className="mt-[12px] text-[12px] text-gray3"
-              style={{ fontFamily: 'Pretendard-Medium' }}
-              numberOfLines={2}
-            >
-              {displayIntro}
-            </Text>
+            {/* margin은 Pressable 바깥에 둬야 터치 영역이 이름 아래로 겹치지 않음 */}
+            <Pressable disabled={!onIntroPress} onPress={onIntroPress} className="mt-[12px]">
+              <Text
+                className="text-[12px] text-gray3"
+                style={{ fontFamily: 'Pretendard-Medium' }}
+                numberOfLines={2}
+              >
+                {displayIntro}
+              </Text>
+            </Pressable>
           </View>
 
           {/* Stats row */}
@@ -144,7 +182,7 @@ export function ProfileCard({ profile, onReviewPress }: Props) {
                 className="text-[18px] leading-5 text-gray3"
                 style={{ fontFamily: 'Pretendard-ExtraBold' }}
               >
-                {topPercentile != null ? `${topPercentile}%` : '-'}
+                {profile.expertGrade == null ? '100%' : topPercentile != null ? `${topPercentile}%` : '-'}
               </Text>
               <Text className="text-[12px] text-gray3" style={{ fontFamily: 'Pretendard-Medium' }}>
                 상위

@@ -4,7 +4,7 @@ import { FlatList, Linking, Platform, Pressable, Share, View } from 'react-nativ
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import { StarMedalIcon } from '@/assets/icons'
+import { GradeMedalIcon } from '@/assets/icons'
 import { Text } from '@/components/AppText'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ImageViewerModal } from '@/components/expert/ImageViewerModal'
@@ -71,7 +71,8 @@ export function ExpertProfileDetailBody({
 }) {
   const [viewerUri, setViewerUri] = useState<string | null>(null)
   const [showLinkDialog, setShowLinkDialog] = useState(false)
-  const centerUrl = profile?.kakaoOpenChatUrl
+  const centerUrl = profile?.centerInfoUrl
+  const chatUrl = profile?.kakaoOpenChatUrl
   const careerItems = profile?.careerText ? profile.careerText.split('\n').filter(Boolean) : []
   const reviewCount =
     (profile?.totalReviewCount ?? 0) > 999 ? '999+' : String(profile?.totalReviewCount ?? 0)
@@ -92,7 +93,7 @@ export function ExpertProfileDetailBody({
 
         {/* 훈장 아이콘 */}
         <View className="absolute right-0 top-0">
-          <StarMedalIcon size={58} />
+          <GradeMedalIcon grade={profile?.expertGrade} size={58} />
         </View>
 
         {/* 하단 그라디언트 오버레이 */}
@@ -209,6 +210,30 @@ export function ExpertProfileDetailBody({
               numberOfLines={1}
             >
               {centerUrl ?? '-'}
+            </Text>
+          </ReadonlyBox>
+        </Pressable>
+      </View>
+
+      {/* 채팅URL (오픈채팅) — 진단요청 후 고객이 이동 */}
+      <View className="mt-6">
+        <SectionLabel label="채팅URL" />
+        <Pressable
+          hitSlop={8}
+          accessibilityRole="link"
+          accessibilityLabel="채팅 링크 열기"
+          disabled={!chatUrl}
+          onPress={() => {
+            if (chatUrl) Linking.openURL(chatUrl).catch(() => {})
+          }}
+        >
+          <ReadonlyBox>
+            <Text
+              className="text-[13px] text-[#1F2A43]"
+              style={{ fontFamily: 'Pretendard-Medium' }}
+              numberOfLines={1}
+            >
+              {chatUrl ?? '-'}
             </Text>
           </ReadonlyBox>
         </Pressable>

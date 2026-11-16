@@ -9,6 +9,8 @@ type TextFieldProps = TextInputProps & {
   errorMessage?: string
   secureToggle?: boolean
   rightButton?: React.ReactNode
+  // 입력칸 배경색 (기본 #D9D9D9). 디자인 지정 색이 다를 때만 전달
+  containerClassName?: string
 }
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(function TextField(
@@ -20,6 +22,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
     onFocus,
     onBlur,
     rightButton,
+    containerClassName = 'bg-[#D9D9D9]',
     ...rest
   },
   ref
@@ -32,7 +35,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
   return (
     <View className="w-full">
       <View
-        className={`h-[46px] flex-row items-center rounded-lg border bg-[#D9D9D9] px-4 ${
+        className={`h-[46px] flex-row items-center rounded-lg border px-4 ${containerClassName} ${
           hasError ? 'border-[#ea4335]' : isFocused ? 'border-primary' : 'border-transparent'
         }`}
       >

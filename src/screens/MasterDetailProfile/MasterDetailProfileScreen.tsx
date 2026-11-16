@@ -30,6 +30,7 @@ const MOCK_PROFILE: ExpertProfileResponseDto = {
   representativeService: '재활 트레이닝',
   introduction: '10년 경력의 재활 전문 트레이너입니다.',
   kakaoOpenChatUrl: 'https://open.kakao.com/o/example',
+  displayName: null,
   expertGrade: 'gold',
   totalReviewCount: 42,
   averageRating: 4.8,
@@ -197,9 +198,31 @@ export function MasterDetailProfileScreen() {
             <ReadonlyTextRow text={profile?.region ?? '-'} />
           </View>
 
-          {/* 센터정보 (URL) */}
+          {/* 센터정보 (주소 URL) */}
           <View>
             <SectionLabel label="센터정보" />
+            <Pressable
+              hitSlop={8}
+              onPress={() => {
+                const url = profile?.centerInfoUrl
+                if (url) Linking.openURL(url)
+              }}
+            >
+              <ReadonlyBox>
+                <Text
+                  className="text-small1 text-gray3"
+                  style={{ fontFamily: 'Pretendard-Medium' }}
+                  numberOfLines={1}
+                >
+                  {profile?.centerInfoUrl ?? '-'}
+                </Text>
+              </ReadonlyBox>
+            </Pressable>
+          </View>
+
+          {/* 채팅URL (오픈채팅) */}
+          <View>
+            <SectionLabel label="채팅URL" />
             <Pressable
               hitSlop={8}
               onPress={() => {
