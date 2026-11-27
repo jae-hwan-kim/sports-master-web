@@ -19,6 +19,8 @@ import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
+import { LegalDocumentModal } from '@/components/legal/LegalDocumentModal'
+import type { LegalDocumentType } from '@/components/legal/legalDocuments'
 import { useAppleAuth } from '@/hooks/useAppleAuth'
 import { useAppleLogin } from '@/hooks/useAppleLogin'
 import { useCheckEmail } from '@/hooks/useCheckEmail'
@@ -75,6 +77,7 @@ export function SignUpScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const [socialDialog, setSocialDialog] = useState<SocialProvider | null>(null)
   const [socialLoading, setSocialLoading] = useState(false)
+  const [legalDoc, setLegalDoc] = useState<LegalDocumentType | null>(null)
   const [socialError, setSocialError] = useState<string | null>(null)
   const [formError, setFormError] = useState<string | null>(null)
   const [checkDialog, setCheckDialog] = useState<CheckDialog>(CHECK_DIALOG_CLOSED)
@@ -507,6 +510,7 @@ export function SignUpScreen() {
               className="py-1"
               accessibilityRole="button"
               accessibilityLabel="개인정보 처리방침"
+              onPress={() => setLegalDoc('privacy')}
             >
               <Text className={`${LEGAL_TEXT_CLASS} underline`}>개인정보 처리방침</Text>
             </Pressable>
@@ -515,6 +519,7 @@ export function SignUpScreen() {
               className="py-1"
               accessibilityRole="button"
               accessibilityLabel="이용약관"
+              onPress={() => setLegalDoc('terms')}
             >
               <Text className={`${LEGAL_TEXT_CLASS} underline`}>이용약관</Text>
             </Pressable>
@@ -544,6 +549,7 @@ export function SignUpScreen() {
         description={checkDialog.description}
         onConfirm={() => setCheckDialog(CHECK_DIALOG_CLOSED)}
       />
+      <LegalDocumentModal type={legalDoc} onClose={() => setLegalDoc(null)} />
     </KeyboardAvoidingView>
   )
 }

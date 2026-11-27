@@ -21,6 +21,8 @@ import { Button } from '@/components/Button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { ScreenHeader } from '@/components/ScreenHeader'
 import { TextField } from '@/components/TextField'
+import { LegalDocumentModal } from '@/components/legal/LegalDocumentModal'
+import type { LegalDocumentType } from '@/components/legal/legalDocuments'
 import { useAppleAuth } from '@/hooks/useAppleAuth'
 import { useAppleLogin } from '@/hooks/useAppleLogin'
 import { useGoogleAuth } from '@/hooks/useGoogleAuth'
@@ -52,6 +54,7 @@ export function LoginScreen() {
   const [autoLogin, setAutoLogin] = useState(false)
   const [socialDialog, setSocialDialog] = useState<SocialProvider | null>(null)
   const [socialLoading, setSocialLoading] = useState(false)
+  const [legalDoc, setLegalDoc] = useState<LegalDocumentType | null>(null)
   const [autoLoginDialogVisible, setAutoLoginDialogVisible] = useState(false)
   const [socialError, setSocialError] = useState<string | null>(null)
   const [formError, setFormError] = useState<string | null>(null)
@@ -391,7 +394,7 @@ export function LoginScreen() {
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel="개인정보 처리방침"
-              onPress={() => Alert.alert('개인정보 처리방침', '서비스 준비 중입니다.')}
+              onPress={() => setLegalDoc('privacy')}
             >
               <Text className="text-[10px] font-normal leading-[1.45] tracking-[0.2px] text-gray2 underline">
                 개인정보 처리방침
@@ -401,7 +404,7 @@ export function LoginScreen() {
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel="이용약관"
-              onPress={() => Alert.alert('이용약관', '서비스 준비 중입니다.')}
+              onPress={() => setLegalDoc('terms')}
             >
               <Text className="text-[10px] font-normal leading-[1.45] tracking-[0.2px] text-gray2 underline">
                 이용약관
@@ -438,6 +441,7 @@ export function LoginScreen() {
         }}
         onCancel={() => setAutoLoginDialogVisible(false)}
       />
+      <LegalDocumentModal type={legalDoc} onClose={() => setLegalDoc(null)} />
     </KeyboardAvoidingView>
   )
 }
