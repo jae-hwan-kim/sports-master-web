@@ -258,17 +258,33 @@ export function CustomerSettingsScreen() {
 
         {/* 프로필 */}
         <View className="items-center py-6">
-          <View className="h-[80px] w-[80px] items-center justify-center rounded-full bg-[#C6A75E]">
-            <ProfilePersonIcon size={54} />
+          {/* 마이페이지 아바타와 동일: 몸통이 원 하단에서 잘리도록 overflow hidden + 절대 배치 */}
+          <View
+            className="h-[80px] w-[80px] overflow-hidden rounded-full bg-[#C6A75E]"
+            style={Platform.select({
+              ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 2, height: 2 },
+                shadowOpacity: 0.11,
+                shadowRadius: 2.9,
+              },
+              android: { elevation: 3 },
+            })}
+          >
+            <ProfilePersonIcon
+              size={56}
+              color="#F2F2F2"
+              style={{ position: 'absolute', left: 12, top: 16 }}
+            />
           </View>
           <Text
-            className="mt-2 text-[20px] text-[#1F2A43]"
+            className="mt-4 text-[20px] text-[#07091C]"
             style={{ fontFamily: 'Pretendard-SemiBold' }}
           >
             {profile?.nickname || profile?.name || '닉네임'}
           </Text>
           <Text
-            className="text-[13px] text-[#B48247]"
+            className="mt-1 text-[14px] text-[#B48247]"
             style={{ fontFamily: 'Pretendard-Medium', textDecorationLine: 'underline' }}
           >
             {`#USER${String(profile?.userId ?? 0).padStart(5, '0')}`}
