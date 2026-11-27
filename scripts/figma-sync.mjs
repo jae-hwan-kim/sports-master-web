@@ -291,6 +291,35 @@ async function cmdDiff() {
   const sections = new Map(file.pages.flatMap((p) => p.sections).map((s) => [s.id, s.path]))
   const screensUnder = (path) =>
     [...new Set(Object.values(reg.frames).filter((f) => !f.ignore && f.screen && f.page.startsWith(path)).map((f) => f.screen))]
+  // 프레임 밖 노드(캔버스 스크린샷·화살표·마커, 미등록 프레임 내부)는 snapshot 으로 못 찾음
+  // → 필요할 때만 감시 page 전체 트리를 받아 조상 체인으로 귀속
+  let tree = null
+  const locate = async (nodeId) => {
+    if (!tree) {
+      tree = { byId: new Map(), parentOf: new Map() }
+      for (const pid of reg.pages) {
+        const res = await figma(`/files/${reg.fileKey}/nodes?ids=${encodeURIComponent(pid)}`)
+        const walk = (n) => (tree.byId.set(n.id, n), n.children?.forEach((c) => (tree.parentOf.set(c.id, n), walk(c))))
+        if (res.nodes[pid]?.document) walk(res.nodes[pid].document)
+      }
+    }
+    const node = tree.byId.get(nodeId)
+    if (!node) return null
+    const chain = [node]
+    for (let p = tree.parentOf.get(nodeId); p; p = tree.parentOf.get(p.id)) chain.push(p)
+    const frame = chain.find(isScreen)
+    const section = [chain.at(-1).name, ...chain.filter((n) => n.type === 'SECTION').reverse().map((n) => n.name)].join(' / ')
+    // 근처 화면 = 같은 컨테이너 안에서 좌상단 기준 가장 가까운 화면 프레임 (스크린샷·화살표 댓글의 대상 추정용)
+    const b = node.absoluteBoundingBox
+    const container = tree.parentOf.get(nodeId)
+    const near = b && container?.children
+      ?.filter((s) => s.id !== nodeId && isScreen(s))
+      .map((s) => [s, Math.hypot(s.absoluteBoundingBox.x - b.x, s.absoluteBoundingBox.y - b.y)])
+      .sort((x, y) => x[1] - y[1])[0]?.[0]
+    return { frame, section, near }
+  }
+  const label = (f) => `${f.name}(${f.id})${reg.frames[f.id] ? ` → ${reg.frames[f.id].screen ?? 'ignore'}` : ' 미등록'}`
+
   const open = []
   let skipped = 0
   for (const c of comments) {
@@ -305,7 +334,13 @@ async function cmdDiff() {
     } else if (nodeId && sections.has(nodeId)) {
       const section = sections.get(nodeId)
       open.push({ ...base, section, screen: null, screens: screensUnder(section) })
-    } else skipped++ // 감시 page 밖 또는 캔버스 댓글
+    } else {
+      const loc = nodeId && (await locate(nodeId))
+      if (!loc) { skipped++; continue } // 감시 page 밖 또는 캔버스 댓글
+      if (loc.frame && reg.frames[loc.frame.id]?.ignore) { skipped++; continue }
+      if (loc.frame) open.push({ ...base, frame: loc.frame.id, screen: reg.frames[loc.frame.id]?.screen ?? null, unlinked: label(loc.frame) })
+      else open.push({ ...base, section: loc.section, screen: null, screens: screensUnder(loc.section), near: loc.near ? label(loc.near) : null })
+    }
   }
 
   writeJson(PENDING, { version: file.version, lastModified: file.lastModified, changed, added, removed, comments: open })
@@ -317,7 +352,15 @@ async function cmdDiff() {
     changed: changed.map((c) => ({ id: c.id, name: c.name, screen: c.screen, changeCount: c.changes.length })),
     added: added.map((f) => ({ id: f.id, name: f.name, page: f.page })),
     removed: removed.map((f) => ({ id: f.id, name: f.name, screen: f.screen })),
-    comments: open.map(({ id, author, createdAt, message, screen, section, screens, lastReply }) => ({ id, author, createdAt: createdAt.slice(0, 10), screen: screen ?? `[section] ${section} → ${screens.join(', ')}`, message, lastReply })),
+    comments: open.map(({ id, author, createdAt, message, screen, section, screens, unlinked, near, lastReply }) => ({
+      id,
+      author,
+      createdAt: createdAt.slice(0, 10),
+      screen: screen ?? (unlinked ? `[frame] ${unlinked}` : `[section] ${section} → ${screens.join(', ')}`),
+      ...(near && { near }),
+      message,
+      lastReply,
+    })),
     commentsSkipped: skipped,
     detail: '.claude/figma/.pending.json',
   }, null, 2))
